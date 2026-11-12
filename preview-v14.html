@@ -89,7 +89,7 @@ let currentProject=0;let activeView='editions';let timer;
 function showOnly(id){['welcome','intro','app'].forEach(key=>{$('#'+key).hidden=key!==id});if(id==='app')window.scrollTo({top:0,behavior:'instant'});}
 function enterWelcome(){clearTimeout(timer);showOnly('welcome')}
 function enterIntro(){if(!$('#welcome')||$('#welcome').hidden)return;window.clearTimeout(welcomeTimer);showOnly('intro');const v=$('#introFilm');if(v){v.muted=true;v.defaultMuted=true;v.playsInline=true;try{v.currentTime=0}catch(e){}const p=v.play();if(p&&typeof p.catch==='function')p.catch(()=>{v.controls=true;v.setAttribute('aria-label','Appuyez sur lecture si le navigateur bloque la lecture automatique')})}}
-function enterApp(view='editions'){const film=$('#introFilm');if(film){film.pause();}showOnly('app');switchView(view)}
+function enterApp(view='editions'){window.clearTimeout(welcomeTimer);const film=$('#introFilm');if(film){film.pause();}showOnly('app');switchView(view)}
 function switchView(view){if(view==='project')view='detail';const prev=activeView;activeView=view;document.body.classList.toggle('video-active',view==='video');$$('[data-view]').forEach(el=>el.hidden=el.dataset.view!==view);$$('[data-nav]').forEach(el=>{if(el.dataset.nav===view||view==='detail'&&el.dataset.nav==='editions')el.setAttribute('aria-current','page');else el.removeAttribute('aria-current')});const film=$('#portfolioFilm');if(film){if(view==='video'){const p=film.play();if(p&&typeof p.catch==='function')p.catch(()=>{film.controls=true})}else film.pause()}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:reduce?'instant':'smooth'});if(view==='contact'&&prev!=='contact')showContactToast();else if(view!=='contact')hideContactToast();refreshScrollTrail();}
 function renderProjects(){
  const feature=$('#featuredProject');const strip=$('#projectStrip');
@@ -119,7 +119,7 @@ function setupContactToast(){const toast=document.createElement('aside');toast.i
 
 let welcomeTimer;
 function init(){renderProjects();renderLogos();initForm();setupScrollTrail();setupContactToast();
- $('#skipWelcome').addEventListener('click',()=>enterApp('editions'));$('#goIntro').addEventListener('click',enterIntro);$('#skipIntro').addEventListener('click',()=>enterApp());$('#introFilm').addEventListener('ended',()=>enterApp());
+ $('#skipWelcome').addEventListener('click',()=>enterApp('editions'));$('#skipIntro').addEventListener('click',()=>enterApp());$('#introFilm').addEventListener('ended',()=>enterApp());
  $('#logoHome').addEventListener('click',()=>switchView('editions'));$('#topContact').addEventListener('click',()=>switchView('contact'));$('#backToBook').addEventListener('click',()=>switchView('editions'));$('#nextCase').addEventListener('click',()=>openProject(currentProject+1));$('#aboutContact').addEventListener('click',()=>switchView('contact'));$('#filmToBook').addEventListener('click',()=>switchView('editions'));
  $$('[data-nav]').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.nav)));
  showOnly('welcome');welcomeTimer=window.setTimeout(enterIntro,3000);
@@ -137,7 +137,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <section id="welcome" class="onboard welcome" aria-label="Welcome">
   <img class="welcome-photo" data-asset="cover" alt="Portrait d’Elhem Matheli" fetchpriority="high">
   <div class="welcome-vignette"></div><div class="welcome-top"><span class="logo-light">em.</span><button id="skipWelcome" type="button" class="welcome-skip">Skip ↗</button></div>
-  <div class="welcome-bottom"><span class="micro-label">ELHEM MATHELI · BRAND & PACKAGING DESIGNER</span><h1>Welcome to my<br><em>creative world.</em></h1><p>Where ideas become visual stories.</p><button id="goIntro" class="primary-button" type="button">Voir la vidéo maintenant <span>↗</span></button><span class="welcome-hint">La vidéo commence automatiquement dans quelques instants.</span></div>
+  <div class="welcome-bottom"><span class="micro-label">ELHEM MATHELI · BRAND & PACKAGING DESIGNER</span><h1>Welcome to my<br><em>creative world.</em></h1><p>Where ideas become visual stories.</p></div>
   <div class="dots dots-white" aria-hidden="true"><b></b><b></b><b></b></div>
 </section>
 <!-- Full-screen intro film, without overlaid phrases or text -->
