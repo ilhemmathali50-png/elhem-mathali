@@ -115,7 +115,15 @@ function initMobile(){
  window.addEventListener("appinstalled",()=>{button.hidden=true;overlay.hidden=true;});
  if("serviceWorker" in navigator&&location.protocol==="https:")window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(e=>console.warn("Service Worker:",e)));
 }
+function initSplash(){
+ const screen=$("#splashScreen");if(!screen)return;
+ const close=()=>{screen.classList.add("is-gone");screen.setAttribute("aria-hidden","true");window.setTimeout(()=>screen.remove(),650)};
+ $("#skipSplash").addEventListener("click",close);
+ if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){close();return;}
+ window.setTimeout(close,1250);
+}
 function init(){
+ initSplash();
  $$("[data-fallback]").forEach(img=>{img.onerror=()=>img.classList.add("is-missing");if(img.complete&&!img.naturalWidth)img.classList.add("is-missing");});
  $("#year").textContent=new Date().getFullYear();
  makeBook();makeAtelier();makeJournal();makeAbout();makeBrief();initMobile();
