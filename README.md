@@ -1,49 +1,22 @@
-# ELHEM MATHELI — THE CREATIVE EDITIONS
+# ELHEM MATHELI — THE CREATIVE EDITIONS (V8)
 
-Portfolio web éditorial mobile-first de Brand Designer & Content Creator.
+Mobile-first PWA portfolio rebuilt around a coherent four-screen experience: animated splash, portrait Welcome, actual intro film, then interactive Art Book.
 
-## Design
-Palette institutionnelle beige, teal et bordeaux. Police **Fraunces** pour les titres, **Manrope** pour le texte, **Amiri** pour les futurs textes arabes. Chaque projet conserve sa propre palette.
+## What runs live
 
-## Quatre expériences clés
+- `index.html` is a **self-contained production bundle**. The custom CSS, JavaScript, two user-supplied photos and intro film are embedded to prevent missing media from the earlier deployment.
+- `manifest.webmanifest`, `app-icon.svg`, `service-worker.js` provide installable PWA behavior.
+- Bottom tabs: Éditions, Logos, Vidéo, À propos. Project brief is available from the header or About page.
+- 4 case studies: Élya Natura, MÉTALLUX, ForceClean, TrackSolid Pro, each with its own color identity, project goal, design decision, and mini palette.
+- Project mockups and labels are not yet uploaded, and are **clearly marked as awaiting originals**. The visual studies in the Logo Atelier are typography-based placeholders, not actual client logo files.
+- The brief form prepares a draft for copying. It **does not** send contact messages without a verified recipient.
 
-1. **Interactive Art Book** : table des matières, sélection d'une édition, feuille de projet.
-2. **Reveal the Design** : comparateur avant/après utilisable au toucher, à la souris ou au clavier.
-3. **The Creative Journal** : notes éditoriales ouvrables sans duplication des projets.
-4. **Start Your Brand Story** : brief commercial guidé et copiable; aucun agent IA payant ni backend nécessaire.
+## Editing / source
 
-### Et en plus
-**The Logo Atelier** : galerie distincte pour les logos exploratoires; 6 emplacements, avec possibilité d'ajouter d'autres études.
-4 projets de démonstration : Élya Natura, MÉTALLUX, ForceClean et TrackSolid Pro.
-About Me, diplômes, réseaux sociaux, contact et effets compatibles avec la préférence « moins d'animations ».
+For a maintainable copy with separate assets and readable CSS/JS, use the V8 ZIP created in ChatGPT. Older `styles.css` / `app.js` / `content.js` files remain in this repository only as historical material and are not referenced by the current `index.html`.
 
-## Fichiers
-- `index.html` : structure du site.
-- `styles.css` : mise en page et typographie responsive.
-- `content.js` : **votre seul fichier principal à personnaliser** (projets, texte, logos, diplômes, liens).
-- `app.js` : interactions.
-- `ASSET_CHECKLIST.md` : noms et dimensions des photos à ajouter.
+**Design tokens:** Cherry #A42E48, Lilac #C9B3F4, Ivory #FAF7F2, Graphite #2D2A2E. Fonts: Fraunces, Manrope, Amiri.
 
-## Prévisualisation
-Le site est statique. Servir le dossier avec un serveur web local : `python3 -m http.server 8000`, puis ouvrir `http://localhost:8000`. Il peut aussi être déployé avec GitHub Pages.
+## Publishing
 
-## Limites
-- Les photos finales ne sont pas fournies et n'ont pas été inventées.
-- Aucun diplôme, chiffre de résultat client, email ou réseau social fictif n'est présenté comme authentique.
-- Le brief **n'est pas envoyé automatiquement** : copie du texte, puis WhatsApp/email après configuration.
-- Ce n'est ni une boutique, ni un agent IA connecté, ni un hébergement de formulaires.
-- Les animations spécifiques de produits et vidéos 3D pourront être ajoutées après réception des assets.
-- Avant mise en production, tester sur de vrais appareils et vérifier la disponibilité de vos contenus, liens et droits d'utilisation.
-
-## Publication
-Tout a été préparé sur la branche de travail `creative-editions-v3`, sans modifier directement la branche `main`. Examiner puis fusionner la pull request pour remplacer le prototype existant.
-
-## Version Mobile App (PWA)
-
-La même expérience est installable via le navigateur : icône SVG, manifest, service worker, barre de navigation mobile, swipe horizontal entre éditions, écran de conseils d'installation iOS et Android. Elle reste accessible en site classique sur ordinateur. La mise en ligne HTTPS et le test sur téléphone réel sont nécessaires pour vérifier l'installation et le fonctionnement hors ligne. Le contenu de la galerie doit être fourni par la créatrice.
-
-## Organisation finale des projets — 12 novembre 2026
-
-Les **projets ne sont pas dupliqués** : le seul sommaire se trouve dans **Interactive Art Book** (ancien bloc nommé « The Editions »). Chaque chapitre a quatre parties : **Cover**, **Project Goal & Design Decision**, **Visual Identity** (logo, palette, typographie, éléments), **The Final Work** (produits en paires mockup + design à plat et comparaison avant/après intégrée). Aucun second Reveal global.
-
-Les produits de chaque marque sont déclarés sous `projects[].products` dans `content.js`. Les couleurs, logos et typographies sont propres à chaque projet. La checklist est dans `ASSET_CHECKLIST.md`.
+GitHub Pages runs on `main`. It is backed by `.github/workflows/pages.yml`.
