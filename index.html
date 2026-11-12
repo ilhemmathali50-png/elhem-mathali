@@ -10,7 +10,6 @@
 <meta name="description" content="Elhem Matheli, Brand Identity & Packaging Designer. Discover The Creative Editions, an interactive mobile portfolio.">
 <title>Elhem Matheli | The Creative Editions</title>
 <link rel="icon" href="app-icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +29,32 @@
 @media(max-width:360px){.signature{font-size:117px}.welcome h1{font-size:39px}.section-intro h2{font-size:43px}.feature-card h3{font-size:39px}.top-identity strong{font-size:9px}.top-identity small{font-size:7px}.intro-bottom h2{font-size:36px}.intro-bottom{padding-top:10px;padding-bottom:calc(15px + env(safe-area-inset-bottom))}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
 
+
+/* V10 · Soft scroll light and editorial transitions */
+:root{--scroll-progress:0;--light-y:32%;--light-x:50%}
+.app-shell{isolation:isolate;position:relative}
+.app-shell:before{content:"";position:fixed;z-index:1;left:0;top:0;width:100%;height:4px;background:linear-gradient(90deg,#C63D4F,#C9B3F4,#BFD7EA);transform-origin:left center;transform:scaleX(var(--scroll-progress));pointer-events:none;box-shadow:0 0 18px #C9B3F488}
+.scroll-glow{position:fixed;z-index:0;left:0;right:0;top:0;height:100dvh;pointer-events:none;opacity:.52;background:radial-gradient(ellipse 140px 130px at var(--light-x) var(--light-y),#C9B3F464,transparent 85%),radial-gradient(ellipse 260px 220px at calc(100% - var(--light-x)) calc(var(--light-y) + 13%),#BFD7EA47,transparent 82%);transition:opacity .25s ease}
+.app-shell>.app-header,.app-shell>main,.app-shell>.bottom-nav{position:relative}
+.app-shell>.app-header,.app-shell>.bottom-nav{z-index:10}
+.app-shell>main{z-index:2}
+.app-view:not([hidden]){animation:pageBloom .52s cubic-bezier(.2,.8,.2,1) both}
+@keyframes pageBloom{from{opacity:.3;transform:translateY(14px);filter:blur(4px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes lightBreath{from{opacity:.35}to{opacity:.7}}
+.scroll-glow{animation:lightBreath 5s ease-in-out infinite alternate}
+.app-view .feature-card,.app-view .project-mini,.app-view .logo-card{transition:transform .28s ease,box-shadow .28s ease}
+@media(hover:hover){.app-view .feature-card:hover,.app-view .project-mini:hover,.app-view .logo-card:hover{transform:translateY(-3px);box-shadow:0 15px 30px #39233824}}
+.contact-greeting{position:fixed;bottom:calc(82px + env(safe-area-inset-bottom));left:50%;width:min(420px,calc(100% - 28px));transform:translate(-50%,25px);opacity:0;visibility:hidden;transition:opacity .42s ease,transform .42s ease,visibility .42s;z-index:22;padding:20px 44px 19px 20px;background:#FFFCF9f5;backdrop-filter:blur(20px);border:1px solid #e2c5d9;border-radius:20px;box-shadow:0 18px 50px #38233e31}
+.contact-greeting.is-visible{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.contact-greeting .greeting-kicker{display:block;color:#A42E48;font-weight:800;font-size:9px;letter-spacing:.16em;margin-bottom:7px}
+.contact-greeting strong{display:block;font:400 27px/1.14 var(--serif);letter-spacing:-.02em;color:#2D2A2E}
+.contact-greeting strong em{color:#A42E48}
+.contact-greeting p{font-size:12px;line-height:1.55;color:#625d62;margin:9px 0 13px}
+.contact-greeting .greeting-action{border:0;border-radius:30px;color:white;background:#A42E48;padding:10px 17px;font-size:11px;font-weight:700}
+.contact-greeting .greeting-close{position:absolute;top:11px;right:11px;width:30px;height:30px;border:0;border-radius:100%;background:#f4e6ed;color:#8f2946;font-size:21px;display:grid;place-items:center}
+@media(max-width:650px){.scroll-glow{opacity:.3;background:radial-gradient(ellipse 120px 170px at var(--light-x) var(--light-y),#C9B3F455,transparent 95%)}.contact-greeting{bottom:calc(80px + env(safe-area-inset-bottom))}.app-view:not([hidden]){animation-duration:.38s}}
+@media(prefers-reduced-motion:reduce){.scroll-glow{display:none!important}.app-view:not([hidden]){animation:none!important}.contact-greeting{transition:none!important}.app-shell:before{box-shadow:none}}
+
 </style>
 <script defer>
 (()=>{
@@ -46,7 +71,7 @@ function showOnly(id){['splash','welcome','intro','app'].forEach(key=>{$('#'+key
 function enterWelcome(){clearTimeout(timer);showOnly('welcome')}
 function enterIntro(){showOnly('intro')}
 function enterApp(view='editions'){const film=$('#introFilm');if(film){film.pause();}showOnly('app');switchView(view)}
-function switchView(view){if(view==='project')view='detail';activeView=view;$$('[data-view]').forEach(el=>el.hidden=el.dataset.view!==view);$$('[data-nav]').forEach(el=>{if(el.dataset.nav===view||view==='detail'&&el.dataset.nav==='editions')el.setAttribute('aria-current','page');else el.removeAttribute('aria-current')});window.scrollTo({top:0,behavior:'instant'});}
+function switchView(view){if(view==='project')view='detail';const previous=activeView;activeView=view;$('[data-view]').forEach(el=>el.hidden=el.dataset.view!==view);$('[data-nav]').forEach(el=>{if(el.dataset.nav===view||view==='detail'&&el.dataset.nav==='editions')el.setAttribute('aria-current','page');else el.removeAttribute('aria-current')});const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:reduced?'instant':'smooth'});if(view==='contact'&&previous!=='contact')notifyContact();else if(view!=='contact')hideContactGreeting();updateScrollLight();}
 function renderProjects(){
  const feature=$('#featuredProject');const strip=$('#projectStrip');
  function choose(idx){currentProject=(idx+projects.length)%projects.length;const p=projects[currentProject];feature.innerHTML=`<button class="feature-card" type="button" style="background:${p.theme};color:${p.paper}" data-open="${currentProject}" aria-label="Ouvrir le projet ${p.name}"><div class="feature-art"></div><span class="feature-kicker">EDITION ${String(currentProject+1).padStart(2,'0')} / ${p.tag}</span><div class="feature-footer"><div><h3>${p.name}</h3><p>${p.type}</p></div><span class="round-arrow">↗</span></div></button>`;$$('[data-mini]').forEach(el=>el.setAttribute('aria-pressed',String(+el.dataset.mini===currentProject)));
@@ -65,7 +90,16 @@ function openProject(i){currentProject=(i+projects.length)%projects.length;const
 function renderLogos(){const works=[{name:'Élya Natura',mark:'é.',color:'#294936',paper:'#E5EBE2'},{name:'MÉTALLUX',mark:'M',color:'#122E45',paper:'#E4EDF3'},{name:'ForceClean',mark:'FC',color:'#0D6197',paper:'#E4F2FA'},{name:'TrackSolid Pro',mark:'T',color:'#0077AD',paper:'#E7F6FE'},{name:'Logo explorations',mark:'✳',color:'#A42E48',paper:'#F7E3EB'},{name:'Letterform studies',mark:'em.',color:'#553169',paper:'#EEE3F6'}];
  $('#logoGrid').innerHTML=works.map((x,i)=>`<div class="logo-card" style="background:${x.paper};color:${x.color}"><small>LOGO ATELIER / 0${i+1}</small><span class="logo-symbol" aria-hidden="true">${x.mark}</span><strong>${x.name}</strong></div>`).join('');}
 function initForm(){const form=$('#briefForm');form.addEventListener('submit',e=>{e.preventDefault();const f=new FormData(form);const t=`BRIEF CRÉATIF — ELHEM MATHELI\nNom : ${f.get('name')}\nMarque : ${f.get('brand')||'À préciser'}\nService : ${f.get('service')}\nProjet : ${f.get('goal')}`;$('#briefText').textContent=t;$('#briefOutput').hidden=false;$('#briefOutput').scrollIntoView({behavior:'smooth',block:'start'})});$('#copyBrief').addEventListener('click',async()=>{const text=$('#briefText').textContent;try{await navigator.clipboard.writeText(text);$('#copyBrief').textContent='Copié ✓'}catch(e){$('#copyBrief').textContent='Sélectionner et copier le texte'}})}
-function init(){renderProjects();renderLogos();initForm();
+
+/* Accessible, lightweight scroll ambient light and contact greeting */
+let scrollTick=false,contactShown=false,contactHideTimeout;
+function updateScrollLight(){if(!$('#app')||$('#app').hidden)return;const doc=document.documentElement;const amount=Math.max(1,doc.scrollHeight-window.innerHeight);const progress=Math.max(0,Math.min(1,window.scrollY/amount));doc.style.setProperty('--scroll-progress',progress.toFixed(3));doc.style.setProperty('--light-y',(23+progress*58).toFixed(1)+'%');doc.style.setProperty('--light-x',(50+Math.sin(progress*Math.PI*2)*24).toFixed(1)+'%');}
+function initScrollEffects(){if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;const app=$('#app');if(!app)return;const light=document.createElement('div');light.className='scroll-glow';light.setAttribute('aria-hidden','true');app.prepend(light);window.addEventListener('scroll',()=>{if(scrollTick)return;scrollTick=true;requestAnimationFrame(()=>{scrollTick=false;updateScrollLight()})},{passive:true});window.addEventListener('resize',updateScrollLight,{passive:true});updateScrollLight();}
+function initContactGreeting(){const el=document.createElement('aside');el.className='contact-greeting';el.id='contactGreeting';el.setAttribute('role','status');el.setAttribute('aria-live','polite');el.innerHTML='<button type="button" class="greeting-close" aria-label="Fermer le message">×</button><span class="greeting-kicker">A LITTLE NOTE FROM ELHEM</span><strong>Une idée en tête ? <em>On en parle ?</em></strong><p>Si mon univers et mes services t’intéressent, n’hésite pas à me contacter. Je serais ravie de découvrir ton projet.</p><button type="button" class="greeting-action">Parlons de ton projet ↗</button>';document.body.appendChild(el);el.querySelector('.greeting-close').addEventListener('click',hideContactGreeting);el.querySelector('.greeting-action').addEventListener('click',()=>{hideContactGreeting();const name=$('.contact-view input[name="name"]');if(name){name.scrollIntoView({behavior:'smooth',block:'center'});name.focus({preventScroll:true})}});}
+function notifyContact(){if(contactShown)return;contactShown=true;const el=$('#contactGreeting');if(!el)return;window.clearTimeout(contactHideTimeout);requestAnimationFrame(()=>el.classList.add('is-visible'));}
+function hideContactGreeting(){const el=$('#contactGreeting');if(el)el.classList.remove('is-visible');}
+
+function init(){renderProjects();renderLogos();initForm();initScrollEffects();initContactGreeting();
  $('#skipSplash').addEventListener('click',enterWelcome);$('#skipWelcome').addEventListener('click',()=>enterApp('editions'));$('#goIntro').addEventListener('click',enterIntro);$('#backToWelcome').addEventListener('click',()=>{$('#introFilm').pause();enterWelcome()});$('#skipIntro').addEventListener('click',()=>enterApp());$('#goEditions').addEventListener('click',()=>enterApp());
  $('#logoHome').addEventListener('click',()=>switchView('editions'));$('#topContact').addEventListener('click',()=>switchView('contact'));$('#backToBook').addEventListener('click',()=>switchView('editions'));$('#nextCase').addEventListener('click',()=>openProject(currentProject+1));$('#aboutContact').addEventListener('click',()=>switchView('contact'));$('#filmToBook').addEventListener('click',()=>switchView('editions'));
  $$('[data-nav]').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.nav)));

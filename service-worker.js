@@ -1,4 +1,4 @@
-const CACHE='em-editions-v8b-20261112';
+const CACHE='em-editions-v10-soft-scroll-contact';
 const CORE=['./','./index.html','./manifest.webmanifest','./app-icon.svg','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('em-editions-')||k.startsWith('elhem-editions-')).filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
