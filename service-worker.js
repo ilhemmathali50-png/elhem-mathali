@@ -1,4 +1,4 @@
-const CACHE="elhem-editions-cherry-lilac-v1";
+const CACHE="elhem-editions-cherry-lilac-v2-typography";
 const CORE=["./","./index.html","./styles.css","./content.js","./app.js","./manifest.webmanifest","./app-icon.svg"];
 self.addEventListener("install",event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));});
 self.addEventListener("activate",event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith("elhem-editions-")&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim()));});
