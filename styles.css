@@ -208,3 +208,11 @@ body,.site-header,.mobile-tabs,.brief{font-family:var(--sans)}
 @media(max-width:380px){.welcome-title{font-size:41px}.welcome-eyebrow{font-size:8px}.splash-logo{font-size:120px}}
 @media(prefers-reduced-motion:reduce){.splash-centered,.splash-ribbon{animation:none}}
 @media(max-width:760px){body.on-welcome .mobile-tabs{transform:translateY(115%);pointer-events:none}.mobile-tabs{transition:transform .22s ease}}
+/* V8 corrections — no fake logos, working installer, adapted navbar */
+.app-install-link{display:block;margin:30px auto 100px;padding:12px 24px;border-radius:25px;background:#FAF7F2;border:1px solid #DAB0BD;color:#A12D4E;font-size:12px;font-weight:700}
+.logo-visual{background:var(--logo-bg,#FAF7F2)!important;overflow:hidden}
+.logo-name{color:var(--logo-ink,#2D2A2E)!important;font-family:var(--serif)!important;font-size:clamp(28px,5vw,44px)!important;letter-spacing:-.035em;text-align:center;position:absolute;inset:0;display:flex!important;align-items:center;justify-content:center;padding:18px;transition:transform .6s ease}
+.logo-card:hover .logo-name,.logo-card:focus-within .logo-name{transform:scale(1.07)}
+.logo-visual img:not(.is-missing){z-index:2;background:var(--logo-bg,#FAF7F2)}
+.logo-details h3{font-size:16px}
+@media(max-width:760px){.logo-visual{aspect-ratio:1.8}.logo-name{font-size:36px!important}}
