@@ -98,12 +98,10 @@ window.PORTFOLIO = {
    }
  ],
  logos: [
-   {title:"Mark Study 01",type:"Monogram Exploration",image:"assets/logo-atelier/logo-01.webp"},
-   {title:"Mark Study 02",type:"Symbol & Geometry",image:"assets/logo-atelier/logo-02.webp"},
-   {title:"Mark Study 03",type:"Letterform Exploration",image:"assets/logo-atelier/logo-03.webp"},
-   {title:"Mark Study 04",type:"Signature Mark",image:"assets/logo-atelier/logo-04.webp"},
-   {title:"Mark Study 05",type:"Minimal Identity Concept",image:"assets/logo-atelier/logo-05.webp"},
-   {title:"Mark Study 06",type:"Typographic Logo",image:"assets/logo-atelier/logo-06.webp"}
+   {title:"Élya Natura",type:"Natural Care · Identity",image:"assets/projects/elya-natura/logo.webp",bg:"#294936",ink:"#F4EFE5"},
+   {title:"MÉTALLUX",type:"Industrial · Visual Identity",image:"assets/projects/metallux/logo.webp",bg:"#122e45",ink:"#ffffff"},
+   {title:"ForceClean",type:"Packaging · Labels",image:"assets/projects/forceclean/logo.webp",bg:"#F4F6FB",ink:"#0d6197"},
+   {title:"TrackSolid Pro",type:"Campaigns · Creative Direction",image:"assets/projects/tracksolid/logo.webp",bg:"#E6F4FB",ink:"#007dc2"}
  ],
  journal: [
    {title:"Un logo n'est pas une identité.",category:"Branding / 01",summary:"Une marque ne se construit pas avec un symbole seul.",body:"Un logo est un point de reconnaissance. L'identité visuelle, elle, organise le reste : couleurs, typographie, compositions, images, usages et cohérence. La force d'un système se mesure à sa capacité à fonctionner sur différents supports."},
