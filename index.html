@@ -21,12 +21,16 @@
 <script src="app.js" defer></script>
 </head>
 <body>
-<div id="splashScreen" class="splash-screen" aria-label="Elhem Matheli · Introduction">
-  <div class="splash-portrait"><img src="assets/profile/cover.webp" alt="Elhem Matheli" fetchpriority="high"></div>
-  <div class="splash-orbit splash-orbit-a" aria-hidden="true"></div><div class="splash-orbit splash-orbit-b" aria-hidden="true"></div>
-  <div class="splash-caption"><span class="splash-overline">BRANDING · PACKAGING · CREATIVE CONTENT</span><strong>Welcome to<br><em>my creative world.</em></strong><span class="splash-tagline">Where ideas become visual stories.</span></div>
-  <span class="splash-monogram">em.</span>
-  <button type="button" id="skipSplash" class="splash-skip">PASSER <span aria-hidden="true">↗</span></button>
+<div id="splashScreen" class="splash-screen" aria-label="The Creative Editions · ouverture">
+  <div class="splash-ribbon splash-ribbon-one" aria-hidden="true"></div>
+  <div class="splash-ribbon splash-ribbon-two" aria-hidden="true"></div>
+  <div class="splash-centered">
+    <strong class="splash-logo">em.</strong>
+    <span class="splash-author">ELHEM MATHELI</span>
+    <span class="splash-editions">THE CREATIVE EDITIONS</span>
+    <span class="splash-rule"></span><span class="splash-descriptor">CREATIVE PORTFOLIO APP</span>
+  </div>
+  <button type="button" id="skipSplash" class="splash-skip">PASSER ↗</button>
 </div>
 <a class="skip" href="#main">Aller au contenu</a>
 <header class="site-header">
@@ -38,25 +42,18 @@
   <a href="#story" class="header-cta">Parlons de votre marque <span aria-hidden="true">↗</span></a>
 </header>
 <main id="main">
-<section id="home" class="hero">
-  <div class="hero-rail"><span>INDEPENDENT CREATIVE DESIGNER</span><span>PORTFOLIO / VOL. 01</span></div>
-  <div class="hero-main">
-   <div class="hero-copy">
-     <div class="overline"><span class="dot"></span> BRANDING · PACKAGING · CREATIVE CONTENT</div>
-     <h1 class="welcome-headline"><span>Welcome to</span><br><em>my creative</em><br>world.</h1>
-     <p class="hero-deck">Where ideas become <i>visual stories.</i></p>
-     <p class="hero-intro"><strong>Elhem Matheli</strong> · Brand Identity, Packaging & Creative Content. Des idées aux univers visuels qui ont du sens.</p>
-     <div class="actions"><a class="btn btn-teal" href="#intro">Meet me · Watch the video <span>▶</span></a><a class="text-link" href="#editions">Skip to the editions ↗</a></div><button class="install-link" id="installApp" type="button">⌁ &nbsp; Ajouter à l’écran d’accueil</button>
-   </div>
-   <div class="hero-art">
-      <div class="paper-mat">
-       <div class="hero-photo"><img src="assets/profile/cover.webp" alt="Portrait professionnel d'Elhem Matheli" data-fallback="portrait"><div class="missing-photo"><span>ELHEM MATHELI</span><strong>Where creativity<br>takes shape.</strong><small>Portrait de bienvenue</small></div></div>
-      </div>
-      <div class="hero-stamp">THE<br>CREATIVE<br>EDITIONS<span>ELHEM / 2026</span></div>
-      <span class="hero-vertical">WHERE IDEAS BECOME VISUAL STORIES.</span>
-   </div>
+<section id="home" class="hero welcome-hero">
+  <div class="welcome-portrait"><img src="assets/profile/cover.webp" alt="Portrait d’Elhem Matheli" fetchpriority="high"></div>
+  <div class="welcome-gradient" aria-hidden="true"></div>
+  <div class="welcome-orbit" aria-hidden="true"></div>
+  <div class="welcome-content">
+    <span class="welcome-eyebrow">ELHEM MATHELI · THE CREATIVE EDITIONS</span>
+    <h1 class="welcome-title">Welcome to my<br><em>creative world.</em></h1>
+    <p class="welcome-tagline">Where ideas become visual stories.</p>
+    <a class="welcome-action" href="#intro">Discover my world <span aria-hidden="true">↗</span></a>
+    <a class="welcome-secondary" href="#editions">Explore the editions ↓</a>
+    <div class="welcome-dots" aria-hidden="true"><span></span><span></span><span></span></div>
   </div>
-  <div class="scroll-cue"><span>SCROLL TO EXPLORE</span><span>↓</span></div>
 </section>
 
 <section id="intro" class="intro-section section" aria-labelledby="introTitle">
@@ -66,19 +63,19 @@
    <video id="introVideo" class="intro-video" controls playsinline preload="metadata" poster="assets/profile/cover.webp" aria-label="Vidéo de présentation d'Elhem Matheli"><source src="assets/video/reel-intro.mp4" type="video/mp4">Votre navigateur ne prend pas en charge la vidéo.</video>
    <div id="introVideoCover" class="intro-cover"><img src="assets/profile/cover.webp" alt="" loading="lazy"><div class="intro-cover-shade"></div><span class="intro-cover-top">ELHEM MATHELI · THE CREATIVE EDITIONS</span><div class="intro-cover-bottom"><span>INTRODUCING THE DESIGNER</span><strong>Meet <i>Elhem.</i></strong><button type="button" id="playIntro" class="intro-play" aria-label="Lire la vidéo de présentation">▶</button></div></div>
   </div>
-  <div class="intro-info"><span class="intro-duration">00:10 · PORTRAIT FILM</span><p>From an idea to a visual story. A glimpse into the creative mind behind every edition.</p><a href="#editions" id="introNext" class="btn btn-teal">Explore the editions <span>↗</span></a></div>
+  <div class="intro-info"><span class="intro-duration">00:10 · INTRO VIDEO</span><p>From an idea to a visual story. A glimpse into the creative mind behind every edition.</p><a href="#editions" id="introNext" class="btn btn-teal">Explore the editions <span>↗</span></a></div>
  </div>
 </section>
 
-<section id="manifesto" class="manifesto section">
+<section id="manifesto" class="manifesto section" hidden>
   <div class="section-index">01 / THE INTRODUCTION</div>
   <div><h2>More than <i>beautiful.</i><br>Built with <i>intention.</i></h2><p>Un bon design ne se résume pas à une belle image. Il relie une idée, une identité et la manière dont une marque se présente au monde. Chaque choix graphique a une raison d'être.</p></div>
   <div class="manifesto-numbers"><span>01 <small>STRATEGY</small></span><span>02 <small>DESIGN</small></span><span>03 <small>STORY</small></span></div>
 </section>
 
 <section id="editions" class="section editions-section">
-  <div class="section-heading"><span class="section-index">02 / THE COLLECTION</span><h2>Interactive <i>Art Book.</i></h2><p>Un seul livre, quatre chapitres. Découvrez directement les travaux, sans galerie répétée.</p></div>
-  <div class="edition-shell">
+  <div class="section-heading editions-heading"><span class="section-index">02 / MY CREATIVE EDITIONS</span><h2>My Creative<br><i>Editions.</i></h2><p>Branding · Packaging · Creative Content</p></div>
+  <div class="edition-shell"><p class="editions-lead">Four brands. Four identities. Four visual stories. Explore each chapter and discover the design behind it.</p>
    <div class="book-head"><span>ELHEM MATHELI / SELECTED WORK</span><span>THE CONTENTS &nbsp; ✳ &nbsp; 2026</span></div>
    <div class="book" id="editionBook">
      <div class="book-left">
@@ -147,7 +144,12 @@
  <div class="closing-bottom"><span>© <span id="year"></span> ELHEM MATHELI</span><span>BRANDING · PACKAGING · CREATIVE CONTENT</span><a href="#home">BACK TO TOP ↑</a></div>
 </section>
 </main>
-<nav class="mobile-tabs" aria-label="Navigation application"><a href="#home" data-tab="home" aria-current="page"><span class="tab-icon" aria-hidden="true">⌂</span>Accueil</a><a href="#editions" data-tab="editions"><span class="tab-icon" aria-hidden="true">▦</span>Art Book</a><a href="#atelier" data-tab="atelier"><span class="tab-icon" aria-hidden="true">✧</span>Logos</a><a href="#journal" data-tab="journal"><span class="tab-icon" aria-hidden="true">✎</span>Journal</a><a href="#story" data-tab="story"><span class="tab-icon" aria-hidden="true">↗</span>Projet</a></nav>
+<nav class="mobile-tabs" aria-label="Navigation application">
+<a href="#editions" data-tab="editions" aria-current="page"><span class="tab-icon" aria-hidden="true">⌂</span>Éditions</a>
+<a href="#atelier" data-tab="atelier"><span class="tab-icon" aria-hidden="true">◇</span>Logos</a>
+<a href="#intro" data-tab="intro"><span class="tab-icon" aria-hidden="true">▷</span>Vidéo</a>
+<a href="#about" data-tab="about"><span class="tab-icon" aria-hidden="true">♙</span>About</a>
+</nav>
 <div id="installHelp" class="install-help" hidden role="dialog" aria-modal="true" aria-labelledby="installTitle"><div class="install-sheet"><button type="button" id="dismissInstall" class="dismiss-install" aria-label="Fermer">×</button><span class="section-index">CHERRY LILAC EDITORIAL / MOBILE</span><h2 id="installTitle">Votre art book,<br><i>dans votre poche.</i></h2><p id="installInstructions">Ajoutez cette application à votre écran d’accueil depuis les options de votre navigateur.</p><button class="btn btn-teal btn-full" id="installConfirm" type="button">Compris ✓</button></div></div>
 </body>
 </html>
