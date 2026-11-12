@@ -3,7 +3,7 @@
 Portfolio web éditorial mobile-first de Brand Designer & Content Creator.
 
 ## Design
-Palette institutionnelle beige, teal et bordeaux. Police **Instrument Serif** pour les titres, **DM Sans** pour le texte, **Amiri** pour les futurs textes arabes. Chaque projet conserve sa propre palette.
+Palette institutionnelle beige, teal et bordeaux. Police **Fraunces** pour les titres, **Manrope** pour le texte, **Amiri** pour les futurs textes arabes. Chaque projet conserve sa propre palette.
 
 ## Quatre expériences clés
 
