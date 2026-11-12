@@ -32,6 +32,27 @@
 
 .bottom-nav svg{height:22px;width:22px;display:block;flex:none}
 
+
+/* Editorial scroll and contact message · respects reduced motion */
+:root{--trail-p:0;--trail-y:30%;--trail-x:50%}
+.app-shell{isolation:isolate;position:relative}
+.app-shell::before{content:"";position:fixed;top:0;left:0;right:0;z-index:15;transform-origin:left;transform:scaleX(var(--trail-p));height:3px;background:linear-gradient(90deg,#A42E48,#C9B3F4,#BFD7EA);box-shadow:0 1px 16px #C9B3F48c;pointer-events:none}
+.scroll-trail{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.42;background:radial-gradient(ellipse 170px 190px at var(--trail-x) var(--trail-y),#C9B3F46c,transparent 80%),radial-gradient(ellipse 230px 210px at 73% calc(var(--trail-y) + 10%),#BFD7EA4d,transparent 95%)}
+.app-shell main,.app-shell .app-header,.app-shell .bottom-nav{position:relative;z-index:2}
+.app-view:not([hidden]){animation:editorialAppear .48s cubic-bezier(.2,.85,.2,1) both}
+@keyframes editorialAppear{from{opacity:.4;transform:translateY(13px);filter:blur(3px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+.contact-toast{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom));width:min(420px,calc(100% - 28px));transform:translate(-50%,18px);opacity:0;visibility:hidden;z-index:30;border:1px solid #e1b4c6;border-radius:20px;padding:20px 43px 18px 20px;background:#fffdfaf7;backdrop-filter:blur(18px);box-shadow:0 20px 50px #3b284329;transition:opacity .35s,transform .35s,visibility .35s}
+.contact-toast.visible{transform:translate(-50%,0);opacity:1;visibility:visible}
+.contact-toast small{color:#A42E48;letter-spacing:.15em;font-weight:800;font-size:9px}
+.contact-toast strong{display:block;font:400 27px/1.2 var(--serif);margin:6px 0}
+.contact-toast strong em{color:#A42E48}
+.contact-toast p{font-size:12px;color:#625d62;line-height:1.6;margin:6px 0 13px}
+.contact-toast button{cursor:pointer}
+.contact-toast .toast-cta{border:0;border-radius:25px;padding:11px 17px;background:#A42E48;color:white;font-size:11px;font-weight:700}
+.contact-toast .toast-close{position:absolute;top:9px;right:10px;width:30px;height:30px;border:0;border-radius:50%;color:#A42E48;background:#f7e4eb;font-size:20px}
+@media(max-width:650px){.scroll-trail{opacity:.25}.app-view:not([hidden]){animation-duration:.35s}}
+@media(prefers-reduced-motion:reduce){.scroll-trail{display:none}.app-view:not([hidden]){animation:none}.contact-toast{transition:none}}
+
 </style>
 <script defer>
 (()=>{
@@ -48,7 +69,7 @@ function showOnly(id){['splash','welcome','intro','app'].forEach(key=>{$('#'+key
 function enterWelcome(){clearTimeout(timer);showOnly('welcome')}
 function enterIntro(){showOnly('intro')}
 function enterApp(view='editions'){const film=$('#introFilm');if(film){film.pause();}showOnly('app');switchView(view)}
-function switchView(view){if(view==='project')view='detail';activeView=view;$$('[data-view]').forEach(el=>el.hidden=el.dataset.view!==view);$$('[data-nav]').forEach(el=>{if(el.dataset.nav===view||view==='detail'&&el.dataset.nav==='editions')el.setAttribute('aria-current','page');else el.removeAttribute('aria-current')});window.scrollTo({top:0,behavior:'instant'});}
+function switchView(view){if(view==='project')view='detail';const prev=activeView;activeView=view;$('[data-view]').forEach(el=>el.hidden=el.dataset.view!==view);$('[data-nav]').forEach(el=>{if(el.dataset.nav===view||view==='detail'&&el.dataset.nav==='editions')el.setAttribute('aria-current','page');else el.removeAttribute('aria-current')});const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:reduce?'instant':'smooth'});if(view==='contact'&&prev!=='contact')showContactToast();else if(view!=='contact')hideContactToast();refreshScrollTrail();}
 function renderProjects(){
  const feature=$('#featuredProject');const strip=$('#projectStrip');
  function choose(idx){currentProject=(idx+projects.length)%projects.length;const p=projects[currentProject];feature.innerHTML=`<button class="feature-card" type="button" style="background:${p.theme};color:${p.paper}" data-open="${currentProject}" aria-label="Ouvrir le projet ${p.name}"><div class="feature-art"></div><span class="feature-kicker">EDITION ${String(currentProject+1).padStart(2,'0')} / ${p.tag}</span><div class="feature-footer"><div><h3>${p.name}</h3><p>${p.type}</p></div><span class="round-arrow">↗</span></div></button>`;$$('[data-mini]').forEach(el=>el.setAttribute('aria-pressed',String(+el.dataset.mini===currentProject)));
@@ -67,7 +88,15 @@ function openProject(i){currentProject=(i+projects.length)%projects.length;const
 function renderLogos(){const works=[{name:'Élya Natura',mark:'é.',color:'#294936',paper:'#E5EBE2'},{name:'MÉTALLUX',mark:'M',color:'#122E45',paper:'#E4EDF3'},{name:'ForceClean',mark:'FC',color:'#0D6197',paper:'#E4F2FA'},{name:'TrackSolid Pro',mark:'T',color:'#0077AD',paper:'#E7F6FE'},{name:'Logo explorations',mark:'✳',color:'#A42E48',paper:'#F7E3EB'},{name:'Letterform studies',mark:'em.',color:'#553169',paper:'#EEE3F6'}];
  $('#logoGrid').innerHTML=works.map((x,i)=>`<div class="logo-card" style="background:${x.paper};color:${x.color}"><small>LOGO ATELIER / 0${i+1}</small><span class="logo-symbol" aria-hidden="true">${x.mark}</span><strong>${x.name}</strong></div>`).join('');}
 function initForm(){const form=$('#briefForm');form.addEventListener('submit',e=>{e.preventDefault();const f=new FormData(form);const t=`BRIEF CRÉATIF — ELHEM MATHELI\nNom : ${f.get('name')}\nMarque : ${f.get('brand')||'À préciser'}\nService : ${f.get('service')}\nProjet : ${f.get('goal')}`;$('#briefText').textContent=t;$('#briefOutput').hidden=false;$('#briefOutput').scrollIntoView({behavior:'smooth',block:'start'})});$('#copyBrief').addEventListener('click',async()=>{const text=$('#briefText').textContent;try{await navigator.clipboard.writeText(text);$('#copyBrief').textContent='Copié ✓'}catch(e){$('#copyBrief').textContent='Sélectionner et copier le texte'}})}
-function init(){renderProjects();renderLogos();initForm();
+
+let toastSeen=false,trailPending=false;
+function refreshScrollTrail(){const app=$('#app');if(!app||app.hidden)return;const d=document.documentElement;const max=Math.max(d.scrollHeight-innerHeight,1);const p=Math.max(0,Math.min(1,scrollY/max));d.style.setProperty('--trail-p',p.toFixed(3));d.style.setProperty('--trail-y',(27+60*p)+'%');d.style.setProperty('--trail-x',(50+24*Math.sin(p*Math.PI*2))+'%');}
+function setupScrollTrail(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const app=$('#app');if(!app)return;const a=document.createElement('div');a.className='scroll-trail';a.setAttribute('aria-hidden','true');app.prepend(a);addEventListener('scroll',()=>{if(trailPending)return;trailPending=true;requestAnimationFrame(()=>{trailPending=false;refreshScrollTrail()})},{passive:true});addEventListener('resize',refreshScrollTrail,{passive:true});}
+function hideContactToast(){const toast=$('#contactToast');if(toast)toast.classList.remove('visible')}
+function showContactToast(){if(toastSeen)return;toastSeen=true;const toast=$('#contactToast');if(toast)requestAnimationFrame(()=>toast.classList.add('visible'))}
+function setupContactToast(){const toast=document.createElement('aside');toast.id='contactToast';toast.className='contact-toast';toast.setAttribute('role','status');toast.setAttribute('aria-live','polite');toast.innerHTML='<button class="toast-close" type="button" aria-label="Fermer">×</button><small>A LITTLE NOTE FROM ELHEM</small><strong>Une idée en tête ? <em>On en parle ?</em></strong><p>Si mes services t’intéressent, n’hésite pas à me contacter. Je serais ravie de découvrir ton projet.</p><button type="button" class="toast-cta">Parlons de ton projet ↗</button>';document.body.appendChild(toast);toast.querySelector('.toast-close').addEventListener('click',hideContactToast);toast.querySelector('.toast-cta').addEventListener('click',()=>{hideContactToast();const input=$('.contact-view input[name="name"]');if(input){input.scrollIntoView({behavior:'smooth',block:'center'});input.focus({preventScroll:true})}})}
+
+function init(){renderProjects();renderLogos();initForm();setupScrollTrail();setupContactToast();
  $('#skipSplash').addEventListener('click',enterWelcome);$('#skipWelcome').addEventListener('click',()=>enterApp('editions'));$('#goIntro').addEventListener('click',enterIntro);$('#backToWelcome').addEventListener('click',()=>{$('#introFilm').pause();enterWelcome()});$('#skipIntro').addEventListener('click',()=>enterApp());$('#goEditions').addEventListener('click',()=>enterApp());
  $('#logoHome').addEventListener('click',()=>switchView('editions'));$('#topContact').addEventListener('click',()=>switchView('contact'));$('#backToBook').addEventListener('click',()=>switchView('editions'));$('#nextCase').addEventListener('click',()=>openProject(currentProject+1));$('#aboutContact').addEventListener('click',()=>switchView('contact'));$('#filmToBook').addEventListener('click',()=>switchView('editions'));
  $$('[data-nav]').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.nav)));
