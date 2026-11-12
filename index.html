@@ -54,13 +54,12 @@
 @media(prefers-reduced-motion:reduce){.scroll-trail{display:none}.app-view:not([hidden]){animation:none}.contact-toast{transition:none}}
 
 
-/* V12 · The Welcome is now the first screen. Film has no editorial overlays. */
-.intro-screen.intro-fullscreen{position:fixed;inset:0;z-index:30;display:block;width:100vw;height:100vh;height:100dvh;padding:0;margin:0;background:#100c13;overflow:hidden}
-.intro-fullscreen #introFilm{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;background:#100c13;display:block}
-.intro-fullscreen .video-exit{position:absolute;top:calc(12px + env(safe-area-inset-top));right:calc(12px + env(safe-area-inset-right));z-index:4;border:1px solid #ffffff9c;border-radius:100%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#20162b82;color:#fff;font-size:29px;font-weight:300;line-height:1;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);text-shadow:0 1px 2px #111}
-@media(min-width:900px){.intro-fullscreen #introFilm{object-fit:contain}}
-@media(max-width:600px){.intro-fullscreen #introFilm{object-fit:cover}}
-@media(prefers-reduced-motion:reduce){.intro-fullscreen #introFilm{animation:none}}
+/* V12: welcome is the opening screen; video alone fills the viewport */
+.intro-screen.intro-fullscreen{position:fixed;inset:0;z-index:40;display:block;padding:0;margin:0;width:100%;height:100dvh;max-width:none;background:#211629;overflow:hidden}
+.intro-fullscreen>video{display:block;width:100%;height:100%;object-fit:cover;object-position:center center;background:#211629}
+.intro-fullscreen .intro-exit{position:absolute;right:calc(13px + env(safe-area-inset-right));top:calc(14px + env(safe-area-inset-top));z-index:2;display:grid;place-items:center;width:41px;height:41px;border:1px solid #ffffff94;border-radius:50%;background:#24142b88;color:white;font:400 25px/1 var(--sans);backdrop-filter:blur(8px);box-shadow:0 3px 16px #0005}
+.welcome{z-index:30}
+@media(min-aspect-ratio:3/4){.intro-fullscreen>video{object-fit:contain}}
 
 </style>
 <script defer>
@@ -73,10 +72,10 @@ const projects=[
  {id:'forceclean',name:'ForceClean',type:'Packaging · Product labels',tag:'PRODUCT PACKAGING',theme:'#0D6197',paper:'#E0F0F7',accent:'#ED8D3B',colors:[['Blue','#0D6197'],['Ice','#E0F0F7'],['Orange','#ED8D3B']],goal:'Créer une gamme d’étiquettes cohérente pour plusieurs références de produits ménagers.',decision:'Une hiérarchie simple, des repères de couleur et une attention aux contraintes de lecture et d’impression.',works:['Liquide vaisselle','Savon liquide','Parfum de linge']},
  {id:'tracksolid',name:'TrackSolid Pro',type:'Social media · Creative content',tag:'TECH & COMMUNICATION',theme:'#057CB7',paper:'#D9EDF9',accent:'#F58107',colors:[['Sky blue','#00A9FD'],['Orange','#F58107'],['White','#FFFFFF']],goal:'Présenter des solutions GPS avec des visuels compréhensibles et engageants.',decision:'Des contrastes dynamiques, des messages courts et des visuels produits adaptés aux formats social media.',works:['GT06N','GT06S','OBD VL505']}
 ];
-let currentProject=0;let activeView='editions';
+let currentProject=0;let activeView='editions';let timer;
 function showOnly(id){['welcome','intro','app'].forEach(key=>{$('#'+key).hidden=key!==id});if(id==='app')window.scrollTo({top:0,behavior:'instant'});}
-function enterWelcome(){showOnly('welcome')}
-function enterIntro(){showOnly('intro');const film=$('#introFilm');if(film){film.currentTime=0;const started=film.play();if(started&&typeof started.catch==='function')started.catch(()=>{film.controls=true;});}}
+function enterWelcome(){clearTimeout(timer);showOnly('welcome')}
+function enterIntro(){showOnly('intro');const v=$('#introFilm');if(v){v.currentTime=0;const p=v.play();if(p&&typeof p.catch==='function')p.catch(()=>{v.controls=true})}}
 function enterApp(view='editions'){const film=$('#introFilm');if(film){film.pause();}showOnly('app');switchView(view)}
 function switchView(view){if(view==='project')view='detail';const prev=activeView;activeView=view;$('[data-view]').forEach(el=>el.hidden=el.dataset.view!==view);$('[data-nav]').forEach(el=>{if(el.dataset.nav===view||view==='detail'&&el.dataset.nav==='editions')el.setAttribute('aria-current','page');else el.removeAttribute('aria-current')});const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:reduce?'instant':'smooth'});if(view==='contact'&&prev!=='contact')showContactToast();else if(view!=='contact')hideContactToast();refreshScrollTrail();}
 function renderProjects(){
@@ -106,7 +105,7 @@ function showContactToast(){if(toastSeen)return;toastSeen=true;const toast=$('#c
 function setupContactToast(){const toast=document.createElement('aside');toast.id='contactToast';toast.className='contact-toast';toast.setAttribute('role','status');toast.setAttribute('aria-live','polite');toast.innerHTML='<button class="toast-close" type="button" aria-label="Fermer">×</button><small>A LITTLE NOTE FROM ELHEM</small><strong>Une idée en tête ? <em>On en parle ?</em></strong><p>Si mes services t’intéressent, n’hésite pas à me contacter. Je serais ravie de découvrir ton projet.</p><button type="button" class="toast-cta">Parlons de ton projet ↗</button>';document.body.appendChild(toast);toast.querySelector('.toast-close').addEventListener('click',hideContactToast);toast.querySelector('.toast-cta').addEventListener('click',()=>{hideContactToast();const input=$('.contact-view input[name="name"]');if(input){input.scrollIntoView({behavior:'smooth',block:'center'});input.focus({preventScroll:true})}})}
 
 function init(){renderProjects();renderLogos();initForm();setupScrollTrail();setupContactToast();
- $('#skipWelcome').addEventListener('click',()=>enterApp('editions'));$('#goIntro').addEventListener('click',enterIntro);$('#skipIntro').addEventListener('click',()=>enterApp());$('#introFilm').addEventListener('ended',()=>enterApp('editions'));$('#introFilm').addEventListener('error',()=>{const close=$('#skipIntro');if(close)close.focus({preventScroll:true})});
+ $('#skipWelcome').addEventListener('click',()=>enterApp('editions'));$('#goIntro').addEventListener('click',enterIntro);$('#skipIntro').addEventListener('click',()=>enterApp());$('#introFilm').addEventListener('ended',()=>enterApp());
  $('#logoHome').addEventListener('click',()=>switchView('editions'));$('#topContact').addEventListener('click',()=>switchView('contact'));$('#backToBook').addEventListener('click',()=>switchView('editions'));$('#nextCase').addEventListener('click',()=>openProject(currentProject+1));$('#aboutContact').addEventListener('click',()=>switchView('contact'));$('#filmToBook').addEventListener('click',()=>switchView('editions'));
  $$('[data-nav]').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.nav)));
  showOnly('welcome');
@@ -119,17 +118,17 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 </head>
 <body>
 <a href="#main" class="skip-link">Aller au contenu</a>
-<!-- Welcome: first screen, with Elhem portrait -->
+<!-- 02. Welcome with actual portrait and a deliberate CTA -->
 <section id="welcome" class="onboard welcome" aria-label="Welcome">
   <img class="welcome-photo" data-asset="cover" alt="Portrait d’Elhem Matheli" fetchpriority="high">
   <div class="welcome-vignette"></div><div class="welcome-top"><span class="logo-light">em.</span><button id="skipWelcome" type="button" class="welcome-skip">Skip ↗</button></div>
   <div class="welcome-bottom"><span class="micro-label">ELHEM MATHELI · BRAND & PACKAGING DESIGNER</span><h1>Welcome to my<br><em>creative world.</em></h1><p>Where ideas become visual stories.</p><button id="goIntro" class="primary-button" type="button">Discover my world <span>↗</span></button><span class="welcome-hint">A little film, then the editions.</span></div>
   <div class="dots dots-white" aria-hidden="true"><b></b><b></b><b></b></div>
 </section>
-<!-- 03. User-supplied intro film: optional, muted by default until play -->
+<!-- Full-screen intro film, without overlaid phrases or text -->
 <section id="intro" class="onboard intro-screen intro-fullscreen" aria-label="Vidéo de présentation" hidden>
-  <video id="introFilm" controls playsinline preload="auto" data-poster="cover" aria-label="Vidéo de présentation d'Elhem Matheli"><source data-asset="video" type="video/mp4"></video>
-  <button id="skipIntro" class="video-exit" type="button" aria-label="Fermer la vidéo et voir les éditions">×</button>
+  <video id="introFilm" controls playsinline preload="metadata" data-poster="cover" aria-label="Présentation vidéo d'Elhem Matheli"><source data-asset="video" type="video/mp4">Votre navigateur ne peut pas lire cette vidéo.</video>
+  <button id="skipIntro" class="intro-exit" type="button" aria-label="Passer la vidéo et voir les projets">×</button>
 </section>
 <!-- 04. Actual app and bottom navigation -->
 <div id="app" class="app-shell" hidden>
