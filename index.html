@@ -74,16 +74,51 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 .clean-film-view>video{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;display:block!important}
 @media(prefers-reduced-motion:reduce){.clean-film-view{animation:none!important}}
 
+
+/* V16 · Approved Sommaire design · 4 real user-supplied covers */
+.sommaire-head{padding:6px 0 22px}
+.sommaire-head h2{font:400 clamp(52px,12vw,78px)/1 var(--serif);letter-spacing:-.055em;margin:13px 0 12px;color:#34202A}
+.sommaire-head p{color:var(--muted);font-size:12px;line-height:1.65;margin:0}
+.sommaire-rule{margin-top:24px;display:flex;align-items:center;gap:12px}
+.sommaire-rule span{flex:1;height:1px;background:#DCC7CC}
+.sommaire-rule small{font-size:9px;letter-spacing:.18em;font-weight:800;color:#9A3B54}
+.sommaire-list{display:grid;gap:12px}
+.sommaire-item{padding:0;display:grid;grid-template-columns:112px minmax(0,1fr) 30px;align-items:center;gap:15px;width:100%;height:134px;overflow:hidden;text-align:left;border:1px solid #E3D9D4;border-radius:18px;background:linear-gradient(105deg,var(--project-paper),#fffaf8 88%);box-shadow:0 6px 18px #3D203410;transition:transform .25s ease,box-shadow .25s ease}
+.sommaire-item:hover{transform:translateY(-2px);box-shadow:0 10px 25px #3D203421}
+.sommaire-cover{display:block;height:100%;width:100%;background-image:url('assets/projects/sommaire-covers.webp');background-size:200% 200%;background-repeat:no-repeat;background-color:var(--project-paper);border-radius:16px 0 0 16px}
+.sommaire-cover-0{background-position:0% 0%}
+.sommaire-cover-1{background-position:100% 0%}
+.sommaire-cover-2{background-position:0% 100%}
+.sommaire-cover-3{background-position:100% 100%}
+.sommaire-meta{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0}
+.sommaire-meta small{font-weight:800;font-size:9px;letter-spacing:.14em;color:#9B354F}
+.sommaire-meta strong{font:400 clamp(27px,6.5vw,39px)/1 var(--serif);letter-spacing:-.047em;color:var(--project-color)}
+.sommaire-meta>span{font:500 10px/1.5 var(--sans);color:#61545D}
+.sommaire-arrow{font-size:23px;color:#8E4556;align-self:center;padding-right:12px}
+.sommaire-foot{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;padding:35px 0 15px;color:#A42E48}
+.sommaire-foot span{font-size:9px;font-weight:700;letter-spacing:.22em}
+.sommaire-foot i{font:italic 23px var(--serif);color:#67414A}
+.sommaire-detail{display:flex;flex-direction:column;align-items:flex-start;color:var(--project-color)}
+.sommaire-detail-cover{width:100%;height:270px;border-radius:20px;background-color:var(--project-paper);background-size:200% 200%;margin-bottom:24px}
+.sommaire-detail>span{font-size:10px;font-weight:800;letter-spacing:.15em}
+.sommaire-detail h2{font:400 53px var(--serif);margin:13px 0}
+.sommaire-detail p{font-size:13px;color:var(--muted);line-height:1.7}
+.sommaire-detail-next{font-size:11px;border:1px solid #DACBD0;background:#fff;padding:18px;border-radius:13px;line-height:2;margin-top:16px}
+@media(min-width:680px){.sommaire-list{grid-template-columns:repeat(2,minmax(0,1fr))}.sommaire-item{grid-template-columns:125px minmax(0,1fr) 28px;height:157px}.sommaire-head{max-width:670px;margin:0 auto 15px}.sommaire-detail-cover{max-width:360px}}
+@media(max-width:350px){.sommaire-item{grid-template-columns:96px minmax(0,1fr) 24px;gap:10px}.sommaire-meta strong{font-size:27px}.sommaire-meta>span{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.sommaire-item{transition:none}}
+
 </style>
 <script defer>
 (()=>{
 'use strict';
 const $=(s,root=document)=>root.querySelector(s),$$=(s,root=document)=>[...root.querySelectorAll(s)];
+/* Add future projects as a new object in this array. The Sommaire renders dynamically. */
 const projects=[
- {id:'elya-natura',name:'Élya Natura',type:'Brand identity · Packaging',tag:'BOTANICAL CARE',theme:'#294936',paper:'#F4EFE5',accent:'#A94F32',colors:[['Forest','#294936'],['Warm cream','#F4EFE5'],['Terracotta','#A94F32']],goal:'Créer une identité cohérente et reconnaissable pour une gamme de soins naturels.',decision:'Une palette végétale, des détails botaniques et une présentation sobre, pour relier identité et expérience produit.',works:['Shampooing solide','Sérum cuir chevelu','Huile solide','Savon enfants']},
- {id:'metallux',name:'MÉTALLUX',type:'Brand identity · Print',tag:'METAL & STRUCTURE',theme:'#122E45',paper:'#DCE5EB',accent:'#B9C6D2',colors:[['Navy','#122E45'],['Mist','#DCE5EB'],['Steel','#B9C6D2']],goal:'Créer une signature graphique claire pour une activité dans le secteur métallique.',decision:'Des formes structurées et un contraste maîtrisé pour une identité lisible et adaptée aux supports imprimés.',works:['Carte de visite','Application de marque','Supports imprimés']},
- {id:'forceclean',name:'ForceClean',type:'Packaging · Product labels',tag:'PRODUCT PACKAGING',theme:'#0D6197',paper:'#E0F0F7',accent:'#ED8D3B',colors:[['Blue','#0D6197'],['Ice','#E0F0F7'],['Orange','#ED8D3B']],goal:'Créer une gamme d’étiquettes cohérente pour plusieurs références de produits ménagers.',decision:'Une hiérarchie simple, des repères de couleur et une attention aux contraintes de lecture et d’impression.',works:['Liquide vaisselle','Savon liquide','Parfum de linge']},
- {id:'tracksolid',name:'TrackSolid Pro',type:'Social media · Creative content',tag:'TECH & COMMUNICATION',theme:'#057CB7',paper:'#D9EDF9',accent:'#F58107',colors:[['Sky blue','#00A9FD'],['Orange','#F58107'],['White','#FFFFFF']],goal:'Présenter des solutions GPS avec des visuels compréhensibles et engageants.',decision:'Des contrastes dynamiques, des messages courts et des visuels produits adaptés aux formats social media.',works:['GT06N','GT06S','OBD VL505']}
+ {id:'herbtresor',name:'Herbtresor',type:'Identité naturelle · Branding',theme:'#294936',paper:'#F4EFE5',sprite:0},
+ {id:'fait-maison',name:'Fait Maison',type:'Identité artisanale · Packaging',theme:'#B93216',paper:'#FAE9DF',sprite:1},
+ {id:'forceclean',name:'ForceClean',type:'Packaging · Produits d’entretien',theme:'#0D6197',paper:'#E5F1FC',sprite:2},
+ {id:'metallux',name:'MÉTALLUX',type:'Identité visuelle · Industrie',theme:'#122E45',paper:'#E6ECF5',sprite:3}
 ];
 let currentProject=0;let activeView='editions';let timer;
 function showOnly(id){['welcome','intro','app'].forEach(key=>{$('#'+key).hidden=key!==id});if(id==='app')window.scrollTo({top:0,behavior:'instant'});}
@@ -92,20 +127,22 @@ function enterIntro(){if(!$('#welcome')||$('#welcome').hidden)return;window.clea
 function enterApp(view='editions'){window.clearTimeout(welcomeTimer);const film=$('#introFilm');if(film){film.pause();}showOnly('app');switchView(view)}
 function switchView(view){if(view==='project')view='detail';const prev=activeView;activeView=view;document.body.classList.toggle('video-active',view==='video');$$('[data-view]').forEach(el=>el.hidden=el.dataset.view!==view);$$('[data-nav]').forEach(el=>{if(el.dataset.nav===view||view==='detail'&&el.dataset.nav==='editions')el.setAttribute('aria-current','page');else el.removeAttribute('aria-current')});const film=$('#portfolioFilm');if(film){if(view==='video'){const p=film.play();if(p&&typeof p.catch==='function')p.catch(()=>{film.controls=true})}else film.pause()}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:reduce?'instant':'smooth'});if(view==='contact'&&prev!=='contact')showContactToast();else if(view!=='contact')hideContactToast();refreshScrollTrail();}
 function renderProjects(){
- const feature=$('#featuredProject');const strip=$('#projectStrip');
- function choose(idx){currentProject=(idx+projects.length)%projects.length;const p=projects[currentProject];feature.innerHTML=`<button class="feature-card" type="button" style="background:${p.theme};color:${p.paper}" data-open="${currentProject}" aria-label="Ouvrir le projet ${p.name}"><div class="feature-art"></div><span class="feature-kicker">EDITION ${String(currentProject+1).padStart(2,'0')} / ${p.tag}</span><div class="feature-footer"><div><h3>${p.name}</h3><p>${p.type}</p></div><span class="round-arrow">↗</span></div></button>`;$$('[data-mini]').forEach(el=>el.setAttribute('aria-pressed',String(+el.dataset.mini===currentProject)));
- feature.querySelector('[data-open]').addEventListener('click',()=>openProject(currentProject));}
- strip.innerHTML=projects.map((p,i)=>`<button class="project-mini" data-mini="${i}" type="button" aria-label="Afficher ${p.name}" style="background:${p.paper};color:${p.theme}"><small>0${i+1} / ${p.tag}</small><strong>${p.name}</strong><span>${p.type}</span></button>`).join('');
- $$('.project-mini').forEach(el=>el.addEventListener('click',()=>choose(+el.dataset.mini)));
- choose(0);
+ const area=$('#projectStrip');
+ if(!area)return;
+ const header=$('#editionCount');if(header)header.textContent=String(projects.length).padStart(2,'0')+' PROJETS';
+ area.innerHTML=projects.map((p,i)=>`<button class="sommaire-item" type="button" data-project="${i}" aria-label="Découvrir ${p.name}" style="--project-color:${p.theme};--project-paper:${p.paper}">
+ <span class="sommaire-cover sommaire-cover-${p.sprite}" aria-hidden="true"></span>
+ <span class="sommaire-meta"><small>ÉDITION ${String(i+1).padStart(2,'0')}</small><strong>${p.name}</strong><span>${p.type}</span></span>
+ <span class="sommaire-arrow" aria-hidden="true">↗</span>
+ </button>`).join('');
+ $$('[data-project]',area).forEach(b=>b.addEventListener('click',()=>openProject(Number(b.dataset.project))));
 }
-function openProject(i){currentProject=(i+projects.length)%projects.length;const p=projects[currentProject];
- const palette=p.colors.map(([name,hex])=>`<div class="swatch"><div class="swatch-color" style="background:${hex}"></div><small>${name}</small><code>${hex}</code></div>`).join('');
- $('#detailContent').innerHTML=`<div class="case-cover" style="background:${p.theme};color:${p.paper}"><span>EDITION ${String(currentProject+1).padStart(2,'0')} · ${p.tag}</span><div><h2>${p.name}</h2><p>${p.type}</p></div></div>
- <div class="case-section"><span class="case-n">01 / DESIGN BRIEF</span><h3>Project goal</h3><p>${p.goal}</p><h3>Design decision</h3><p>${p.decision}</p></div>
- <div class="case-section"><span class="case-n">02 / MINI CHARTE GRAPHIQUE</span><h3>Visual identity</h3><div class="swatches">${palette}</div><div class="type-row"><span>${p.name}</span><small>Typographie du projet à documenter à partir de la charte originale.</small></div></div>
- <div class="case-section"><span class="case-n">03 / SELECTED WORK</span><h3>The final work</h3><p>Les créations originales de ce projet seront présentées en regard : maquette et composition à plat.</p><div class="work-list">${p.works.map(w=>`<div>${w}</div>`).join('')}</div><div class="work-placeholder"><span>✳</span><strong>Original work, coming into focus.</strong><p>Les photos, mockups et étiquettes originaux doivent être ajoutés ici. Aucun faux visuel de projet n’est présenté.</p></div></div>`;
- switchView('detail');}
+function openProject(i){
+ currentProject=(i+projects.length)%projects.length;
+ const p=projects[currentProject];
+ $('#detailContent').innerHTML=`<div class="sommaire-detail" style="--project-color:${p.theme};--project-paper:${p.paper}"><div class="sommaire-detail-cover sommaire-cover-${p.sprite}" aria-hidden="true"></div><span>ÉDITION ${String(currentProject+1).padStart(2,'0')}</span><h2>${p.name}</h2><p>Page du projet à compléter après validation du Sommaire.</p><div class="sommaire-detail-next">Cover · Mini charte graphique · Logo · Couleurs · Typographies · Project Goal · Design Decision · Mockups</div></div>`;
+ switchView('detail');
+}
 function renderLogos(){const works=[{name:'Élya Natura',mark:'é.',color:'#294936',paper:'#E5EBE2'},{name:'MÉTALLUX',mark:'M',color:'#122E45',paper:'#E4EDF3'},{name:'ForceClean',mark:'FC',color:'#0D6197',paper:'#E4F2FA'},{name:'TrackSolid Pro',mark:'T',color:'#0077AD',paper:'#E7F6FE'},{name:'Logo explorations',mark:'✳',color:'#A42E48',paper:'#F7E3EB'},{name:'Letterform studies',mark:'em.',color:'#553169',paper:'#EEE3F6'}];
  $('#logoGrid').innerHTML=works.map((x,i)=>`<div class="logo-card" style="background:${x.paper};color:${x.color}"><small>LOGO ATELIER / 0${i+1}</small><span class="logo-symbol" aria-hidden="true">${x.mark}</span><strong>${x.name}</strong></div>`).join('');}
 function initForm(){const form=$('#briefForm');form.addEventListener('submit',e=>{e.preventDefault();const f=new FormData(form);const t=`BRIEF CRÉATIF — ELHEM MATHELI\nNom : ${f.get('name')}\nMarque : ${f.get('brand')||'À préciser'}\nService : ${f.get('service')}\nProjet : ${f.get('goal')}`;$('#briefText').textContent=t;$('#briefOutput').hidden=false;$('#briefOutput').scrollIntoView({behavior:'smooth',block:'start'})});$('#copyBrief').addEventListener('click',async()=>{const text=$('#briefText').textContent;try{await navigator.clipboard.writeText(text);$('#copyBrief').textContent='Copié ✓'}catch(e){$('#copyBrief').textContent='Sélectionner et copier le texte'}})}
@@ -149,12 +186,14 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <header class="app-header"><button type="button" class="em-link" id="logoHome" aria-label="Ouvrir les éditions">em.</button><div class="top-identity"><strong>ELHEM MATHELI</strong><small>THE CREATIVE EDITIONS</small></div><button type="button" class="header-contact" id="topContact" aria-label="Start a project">↗</button></header>
 <main id="main">
 <section class="app-view editions-view" data-view="editions">
-  <div class="section-intro"><div class="eyebrow">THE ART BOOK <span>· VOL. 01 / 2026</span></div><h2>My Creative<br><em>Editions<span class="period">.</span></em></h2><p>Brand identity · Packaging · Creative content</p></div>
-  <div class="featured-label"><span>SELECTED WORK / CHAPTERS</span><span>01 — 04</span></div>
-  <div id="featuredProject" class="featured-project"></div>
-  <div class="chapter-title"><span>EXPLORE THE COLLECTION</span><span>SWIPE →</span></div>
-  <div id="projectStrip" class="project-strip" aria-label="Liste des projets"></div>
-  <div class="book-quote"><span>✳</span><p>Every brand deserves<br><em>its own visual story.</em></p></div>
+ <div class="sommaire-head">
+  <span class="eyebrow">THE CREATIVE EDITIONS · VOL. 01</span>
+  <h2>Sommaire<span class="period">.</span></h2>
+  <p>Quatre univers graphiques. Quatre histoires de marque.</p>
+  <div class="sommaire-rule"><span></span><small id="editionCount">04 PROJETS</small></div>
+ </div>
+ <div id="projectStrip" class="sommaire-list" aria-label="Sommaire des projets"></div>
+ <div class="sommaire-foot"><span>THE CREATIVE EDITIONS</span><i>Every brand has its own story.</i></div>
 </section>
 <section class="app-view detail-view" data-view="detail" hidden><button type="button" id="backToBook" class="return-link">← Back to the Art Book</button><div id="detailContent"></div><button type="button" class="outline-button detail-next" id="nextCase">Next edition <span>→</span></button></section>
 <section class="app-view logos-view" data-view="logos" hidden><div class="section-intro"><div class="eyebrow">THE LOGO ATELIER</div><h2>Little marks.<br><em>Big ideas.</em></h2><p>Une vitrine de recherches et d’identités graphiques, sans inventer de réalisations.</p></div><div class="logo-grid" id="logoGrid"></div><div class="editorial-note">La construction d’un logo commence toujours par une idée claire, pas par un effet.</div></section>
@@ -162,7 +201,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <section class="app-view about-view" data-view="about" hidden><div class="section-intro"><div class="eyebrow">THE DESIGNER</div><h2>Hello, I’m<br><em>Elhem.</em></h2></div><div class="about-photo"><img data-asset="about" alt="Elhem Matheli, designer" loading="lazy"></div><div class="about-copy"><span class="eyebrow">BRAND · PACKAGING · CONTENT</span><p>Je donne forme aux idées à travers des identités visuelles, des packagings et du contenu créatif. Mon travail réunit intention, clarté et détails.</p></div><div class="services-grid"><div><span>✳</span><strong>Brand Identity</strong></div><div><span>◇</span><strong>Packaging</strong></div><div><span>▦</span><strong>Creative Content</strong></div></div><div class="journal"><div class="eyebrow">THE CREATIVE JOURNAL</div><h3>Notes from<br><em>the studio.</em></h3><details><summary>Un logo n’est pas une identité. <span>+</span></summary><p>Une identité comprend les couleurs, la typographie, les compositions et les usages qui rendent la marque cohérente.</p></details><details><summary>Le packaging parle avant le produit. <span>+</span></summary><p>La hiérarchie, la matière et les informations d’une étiquette guident le regard et facilitent la compréhension.</p></details><details><summary>Chaque marque a son propre univers. <span>+</span></summary><p>Une marque botanique et une entreprise industrielle ne se racontent pas avec les mêmes codes.</p></details></div><button type="button" class="primary-button" id="aboutContact">Start your brand story <span>↗</span></button></section>
 <section class="app-view contact-view" data-view="contact" hidden><div class="section-intro"><div class="eyebrow">LET’S WORK TOGETHER</div><h2>Start your<br><em>brand story.</em></h2><p>Un petit brief pour mieux comprendre votre projet, sans formulaire compliqué.</p></div><form id="briefForm" class="brief-form"><label>Votre nom<input name="name" placeholder="Votre nom" required autocomplete="name"></label><label>Nom de la marque<input name="brand" placeholder="Votre marque (optionnel)"></label><label>Quel type de projet ?<select name="service"><option>Brand Identity</option><option>Packaging Design</option><option>Creative Content</option><option>Autre projet</option></select></label><label>Parlez-moi de votre idée<textarea name="goal" placeholder="Racontez votre projet en quelques mots" required rows="4"></textarea></label><button class="primary-button" type="submit">Préparer mon brief <span>↗</span></button></form><div id="briefOutput" hidden class="brief-output" aria-live="polite"><h3>Votre brief est prêt.</h3><pre id="briefText"></pre><button id="copyBrief" class="outline-button" type="button">Copier le brief</button></div></section>
 </main>
-<nav class="bottom-nav" aria-label="Navigation principale"><button type="button" data-nav="editions" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10H3z"/><path d="M9 20v-7h6v7"/></svg>Éditions</button><button type="button" data-nav="logos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 22 12 12 22 2 12z"/><path d="M12 6v12M6 12h12"/></svg>Logos</button><button type="button" data-nav="video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z"/></svg>Vidéo</button><button type="button" data-nav="about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 21v-2.2a7.5 7.5 0 0 1 15 0V21z"/></svg>À propos</button></nav>
+<nav class="bottom-nav" aria-label="Navigation principale"><button type="button" data-nav="editions" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10H3z"/><path d="M9 20v-7h6v7"/></svg>Sommaire</button><button type="button" data-nav="logos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 22 12 12 22 2 12z"/><path d="M12 6v12M6 12h12"/></svg>Logos</button><button type="button" data-nav="video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z"/></svg>Vidéo</button><button type="button" data-nav="about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 21v-2.2a7.5 7.5 0 0 1 15 0V21z"/></svg>À propos</button></nav>
 </div>
 <script>
 /* Keep real portrait and video in separate files, instead of embedding them in the HTML. */

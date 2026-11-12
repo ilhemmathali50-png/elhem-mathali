@@ -1,5 +1,5 @@
-const CACHE='em-editions-v16-seamless-intro';
-const CORE=['./index.html?v=16','./manifest.webmanifest','./app-icon.svg'];
+const CACHE='em-editions-v16-sommaire';
+const CORE=['./index.html?v=16','./manifest.webmanifest','./app-icon.svg','./assets/projects/sommaire-covers.webp'];
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
 });
