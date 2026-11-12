@@ -60,7 +60,7 @@ function openProject(i){
  section.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
 }
 function makeAtelier(){
- $("#logoGrid").innerHTML=d.logos.map((l,i)=>'<article class="logo-card"><div class="logo-visual"><div class="logo-placeholder">'+(i+1).toString().padStart(2,"0")+'</div>'+cover(l.image,l.title)+'</div><div class="logo-details"><div><h3>'+esc(l.title)+'</h3><small>'+esc(l.type)+'</small></div><small>STUDY '+number(i)+'</small></div></article>').join("");
+ $("#logoGrid").innerHTML=d.logos.map((l,i)=>'<article class="logo-card" style="--logo-bg:'+esc(l.bg||"#FAF7F2")+';--logo-ink:'+esc(l.ink||"#2D2A2E")+'"><div class="logo-visual"><div class="logo-placeholder logo-name">'+esc(l.title)+'</div>'+cover(l.image,l.title)+'</div><div class="logo-details"><div><h3>'+esc(l.title)+'</h3><small>'+esc(l.type)+'</small></div><small>EDITION '+number(i)+'</small></div></article>').join("");
  $$("#logoGrid img").forEach(img=>{img.onerror=()=>img.classList.add("is-missing");if(img.complete&&!img.naturalWidth)img.classList.add("is-missing");});
 }
 function makeJournal(){
@@ -89,8 +89,8 @@ function makeBrief(){
  });
 }
 function initMobile(){
- const navLinks=$$(".mobile-tabs a");
- const keys=["home","editions","atelier","journal","story"];
+ const navLinks=$(".mobile-tabs a");
+ const keys=["editions","atelier","intro","about"];
  const setActive=id=>{if(!keys.includes(id))return;navLinks.forEach(a=>{if(a.dataset.tab===id)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});};
  navLinks.forEach(a=>a.addEventListener("click",()=>setActive(a.dataset.tab)));
  if("IntersectionObserver" in window){const observer=new IntersectionObserver(entries=>{const e=entries.filter(x=>x.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(e)setActive(e.target.id);},{rootMargin:"-18% 0px -45% 0px",threshold:[0,.1,.2,.4,.6]});keys.map(id=>document.getElementById(id)).filter(Boolean).forEach(el=>observer.observe(el));}
@@ -102,7 +102,7 @@ function initMobile(){
  const standalone=()=>matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
  const isiOS=()=>/iPhone|iPad|iPod/.test(navigator.userAgent);
  const isSafari=()=>/Safari/.test(navigator.userAgent)&&!/CriOS|FxiOS|EdgiOS/.test(navigator.userAgent);
- if(standalone())button.hidden=true;
+ if(button&&standalone())button.hidden=true;
  const close=()=>{overlay.hidden=true;button.focus();};
  $("#dismissInstall").addEventListener("click",close);$("#installConfirm").addEventListener("click",close);
  overlay.addEventListener("click",e=>{if(e.target===overlay)close();});
