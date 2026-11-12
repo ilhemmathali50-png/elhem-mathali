@@ -120,7 +120,7 @@ function initSplash(){
  const close=()=>{screen.classList.add("is-gone");screen.setAttribute("aria-hidden","true");window.setTimeout(()=>screen.remove(),650)};
  $("#skipSplash").addEventListener("click",close);
  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){close();return;}
- window.setTimeout(close,2100);
+ window.setTimeout(close,1750);
 }
 function initIntroVideo(){
  const film=$("#introVideo"),cover=$("#introVideoCover"),play=$("#playIntro");if(!film||!play)return;
@@ -135,6 +135,8 @@ function initIntroVideo(){
 }
 function init(){
  initSplash();initIntroVideo();
+ const welcome=$("#home");if(welcome&&"IntersectionObserver" in window){const obs=new IntersectionObserver(entries=>{document.body.classList.toggle("on-welcome",entries[0].isIntersecting)},{threshold:.4});obs.observe(welcome);}
+
  $$("[data-fallback]").forEach(img=>{img.onerror=()=>img.classList.add("is-missing");if(img.complete&&!img.naturalWidth)img.classList.add("is-missing");});
  $("#year").textContent=new Date().getFullYear();
  makeBook();makeAtelier();makeJournal();makeAbout();makeBrief();initMobile();
