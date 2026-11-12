@@ -89,7 +89,7 @@ function makeBrief(){
  });
 }
 function initMobile(){
- const navLinks=$(".mobile-tabs a");
+ const navLinks=$$(".mobile-tabs a");
  const keys=["home","editions","atelier","journal","story"];
  const setActive=id=>{if(!keys.includes(id))return;navLinks.forEach(a=>{if(a.dataset.tab===id)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});};
  navLinks.forEach(a=>a.addEventListener("click",()=>setActive(a.dataset.tab)));
