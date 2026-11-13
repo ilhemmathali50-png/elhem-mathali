@@ -108,6 +108,37 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 @media(max-width:350px){.sommaire-item{grid-template-columns:96px minmax(0,1fr) 24px;gap:10px}.sommaire-meta strong{font-size:27px}.sommaire-meta>span{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.sommaire-item{transition:none}}
 
+
+/* HerbTrésor art book */
+.herb-book { --herb-paper:#fbf6ea; --herb-ink:#294936; color:var(--herb-ink); font-size:16px; }
+.herb-page { position:relative; margin-block:14px; padding:clamp(19px,5vw,48px); border:1px solid #d8cbb5; border-radius:3px 9px 9px 3px; background:linear-gradient(90deg,#6c503418,transparent 15px),var(--herb-paper); box-shadow:0 2px #e8ddc9,0 4px #cbbcaa,0 10px 20px #3a271b1a; }
+.herb-cover { display:grid; gap:20px; align-items:center; background:linear-gradient(90deg,#281d2122,transparent 15px),#eee4cc; }
+.herb-cover .herb-art { max-height:475px; object-fit:contain; }
+.herb-kicker,.herb-page header span { font-size:.73rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+.herb-page h1,.herb-page h2 { font-family:var(--serif); font-weight:400; line-height:1.02; margin:.22em 0 .36em; }
+.herb-page h1 { font-size:clamp(2.6rem,10vw,5.1rem); }
+.herb-page h2 { font-size:clamp(2rem,7vw,3.5rem); }
+.herb-page p { line-height:1.65; }
+.herb-story { color:#fff8e8; background:linear-gradient(90deg,#1118,transparent 15px),#294936; border-color:#294936; }
+.herb-spread,.herb-logos,.herb-labels,.herb-range { display:grid; gap:14px; }
+.herb-logos,.herb-range,.herb-labels { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.herb-art { display:block; width:100%; height:auto; border-radius:3px; }
+.herb-page figure { margin:0; }
+.herb-page figcaption { margin-top:.55rem; font-size:.83rem; }
+.herb-label { min-width:0; color:inherit; text-align:left; border:1px solid #d8cbb5; border-radius:4px; background:#fffdf7; padding:8px; display:grid; gap:6px; }
+.herb-label img { width:100%; aspect-ratio:4/3; object-fit:contain; background:#f2ecdf; }
+.herb-label span { font-size:.7rem; }
+.herb-dialog { position:fixed; inset:0; margin:0; width:100%; height:100%; max-width:none; max-height:none; padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left)); border:0; color:#fff8e8; background:#1e3428; }
+.herb-dialog[open] { display:grid; grid-template-rows:auto minmax(0,1fr) auto; gap:12px; }
+.herb-dialog::backdrop { background:#15271f; }
+.herb-dialog-bar { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.herb-dialog-bar h2 { font:400 clamp(1.5rem,6vw,2.6rem)/1 var(--serif); margin:0; }
+.herb-close,.herb-toggle { background:#fff8e8; color:#294936; border:0; border-radius:999px; min-height:44px; }
+.herb-close { width:44px; font-size:24px; }
+.herb-toggle { justify-self:center; padding:0 18px; }
+.herb-full-image { display:block; width:100%; height:100%; object-fit:contain; }
+@media (min-width:720px) { .herb-cover,.herb-spread { grid-template-columns:repeat(2,minmax(0,1fr)); align-items:center; } .herb-labels { grid-template-columns:repeat(4,minmax(0,1fr)); } }
+@media (prefers-reduced-motion:no-preference) { .herb-dialog[open] .herb-full-image { animation:herb-reveal .24s ease-out; } @keyframes herb-reveal { from { opacity:.5;transform:scale(.96); } to { opacity:1;transform:scale(1); } } }
 </style>
 <script defer>
 (()=>{
@@ -115,7 +146,7 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 const $=(s,root=document)=>root.querySelector(s),$$=(s,root=document)=>[...root.querySelectorAll(s)];
 /* Add future projects as a new object in this array. The Sommaire renders dynamically. */
 const projects=[
- {id:'herbtresor',name:'Herbtresor',type:'Identité naturelle · Branding',theme:'#294936',paper:'#F4EFE5',sprite:0},
+ {id:'herbtresor',name:'HerbTrésor',type:'Identité naturelle · Branding',theme:'#294936',paper:'#F4EFE5',sprite:0},
  {id:'fait-maison',name:'Fait Maison',type:'Identité artisanale · Packaging',theme:'#B93216',paper:'#FAE9DF',sprite:1},
  {id:'forceclean',name:'ForceClean',type:'Packaging · Produits d’entretien',theme:'#0D6197',paper:'#E5F1FC',sprite:2},
  {id:'metallux',name:'MÉTALLUX',type:'Identité visuelle · Industrie',theme:'#122E45',paper:'#E6ECF5',sprite:3}
@@ -143,9 +174,56 @@ function renderProjects(){
  </button>`).join('');
  $$('[data-project]',area).forEach(b=>b.addEventListener('click',()=>openProject(Number(b.dataset.project))));
 }
+function renderHerbBook(){
+ const detail=$('#detailContent');
+ detail.innerHTML=`<article class="herb-book" aria-label="HerbTrésor, livre de marque">
+<section class="herb-page herb-cover"><div><p class="herb-kicker">HerbTrésor · Identité visuelle &amp; packaging</p><h1>Le trésor<br><em>du végétal</em></h1></div><img class="herb-art" src="./assets/projects/herbtresor/mock_ricin.jpg" alt="Flacon HerbTrésor avec l’étiquette Ricin" loading="lazy" decoding="async"></section>
+<section class="herb-page herb-story"><header><span>01</span><h2>Direction artistique</h2></header><div class="herb-spread"><p>Pour HerbTrésor, l’enjeu était de rendre chaque huile identifiable tout en gardant une signature commune. Le dessin botanique ancre la marque dans son univers, et les accents de couleur distinguent les variétés.</p><img class="herb-art" src="./assets/projects/herbtresor/story.jpg" alt="Planche de direction artistique HerbTrésor" loading="lazy" decoding="async"></div></section>
+<section class="herb-page "><header><span>02</span><h2>Le logo</h2></header><p>Une feuille prolonge le tracé calligraphique et signe l’univers végétal de la marque.</p><div class="herb-spread"><img class="herb-art" src="./assets/projects/herbtresor/sketch.jpg" alt="Croquis et inspiration du logo HerbTrésor" loading="lazy" decoding="async"><div class="herb-logos"><img class="herb-art" src="./assets/projects/herbtresor/logo.jpg" alt="Logotype original sur fond clair" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/logodark.jpg" alt="Logotype original sur fond foncé" loading="lazy" decoding="async"></div></div></section>
+<section class="herb-page "><header><span>03</span><h2>Couleurs &amp; typographies</h2></header><div class="herb-spread"><figure><img class="herb-art" src="./assets/projects/herbtresor/palette.jpg" alt="Palette de la charte HerbTrésor" loading="lazy" decoding="async"><figcaption>Palette chromatique</figcaption></figure><figure><img class="herb-art" src="./assets/projects/herbtresor/type.jpg" alt="Hiérarchie typographique de la charte HerbTrésor" loading="lazy" decoding="async"><figcaption>Typographies</figcaption></figure></div></section>
+<section class="herb-page "><header><span>04</span><h2>Système d’étiquettes</h2></header><div class="herb-labels"><button type="button" class="herb-label" data-herb-product="label_ricin"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_ricin.jpg" alt=""><strong>Ricin</strong><span>Voir le mockup ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="label_argan"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_argan.jpg" alt=""><strong>Argan</strong><span>Voir le mockup ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="label_lavande"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_lavande.jpg" alt=""><strong>Lavande</strong><span>Voir le mockup ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="label_orange"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_orange.jpg" alt=""><strong>Orange</strong><span>Voir le mockup ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="label_citron"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_citron.jpg" alt=""><strong>Citron</strong><span>Agrandir l’étiquette ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="label_girofle"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_girofle.jpg" alt=""><strong>Girofle</strong><span>Voir le mockup ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="label_lin"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_lin.jpg" alt=""><strong>Lin</strong><span>Agrandir l’étiquette ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="label_fenugrec"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_fenugrec.jpg" alt=""><strong>Fenugrec</strong><span>Agrandir l’étiquette ↗</span></button></div></section>
+<section class="herb-page herb-story"><header><span>05</span><h2>La gamme</h2></header><div class="herb-range"><img class="herb-art" src="./assets/projects/herbtresor/mock_ricin.jpg" alt="Mockup HerbTrésor · Ricin" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/mock_argan.jpg" alt="Mockup HerbTrésor · Argan" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/mock_lavande.jpg" alt="Mockup HerbTrésor · Lavande" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/mock_orange.jpg" alt="Mockup HerbTrésor · Orange" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/mock_girofle.jpg" alt="Mockup HerbTrésor · Girofle" loading="lazy" decoding="async"></div></section>
+<dialog class="herb-dialog" aria-labelledby="herb-view-title"><div class="herb-dialog-bar"><h2 id="herb-view-title"></h2><button type="button" class="herb-close" aria-label="Fermer" autofocus>×</button></div><img class="herb-full-image" alt=""><button type="button" class="herb-toggle"></button></dialog>
+</article>`;
+ const dialog=$('.herb-dialog',detail);
+ const visual=$('.herb-full-image',dialog);
+ const toggle=$('.herb-toggle',dialog);
+ const products=[{"name":"Ricin","label":"label_ricin","mock":"mock_ricin"},{"name":"Argan","label":"label_argan","mock":"mock_argan"},{"name":"Lavande","label":"label_lavande","mock":"mock_lavande"},{"name":"Orange","label":"label_orange","mock":"mock_orange"},{"name":"Citron","label":"label_citron","mock":null},{"name":"Girofle","label":"label_girofle","mock":"mock_girofle"},{"name":"Lin","label":"label_lin","mock":null},{"name":"Fenugrec","label":"label_fenugrec","mock":null}];
+ let product, opener, previousOverflow, mockVisible;
+ function showVisual(showMock){
+  mockVisible=showMock;
+  visual.src='./assets/projects/herbtresor/'+(showMock?product.mock:product.label)+'.jpg';
+  visual.alt=(showMock?'Mockup HerbTrésor · ':'Étiquette originale · ')+product.name;
+  toggle.textContent=showMock?'Voir l’étiquette originale':'Voir le mockup';
+  toggle.hidden=!product.mock;
+ }
+ $('[data-herb-product]',detail).forEach(button=>button.addEventListener('click',()=>{
+  opener=button;
+  product=products.find(item=>item.label===button.dataset.herbProduct);
+  $('#herb-view-title').textContent=product.name;
+  showVisual(Boolean(product.mock));
+  previousOverflow=document.body.style.overflow;
+  dialog.showModal();
+  document.body.style.overflow='hidden';
+ }));
+ toggle.addEventListener('click',()=>showVisual(!mockVisible));
+ $('.herb-close',dialog).addEventListener('click',()=>dialog.close());
+ dialog.addEventListener('close',()=>{
+  document.body.style.overflow=previousOverflow;
+  opener.focus({preventScroll:true});
+ });
+}
 function openProject(i){
  currentProject=(i+projects.length)%projects.length;
  const p=projects[currentProject];
+ if(p.id==='herbtresor'){renderHerbBook();switchView('detail');return;}
  $('#detailContent').innerHTML=`<div class="sommaire-detail" style="--project-color:${p.theme};--project-paper:${p.paper}"><div class="sommaire-detail-cover sommaire-cover-${p.sprite}" aria-hidden="true"></div><span>ÉDITION ${String(currentProject+1).padStart(2,'0')}</span><h2>${p.name}</h2><p>Page du projet à compléter après validation du Sommaire.</p><div class="sommaire-detail-next">Cover · Mini charte graphique · Logo · Couleurs · Typographies · Project Goal · Design Decision · Mockups</div></div>`;
  switchView('detail');
 }
