@@ -160,6 +160,15 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
  transform-origin:right;
 }
 .herb-book.has-sheet-stack .herb-page:focus-within::after { opacity:0; }
+
+.herb-plate { display:block; padding:0; }
+.herb-plate .herb-art { width:100%; max-height:none; border-radius:inherit; }
+.herb-visually-hidden { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.herb-range .herb-label { color:var(--herb-ink); }
+.herb-range .herb-label img { aspect-ratio:4/5; }
+.herb-views { display:flex; justify-content:center; flex-wrap:wrap; gap:6px; }
+.herb-views .herb-toggle { font-size:.8rem; padding-inline:12px; }
+.herb-views .herb-toggle[aria-pressed="true"] { background:#c7a874; color:#172a21; }
 </style>
 <script defer>
 (()=>{
@@ -240,44 +249,57 @@ function stackHerbSheets(book){
 function renderHerbBook(){
  const detail=$('#detailContent');
  detail.innerHTML=`<article class="herb-book" aria-label="HerbTrésor, livre de marque">
-<section class="herb-page herb-cover"><div><p class="herb-kicker">HerbTrésor · Identité visuelle &amp; packaging</p><h1>Le trésor<br><em>du végétal</em></h1></div><img class="herb-art" src="./assets/projects/herbtresor/mock_ricin.jpg" alt="Flacon HerbTrésor avec l’étiquette Ricin" loading="lazy" decoding="async"></section>
-<section class="herb-page herb-story"><header><span>01</span><h2>Direction artistique</h2></header><div class="herb-spread"><p>Pour HerbTrésor, l’enjeu était de rendre chaque huile identifiable tout en gardant une signature commune. Le dessin botanique ancre la marque dans son univers, et les accents de couleur distinguent les variétés.</p><img class="herb-art" src="./assets/projects/herbtresor/story.jpg" alt="Planche de direction artistique HerbTrésor" loading="lazy" decoding="async"></div></section>
+<section class="herb-page herb-cover herb-plate"><h1 class="herb-visually-hidden">HerbTrésor — Charte graphique</h1><img class="herb-art" src="./assets/projects/herbtresor/cover_story.webp" alt="Couverture du Brand Book HerbTrésor" loading="lazy" decoding="async"></section>
+<section class="herb-page herb-plate"><h2 class="herb-visually-hidden">L’histoire de HerbTrésor</h2><img class="herb-art" src="./assets/projects/herbtresor/brand_story.webp" alt="Brand Story HerbTrésor : histoire, essence, mission et vision" loading="lazy" decoding="async"></section>
 <section class="herb-page "><header><span>02</span><h2>Le logo</h2></header><p>Une feuille prolonge le tracé calligraphique et signe l’univers végétal de la marque.</p><div class="herb-spread"><img class="herb-art" src="./assets/projects/herbtresor/sketch.jpg" alt="Croquis et inspiration du logo HerbTrésor" loading="lazy" decoding="async"><div class="herb-logos"><img class="herb-art" src="./assets/projects/herbtresor/logo.jpg" alt="Logotype original sur fond clair" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/logodark.jpg" alt="Logotype original sur fond foncé" loading="lazy" decoding="async"></div></div></section>
-<section class="herb-page "><header><span>03</span><h2>Couleurs &amp; typographies</h2></header><div class="herb-spread"><figure><img class="herb-art" src="./assets/projects/herbtresor/palette.jpg" alt="Palette de la charte HerbTrésor" loading="lazy" decoding="async"><figcaption>Palette chromatique</figcaption></figure><figure><img class="herb-art" src="./assets/projects/herbtresor/type.jpg" alt="Hiérarchie typographique de la charte HerbTrésor" loading="lazy" decoding="async"><figcaption>Typographies</figcaption></figure></div></section>
-<section class="herb-page "><header><span>04</span><h2>Système d’étiquettes</h2></header><div class="herb-labels"><button type="button" class="herb-label" data-herb-product="label_ricin"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_ricin.jpg" alt=""><strong>Ricin</strong><span>Voir le mockup ↗</span></button>
-<button type="button" class="herb-label" data-herb-product="label_argan"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_argan.jpg" alt=""><strong>Argan</strong><span>Voir le mockup ↗</span></button>
-<button type="button" class="herb-label" data-herb-product="label_lavande"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_lavande.jpg" alt=""><strong>Lavande</strong><span>Voir le mockup ↗</span></button>
-<button type="button" class="herb-label" data-herb-product="label_orange"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_orange.jpg" alt=""><strong>Orange</strong><span>Voir le mockup ↗</span></button>
-<button type="button" class="herb-label" data-herb-product="label_citron"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_citron.jpg" alt=""><strong>Citron</strong><span>Agrandir l’étiquette ↗</span></button>
-<button type="button" class="herb-label" data-herb-product="label_girofle"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_girofle.jpg" alt=""><strong>Girofle</strong><span>Voir le mockup ↗</span></button>
-<button type="button" class="herb-label" data-herb-product="label_lin"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_lin.jpg" alt=""><strong>Lin</strong><span>Agrandir l’étiquette ↗</span></button>
-<button type="button" class="herb-label" data-herb-product="label_fenugrec"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_fenugrec.jpg" alt=""><strong>Fenugrec</strong><span>Agrandir l’étiquette ↗</span></button></div></section>
-<section class="herb-page herb-story"><header><span>05</span><h2>La gamme</h2></header><div class="herb-range"><img class="herb-art" src="./assets/projects/herbtresor/mock_ricin.jpg" alt="Mockup HerbTrésor · Ricin" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/mock_argan.jpg" alt="Mockup HerbTrésor · Argan" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/mock_lavande.jpg" alt="Mockup HerbTrésor · Lavande" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/mock_orange.jpg" alt="Mockup HerbTrésor · Orange" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/mock_girofle.jpg" alt="Mockup HerbTrésor · Girofle" loading="lazy" decoding="async"></div></section>
-<dialog class="herb-dialog" aria-labelledby="herb-view-title"><div class="herb-dialog-bar"><h2 id="herb-view-title"></h2><button type="button" class="herb-close" aria-label="Fermer" autofocus>×</button></div><img class="herb-full-image" alt=""><button type="button" class="herb-toggle"></button></dialog>
+<section class="herb-page "><header><span>03</span><h2>Couleurs &amp; typographies</h2></header><div class="herb-spread"><figure><img class="herb-art" src="./assets/projects/herbtresor/palette.webp" alt="Palette de la charte HerbTrésor" loading="lazy" decoding="async"><figcaption>Palette chromatique</figcaption></figure><figure><img class="herb-art" src="./assets/projects/herbtresor/type.jpg" alt="Hiérarchie typographique de la charte HerbTrésor" loading="lazy" decoding="async"><figcaption>Typographies</figcaption></figure></div></section>
+<section class="herb-page "><header><span>04</span><h2>Système d’étiquettes</h2></header><div class="herb-labels"><button type="button" class="herb-label" data-herb-product="Ricin"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_ricin.webp" alt=""><strong>Ricin</strong><span>Voir le mockup ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Argan"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_argan.webp" alt=""><strong>Argan</strong><span>Voir le mockup ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Lavande"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_lavande.jpg" alt=""><strong>Lavande</strong><span>Voir le mockup ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Orange"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_orange.jpg" alt=""><strong>Orange</strong><span>Voir le mockup ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Nigelle"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_nigelle.webp" alt=""><strong>Nigelle</strong><span>Voir l’avant / après ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Gadoum"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_gadoum.webp" alt=""><strong>Gadoum</strong><span>Agrandir l’étiquette ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Amla"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_amla.webp" alt=""><strong>Amla</strong><span>Agrandir l’étiquette ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Amande amère"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_amande.webp" alt=""><strong>Amande amère</strong><span>Agrandir l’étiquette ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Fenugrec"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_fenugrec.webp" alt=""><strong>Fenugrec</strong><span>Agrandir l’étiquette ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Lin"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_lin.webp" alt=""><strong>Lin</strong><span>Agrandir l’étiquette ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Cresson alénois"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_cresson.webp" alt=""><strong>Cresson alénois</strong><span>Agrandir l’étiquette ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Akpi"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_akpi.webp" alt=""><strong>Akpi</strong><span>Agrandir l’étiquette ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Citron"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_citron.jpg" alt=""><strong>Citron</strong><span>Agrandir l’étiquette ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Girofle"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_girofle.jpg" alt=""><strong>Girofle</strong><span>Voir le mockup ↗</span></button></div></section>
+<section class="herb-page herb-story"><header><span>05</span><h2>Avant / Après</h2></header><div class="herb-range"><button type="button" class="herb-label" data-herb-product="Ricin" data-herb-view="before"><img class="herb-art" src="./assets/projects/herbtresor/before_ricin.webp" alt="Avant et après · Ricin" loading="lazy" decoding="async"><strong>Ricin</strong><span>Voir l’avant / après ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Lavande" data-herb-view="before"><img class="herb-art" src="./assets/projects/herbtresor/before_lavande.webp" alt="Avant et après · Lavande" loading="lazy" decoding="async"><strong>Lavande</strong><span>Voir l’avant / après ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Orange" data-herb-view="before"><img class="herb-art" src="./assets/projects/herbtresor/before_orange.webp" alt="Avant et après · Orange" loading="lazy" decoding="async"><strong>Orange</strong><span>Voir l’avant / après ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Nigelle" data-herb-view="before"><img class="herb-art" src="./assets/projects/herbtresor/before_nigelle.webp" alt="Avant et après · Nigelle" loading="lazy" decoding="async"><strong>Nigelle</strong><span>Voir l’avant / après ↗</span></button>
+<button type="button" class="herb-label" data-herb-product="Abricot" data-herb-view="before"><img class="herb-art" src="./assets/projects/herbtresor/before_abricot.webp" alt="Avant et après · Abricot" loading="lazy" decoding="async"><strong>Abricot</strong><span>Voir l’avant / après ↗</span></button></div></section>
+<dialog class="herb-dialog" aria-labelledby="herb-view-title"><div class="herb-dialog-bar"><h2 id="herb-view-title"></h2><button type="button" class="herb-close" aria-label="Fermer" autofocus>×</button></div><img class="herb-full-image" alt=""><div class="herb-views" aria-label="Vues du produit"><button type="button" class="herb-toggle" data-herb-mode="label">Étiquette</button><button type="button" class="herb-toggle" data-herb-mode="mock">Mockup</button><button type="button" class="herb-toggle" data-herb-mode="before">Avant / Après</button></div></dialog>
 </article>`;
  releaseHerbSheets=stackHerbSheets($('.herb-book',detail));
  const dialog=$('.herb-dialog',detail);
  const visual=$('.herb-full-image',dialog);
- const toggle=$('.herb-toggle',dialog);
- const products=[{"name":"Ricin","label":"label_ricin","mock":"mock_ricin"},{"name":"Argan","label":"label_argan","mock":"mock_argan"},{"name":"Lavande","label":"label_lavande","mock":"mock_lavande"},{"name":"Orange","label":"label_orange","mock":"mock_orange"},{"name":"Citron","label":"label_citron","mock":null},{"name":"Girofle","label":"label_girofle","mock":"mock_girofle"},{"name":"Lin","label":"label_lin","mock":null},{"name":"Fenugrec","label":"label_fenugrec","mock":null}];
- let product, opener, previousOverflow, mockVisible;
- function showVisual(showMock){
-  mockVisible=showMock;
-  visual.src='./assets/projects/herbtresor/'+(showMock?product.mock:product.label)+'.jpg';
-  visual.alt=(showMock?'Mockup HerbTrésor · ':'Étiquette originale · ')+product.name;
-  toggle.textContent=showMock?'Voir l’étiquette originale':'Voir le mockup';
-  toggle.hidden=!product.mock;
+ const views=$$('[data-herb-mode]',dialog);
+ const products=[{"name":"Ricin","label":"label_ricin.webp","mock":"mock_ricin.webp","before":"before_ricin.webp"},{"name":"Argan","label":"label_argan.webp","mock":"mock_argan.jpg"},{"name":"Lavande","label":"label_lavande.jpg","mock":"mock_lavande.jpg","before":"before_lavande.webp"},{"name":"Orange","label":"label_orange.jpg","mock":"mock_orange.jpg","before":"before_orange.webp"},{"name":"Nigelle","label":"label_nigelle.webp","mock":null,"before":"before_nigelle.webp"},{"name":"Gadoum","label":"label_gadoum.webp"},{"name":"Amla","label":"label_amla.webp"},{"name":"Amande amère","label":"label_amande.webp"},{"name":"Fenugrec","label":"label_fenugrec.webp"},{"name":"Lin","label":"label_lin.webp"},{"name":"Cresson alénois","label":"label_cresson.webp"},{"name":"Akpi","label":"label_akpi.webp"},{"name":"Citron","label":"label_citron.jpg"},{"name":"Girofle","label":"label_girofle.jpg","mock":"mock_girofle.jpg"},{"name":"Abricot","label":null,"mock":null,"before":"before_abricot.webp"}];
+ const viewLabels={label:'Étiquette originale',mock:'Mockup HerbTrésor',before:'Avant et après'};
+ let product, opener, previousOverflow;
+ function showVisual(mode){
+  visual.src='./assets/projects/herbtresor/'+product[mode];
+  visual.alt=viewLabels[mode]+' · '+product.name;
+  views.forEach(button=>{
+   const key=button.dataset.herbMode;
+   button.hidden=!product[key];
+   button.setAttribute('aria-pressed',String(key===mode));
+  });
  }
  $$('[data-herb-product]',detail).forEach(button=>button.addEventListener('click',()=>{
   opener=button;
-  product=products.find(item=>item.label===button.dataset.herbProduct);
-  $('#herb-view-title').textContent=product.name;
-  showVisual(Boolean(product.mock));
+  product=products.find(item=>item.name===button.dataset.herbProduct);
+  $('#herb-view-title',dialog).textContent=product.name;
+  showVisual(button.dataset.herbView || (product.mock?'mock':product.before?'before':'label'));
   previousOverflow=document.body.style.overflow;
   dialog.showModal();
   document.body.style.overflow='hidden';
  }));
- toggle.addEventListener('click',()=>showVisual(!mockVisible));
+ views.forEach(button=>button.addEventListener('click',()=>showVisual(button.dataset.herbMode)));
  $('.herb-close',dialog).addEventListener('click',()=>dialog.close());
  dialog.addEventListener('close',()=>{
   document.body.style.overflow=previousOverflow;
