@@ -139,6 +139,27 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 .herb-full-image { display:block; width:100%; height:100%; object-fit:contain; }
 @media (min-width:720px) { .herb-cover,.herb-spread { grid-template-columns:repeat(2,minmax(0,1fr)); align-items:center; } .herb-labels { grid-template-columns:repeat(4,minmax(0,1fr)); } }
 @media (prefers-reduced-motion:no-preference) { .herb-dialog[open] .herb-full-image { animation:herb-reveal .24s ease-out; } @keyframes herb-reveal { from { opacity:.5;transform:scale(.96); } to { opacity:1;transform:scale(1); } } }
+
+/* Keep each sheet in place once its bottom has scrolled into view. */
+.herb-book { isolation:isolate; }
+.herb-book.has-sheet-stack .herb-page:not(:last-of-type) {
+ position:sticky;
+ top:var(--sheet-top, 12px);
+}
+.herb-book.has-sheet-stack .herb-page { margin-block:0 18px; }
+.herb-book.has-sheet-stack .herb-page::after {
+ content:"";
+ position:absolute;
+ inset:0 0 0 auto;
+ width:clamp(24px, 12%, 92px);
+ border-radius:0 9px 9px 0;
+ pointer-events:none;
+ background:linear-gradient(90deg,transparent,#3a251438 65%,#fff6dc9e 88%,#fff8e7);
+ opacity:var(--sheet-fold,0);
+ transform:perspective(320px) rotateY(calc(var(--sheet-fold,0) * -42deg));
+ transform-origin:right;
+}
+.herb-book.has-sheet-stack .herb-page:focus-within::after { opacity:0; }
 </style>
 <script defer>
 (()=>{
@@ -174,6 +195,48 @@ function renderProjects(){
  </button>`).join('');
  $$('[data-project]',area).forEach(b=>b.addEventListener('click',()=>openProject(Number(b.dataset.project))));
 }
+let releaseHerbSheets;
+function stackHerbSheets(book){
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches || typeof ResizeObserver==='undefined' || !CSS.supports('position','sticky'))return;
+ const sheets=$$('.herb-page',book);
+ const topGap=12;
+ const bottomGap=96;
+ let frame=0;
+ const resize=new ResizeObserver(queue);
+ sheets.forEach((sheet,index)=>{
+  sheet.style.zIndex=index+1;
+  resize.observe(sheet);
+ });
+ book.classList.add('has-sheet-stack');
+ function update(){
+  frame=0;
+  if(!book.getClientRects().length || $('.herb-dialog',book).open)return;
+  const viewportHeight=window.innerHeight;
+  const bounds=sheets.map(sheet=>sheet.getBoundingClientRect());
+  sheets.forEach((sheet,index)=>{
+   const stickyTop=Math.min(topGap,viewportHeight-bounds[index].height-bottomGap);
+   sheet.style.setProperty('--sheet-top',stickyTop+'px');
+   const next=bounds[index+1];
+   const visibleTop=Math.max(0,bounds[index].top);
+   const visibleBottom=Math.min(viewportHeight-bottomGap,bounds[index].bottom);
+   const progress=next?(visibleBottom-next.top)/Math.max(1,visibleBottom-visibleTop):0;
+   const fold=progress>0&&progress<1?Math.sin(progress*Math.PI):0;
+   sheet.style.setProperty('--sheet-fold',fold.toFixed(3));
+  });
+ }
+ function queue(){
+  if(!frame)frame=requestAnimationFrame(update);
+ }
+ window.addEventListener('scroll',queue,{passive:true});
+ window.addEventListener('resize',queue);
+ queue();
+ return ()=>{
+  resize.disconnect();
+  window.removeEventListener('scroll',queue);
+  window.removeEventListener('resize',queue);
+  cancelAnimationFrame(frame);
+ };
+}
 function renderHerbBook(){
  const detail=$('#detailContent');
  detail.innerHTML=`<article class="herb-book" aria-label="HerbTrésor, livre de marque">
@@ -192,6 +255,7 @@ function renderHerbBook(){
 <section class="herb-page herb-story"><header><span>05</span><h2>La gamme</h2></header><div class="herb-range"><img class="herb-art" src="./assets/projects/herbtresor/mock_ricin.jpg" alt="Mockup HerbTrésor · Ricin" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/mock_argan.jpg" alt="Mockup HerbTrésor · Argan" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/mock_lavande.jpg" alt="Mockup HerbTrésor · Lavande" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/mock_orange.jpg" alt="Mockup HerbTrésor · Orange" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/mock_girofle.jpg" alt="Mockup HerbTrésor · Girofle" loading="lazy" decoding="async"></div></section>
 <dialog class="herb-dialog" aria-labelledby="herb-view-title"><div class="herb-dialog-bar"><h2 id="herb-view-title"></h2><button type="button" class="herb-close" aria-label="Fermer" autofocus>×</button></div><img class="herb-full-image" alt=""><button type="button" class="herb-toggle"></button></dialog>
 </article>`;
+ releaseHerbSheets=stackHerbSheets($('.herb-book',detail));
  const dialog=$('.herb-dialog',detail);
  const visual=$('.herb-full-image',dialog);
  const toggle=$('.herb-toggle',dialog);
@@ -221,6 +285,8 @@ function renderHerbBook(){
  });
 }
 function openProject(i){
+ releaseHerbSheets?.();
+ releaseHerbSheets=undefined;
  currentProject=(i+projects.length)%projects.length;
  const p=projects[currentProject];
  if(p.id==='herbtresor'){renderHerbBook();switchView('detail');return;}
