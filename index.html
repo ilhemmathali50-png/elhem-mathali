@@ -204,7 +204,7 @@ function renderHerbBook(){
   toggle.textContent=showMock?'Voir l’étiquette originale':'Voir le mockup';
   toggle.hidden=!product.mock;
  }
- $('[data-herb-product]',detail).forEach(button=>button.addEventListener('click',()=>{
+ $$('[data-herb-product]',detail).forEach(button=>button.addEventListener('click',()=>{
   opener=button;
   product=products.find(item=>item.label===button.dataset.herbProduct);
   $('#herb-view-title').textContent=product.name;
