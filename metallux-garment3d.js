@@ -125,7 +125,7 @@ function attachViewer(stage,T){
  renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;
  renderer.toneMappingExposure=1.2;
  renderer.setClearColor(0x000000,0);
- renderer.domElement.setAttribute('role','img');renderer.domElement.setAttribute('aria-label','Vêtement 3D MÉTALLUX. Glissez horizontalement pour tourner.');
+ renderer.domElement.setAttribute('role','img');renderer.domElement.setAttribute('aria-label','Vêtement 3D MÉTALLUX, glissez horizontalement pour tourner');
  stage.append(renderer.domElement);
  const scene=new T.Scene();
  const camera=new T.PerspectiveCamera(33,1,.1,50);camera.position.set(0,.1,5.8);camera.lookAt(0,0,0);
@@ -178,7 +178,7 @@ async function init(stage){
  if(!stage||activeStages.has(stage))return;activeStages.add(stage);
  const fallback=stage.querySelector('#mxGLFallback');
  try{const T=await getThree();if(stage.isConnected)attachViewer(stage,T)}catch(error){
-  if(fallback){fallback.hidden=false;const p=fallback.querySelector('p');if(p)p.textContent='Aperçu interactif non disponible sur ce navigateur. Les mockups originaux restent visibles.'}
+  if(fallback){fallback.hidden=false;const p=fallback.querySelector('p');if(p)p.textContent='Aperçu interactif non disponible sur ce navigateur, les mockups originaux restent visibles'}
   console.warn('MÉTALLUX 3D viewer:',error);
   const section=stage.closest('.mx-showroom');section?.querySelectorAll('button,input').forEach(x=>x.disabled=true);
  }

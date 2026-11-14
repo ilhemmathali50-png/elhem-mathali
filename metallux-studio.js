@@ -32,7 +32,7 @@
    },{capture:true});
   }
   const logoNote=root.querySelector('.mx-concept-row p');
-  if(logoNote)logoNote.textContent='Le monogramme fait référence à Bilel Oueslati, dirigeant de MÉTALLUX. Ses courbes et sa construction évoquent le mouvement et la précision du travail du métal.';
+  if(logoNote)logoNote.textContent='Le monogramme fait référence à Bilel Oueslati, dirigeant de MÉTALLUX, avec des courbes qui évoquent le mouvement et la précision du travail du métal';
   const app=root.querySelector('#mx-apps');
   if(!app)return;
   // One textile experience only: remove the old static textile block.
@@ -47,8 +47,8 @@
   section.innerHTML=`
    <div class="mx-inner">
     <div class="mx-showroom-heading mx-reveal">
-     <div><span class="mx-eyebrow">06 / LE SHOWROOM INTERACTIF</span><h2 id="mxAtelierHeading">MÉTALLUX<br><em>en volume.</em></h2></div>
-     <p>Un aperçu des vêtements de marque à manipuler en trois dimensions. Tournez, explorez, changez de pièce.</p>
+     <div><span class="mx-eyebrow">06 / LE SHOWROOM INTERACTIF</span><h2 id="mxAtelierHeading">MÉTALLUX<br><em>en volume</em></h2></div>
+     <p>Un aperçu des vêtements de marque à manipuler en trois dimensions. Tournez, explorez, changez de pièce</p>
     </div>
     <div class="mx-showroom-grid mx-reveal">
      <div class="mx-viewport" id="mxGLViewer" aria-label="Visualisation tridimensionnelle interactive d'un vêtement MÉTALLUX">
@@ -57,14 +57,14 @@
       <div class="mx-viewport-fallback" id="mxGLFallback"><div><img src="./assets/projects/metallux/native/uniforms.webp" alt="Polo et sweat MÉTALLUX, mockups originaux" loading="lazy" decoding="async"><p>Chargement de l’aperçu 3D interactif…</p></div></div>
      </div>
      <div class="mx-garment-toolbar">
-      <div class="mx-controls-title"><span class="mx-identity">ÉQUIPEMENT / PROTOTYPE NUMÉRIQUE</span><h3 id="mxGarmentTitle">Polo signature</h3><p>Bleu marine, monogramme discret, matière textile.</p></div>
+      <div class="mx-controls-title"><span class="mx-identity">ÉQUIPEMENT / PROTOTYPE NUMÉRIQUE</span><h3 id="mxGarmentTitle">Polo signature</h3><p>Bleu marine, monogramme discret, matière textile</p></div>
       <div class="mx-garment-buttons" role="group" aria-label="Sélection du vêtement">
        <button type="button" data-mx-garment="polo" aria-pressed="true">01 · Polo</button>
        <button type="button" data-mx-garment="sweat" aria-pressed="false">02 · Pull</button>
       </div>
       <div class="mx-garment-slider"><label for="mxGarmentAngle">ROTATION <output id="mxGarmentDegrees">0°</output></label><input id="mxGarmentAngle" type="range" min="0" max="360" step="1" value="0" aria-label="Tourner le vêtement en degrés"></div>
       <div class="mx-controls-actions"><button type="button" id="mxGarmentAuto" class="mx-auto-btn" aria-pressed="false">▶ Activer la rotation</button><button type="button" id="mxGarmentReset" class="mx-reset-btn">↺ Vue de face</button></div>
-      <p class="mx-garment-footnote" id="mxGarmentNote">Modèle 3D conceptuel : ouvrez les mockups originaux pour comparer les designs réels.</p>
+      <p class="mx-garment-footnote" id="mxGarmentNote">Modèle 3D conceptuel : ouvrez les mockups originaux pour comparer les designs réels</p>
      </div>
     </div>
     <div class="mx-studio-bottom"><span>THE CREATIVE EDITIONS / MÉTALLUX</span><span>INTERACTION AU DOIGT · SOURIS · CURSEUR</span></div>
