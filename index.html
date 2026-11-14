@@ -184,6 +184,52 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 .herb-sketch-preview { grid-row:2; grid-column:1; align-self:center; justify-self:center; width:min(100%,calc((100dvh - 100px) * .8),700px); }
 .herb-sketch-preview .herb-art { width:100%; height:auto; }
 .herb-dialog[data-artwork] > .herb-full-image { display:none; }
+
+/* Fait Maison uses the same paper stack as the other edition. */
+.fm-book { --herb-paper:#fbf3df; --herb-ink:#263521; --fm-red:#9a321d; }
+.fm-book img { width:100%; height:auto; display:block; }
+.fm-page { display:grid; align-content:start; gap:16px; border-color:#d7bea0; }
+.fm-page h1,.fm-page h2 { margin:0; }
+.fm-page h1 { color:#fff4dc; font-size:clamp(3.1rem,13vw,7rem); }
+.fm-page h2 em { color:var(--fm-red); }
+.fm-page p { margin:0; max-width:54ch; }
+.fm-cover { background:#263521; color:#fff4dc; padding:0; overflow:hidden; gap:0; }
+.fm-cover-text { padding:24px clamp(16px,5vw,40px) 20px; }
+.fm-cover-text p { font:italic clamp(1.35rem,6vw,2.2rem)/1.2 var(--serif); margin-top:5px; color:#f4c898; }
+.fm-kicker,.fm-cover-foot { font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+.fm-cover-foot { display:flex; align-items:center; gap:12px; padding:15px clamp(16px,5vw,40px); }
+.fm-cover-foot span { width:24px; height:1px; background:#e5bf86; }
+.fm-story { background:linear-gradient(90deg,#59231330,transparent 15px),#f3e3c7; }
+.fm-identity,.fm-products { display:grid; gap:13px; grid-template-columns:repeat(2,minmax(0,1fr)); }
+.fm-plate { width:100%; color:inherit; background:#fff9ee; border:1px solid #dbcaad; border-radius:3px; padding:0; overflow:hidden; text-align:left; cursor:zoom-in; }
+.fm-plate > span { display:flex; justify-content:space-between; gap:6px; padding:10px; font-size:.75rem; }
+.fm-identity .fm-plate:first-child { grid-column:1/-1; }
+.fm-identity .fm-plate:first-child img { width:min(100%,380px); margin-inline:auto; }
+.fm-product { min-width:0; padding:10px; display:grid; gap:7px; align-content:start; text-align:left; color:#27321e; background:var(--fm-tint); border:1px solid #9e78594a; border-radius:4px; }
+.fm-product > strong { font:600 clamp(.93rem,4vw,1.25rem)/1.15 var(--serif); }
+.fm-product > span:last-child { font-size:.68rem; }
+.fm-product-art { display:block; aspect-ratio:4/5; overflow:hidden; border-radius:3px; transform-origin:bottom center; }
+.fm-product-art img { width:100%; height:100%; object-fit:contain; }
+.fm-pair img { width:200%; max-width:none; height:100%; object-fit:cover; }
+.fm-pair-poulet img { transform:translateX(-50%); }
+.fm-range { background:#263521; color:#fff4dc; }
+.fm-range .fm-plate { color:#27321e; }
+.fm-dialog { background:radial-gradient(ellipse at 50% 75%,#f6e8d0,#ead3b0 70%,#cfa981); color:#27321e; }
+.fm-stage { display:grid; place-items:center; min-width:0; min-height:0; perspective:900px; overflow:hidden; }
+.fm-stage .fm-stage-image { width:100%; height:100%; min-height:0; object-fit:contain; }
+.fm-stage.is-label { display:block; overflow:auto; }
+.fm-stage.is-label .fm-stage-image { height:auto; max-width:none; margin:8px auto; }
+.fm-stage.is-label.is-wrap .fm-stage-image { min-width:min(1200px,220vw); }
+.fm-stage.is-label:not(.is-wrap) .fm-stage-image { max-width:400px; }
+.fm-dialog[data-kind="art"] .fm-views { display:none; }
+.fm-dialog[data-kind="art"][open] { grid-template-rows:auto minmax(0,1fr); }
+@media(min-width:650px){ .fm-products { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(prefers-reduced-motion:no-preference){
+ .fm-product-art { transition:transform .35s ease,filter .35s ease; }
+ .fm-product:hover .fm-product-art,.fm-product:focus-visible .fm-product-art { transform:perspective(600px) rotateX(6deg) translateY(-5px); filter:drop-shadow(0 8px 8px #4b2d2540); }
+ .fm-dialog[open] .fm-stage.is-mock img { animation:fm-rise .52s cubic-bezier(.18,.8,.26,1) both; }
+ @keyframes fm-rise { from { opacity:0; transform:translate3d(0,55px,-200px) rotateX(18deg) scale(.7); } to { opacity:1; transform:translate3d(0,0,0) rotateX(0) scale(1); } }
+}
 </style>
 <script defer>
 (()=>{
@@ -335,12 +381,82 @@ function renderHerbBook(){
   opener.focus({preventScroll:true});
  });
 }
+function renderFaitMaisonBook(){
+ const detail=$('#detailContent');
+ detail.innerHTML=`<article class="herb-book fm-book" aria-label="Fait Maison, livre de marque">
+<section class="herb-page fm-page fm-cover"><div class="fm-cover-text"><span class="fm-kicker">The Creative Editions · 02</span><h1>Fait Maison</h1><p>Le goût du geste</p></div><img src="./assets/projects/fait-maison/cover.webp" alt="La gamme Fait Maison mise en scène sur une table tunisienne" fetchpriority="high" decoding="async"><div class="fm-cover-foot">Identité visuelle <span></span> Packaging</div></section>
+<section class="herb-page fm-page fm-story"><span class="fm-kicker">Direction artistique</span><h2>Les gestes qu’on<br><em>se transmet</em></h2><p>Une main qui prépare, une poterie et un rameau d’olivier. Le logo réunit ces gestes et ces objets familiers sous une arche, comme une fenêtre ouverte sur la cuisine tunisienne.</p><button class="fm-plate" type="button" data-fm-art="story" data-fm-title="L’histoire de la marque" aria-label="Agrandir : L’histoire de la marque"><img src="./assets/projects/fait-maison/story.webp" alt="L’histoire de la marque" loading="lazy" decoding="async"><span>L’histoire de la marque <span aria-hidden="true">↗</span></span></button>
+<button class="fm-plate" type="button" data-fm-art="concept" data-fm-title="Les éléments du logo" aria-label="Agrandir : Les éléments du logo"><img src="./assets/projects/fait-maison/concept.webp" alt="Les éléments du logo" loading="lazy" decoding="async"><span>Les éléments du logo <span aria-hidden="true">↗</span></span></button></section>
+<section class="herb-page fm-page"><span class="fm-kicker">Charte graphique</span><h2>Les signes<br><em>de la maison</em></h2><div class="fm-identity"><button class="fm-plate" type="button" data-fm-art="logo" data-fm-title="Logo original" aria-label="Agrandir : Logo original"><img src="./assets/projects/fait-maison/logo.webp" alt="Logo original" loading="lazy" decoding="async"><span>Logo original <span aria-hidden="true">↗</span></span></button>
+<button class="fm-plate" type="button" data-fm-art="versions" data-fm-title="Déclinaisons du logo" aria-label="Agrandir : Déclinaisons du logo"><img src="./assets/projects/fait-maison/versions.webp" alt="Déclinaisons du logo" loading="lazy" decoding="async"><span>Déclinaisons du logo <span aria-hidden="true">↗</span></span></button>
+<button class="fm-plate" type="button" data-fm-art="mono" data-fm-title="Versions monochromes" aria-label="Agrandir : Versions monochromes"><img src="./assets/projects/fait-maison/mono.webp" alt="Versions monochromes" loading="lazy" decoding="async"><span>Versions monochromes <span aria-hidden="true">↗</span></span></button>
+<button class="fm-plate" type="button" data-fm-art="palette" data-fm-title="Palette chromatique" aria-label="Agrandir : Palette chromatique"><img src="./assets/projects/fait-maison/palette.webp" alt="Palette chromatique" loading="lazy" decoding="async"><span>Palette chromatique <span aria-hidden="true">↗</span></span></button>
+<button class="fm-plate" type="button" data-fm-art="type" data-fm-title="Typographies" aria-label="Agrandir : Typographies"><img src="./assets/projects/fait-maison/type.webp" alt="Typographies" loading="lazy" decoding="async"><span>Typographies <span aria-hidden="true">↗</span></span></button>
+<button class="fm-plate" type="button" data-fm-art="motifs" data-fm-title="Motifs et illustrations" aria-label="Agrandir : Motifs et illustrations"><img src="./assets/projects/fait-maison/motifs.webp" alt="Motifs et illustrations" loading="lazy" decoding="async"><span>Motifs et illustrations <span aria-hidden="true">↗</span></span></button></div></section>
+<section class="herb-page fm-page"><span class="fm-kicker">Packaging · Les bocaux</span><h2>Saveurs du terroir</h2><p>Sur les bocaux, la face centrale donne le nom du produit en français et en arabe. La couleur et l’illustration distinguent les recettes.</p><div class="fm-products"><button class="fm-product" type="button" data-fm-product="0" style="--fm-tint:#e8ead1"><span class="fm-product-art fm-pair fm-pair-caviar"><img src="./assets/projects/fait-maison/duo.webp" alt="" loading="lazy" decoding="async"></span><strong>Caviar d’artichaut</strong><span>Voir le packaging <span aria-hidden="true">↗</span></span></button>
+<button class="fm-product" type="button" data-fm-product="1" style="--fm-tint:#f3d6bd"><span class="fm-product-art fm-pair fm-pair-poulet"><img src="./assets/projects/fait-maison/duo.webp" alt="" loading="lazy" decoding="async"></span><strong>Épice de poulet</strong><span>Voir le packaging <span aria-hidden="true">↗</span></span></button>
+<button class="fm-product" type="button" data-fm-product="2" style="--fm-tint:#f6e1c4"><span class="fm-product-art"><img src="./assets/projects/fait-maison/beurre.webp" alt="Beurre de cacahuète" loading="lazy" decoding="async"></span><strong>Beurre de cacahuète</strong><span>Voir le packaging <span aria-hidden="true">↗</span></span></button></div></section>
+<section class="herb-page fm-page"><span class="fm-kicker">Packaging · Les bouteilles</span><h2>Eaux florales</h2><p>Le cartouche, les filets et la composition restent communs. La couleur et la fleur identifient chaque variété.</p><div class="fm-products"><button class="fm-product" type="button" data-fm-product="3" style="--fm-tint:#f3dce4"><span class="fm-product-art"><img src="./assets/projects/fait-maison/geranium.webp" alt="Eau de géranium" loading="lazy" decoding="async"></span><strong>Eau de géranium</strong><span>Voir le packaging <span aria-hidden="true">↗</span></span></button>
+<button class="fm-product" type="button" data-fm-product="4" style="--fm-tint:#f8e5cc"><span class="fm-product-art"><img src="./assets/projects/fait-maison/oranger.webp" alt="Eau de fleur d’oranger" loading="lazy" decoding="async"></span><strong>Eau de fleur d’oranger</strong><span>Voir le packaging <span aria-hidden="true">↗</span></span></button>
+<button class="fm-product" type="button" data-fm-product="5" style="--fm-tint:#e2ebd7"><span class="fm-product-art"><img src="./assets/projects/fait-maison/menthe.webp" alt="Eau de menthe pouliot" loading="lazy" decoding="async"></span><strong>Eau de menthe pouliot</strong><span>Voir le packaging <span aria-hidden="true">↗</span></span></button></div></section>
+<section class="herb-page fm-page fm-range"><h2>Toute la gamme</h2><button class="fm-plate" type="button" data-fm-art="range" data-fm-title="Saveurs du terroir et eaux florales" aria-label="Agrandir : Saveurs du terroir et eaux florales"><img src="./assets/projects/fait-maison/range.webp" alt="Saveurs du terroir et eaux florales" loading="lazy" decoding="async"><span>Saveurs du terroir et eaux florales <span aria-hidden="true">↗</span></span></button></section>
+<dialog class="herb-dialog fm-dialog" aria-labelledby="fm-preview-title"><div class="herb-dialog-bar"><h2 id="fm-preview-title"></h2><button class="herb-close" type="button" aria-label="Fermer" autofocus>×</button></div><div class="fm-stage"><img class="fm-stage-image" alt=""></div><div class="herb-views fm-views"><button type="button" class="herb-toggle" data-fm-mode="mock">Mockup</button><button type="button" class="herb-toggle" data-fm-mode="label">Étiquette originale</button></div></dialog>
+</article>`;
+ const book=$('.fm-book',detail);
+ const dialog=$('.fm-dialog',book);
+ const stage=$('.fm-stage',dialog);
+ const visual=$('.fm-stage-image',dialog);
+ const title=$('#fm-preview-title',dialog);
+ const modes=$$('[data-fm-mode]',dialog);
+ const products=[["Caviar d’artichaut","duo","caviar","#e8ead1"],["Épice de poulet","duo","poulet","#f3d6bd"],["Beurre de cacahuète","beurre","beurre","#f6e1c4"],["Eau de géranium","geranium","geranium","#f3dce4"],["Eau de fleur d’oranger","oranger","oranger","#f8e5cc"],["Eau de menthe pouliot","menthe","menthe","#e2ebd7"]];
+ let opener, previousOverflow, selected;
+ function showImage(file, description, kind){
+  stage.className='fm-stage is-'+kind;
+  stage.scrollTop=0;
+  stage.scrollLeft=0;
+  visual.src='./assets/projects/fait-maison/'+file+'.webp';
+  visual.alt=description;
+  modes.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.fmMode===kind)));
+ }
+ function showProduct(mode){
+  const [name,mock,label]=selected;
+  const isMock=mode==='mock';
+  const description=isMock&&mock==='duo'?'Mockup du duo Caviar d’artichaut et Épice de poulet':name;
+  showImage(isMock?mock:'label-'+label,description,mode);
+  if(!isMock&&['caviar','poulet','beurre'].includes(label))stage.classList.add('is-wrap');
+ }
+ function openPreview(button,heading,kind){
+  opener=button;
+  title.textContent=heading;
+  dialog.dataset.kind=kind;
+  previousOverflow=document.body.style.overflow;
+  dialog.showModal();
+  document.body.style.overflow='hidden';
+ }
+ $$('[data-fm-product]',book).forEach(button=>button.addEventListener('click',()=>{
+  selected=products[Number(button.dataset.fmProduct)];
+  showProduct('mock');
+  openPreview(button,selected[0],'product');
+ }));
+ $$('[data-fm-art]',book).forEach(button=>button.addEventListener('click',()=>{
+  showImage(button.dataset.fmArt,button.dataset.fmTitle,'art');
+  openPreview(button,button.dataset.fmTitle,'art');
+ }));
+ modes.forEach(button=>button.addEventListener('click',()=>showProduct(button.dataset.fmMode)));
+ $('.herb-close',dialog).addEventListener('click',()=>dialog.close());
+ dialog.addEventListener('close',()=>{
+  document.body.style.overflow=previousOverflow;
+  opener.focus({preventScroll:true});
+ });
+ releaseHerbSheets=stackHerbSheets(book);
+}
 function openProject(i){
  releaseHerbSheets?.();
  releaseHerbSheets=undefined;
  currentProject=(i+projects.length)%projects.length;
  const p=projects[currentProject];
  if(p.id==='herbtresor'){renderHerbBook();switchView('detail');return;}
+ if(p.id==='fait-maison'){renderFaitMaisonBook();switchView('detail');return;}
  $('#detailContent').innerHTML=`<div class="sommaire-detail" style="--project-color:${p.theme};--project-paper:${p.paper}"><div class="sommaire-detail-cover sommaire-cover-${p.sprite}" aria-hidden="true"></div><span>ÉDITION ${String(currentProject+1).padStart(2,'0')}</span><h2>${p.name}</h2><p>Page du projet à compléter après validation du Sommaire.</p><div class="sommaire-detail-next">Cover · Mini charte graphique · Logo · Couleurs · Typographies · Project Goal · Design Decision · Mockups</div></div>`;
  switchView('detail');
 }
