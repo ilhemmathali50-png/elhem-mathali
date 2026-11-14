@@ -169,6 +169,11 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 .herb-views { display:flex; justify-content:center; flex-wrap:wrap; gap:6px; }
 .herb-views .herb-toggle { font-size:.8rem; padding-inline:12px; }
 .herb-views .herb-toggle[aria-pressed="true"] { background:#c7a874; color:#172a21; }
+.herb-sketch-page { background:#f4eee2; }
+.herb-sketch-zoom { display:block; width:100%; max-width:700px; margin-inline:auto; padding:0; border:0; border-radius:inherit; background:transparent; cursor:zoom-in; }
+.herb-sketch-zoom .herb-art { height:auto; object-fit:contain; }
+.herb-dialog[data-artwork][open] { grid-template-rows:auto minmax(0,1fr); }
+.herb-dialog[data-artwork] .herb-views { display:none; }
 </style>
 <script defer>
 (()=>{
@@ -251,7 +256,8 @@ function renderHerbBook(){
  detail.innerHTML=`<article class="herb-book" aria-label="HerbTrésor, livre de marque">
 <section class="herb-page herb-cover herb-plate"><h1 class="herb-visually-hidden">HerbTrésor — Charte graphique</h1><img class="herb-art" src="./assets/projects/herbtresor/cover_story.webp" alt="Couverture du Brand Book HerbTrésor" loading="lazy" decoding="async"></section>
 <section class="herb-page herb-plate"><h2 class="herb-visually-hidden">L’histoire de HerbTrésor</h2><img class="herb-art" src="./assets/projects/herbtresor/brand_story.webp" alt="Brand Story HerbTrésor : histoire, essence, mission et vision" loading="lazy" decoding="async"></section>
-<section class="herb-page "><header><span>02</span><h2>Le logo</h2></header><p>Une feuille prolonge le tracé calligraphique et signe l’univers végétal de la marque.</p><div class="herb-spread"><img class="herb-art" src="./assets/projects/herbtresor/sketch.jpg" alt="Croquis et inspiration du logo HerbTrésor" loading="lazy" decoding="async"><div class="herb-logos"><img class="herb-art" src="./assets/projects/herbtresor/logo.jpg" alt="Logotype original sur fond clair" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/logodark.jpg" alt="Logotype original sur fond foncé" loading="lazy" decoding="async"></div></div></section>
+<section class="herb-page herb-plate herb-sketch-page"><h2 class="herb-visually-hidden">Tout commence par une feuille</h2><button type="button" class="herb-sketch-zoom" aria-label="Agrandir la planche du croquis"><img class="herb-art" src="./assets/projects/herbtresor/sketch.jpg" alt="Croquis de la feuille et symbole HerbTrésor" width="700" height="875" loading="lazy" decoding="async"></button></section>
+<section class="herb-page"><header><span>02</span><h2>Le logo</h2></header><p>Une feuille prolonge le tracé calligraphique et signe l’univers végétal de la marque.</p><div class="herb-logos"><img class="herb-art" src="./assets/projects/herbtresor/logo.jpg" alt="Logotype original sur fond clair" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/logodark.jpg" alt="Logotype original sur fond foncé" loading="lazy" decoding="async"></div></section>
 <section class="herb-page "><header><span>03</span><h2>Couleurs &amp; typographies</h2></header><div class="herb-spread"><figure><img class="herb-art" src="./assets/projects/herbtresor/palette.webp" alt="Palette de la charte HerbTrésor" loading="lazy" decoding="async"><figcaption>Palette chromatique</figcaption></figure><figure><img class="herb-art" src="./assets/projects/herbtresor/type.jpg" alt="Hiérarchie typographique de la charte HerbTrésor" loading="lazy" decoding="async"><figcaption>Typographies</figcaption></figure></div></section>
 <section class="herb-page "><header><span>04</span><h2>Système d’étiquettes</h2></header><div class="herb-labels"><button type="button" class="herb-label" data-herb-product="Ricin"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_ricin.webp" alt=""><strong>Ricin</strong><span>Voir le mockup ↗</span></button>
 <button type="button" class="herb-label" data-herb-product="Argan"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_argan.webp" alt=""><strong>Argan</strong><span>Voir le mockup ↗</span></button>
@@ -295,14 +301,26 @@ function renderHerbBook(){
   product=products.find(item=>item.name===button.dataset.herbProduct);
   $('#herb-view-title',dialog).textContent=product.name;
   showVisual(button.dataset.herbView || (product.mock?'mock':product.before?'before':'label'));
+  openHerbPreview();
+ }));
+ $('.herb-sketch-zoom',detail).addEventListener('click',event=>{
+  opener=event.currentTarget;
+  dialog.setAttribute('data-artwork','');
+  $('#herb-view-title',dialog).textContent='Du croquis au symbole';
+  visual.src='./assets/projects/herbtresor/sketch.jpg';
+  visual.alt='Planche complète du croquis de la feuille HerbTrésor';
+  openHerbPreview();
+ });
+ function openHerbPreview(){
   previousOverflow=document.body.style.overflow;
   dialog.showModal();
   document.body.style.overflow='hidden';
- }));
+ }
  views.forEach(button=>button.addEventListener('click',()=>showVisual(button.dataset.herbMode)));
  $('.herb-close',dialog).addEventListener('click',()=>dialog.close());
  dialog.addEventListener('close',()=>{
   document.body.style.overflow=previousOverflow;
+  dialog.removeAttribute('data-artwork');
   opener.focus({preventScroll:true});
  });
 }
