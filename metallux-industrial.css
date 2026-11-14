@@ -184,3 +184,11 @@
  .mx-garment-toolbar{column-gap:12px}
 }
 @media(prefers-reduced-motion:reduce){.mx-book .mx-hero::before,.mx-book .mx-book-object,.mx-viewport-orbit::before{animation:none!important}}
+/* MÉTALLUX · one textile showroom, original references on demand. */
+.mx-showroom .mx-controls-actions .mx-original-toggle{grid-column:1/-1;min-height:44px;background:#ddeaf7;color:#073263;border-color:#a8c9e9}
+.mx-showroom .mx-controls-actions .mx-original-toggle[aria-pressed="true"]{background:#0066ff;color:white;border-color:#0066ff}
+.mx-showroom .mx-viewport{isolation:isolate}
+.mx-original-overlay[hidden]{display:none!important}
+.mx-original-overlay{position:absolute;z-index:6;inset:0;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:8px;align-items:center;justify-items:center;overflow:hidden;padding:clamp(14px,3vw,28px);background:radial-gradient(circle at 50% 40%,#20578b,#06182a 86%);pointer-events:none}
+.mx-original-overlay img{display:block;max-width:100%;max-height:100%;width:auto;height:100%;object-fit:contain;filter:drop-shadow(0 17px 18px #0006)}
+.mx-original-overlay span{justify-self:start;font:700 10px/1.5 var(--mx-sans);letter-spacing:.15em;color:#d2eaff}

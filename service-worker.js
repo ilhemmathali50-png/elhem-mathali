@@ -1,5 +1,5 @@
-const CACHE='em-editions-v27-steel-atelier-3d';
-const CORE=['./index.html?v=27','./manifest.webmanifest','./app-icon.svg','./assets/projects/sommaire-covers.webp','./forceclean-native.css?v=19','./forceclean-native.js?v=19','./metallux-native.css?v=25','./metallux-native.js?v=25','./metallux-industrial.css?v=26','./metallux-studio.js?v=26','./metallux-garment3d.js?v=27','./assets/projects/metallux/native/logo-black-transparent.webp'];
+const CACHE='em-editions-v28-metallux-single-showroom';
+const CORE=['./index.html?v=28','./manifest.webmanifest','./app-icon.svg','./assets/projects/sommaire-covers.webp','./forceclean-native.css?v=19','./forceclean-native.js?v=19','./metallux-native.css?v=25','./metallux-native.js?v=25','./metallux-industrial.css?v=28','./metallux-studio.js?v=28','./metallux-garment3d.js?v=27','./assets/projects/metallux/native/logo-black-transparent.webp'];
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
 });
@@ -10,7 +10,7 @@ self.addEventListener('fetch',event=>{
  const req=event.request;
  if(req.method!=='GET'||new URL(req.url).origin!==self.location.origin)return;
  if(req.mode==='navigate'){
-  event.respondWith(fetch(new Request(req,{cache:'reload'})).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put('./index.html?v=27',copy));}return res;}).catch(()=>caches.match('./index.html?v=27')));
+  event.respondWith(fetch(new Request(req,{cache:'reload'})).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put('./index.html?v=28',copy));}return res;}).catch(()=>caches.match('./index.html?v=28')));
   return;
  }
  event.respondWith(fetch(req).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put(req,copy));}return res;}).catch(()=>caches.match(req)));
