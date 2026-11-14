@@ -363,6 +363,8 @@ body.video-active .portfolio-top-frame{display:none!important}
 <link rel="stylesheet" href="./forceclean-native.css?v=30">
 <link rel="stylesheet" href="./metallux-native.css?v=25">
 <link rel="stylesheet" href="./metallux-industrial.css?v=30">
+<link rel="stylesheet" href="./logo-showroom.css?v=31">
+<script src="./logo-showroom.js?v=31" defer></script>
 <script src="./forceclean-native.js?v=19" defer></script>
 <script src="./metallux-native.js?v=29" defer></script>
 <script src="./metallux-studio.js?v=29" defer></script>
@@ -861,8 +863,13 @@ function renderMetalluxBook(){
  else detail.textContent='MÉTALLUX : le chapitre interactif est momentanément indisponible.';
 }
 
-function renderLogos(){const works=[{name:'Élya Natura',mark:'é.',color:'#294936',paper:'#E5EBE2'},{name:'MÉTALLUX',mark:'M',color:'#122E45',paper:'#E4EDF3'},{name:'ForceClean',mark:'FC',color:'#0D6197',paper:'#E4F2FA'},{name:'TrackSolid Pro',mark:'T',color:'#0077AD',paper:'#E7F6FE'},{name:'Logo explorations',mark:'✳',color:'#A42E48',paper:'#F7E3EB'},{name:'Letterform studies',mark:'em.',color:'#553169',paper:'#EEE3F6'}];
- $('#logoGrid').innerHTML=works.map((x,i)=>`<div class="logo-card" style="background:${x.paper};color:${x.color}"><small>LOGO ATELIER / 0${i+1}</small><span class="logo-symbol" aria-hidden="true">${x.mark}</span><strong>${x.name}</strong></div>`).join('');}
+function renderLogos(){
+ const page=document.querySelector('.logos-view');
+ if(!page)return;
+ if(typeof window.mountLogoShowroom==='function'){window.mountLogoShowroom(page);return;}
+ const list=document.getElementById('logoGrid');
+ if(list)list.textContent='Le catalogue des logos est momentanément indisponible';
+}
 
 function setupClientCapture(){
  const trigger=$('#openClientCapture'),dialog=$('#clientCaptureDialog'),close=$('#closeClientCapture');
