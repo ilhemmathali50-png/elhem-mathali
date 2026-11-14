@@ -53,7 +53,7 @@ function torsoGeometry(T,type){
  }
  for(let j=0;j<rings.length-1;j++)for(let i=0;i<N;i++){
   const a=j*N+i,b=j*N+(i+1)%N,c=(j+1)*N+i,d=(j+1)*N+(i+1)%N;
-  indices.push(a,c,b,b,c,d);
+  indices.push(a,b,c,b,d,c);
  }
  const geometry=new T.BufferGeometry();
  geometry.setAttribute('position',new T.Float32BufferAttribute(vertices,3));
