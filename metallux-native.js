@@ -33,13 +33,13 @@ window.renderMetalluxNative=function(detail){
   <div class="mx-concept-row mx-reveal"><img src="${A('logo-icon-version')}" alt="Icône originale composée de deux formes métalliques imbriquées" loading="lazy"><div><strong>Une construction, deux matières.</strong><p>Les deux éléments s’emboîtent pour évoquer l’assemblage. La forme originale et ses proportions sont préservées.</p></div></div>
  </div></section>
  <section class="mx-section mx-colors" id="mx-colors" data-mx-chapter="colors"><div class="mx-inner">
-  <span class="mx-eyebrow mx-reveal">03 / SYSTÈME GRAPHIQUE</span><h2 class="mx-reveal">Couleur<br><em>et caractère.</em></h2><p class="mx-colors-intro mx-reveal">Bleu marine pour l’ancrage, bleu électrique pour les détails, argent pour la référence au métal brossé. Une palette sobre, précise et immédiatement reconnaissable.</p>
+  <span class="mx-eyebrow mx-reveal">03 / SYSTÈME GRAPHIQUE</span><h2 class="mx-reveal">Couleur<br><em>et caractère.</em></h2><p class="mx-colors-intro mx-reveal">Bleu marine pour l’ancrage, bleu électrique pour les détails, argent pour la référence au métal brossé. Cinq teintes présentées comme des pièces de métal façonnées, entre matières brutes et lumière.</p>
   <div class="mx-swatch-list mx-reveal" aria-label="Palette officielle MÉTALLUX">
-   <div class="mx-swatch" style="--mx-c:#001F4D"><span class="mx-swatch-globe"></span><strong>Marine</strong><code>#001F4D</code></div>
-   <div class="mx-swatch" style="--mx-c:#0066FF"><span class="mx-swatch-globe"></span><strong>Électrique</strong><code>#0066FF</code></div>
-   <div class="mx-swatch" style="--mx-c:#C0C4CC"><span class="mx-swatch-globe"></span><strong>Argent</strong><code>#C0C4CC</code></div>
-   <div class="mx-swatch" style="--mx-c:#E6E8ED"><span class="mx-swatch-globe"></span><strong>Gris clair</strong><code>#E6E8ED</code></div>
-   <div class="mx-swatch" style="--mx-c:#FFFFFF"><span class="mx-swatch-globe"></span><strong>Blanc</strong><code>#FFFFFF</code></div>
+   <div class="mx-swatch" style="--mx-c:#001F4D"><span class="mx-swatch-sculpture" aria-hidden="true"><span class="mx-swatch-grain"></span><span class="mx-swatch-engrave">01</span></span><strong>Marine</strong><code>#001F4D</code></div>
+   <div class="mx-swatch" style="--mx-c:#0066FF"><span class="mx-swatch-sculpture" aria-hidden="true"><span class="mx-swatch-grain"></span><span class="mx-swatch-engrave">02</span></span><strong>Électrique</strong><code>#0066FF</code></div>
+   <div class="mx-swatch" style="--mx-c:#C0C4CC"><span class="mx-swatch-sculpture" aria-hidden="true"><span class="mx-swatch-grain"></span><span class="mx-swatch-engrave">03</span></span><strong>Argent</strong><code>#C0C4CC</code></div>
+   <div class="mx-swatch" style="--mx-c:#E6E8ED"><span class="mx-swatch-sculpture" aria-hidden="true"><span class="mx-swatch-grain"></span><span class="mx-swatch-engrave">04</span></span><strong>Gris clair</strong><code>#E6E8ED</code></div>
+   <div class="mx-swatch" style="--mx-c:#FFFFFF"><span class="mx-swatch-sculpture" aria-hidden="true"><span class="mx-swatch-grain"></span><span class="mx-swatch-engrave">05</span></span><strong>Blanc</strong><code>#FFFFFF</code></div>
   </div>
   <div class="mx-type mx-reveal"><div class="mx-type-title" aria-label="Montserrat">Aa</div><div class="mx-type-caption"><strong>Montserrat</strong><p>La typographie de l’identité : nette, structurée et contemporaine.</p></div></div>
  </div></section>
