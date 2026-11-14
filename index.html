@@ -249,6 +249,11 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
  @keyframes fm-label-wrap { from { transform:translateX(var(--fm-flat-x)) translateY(26px) translateZ(95px); } to { transform:rotateY(var(--fm-face-angle)) translateZ(var(--fm-z)); } }
  @keyframes fm-body-rise { 0%,18%{opacity:0}to{opacity:1} }
 }
+
+.fm-model.fm-photo-model { width:min(100%, 370px); height:auto; aspect-ratio:2/3; overflow:hidden; border-radius:inherit; }
+.fm-photo-model::before { content:none; }
+.fm-photo-model > img, .fm-photo-label { position:absolute; inset:0; width:100%; height:100%; display:block; }
+.fm-photo-model > img, .fm-photo-label { pointer-events:none; }
 </style>
 <script defer>
 (()=>{
@@ -551,6 +556,68 @@ function renderFaitMaisonBook(){
  });
  $$('.fm-product-page',book).forEach(setupFaitMaisonProduct);
 }
+function setupFaitMaisonPhotoJar(model, artwork){
+ model.classList.add('fm-photo-model');
+ const photo=document.createElement('img');
+ photo.src='./assets/projects/fait-maison/rotation-jar.webp';
+ photo.alt='';
+ photo.draggable=false;
+ photo.decoding='async';
+ model.prepend(photo);
+ const layer=document.createElement('canvas');
+ layer.width=880;
+ layer.height=1320;
+ layer.className='fm-photo-label';
+ layer.setAttribute('aria-hidden','true');
+ model.append(layer);
+ const context=layer.getContext('2d');
+ let animation=0;
+ function paint(angle, amount){
+  if(!context)return;
+  context.clearRect(0,0,880,1320);
+  if(!artwork.naturalWidth || amount<=0)return;
+  const center=440;
+  const radius=270;
+  const shift=angle/360;
+  const sourceWidth=artwork.naturalWidth;
+  const sourceHeight=artwork.naturalHeight;
+  const top=630;
+  const height=sourceHeight/sourceWidth*(2*Math.PI*radius);
+  for(let x=center-radius;x<center+radius;x++){
+   const curve=(x-center)/radius;
+   const depth=Math.sqrt(1-curve*curve);
+   const wrapped=(.5+Math.asin(curve)/(2*Math.PI)-shift+1)%1;
+   const flat=.5+curve*.31;
+   const sample=(flat+(wrapped-flat)*amount+1)%1;
+   const y=top+(16*depth-42*(1-amount))*amount;
+   context.globalAlpha=amount;
+   context.drawImage(artwork,Math.min(sourceWidth-1,Math.floor(sample*sourceWidth)),0,1,sourceHeight,x,y,1,height);
+   context.globalAlpha=(1-depth)*.24*amount;
+   context.fillStyle='#331a08';
+   context.fillRect(x,y,1,height);
+  }
+  context.globalAlpha=1;
+ }
+ function draw(angle, animated=false){
+  cancelAnimationFrame(animation);
+  if(!animated||matchMedia('(prefers-reduced-motion: reduce)').matches){
+   paint(angle,1);
+   return;
+  }
+  const start=performance.now();
+  function tick(time){
+   const progress=Math.min(1,(time-start)/480);
+   paint(angle,1-(1-progress)**3);
+   if(progress<1)animation=requestAnimationFrame(tick);
+  }
+  animation=requestAnimationFrame(tick);
+ }
+ artwork.addEventListener('load',()=>draw(Number(model.dataset.angle||0)));
+ return (angle,animated)=>{
+  model.dataset.angle=angle;
+  draw(angle,animated);
+ };
+}
 function setupFaitMaisonProduct(page){
  const canvas=$('.fm-transform',page);
  const model=$('.fm-model',canvas);
@@ -563,7 +630,8 @@ function setupFaitMaisonProduct(page){
  const point=$('.fm-point',canvas);
  const note=$('.fm-design-note',page);
  const bottle=canvas.dataset.shape==='bottle';
- let angle=0, drag;
+ let angle=0, drag, paintPhoto;
+ const usesPhoto=canvas.dataset.label==='poulet';
  function face(kind,deg,radius,width){
   const el=document.createElement('span');
   el.className='fm-face is-'+kind;
@@ -597,14 +665,17 @@ function setupFaitMaisonProduct(page){
  function rotate(value){
   angle=((value+180)%360+360)%360-180;
   range.value=angle;
+  paintPhoto?.(angle,false);
   spin.style.setProperty('--fm-angle',angle+'deg');
   spin.style.setProperty('--fm-glint-x',50+28*Math.sin(angle*Math.PI/180)+'%');
  }
  wrap.addEventListener('click',()=>{
   const reveal=model.hidden;
-  if(reveal&&!spin.childElementCount)buildModel();
+  if(reveal&&usesPhoto)paintPhoto??=setupFaitMaisonPhotoJar(model,artwork);
+  if(reveal&&!usesPhoto&&!spin.childElementCount)buildModel();
   rotate(0);
   model.hidden=!reveal;
+  if(reveal)paintPhoto?.(0,true);
   flat.hidden=reveal;
   rotation.hidden=!reveal;
   wrap.setAttribute('aria-pressed',String(reveal));
