@@ -85,3 +85,10 @@
 .mx-card-side{box-shadow:0 18px 25px #0005;-webkit-backface-visibility:hidden;backface-visibility:hidden}
 .mx-card-side.front{transform:translateZ(1px)}
 .mx-card-side.back{transform:rotateY(180deg) translateZ(1px)}
+
+/* High-resolution original brand monogram; no white thumbnail box. */
+.mx-concept-row{grid-template-columns:minmax(120px,172px) minmax(0,1fr);max-width:760px;gap:27px}
+.mx-concept-row img{display:block;width:100%;height:auto;object-fit:contain;mix-blend-mode:normal;image-rendering:auto;filter:drop-shadow(0 9px 13px #00345d2b)}
+.mx-logo-display img{image-rendering:auto}
+@media(max-width:700px){.mx-concept-row{grid-template-columns:112px minmax(0,1fr);gap:17px}}
+@media(max-width:365px){.mx-concept-row{grid-template-columns:94px minmax(0,1fr);gap:13px}}
