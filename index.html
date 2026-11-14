@@ -185,50 +185,69 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 .herb-sketch-preview .herb-art { width:100%; height:auto; }
 .herb-dialog[data-artwork] > .herb-full-image { display:none; }
 
-/* Fait Maison uses the same paper stack as the other edition. */
-.fm-book { --herb-paper:#fbf3df; --herb-ink:#263521; --fm-red:#9a321d; }
-.fm-book img { width:100%; height:auto; display:block; }
-.fm-page { display:grid; align-content:start; gap:16px; border-color:#d7bea0; }
-.fm-page h1,.fm-page h2 { margin:0; }
-.fm-page h1 { color:#fff4dc; font-size:clamp(3.1rem,13vw,7rem); }
-.fm-page h2 em { color:var(--fm-red); }
-.fm-page p { margin:0; max-width:54ch; }
-.fm-cover { background:#263521; color:#fff4dc; padding:0; overflow:hidden; gap:0; }
-.fm-cover-text { padding:24px clamp(16px,5vw,40px) 20px; }
-.fm-cover-text p { font:italic clamp(1.35rem,6vw,2.2rem)/1.2 var(--serif); margin-top:5px; color:#f4c898; }
-.fm-kicker,.fm-cover-foot { font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
-.fm-cover-foot { display:flex; align-items:center; gap:12px; padding:15px clamp(16px,5vw,40px); }
-.fm-cover-foot span { width:24px; height:1px; background:#e5bf86; }
-.fm-story { background:linear-gradient(90deg,#59231330,transparent 15px),#f3e3c7; }
-.fm-identity,.fm-products { display:grid; gap:13px; grid-template-columns:repeat(2,minmax(0,1fr)); }
-.fm-plate { width:100%; color:inherit; background:#fff9ee; border:1px solid #dbcaad; border-radius:3px; padding:0; overflow:hidden; text-align:left; cursor:zoom-in; }
-.fm-plate > span { display:flex; justify-content:space-between; gap:6px; padding:10px; font-size:.75rem; }
-.fm-identity .fm-plate:first-child { grid-column:1/-1; }
-.fm-identity .fm-plate:first-child img { width:min(100%,380px); margin-inline:auto; }
-.fm-product { min-width:0; padding:10px; display:grid; gap:7px; align-content:start; text-align:left; color:#27321e; background:var(--fm-tint); border:1px solid #9e78594a; border-radius:4px; }
-.fm-product > strong { font:600 clamp(.93rem,4vw,1.25rem)/1.15 var(--serif); }
-.fm-product > span:last-child { font-size:.68rem; }
-.fm-product-art { display:block; aspect-ratio:4/5; overflow:hidden; border-radius:3px; transform-origin:bottom center; }
-.fm-product-art img { width:100%; height:100%; object-fit:contain; }
-.fm-pair img { width:200%; max-width:none; height:100%; object-fit:cover; }
-.fm-pair-poulet img { transform:translateX(-50%); }
-.fm-range { background:#263521; color:#fff4dc; }
-.fm-range .fm-plate { color:#27321e; }
-.fm-dialog { background:radial-gradient(ellipse at 50% 75%,#f6e8d0,#ead3b0 70%,#cfa981); color:#27321e; }
-.fm-stage { display:grid; place-items:center; min-width:0; min-height:0; perspective:900px; overflow:hidden; }
-.fm-stage .fm-stage-image { width:100%; height:100%; min-height:0; object-fit:contain; }
-.fm-stage.is-label { display:block; overflow:auto; }
-.fm-stage.is-label .fm-stage-image { height:auto; max-width:none; margin:8px auto; }
-.fm-stage.is-label.is-wrap .fm-stage-image { min-width:min(1200px,220vw); }
-.fm-stage.is-label:not(.is-wrap) .fm-stage-image { max-width:400px; }
-.fm-dialog[data-kind="art"] .fm-views { display:none; }
-.fm-dialog[data-kind="art"][open] { grid-template-rows:auto minmax(0,1fr); }
-@media(min-width:650px){ .fm-products { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+
+.fm-book{--fm-ink:#293b28;color:var(--fm-ink);margin:0 auto;max-width:750px}
+.fm-leaves{position:relative;perspective:1300px;touch-action:pan-y}
+.fm-leaf{position:relative;min-width:0;background:linear-gradient(90deg,#b5915a28,transparent 18px),#fbf3e3;border:1px solid #cdb698;border-radius:4px 12px 12px 4px;box-shadow:0 3px #e5d5be,0 6px #cdb89d,0 16px 26px #53392224;transform-origin:left center}
+.fm-leaf.is-turning{animation:fm-page-turn .42s ease both}
+@keyframes fm-page-turn{from{transform:rotateY(var(--fm-turn));filter:brightness(.83);opacity:.65}to{transform:rotateY(0);opacity:1}}
+.fm-leaf img{display:block;width:100%;height:auto}
+.fm-cover{background:#25321e}
+.fm-cover>img,.fm-plate img{border-radius:inherit}
+.fm-cover-pop{position:absolute;left:43%;bottom:13%;width:23%;pointer-events:none;filter:drop-shadow(12px 12px 11px #160d0960);animation:fm-cover-pop 2.5s ease 1 both}
+@keyframes fm-cover-pop{0%,90%,100%{opacity:0;transform:translateY(18px) scale(.65)}24%,68%{opacity:1;transform:translateY(-32px) scale(1.23)}}
+.fm-plate,.fm-flat{width:100%;padding:0;border:0;border-radius:inherit;display:block;background:none;color:inherit;cursor:zoom-in}
+.fm-plate span{display:block;padding:8px;font-size:.85rem}
+.fm-heading h2{font:400 clamp(2rem,8vw,4rem)/1.05 var(--serif);margin:.16em 0}
+.fm-heading p{margin:0;color:#893d27;font-size:.74rem;letter-spacing:.11em;text-transform:uppercase;font-weight:700}
+.fm-product-page,.fm-range{padding:clamp(12px,4vw,30px)}
+.fm-transform{position:relative;margin-block:16px;min-height:210px;display:grid;place-items:center;perspective:850px;background:radial-gradient(ellipse at 50% 80%,#fffaf1,#e9dbc1);border-radius:5px}
+.fm-transform>*{grid-area:1/1}
+.fm-flat{max-width:620px;width:100%;padding:10px;animation:fm-print .35s ease both}
+.fm-flat img{max-height:42svh;object-fit:contain}
+@keyframes fm-print{from{opacity:.45;transform:translateY(-9px) rotate(-1.5deg)}to{opacity:1;transform:none}}
+.fm-point{position:absolute;right:10px;top:10px}
+.fm-book button.fm-point,.fm-actions button,.fm-navigation button,.fm-zoom button{border:1px solid #765e43;border-radius:999px;background:#fff9ee;color:#293b28;min-height:44px;padding:0 13px}
+.fm-actions,.fm-navigation{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px}
+.fm-actions button:first-child{background:#294936;color:white;border-color:#294936}
+.fm-design-note{text-align:center;font-size:.88rem}
+.fm-rotate{margin:12px 0 0;text-align:center}
+.fm-rotate label{display:grid;gap:3px;font-size:.84rem}
+.fm-rotate input{width:min(100%,340px);margin:auto;accent-color:#294936}
+.fm-navigation{position:sticky;bottom:calc(86px + env(safe-area-inset-bottom));z-index:3;margin:14px auto 0;padding:6px;width:max-content;max-width:100%;border-radius:999px;background:#fbf3e3;box-shadow:0 3px 12px #30201636}
+.fm-navigation button:disabled{opacity:.42;cursor:default}
+.fm-navigation output{min-width:68px;text-align:center;font-size:.8rem;font-variant-numeric:tabular-nums}
+.fm-gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:13px}
+.fm-model{--fm-radius:67px;--fm-body:130px;--fm-label-h:88px;--fm-label-top:99px;position:relative;width:100%;height:255px;perspective:850px;touch-action:pan-y;cursor:grab}
+.fm-model:active{cursor:grabbing}
+.fm-transform[data-shape="bottle"] .fm-model{--fm-radius:46px;--fm-body:155px;--fm-label-h:99px;--fm-label-top:104px}
+.fm-spin{position:absolute;left:50%;top:0;width:0;height:100%;transform-style:preserve-3d;transform:rotateX(-9deg) rotateY(var(--fm-angle,0deg))}
+.fm-model::before{content:"";position:absolute;left:50%;bottom:19px;width:154px;height:22px;transform:translateX(-50%);background:#52391c55;border-radius:50%;filter:blur(8px)}
+.fm-face{position:absolute;left:0;top:var(--fm-top);width:var(--fm-strip);height:var(--fm-height);margin-left:calc(var(--fm-strip) / -2);transform:rotateY(var(--fm-face-angle)) translateZ(var(--fm-z));backface-visibility:hidden;background-color:var(--fm-fill);background-image:linear-gradient(180deg,#ffffff5e,transparent 27%,#25160638 88%,#ffffff59);filter:brightness(var(--fm-light,1))}
+.fm-face.is-body{--fm-top:calc(229px - var(--fm-body));--fm-height:var(--fm-body);border-radius:0 0 2px 2px}
+.fm-face.is-cap{--fm-top:calc(203px - var(--fm-body));--fm-height:27px;background-color:#bd903d;background-image:repeating-linear-gradient(90deg,#3e271d35 0 1px,#f7d48470 1px 3px),linear-gradient(#fff6,transparent,#2e150259)}
+.fm-transform[data-shape="bottle"] .fm-face.is-cap{--fm-top:48px;--fm-height:29px}
+.fm-face.is-label{--fm-top:var(--fm-label-top);--fm-height:var(--fm-label-h);background-image:var(--fm-label);background-size:2400% 100%;background-position:var(--fm-sample) center}
+.fm-transform[data-shape="jar"] .fm-face.is-label{--fm-label-h:calc(var(--fm-radius)*6.283 / var(--fm-ratio,4.88));--fm-label-top:125px}
+.fm-transform[data-shape="bottle"] .fm-face.is-label{--fm-label-h:112px;--fm-top:96px;background-color:transparent;background-size:570% 100%;background-position:var(--fm-bottle-sample) center}
+.fm-face.is-cap-top{--fm-top:calc(203px - var(--fm-body));--fm-height:calc(var(--fm-z)*2);width:var(--fm-height);margin-left:calc(var(--fm-height)/-2);margin-top:calc(var(--fm-height)/-2);border-radius:50%;background:radial-gradient(circle,#e7c477 0 54%,#d7a94a 55% 66%,#9b6724 72%);transform:rotateX(90deg)}
+.fm-transform[data-shape="bottle"] .fm-face.is-cap-top{--fm-top:48px}
+.fm-face.is-shoulder{--fm-top:73px;--fm-height:31px}
+.fm-stage{display:grid;place-items:center;min-width:0;min-height:0;overflow:auto}
+.fm-stage img{width:100%;height:100%;object-fit:contain}
+.fm-stage.is-zoom{display:block}
+.fm-stage.is-zoom img{width:170%;max-width:none;height:auto}
+.fm-zoom{display:flex;justify-content:center}
+@media(prefers-reduced-motion:reduce){.fm-leaf.is-turning,.fm-flat{animation:none}.fm-cover-pop{display:none}}
+
+.fm-face.is-label { background-size:2400% 100%; }
+.fm-transform[data-shape="bottle"] .fm-face.is-label { background-size:600% 100%; background-position:var(--fm-sample) center; }
+.fm-spin::after { content:""; position:absolute; top:48px; height:180px; width:170px; left:-85px; pointer-events:none; transform:translateZ(70px); background:radial-gradient(ellipse 4px 58px at var(--fm-glint-x,50%) 32%,#fff9,transparent); }
 @media(prefers-reduced-motion:no-preference){
- .fm-product-art { transition:transform .35s ease,filter .35s ease; }
- .fm-product:hover .fm-product-art,.fm-product:focus-visible .fm-product-art { transform:perspective(600px) rotateX(6deg) translateY(-5px); filter:drop-shadow(0 8px 8px #4b2d2540); }
- .fm-dialog[open] .fm-stage.is-mock img { animation:fm-rise .52s cubic-bezier(.18,.8,.26,1) both; }
- @keyframes fm-rise { from { opacity:0; transform:translate3d(0,55px,-200px) rotateX(18deg) scale(.7); } to { opacity:1; transform:translate3d(0,0,0) rotateX(0) scale(1); } }
+ .fm-model:not([hidden]) .fm-face.is-label { animation:fm-label-wrap .7s cubic-bezier(.2,.6,.25,1) both; }
+ .fm-model:not([hidden]) .fm-face:not(.is-label) { animation:fm-body-rise .7s ease both; }
+ @keyframes fm-label-wrap { from { transform:translateX(var(--fm-flat-x)) translateY(26px) translateZ(95px); } to { transform:rotateY(var(--fm-face-angle)) translateZ(var(--fm-z)); } }
+ @keyframes fm-body-rise { 0%,18%{opacity:0}to{opacity:1} }
 }
 </style>
 <script defer>
@@ -383,72 +402,227 @@ function renderHerbBook(){
 }
 function renderFaitMaisonBook(){
  const detail=$('#detailContent');
- detail.innerHTML=`<article class="herb-book fm-book" aria-label="Fait Maison, livre de marque">
-<section class="herb-page fm-page fm-cover"><div class="fm-cover-text"><span class="fm-kicker">The Creative Editions · 02</span><h1>Fait Maison</h1><p>Le goût du geste</p></div><img src="./assets/projects/fait-maison/cover.webp" alt="La gamme Fait Maison mise en scène sur une table tunisienne" fetchpriority="high" decoding="async"><div class="fm-cover-foot">Identité visuelle <span></span> Packaging</div></section>
-<section class="herb-page fm-page fm-story"><span class="fm-kicker">Direction artistique</span><h2>Les gestes qu’on<br><em>se transmet</em></h2><p>Une main qui prépare, une poterie et un rameau d’olivier. Le logo réunit ces gestes et ces objets familiers sous une arche, comme une fenêtre ouverte sur la cuisine tunisienne.</p><button class="fm-plate" type="button" data-fm-art="story" data-fm-title="L’histoire de la marque" aria-label="Agrandir : L’histoire de la marque"><img src="./assets/projects/fait-maison/story.webp" alt="L’histoire de la marque" loading="lazy" decoding="async"><span>L’histoire de la marque <span aria-hidden="true">↗</span></span></button>
-<button class="fm-plate" type="button" data-fm-art="concept" data-fm-title="Les éléments du logo" aria-label="Agrandir : Les éléments du logo"><img src="./assets/projects/fait-maison/concept.webp" alt="Les éléments du logo" loading="lazy" decoding="async"><span>Les éléments du logo <span aria-hidden="true">↗</span></span></button></section>
-<section class="herb-page fm-page"><span class="fm-kicker">Charte graphique</span><h2>Les signes<br><em>de la maison</em></h2><div class="fm-identity"><button class="fm-plate" type="button" data-fm-art="logo" data-fm-title="Logo original" aria-label="Agrandir : Logo original"><img src="./assets/projects/fait-maison/logo.webp" alt="Logo original" loading="lazy" decoding="async"><span>Logo original <span aria-hidden="true">↗</span></span></button>
-<button class="fm-plate" type="button" data-fm-art="versions" data-fm-title="Déclinaisons du logo" aria-label="Agrandir : Déclinaisons du logo"><img src="./assets/projects/fait-maison/versions.webp" alt="Déclinaisons du logo" loading="lazy" decoding="async"><span>Déclinaisons du logo <span aria-hidden="true">↗</span></span></button>
-<button class="fm-plate" type="button" data-fm-art="mono" data-fm-title="Versions monochromes" aria-label="Agrandir : Versions monochromes"><img src="./assets/projects/fait-maison/mono.webp" alt="Versions monochromes" loading="lazy" decoding="async"><span>Versions monochromes <span aria-hidden="true">↗</span></span></button>
-<button class="fm-plate" type="button" data-fm-art="palette" data-fm-title="Palette chromatique" aria-label="Agrandir : Palette chromatique"><img src="./assets/projects/fait-maison/palette.webp" alt="Palette chromatique" loading="lazy" decoding="async"><span>Palette chromatique <span aria-hidden="true">↗</span></span></button>
-<button class="fm-plate" type="button" data-fm-art="type" data-fm-title="Typographies" aria-label="Agrandir : Typographies"><img src="./assets/projects/fait-maison/type.webp" alt="Typographies" loading="lazy" decoding="async"><span>Typographies <span aria-hidden="true">↗</span></span></button>
-<button class="fm-plate" type="button" data-fm-art="motifs" data-fm-title="Motifs et illustrations" aria-label="Agrandir : Motifs et illustrations"><img src="./assets/projects/fait-maison/motifs.webp" alt="Motifs et illustrations" loading="lazy" decoding="async"><span>Motifs et illustrations <span aria-hidden="true">↗</span></span></button></div></section>
-<section class="herb-page fm-page"><span class="fm-kicker">Packaging · Les bocaux</span><h2>Saveurs du terroir</h2><p>Sur les bocaux, la face centrale donne le nom du produit en français et en arabe. La couleur et l’illustration distinguent les recettes.</p><div class="fm-products"><button class="fm-product" type="button" data-fm-product="0" style="--fm-tint:#e8ead1"><span class="fm-product-art fm-pair fm-pair-caviar"><img src="./assets/projects/fait-maison/duo.webp" alt="" loading="lazy" decoding="async"></span><strong>Caviar d’artichaut</strong><span>Voir le packaging <span aria-hidden="true">↗</span></span></button>
-<button class="fm-product" type="button" data-fm-product="1" style="--fm-tint:#f3d6bd"><span class="fm-product-art fm-pair fm-pair-poulet"><img src="./assets/projects/fait-maison/duo.webp" alt="" loading="lazy" decoding="async"></span><strong>Épice de poulet</strong><span>Voir le packaging <span aria-hidden="true">↗</span></span></button>
-<button class="fm-product" type="button" data-fm-product="2" style="--fm-tint:#f6e1c4"><span class="fm-product-art"><img src="./assets/projects/fait-maison/beurre.webp" alt="Beurre de cacahuète" loading="lazy" decoding="async"></span><strong>Beurre de cacahuète</strong><span>Voir le packaging <span aria-hidden="true">↗</span></span></button></div></section>
-<section class="herb-page fm-page"><span class="fm-kicker">Packaging · Les bouteilles</span><h2>Eaux florales</h2><p>Le cartouche, les filets et la composition restent communs. La couleur et la fleur identifient chaque variété.</p><div class="fm-products"><button class="fm-product" type="button" data-fm-product="3" style="--fm-tint:#f3dce4"><span class="fm-product-art"><img src="./assets/projects/fait-maison/geranium.webp" alt="Eau de géranium" loading="lazy" decoding="async"></span><strong>Eau de géranium</strong><span>Voir le packaging <span aria-hidden="true">↗</span></span></button>
-<button class="fm-product" type="button" data-fm-product="4" style="--fm-tint:#f8e5cc"><span class="fm-product-art"><img src="./assets/projects/fait-maison/oranger.webp" alt="Eau de fleur d’oranger" loading="lazy" decoding="async"></span><strong>Eau de fleur d’oranger</strong><span>Voir le packaging <span aria-hidden="true">↗</span></span></button>
-<button class="fm-product" type="button" data-fm-product="5" style="--fm-tint:#e2ebd7"><span class="fm-product-art"><img src="./assets/projects/fait-maison/menthe.webp" alt="Eau de menthe pouliot" loading="lazy" decoding="async"></span><strong>Eau de menthe pouliot</strong><span>Voir le packaging <span aria-hidden="true">↗</span></span></button></div></section>
-<section class="herb-page fm-page fm-range"><h2>Toute la gamme</h2><button class="fm-plate" type="button" data-fm-art="range" data-fm-title="Saveurs du terroir et eaux florales" aria-label="Agrandir : Saveurs du terroir et eaux florales"><img src="./assets/projects/fait-maison/range.webp" alt="Saveurs du terroir et eaux florales" loading="lazy" decoding="async"><span>Saveurs du terroir et eaux florales <span aria-hidden="true">↗</span></span></button></section>
-<dialog class="herb-dialog fm-dialog" aria-labelledby="fm-preview-title"><div class="herb-dialog-bar"><h2 id="fm-preview-title"></h2><button class="herb-close" type="button" aria-label="Fermer" autofocus>×</button></div><div class="fm-stage"><img class="fm-stage-image" alt=""></div><div class="herb-views fm-views"><button type="button" class="herb-toggle" data-fm-mode="mock">Mockup</button><button type="button" class="herb-toggle" data-fm-mode="label">Étiquette originale</button></div></dialog>
+ detail.innerHTML=`<article class="fm-book" aria-label="Fait Maison, livre interactif">
+<div class="fm-leaves">
+<section class="fm-leaf fm-cover"><h1 class="herb-visually-hidden">Fait Maison — Le goût du geste</h1><img src="./assets/projects/fait-maison/book-cover.webp" alt="Couverture Fait Maison · Le goût du geste" fetchpriority="high" decoding="async"><div class="fm-cover-pop" aria-hidden="true"><img src="./assets/projects/fait-maison/geranium.webp" alt=""  decoding="async"></div></section>
+<section class="fm-leaf " hidden><h2 class="herb-visually-hidden">À propos</h2><button class="fm-plate" type="button" data-fm-image="book-story" data-fm-title="À propos" aria-label="Agrandir : À propos"><img src="./assets/projects/fait-maison/book-story.webp" alt="À propos" loading="lazy" decoding="async"></button></section>
+<section class="fm-leaf " hidden><h2 class="herb-visually-hidden">Les versions du logo</h2><button class="fm-plate" type="button" data-fm-image="book-logos" data-fm-title="Les versions du logo" aria-label="Agrandir : Les versions du logo"><img src="./assets/projects/fait-maison/book-logos.webp" alt="Les versions du logo" loading="lazy" decoding="async"></button></section>
+<section class="fm-leaf " hidden><h2 class="herb-visually-hidden">Palette de couleurs</h2><button class="fm-plate" type="button" data-fm-image="book-palette" data-fm-title="Palette de couleurs" aria-label="Agrandir : Palette de couleurs"><img src="./assets/projects/fait-maison/book-palette.webp" alt="Palette de couleurs" loading="lazy" decoding="async"></button></section>
+<section class="fm-leaf " hidden><h2 class="herb-visually-hidden">Typographies</h2><button class="fm-plate" type="button" data-fm-image="book-type" data-fm-title="Typographies" aria-label="Agrandir : Typographies"><img src="./assets/projects/fait-maison/book-type.webp" alt="Typographies" loading="lazy" decoding="async"></button></section>
+<section class="fm-leaf " hidden><h2 class="herb-visually-hidden">Règles d’utilisation</h2><button class="fm-plate" type="button" data-fm-image="book-rules" data-fm-title="Règles d’utilisation" aria-label="Agrandir : Règles d’utilisation"><img src="./assets/projects/fait-maison/book-rules.webp" alt="Règles d’utilisation" loading="lazy" decoding="async"></button></section>
+<section class="fm-leaf fm-product-page" hidden>
+<div class="fm-heading"><p>Du dessin au packaging</p><h2>Caviar d’artichaut</h2></div>
+<div class="fm-transform" data-label="caviar" data-shape="jar" style="--fm-fill:#84904a;--fm-label:url('./assets/projects/fait-maison/label-caviar.webp')">
+ <button type="button" class="fm-flat" data-fm-image="label-caviar" data-fm-title="Caviar d’artichaut" data-fm-label aria-label="Agrandir l’étiquette : Caviar d’artichaut"><img src="./assets/projects/fait-maison/label-caviar.webp" alt="Étiquette originale · Caviar d’artichaut" loading="lazy" decoding="async"></button>
+ <div class="fm-model" hidden aria-label="Maquette 3D de Caviar d’artichaut"><div class="fm-spin"></div></div>
+ <button type="button" class="fm-point" aria-label="Expliquer un choix graphique" aria-expanded="false">+</button>
+</div>
+<p class="fm-design-note" hidden>Le cartouche crème met le nom du produit en valeur. Les volets verts accueillent les informations pratiques.</p>
+<div class="fm-actions"><button type="button" data-fm-wrap aria-pressed="false">Voir le produit</button><button type="button" data-fm-image="duo" data-fm-title="Caviar d’artichaut et Épice de poulet">Voir le mockup</button></div>
+<div class="fm-rotate" hidden><label>Tourner le produit <input type="range" min="-180" max="180" value="0" aria-label="Angle de rotation de Caviar d’artichaut"></label></div>
+</section>
+<section class="fm-leaf fm-product-page" hidden>
+<div class="fm-heading"><p>Du dessin au packaging</p><h2>Épice de poulet</h2></div>
+<div class="fm-transform" data-label="poulet" data-shape="jar" style="--fm-fill:#bc6034;--fm-label:url('./assets/projects/fait-maison/label-poulet.webp')">
+ <button type="button" class="fm-flat" data-fm-image="label-poulet" data-fm-title="Épice de poulet" data-fm-label aria-label="Agrandir l’étiquette : Épice de poulet"><img src="./assets/projects/fait-maison/label-poulet.webp" alt="Étiquette originale · Épice de poulet" loading="lazy" decoding="async"></button>
+ <div class="fm-model" hidden aria-label="Maquette 3D de Épice de poulet"><div class="fm-spin"></div></div>
+ <button type="button" class="fm-point" aria-label="Expliquer un choix graphique" aria-expanded="false">+</button>
+</div>
+<p class="fm-design-note" hidden>Le rouge épicé distingue la recette. Le français et l’arabe se lisent au centre de l’étiquette.</p>
+<div class="fm-actions"><button type="button" data-fm-wrap aria-pressed="false">Voir le produit</button><button type="button" data-fm-image="duo" data-fm-title="Caviar d’artichaut et Épice de poulet">Voir le mockup</button></div>
+<div class="fm-rotate" hidden><label>Tourner le produit <input type="range" min="-180" max="180" value="0" aria-label="Angle de rotation de Épice de poulet"></label></div>
+</section>
+<section class="fm-leaf fm-product-page" hidden>
+<div class="fm-heading"><p>Du dessin au packaging</p><h2>Beurre de cacahuète</h2></div>
+<div class="fm-transform" data-label="beurre" data-shape="jar" style="--fm-fill:#c78c4d;--fm-label:url('./assets/projects/fait-maison/label-beurre.webp')">
+ <button type="button" class="fm-flat" data-fm-image="label-beurre" data-fm-title="Beurre de cacahuète" data-fm-label aria-label="Agrandir l’étiquette : Beurre de cacahuète"><img src="./assets/projects/fait-maison/label-beurre.webp" alt="Étiquette originale · Beurre de cacahuète" loading="lazy" decoding="async"></button>
+ <div class="fm-model" hidden aria-label="Maquette 3D de Beurre de cacahuète"><div class="fm-spin"></div></div>
+ <button type="button" class="fm-point" aria-label="Expliquer un choix graphique" aria-expanded="false">+</button>
+</div>
+<p class="fm-design-note" hidden>Le vert et le terracotta encadrent le nom. L’illustration montre la texture du beurre.</p>
+<div class="fm-actions"><button type="button" data-fm-wrap aria-pressed="false">Voir le produit</button><button type="button" data-fm-image="beurre-scene" data-fm-title="Beurre de cacahuète">Voir le mockup</button></div>
+<div class="fm-rotate" hidden><label>Tourner le produit <input type="range" min="-180" max="180" value="0" aria-label="Angle de rotation de Beurre de cacahuète"></label></div>
+</section>
+<section class="fm-leaf fm-product-page" hidden>
+<div class="fm-heading"><p>Du dessin au packaging</p><h2>Eau de géranium</h2></div>
+<div class="fm-transform" data-label="geranium" data-shape="bottle" style="--fm-fill:#d795a9;--fm-label:url('./assets/projects/fait-maison/label-geranium.webp')">
+ <button type="button" class="fm-flat" data-fm-image="label-geranium" data-fm-title="Eau de géranium" data-fm-label aria-label="Agrandir l’étiquette : Eau de géranium"><img src="./assets/projects/fait-maison/label-geranium.webp" alt="Étiquette originale · Eau de géranium" loading="lazy" decoding="async"></button>
+ <div class="fm-model" hidden aria-label="Maquette 3D de Eau de géranium"><div class="fm-spin"></div></div>
+ <button type="button" class="fm-point" aria-label="Expliquer un choix graphique" aria-expanded="false">+</button>
+</div>
+<p class="fm-design-note" hidden>Le rose et l’illustration du géranium différencient cette eau florale.</p>
+<div class="fm-actions"><button type="button" data-fm-wrap aria-pressed="false">Voir le produit</button><button type="button" data-fm-image="geranium" data-fm-title="Eau de géranium">Voir le mockup</button></div>
+<div class="fm-rotate" hidden><label>Tourner le produit <input type="range" min="-180" max="180" value="0" aria-label="Angle de rotation de Eau de géranium"></label></div>
+</section>
+<section class="fm-leaf fm-product-page" hidden>
+<div class="fm-heading"><p>Du dessin au packaging</p><h2>Eau de fleur d’oranger</h2></div>
+<div class="fm-transform" data-label="oranger" data-shape="bottle" style="--fm-fill:#d1aa66;--fm-label:url('./assets/projects/fait-maison/label-oranger.webp')">
+ <button type="button" class="fm-flat" data-fm-image="label-oranger" data-fm-title="Eau de fleur d’oranger" data-fm-label aria-label="Agrandir l’étiquette : Eau de fleur d’oranger"><img src="./assets/projects/fait-maison/label-oranger.webp" alt="Étiquette originale · Eau de fleur d’oranger" loading="lazy" decoding="async"></button>
+ <div class="fm-model" hidden aria-label="Maquette 3D de Eau de fleur d’oranger"><div class="fm-spin"></div></div>
+ <button type="button" class="fm-point" aria-label="Expliquer un choix graphique" aria-expanded="false">+</button>
+</div>
+<p class="fm-design-note" hidden>La fleur blanche identifie la variété. Le cartouche reprend la forme commune à la gamme.</p>
+<div class="fm-actions"><button type="button" data-fm-wrap aria-pressed="false">Voir le produit</button><button type="button" data-fm-image="oranger" data-fm-title="Eau de fleur d’oranger">Voir le mockup</button></div>
+<div class="fm-rotate" hidden><label>Tourner le produit <input type="range" min="-180" max="180" value="0" aria-label="Angle de rotation de Eau de fleur d’oranger"></label></div>
+</section>
+<section class="fm-leaf fm-product-page" hidden>
+<div class="fm-heading"><p>Du dessin au packaging</p><h2>Eau de menthe pouliot</h2></div>
+<div class="fm-transform" data-label="menthe" data-shape="bottle" style="--fm-fill:#92a171;--fm-label:url('./assets/projects/fait-maison/label-menthe.webp')">
+ <button type="button" class="fm-flat" data-fm-image="label-menthe" data-fm-title="Eau de menthe pouliot" data-fm-label aria-label="Agrandir l’étiquette : Eau de menthe pouliot"><img src="./assets/projects/fait-maison/label-menthe.webp" alt="Étiquette originale · Eau de menthe pouliot" loading="lazy" decoding="async"></button>
+ <div class="fm-model" hidden aria-label="Maquette 3D de Eau de menthe pouliot"><div class="fm-spin"></div></div>
+ <button type="button" class="fm-point" aria-label="Expliquer un choix graphique" aria-expanded="false">+</button>
+</div>
+<p class="fm-design-note" hidden>Le vert et le motif botanique identifient la menthe au premier regard.</p>
+<div class="fm-actions"><button type="button" data-fm-wrap aria-pressed="false">Voir le produit</button><button type="button" data-fm-image="menthe" data-fm-title="Eau de menthe pouliot">Voir le mockup</button></div>
+<div class="fm-rotate" hidden><label>Tourner le produit <input type="range" min="-180" max="180" value="0" aria-label="Angle de rotation de Eau de menthe pouliot"></label></div>
+</section>
+<section class="fm-leaf fm-range" hidden><div class="fm-heading"><h2>La gamme</h2></div><img src="./assets/projects/fait-maison/cover.webp" alt="Saveurs du terroir et eaux florales Fait Maison" loading="lazy" decoding="async"><div class="fm-gallery"><button class="fm-plate" type="button" data-fm-image="bsissa" data-fm-title="Bsissa d’orge aux herbes"><img src="./assets/projects/fait-maison/bsissa.webp" alt="Bsissa d’orge aux herbes" loading="lazy" decoding="async"><span>Bsissa d’orge aux herbes</span></button><button class="fm-plate" type="button" data-fm-image="beurre-scene" data-fm-title="Beurre de cacahuète"><img src="./assets/projects/fait-maison/beurre-scene.webp" alt="Beurre de cacahuète" loading="lazy" decoding="async"><span>Beurre de cacahuète</span></button></div></section>
+</div>
+<nav class="fm-navigation" aria-label="Pages de Fait Maison"><button type="button" data-fm-step="-1" aria-label="Page précédente" disabled>←</button><output aria-live="polite" aria-label="Page actuelle">01 / 13</output><button type="button" data-fm-step="1" aria-label="Page suivante">→</button></nav>
+<dialog class="herb-dialog fm-dialog" aria-labelledby="fm-preview-title"><div class="herb-dialog-bar"><h2 id="fm-preview-title"></h2><button class="herb-close" type="button" aria-label="Fermer" autofocus>×</button></div><div class="fm-stage"><img alt=""></div><div class="fm-zoom"><button type="button" aria-pressed="false">Zoom +</button></div></dialog>
 </article>`;
  const book=$('.fm-book',detail);
+ const leaves=$('.fm-leaves',book);
+ const pages=$$('.fm-leaf',leaves);
+ const nav=$('.fm-navigation',book);
+ const steps=$$('[data-fm-step]',nav);
  const dialog=$('.fm-dialog',book);
  const stage=$('.fm-stage',dialog);
- const visual=$('.fm-stage-image',dialog);
- const title=$('#fm-preview-title',dialog);
- const modes=$$('[data-fm-mode]',dialog);
- const products=[["Caviar d’artichaut","duo","caviar","#e8ead1"],["Épice de poulet","duo","poulet","#f3d6bd"],["Beurre de cacahuète","beurre","beurre","#f6e1c4"],["Eau de géranium","geranium","geranium","#f3dce4"],["Eau de fleur d’oranger","oranger","oranger","#f8e5cc"],["Eau de menthe pouliot","menthe","menthe","#e2ebd7"]];
- let opener, previousOverflow, selected;
- function showImage(file, description, kind){
-  stage.className='fm-stage is-'+kind;
-  stage.scrollTop=0;
-  stage.scrollLeft=0;
-  visual.src='./assets/projects/fait-maison/'+file+'.webp';
-  visual.alt=description;
-  modes.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.fmMode===kind)));
+ const zoom=$('.fm-zoom button',dialog);
+ let current=0, swipeStart, opener, oldOverflow;
+ function turn(step){
+  const next=current+step;
+  if(dialog.open||next<0||next>=pages.length)return;
+  pages[current].hidden=true;
+  pages[current].classList.remove('is-turning');
+  current=next;
+  const page=pages[current];
+  page.style.setProperty('--fm-turn',step>0?'-34deg':'34deg');
+  page.hidden=false;
+  page.classList.add('is-turning');
+  steps[0].disabled=current===0;
+  steps[1].disabled=current===pages.length-1;
+  $('output',nav).textContent=(current+1).toString().padStart(2,'0')+' / '+pages.length;
+  if(document.activeElement?.disabled){
+   steps[current===0?1:0].focus({preventScroll:true});
+  }
+  if(book.getBoundingClientRect().top<0)book.scrollIntoView({block:'start'});
  }
- function showProduct(mode){
-  const [name,mock,label]=selected;
-  const isMock=mode==='mock';
-  const description=isMock&&mock==='duo'?'Mockup du duo Caviar d’artichaut et Épice de poulet':name;
-  showImage(isMock?mock:'label-'+label,description,mode);
-  if(!isMock&&['caviar','poulet','beurre'].includes(label))stage.classList.add('is-wrap');
- }
- function openPreview(button,heading,kind){
+ steps.forEach(button=>button.addEventListener('click',()=>turn(Number(button.dataset.fmStep))));
+ leaves.addEventListener('pointerdown',event=>{
+  if(event.target.closest('.fm-model,input'))return;
+  swipeStart={x:event.clientX,y:event.clientY,id:event.pointerId};
+ });
+ leaves.addEventListener('pointerup',event=>{
+  if(swipeStart?.id!==event.pointerId)return;
+  const x=event.clientX-swipeStart.x,y=event.clientY-swipeStart.y;
+  swipeStart=null;
+  if(Math.abs(x)>55&&Math.abs(x)>1.5*Math.abs(y)){
+   const preventGhost=e=>{e.preventDefault();e.stopPropagation()};
+   // A swipe can end on a zoom button. The click canceller expires this frame.
+   leaves.addEventListener('click',preventGhost,true);
+   setTimeout(()=>leaves.removeEventListener('click',preventGhost,true),0);
+   turn(x<0?1:-1);
+  }
+ });
+ leaves.addEventListener('pointercancel',()=>{swipeStart=null});
+ $$('[data-fm-image]',book).forEach(button=>button.addEventListener('click',()=>{
   opener=button;
-  title.textContent=heading;
-  dialog.dataset.kind=kind;
-  previousOverflow=document.body.style.overflow;
+  const visual=$('img',stage);
+  visual.src='./assets/projects/fait-maison/'+button.dataset.fmImage+'.webp';
+  visual.alt=button.dataset.fmTitle;
+  $('#fm-preview-title',dialog).textContent=button.dataset.fmTitle;
+  stage.classList.remove('is-zoom');
+  zoom.setAttribute('aria-pressed','false');
+  zoom.textContent='Zoom +';
+  oldOverflow=document.body.style.overflow;
   dialog.showModal();
   document.body.style.overflow='hidden';
- }
- $$('[data-fm-product]',book).forEach(button=>button.addEventListener('click',()=>{
-  selected=products[Number(button.dataset.fmProduct)];
-  showProduct('mock');
-  openPreview(button,selected[0],'product');
  }));
- $$('[data-fm-art]',book).forEach(button=>button.addEventListener('click',()=>{
-  showImage(button.dataset.fmArt,button.dataset.fmTitle,'art');
-  openPreview(button,button.dataset.fmTitle,'art');
- }));
- modes.forEach(button=>button.addEventListener('click',()=>showProduct(button.dataset.fmMode)));
+ zoom.addEventListener('click',()=>{
+  const active=stage.classList.toggle('is-zoom');
+  zoom.setAttribute('aria-pressed',String(active));
+  zoom.textContent=active?'Vue entière':'Zoom +';
+ });
  $('.herb-close',dialog).addEventListener('click',()=>dialog.close());
  dialog.addEventListener('close',()=>{
-  document.body.style.overflow=previousOverflow;
+  document.body.style.overflow=oldOverflow;
   opener.focus({preventScroll:true});
  });
- releaseHerbSheets=stackHerbSheets(book);
+ $$('.fm-product-page',book).forEach(setupFaitMaisonProduct);
+}
+function setupFaitMaisonProduct(page){
+ const canvas=$('.fm-transform',page);
+ const model=$('.fm-model',canvas);
+ const spin=$('.fm-spin',model);
+ const flat=$('.fm-flat',canvas);
+ const artwork=$('img',flat);
+ const wrap=$('[data-fm-wrap]',page);
+ const rotation=$('.fm-rotate',page);
+ const range=$('input',rotation);
+ const point=$('.fm-point',canvas);
+ const note=$('.fm-design-note',page);
+ const bottle=canvas.dataset.shape==='bottle';
+ let angle=0, drag;
+ function face(kind,deg,radius,width){
+  const el=document.createElement('span');
+  el.className='fm-face is-'+kind;
+  el.style.cssText='--fm-face-angle:'+deg+'deg;--fm-z:'+radius+'px;--fm-strip:'+width+'px';
+  spin.append(el);
+  return el;
+ }
+ function buildModel(){
+  const strips=24;
+  const radius=bottle?46:67;
+  const width=2*radius*Math.tan(Math.PI/strips)+.3;
+  const capRadius=bottle?24:69;
+  canvas.style.setProperty('--fm-ratio',artwork.naturalWidth/artwork.naturalHeight||4.88);
+  for(let i=0;i<strips;i++){
+   const deg=(i-(strips-1)/2)*360/strips;
+   face('body',deg,radius,width);
+   face('cap',deg,capRadius,2*capRadius*Math.tan(Math.PI/strips)+.3);
+   if(bottle){
+    face('shoulder',deg,34,2*34*Math.tan(Math.PI/strips)+.3);
+   }
+   const panelCount=bottle?6:strips;
+   const index=i-(strips-panelCount)/2;
+   if(index>=0&&index<panelCount){
+    const panel=face('label',deg,radius+.7,width);
+    panel.style.setProperty('--fm-sample',index/(panelCount-1)*100+'%');
+    panel.style.setProperty('--fm-flat-x',(index-(panelCount-1)/2)*width+'px');
+   }
+  }
+  face('cap-top',0,capRadius,0);
+ }
+ function rotate(value){
+  angle=((value+180)%360+360)%360-180;
+  range.value=angle;
+  spin.style.setProperty('--fm-angle',angle+'deg');
+  spin.style.setProperty('--fm-glint-x',50+28*Math.sin(angle*Math.PI/180)+'%');
+ }
+ wrap.addEventListener('click',()=>{
+  const reveal=model.hidden;
+  if(reveal&&!spin.childElementCount)buildModel();
+  rotate(0);
+  model.hidden=!reveal;
+  flat.hidden=reveal;
+  rotation.hidden=!reveal;
+  wrap.setAttribute('aria-pressed',String(reveal));
+  wrap.textContent=reveal?'Étiquette':'Voir le produit';
+ });
+ point.addEventListener('click',()=>{
+  note.hidden=!note.hidden;
+  point.setAttribute('aria-expanded',String(!note.hidden));
+ });
+ range.addEventListener('input',()=>rotate(Number(range.value)));
+ model.addEventListener('pointerdown',event=>{
+  drag={id:event.pointerId,x:event.clientX,angle};
+  model.setPointerCapture(event.pointerId);
+ });
+ model.addEventListener('pointermove',event=>{
+  if(drag?.id===event.pointerId)rotate(drag.angle+(event.clientX-drag.x)*1.25);
+ });
+ model.addEventListener('lostpointercapture',()=>{drag=null});
 }
 function openProject(i){
  releaseHerbSheets?.();
