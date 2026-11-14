@@ -348,7 +348,9 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="./forceclean-native.css?v=19">
+<link rel="stylesheet" href="./metallux-native.css?v=20">
 <script src="./forceclean-native.js?v=19" defer></script>
+<script src="./metallux-native.js?v=20" defer></script>
 <script defer>
 (()=>{
 'use strict';
@@ -824,6 +826,7 @@ function openProject(i){
  if(p.id==='herbtresor'){renderHerbBook();switchView('detail');return;}
  if(p.id==='fait-maison'){renderFaitMaisonBook();switchView('detail');return;}
  if(p.id==='forceclean'){renderForceCleanBook();switchView('detail');return;}
+ if(p.id==='metallux'){renderMetalluxBook();switchView('detail');return;}
  $('#detailContent').innerHTML=`<div class="sommaire-detail" style="--project-color:${p.theme};--project-paper:${p.paper}"><div class="sommaire-detail-cover sommaire-cover-${p.sprite}" aria-hidden="true"></div><span>ÉDITION ${String(currentProject+1).padStart(2,'0')}</span><h2>${p.name}</h2><p>Page du projet à compléter après validation du Sommaire.</p><div class="sommaire-detail-next">Cover · Mini charte graphique · Logo · Couleurs · Typographies · Project Goal · Design Decision · Mockups</div></div>`;
  switchView('detail');
 }
@@ -833,6 +836,13 @@ function renderForceCleanBook(){
  const detail=document.querySelector('#detailContent');
  if(typeof window.renderForceCleanNative==='function') window.renderForceCleanNative(detail);
  else detail.textContent='ForceClean : le chapitre interactif est momentanément indisponible.';
+}
+
+/* MÉTALLUX · original graphic charter, immersive metal edition. */
+function renderMetalluxBook(){
+ const detail=document.querySelector('#detailContent');
+ if(typeof window.renderMetalluxNative==='function') window.renderMetalluxNative(detail);
+ else detail.textContent='MÉTALLUX : le chapitre interactif est momentanément indisponible.';
 }
 
 function renderLogos(){const works=[{name:'Élya Natura',mark:'é.',color:'#294936',paper:'#E5EBE2'},{name:'MÉTALLUX',mark:'M',color:'#122E45',paper:'#E4EDF3'},{name:'ForceClean',mark:'FC',color:'#0D6197',paper:'#E4F2FA'},{name:'TrackSolid Pro',mark:'T',color:'#0077AD',paper:'#E7F6FE'},{name:'Logo explorations',mark:'✳',color:'#A42E48',paper:'#F7E3EB'},{name:'Letterform studies',mark:'em.',color:'#553169',paper:'#EEE3F6'}];
