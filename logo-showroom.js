@@ -5,6 +5,7 @@ const ITEMS=[{"name":"Élya Natura","slug":"elya-natura","category":"Nature","sr
 const CATEGORIES=['Tout','Nature','Food','Industrie','Média','Immobilier','Mode','Luxe','Lifestyle','Identité'];
 const safe=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
 const asset=p=>'./'+p;
+const arrowSVG='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg>';
 window.mountLogoShowroom=function(view){
  if(!view||view.dataset.logoGalleryMounted==='true')return;
  view.dataset.logoGalleryMounted='true';
@@ -27,8 +28,8 @@ window.mountLogoShowroom=function(view){
  function tile(it,index){
   const caption=it.board?'Voir la charte graphique':'Agrandir le logo';
   return `<button type="button" class="lg-logo" data-lg-item="${safe(it.slug)}" style="--lg-accent:${it.accent};--lg-soft:${it.soft};--lg-order:${Math.min(index,9)}" aria-label="${safe(it.name)} · ${caption}">
-   <span class="lg-logo-stage"><img src="${asset(it.src||it.board)}" alt="Logo ${safe(it.name)}" loading="${index<6?'eager':'lazy'}" decoding="async"><span class="lg-zoom-icon" aria-hidden="true">↗</span></span>
-   <span class="lg-logo-meta"><span><strong>${safe(it.name)}</strong><small>${safe(it.category)}</small></span>${it.board?'<span class="lg-logo-label">CHARTE ↗</span>':'<span class="lg-logo-dot" aria-hidden="true">↗</span>'}</span>
+   <span class="lg-logo-stage"><img src="${asset(it.src||it.board)}" alt="Logo ${safe(it.name)}" loading="${index<6?'eager':'lazy'}" decoding="async"><span class="lg-zoom-icon" aria-hidden="true">${arrowSVG}</span></span>
+   <span class="lg-logo-meta"><span><strong>${safe(it.name)}</strong><small>${safe(it.category)}</small></span>${it.board?'<span class="lg-logo-label">CHARTE</span>':''}</span>
   </button>`;
  }
  function renderGallery(){
