@@ -1,5 +1,5 @@
-const CACHE='em-editions-v35-transparent-logo-gallery';
-const CORE=['./index.html?v=35','./manifest.webmanifest','./app-icon.svg','./assets/projects/sommaire-covers.webp','./forceclean-native.css?v=30','./forceclean-native.js?v=19','./metallux-native.css?v=25','./metallux-native.js?v=29','./metallux-industrial.css?v=30','./metallux-studio.js?v=29','./metallux-garment3d.js?v=29','./logo-showroom.css?v=34','./logo-showroom.js?v=35','./assets/projects/metallux/native/logo-black-transparent.webp'];
+const CACHE='em-editions-v36-creative-pages';
+const CORE=['./index.html?v=36','./manifest.webmanifest','./app-icon.svg','./assets/projects/sommaire-covers.webp','./forceclean-native.css?v=30','./forceclean-native.js?v=19','./metallux-native.css?v=25','./metallux-native.js?v=29','./metallux-industrial.css?v=30','./metallux-studio.js?v=29','./metallux-garment3d.js?v=29','./logo-showroom.css?v=34','./logo-showroom.js?v=35','./creative-editorial.css?v=1','./creative-editorial.js?v=1','./assets/projects/metallux/native/logo-black-transparent.webp'];
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
 });
@@ -10,7 +10,7 @@ self.addEventListener('fetch',event=>{
  const req=event.request;
  if(req.method!=='GET'||new URL(req.url).origin!==self.location.origin)return;
  if(req.mode==='navigate'){
-  event.respondWith(fetch(new Request(req,{cache:'reload'})).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put('./index.html?v=35',copy));}return res;}).catch(()=>caches.match('./index.html?v=35')));
+  event.respondWith(fetch(new Request(req,{cache:'reload'})).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put('./index.html?v=36',copy));}return res;}).catch(()=>caches.match('./index.html?v=36')));
   return;
  }
  event.respondWith(fetch(req).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put(req,copy));}return res;}).catch(()=>caches.match(req)));
