@@ -1,0 +1,186 @@
+/* MÉTALLUX • Steel Atelier / independent art direction, v26 */
+.detail-view:has(.mx-book){background:#e9ecf0}
+.mx-book{
+ --mx-ice:#e9edf1;--mx-graphite:#111c29;--mx-blue:#0066ff;
+ background:#e9edf1;color:#12243c;
+}
+.mx-book .mx-section{overflow:clip}
+.mx-book .mx-section h1,.mx-book .mx-section h2{letter-spacing:-.07em}
+.mx-book .mx-eyebrow{letter-spacing:.19em;font-weight:800}
+/* Architectural cover: concrete paper, a brushed-metal diagonal and blueprint lines. */
+.mx-book .mx-hero{
+ color:#0b213c;
+ background:
+  repeating-linear-gradient(90deg,transparent 0,transparent 64px,#1a466d14 65px,#1a466d14 66px),
+  repeating-linear-gradient(0deg,transparent 0,transparent 64px,#1a466d13 65px,#1a466d13 66px),
+  radial-gradient(ellipse 72% 62% at 79% 22%,#ffffff 0%,transparent 80%),
+  linear-gradient(133deg,#f5f5f3 0%,#d7e2eb 55%,#a7b4c3 100%);
+ padding:clamp(90px,11vw,145px) 0 clamp(50px,7vw,83px);
+ min-height:min(840px,96svh);
+}
+.mx-book .mx-hero::before{
+ background:linear-gradient(132deg,transparent 51%,#fff8 54%,#ffffff0d 54.7%,transparent 60%),
+ repeating-linear-gradient(112deg,transparent 0 21px,#426c8c09 22px,transparent 24px 41px);
+ opacity:.9;animation:mx-industrial-sweep 17s ease-in-out infinite alternate;
+ mix-blend-mode:multiply;
+}
+.mx-book .mx-hero::after{
+ background:linear-gradient(156deg,transparent 67%,#001c38 67.2%,#001c38 74%,#0066ff 74.1%,#0066ff 75%,transparent 75.1%);
+ opacity:.98;pointer-events:none;
+}
+.mx-book .mx-hero .mx-inner{z-index:2}
+.mx-book .mx-hero h1{color:#082447;font-weight:660;text-transform:uppercase;font-family:'Montserrat',Arial,sans-serif;font-size:clamp(46px,10.4vw,104px);line-height:.93}
+.mx-book .mx-hero h1 em{color:#0066ff;font-size:.86em;text-transform:none;letter-spacing:-.055em}
+.mx-book .mx-hero .mx-eyebrow{color:#0066a9}
+.mx-book .mx-hero-intro{color:#304b65;font-size:clamp(12px,1.2vw,15px);line-height:1.7}
+.mx-book .mx-hero-rule{color:#174872;font-size:10px;line-height:1.5}
+.mx-book .mx-hero-rule::before{background:#0066ff}
+.mx-book .mx-book-object{max-width:430px;filter:drop-shadow(24px 32px 22px #12243c50);animation:mx-industrial-float 7s ease-in-out infinite alternate}
+.mx-book .mx-book-object img{mask-image:none;clip-path:polygon(7% 4%,96% 0,97% 96%,4% 100%);box-shadow:1px 2px 8px #001f4d55}
+.mx-book .mx-hero-aura{background:radial-gradient(ellipse at 52% 50%,#ffffffaa,transparent 65%)}
+.mx-industrial-stamp{display:flex;align-items:center;gap:8px;margin:22px 0 0;color:#0066ff;font-size:10px;font-weight:850;letter-spacing:.18em}
+.mx-industrial-stamp::before{content:"";width:32px;height:4px;background:#0066ff;box-shadow:0 6px 0 #0c2d50}
+/* Navigation as a stamped industrial strip. */
+.mx-book .mx-chapter-nav{top:64px;padding:9px 16px;background:#18232eeb;border-bottom:2px solid #4a667f;box-shadow:0 4px 18px #071b292c}
+.mx-book .mx-chapter-nav a{border-radius:3px;color:#d9e3ec;font-size:10px;letter-spacing:.04em}
+.mx-book .mx-chapter-nav a[aria-current="location"]{background:#0066ff;border-color:#258cfe;color:#fff}
+/* Alternating architectural editorial sections instead of ForceClean's water-gradients. */
+.mx-book .mx-art{
+ color:#0a273f;background:
+ repeating-linear-gradient(90deg,transparent 0 89px,#0b325712 90px),
+ linear-gradient(165deg,#f4f5f4,#dbe2e8 70%,#ecf0f4);
+ padding:clamp(70px,9vw,112px) 0 94px;
+}
+.mx-book .mx-art::before{background:linear-gradient(125deg,transparent 0 63%,#0066ff11 63.2% 64%,transparent 64.1%);animation:none}
+.mx-book .mx-art h2{color:#102a45}
+.mx-book .mx-art h2 em{color:#0861b4}
+.mx-book .mx-art .mx-eyebrow{color:#0557a2}
+.mx-book .mx-art-head>p{color:#39556b}
+.mx-book .mx-photo-grid{gap:7px;grid-template-rows:300px 245px}
+.mx-book .mx-photo,.mx-book .mx-photo-strip .mx-photo{border-radius:0;clip-path:polygon(0 0,100% 0,100% 94%,94% 100%,0 100%);box-shadow:inset 0 0 0 1px #aec1d6}
+.mx-book .mx-photo-strip{gap:7px;margin-top:7px}
+.mx-book .mx-photo::after{background:linear-gradient(transparent 52%,#051a30b5)}
+/* Signature on raw stone instead of a glossy card. */
+.mx-book .mx-assembly{
+ background:
+ linear-gradient(90deg,#fff1 1px,transparent 1px) 0 0/52px 52px,
+ linear-gradient(0deg,#fff1 1px,transparent 1px) 0 0/52px 52px,
+ radial-gradient(ellipse 85% 75% at 75% 35%,#243c52,#101d2b 75%);
+ color:#edf5fb;
+}
+.mx-book .mx-assembly::after{background:linear-gradient(119deg,transparent 17%,#d0dee40d 39%,transparent 51%),linear-gradient(90deg,#0005,transparent);pointer-events:none}
+.mx-book .mx-assembly .mx-eyebrow,.mx-book .mx-assembly-head h2 em{color:#7cc6ff}
+.mx-book .mx-assembly-head h2{color:#fff}
+.mx-book .mx-assembly-head p{color:#c1ceda}
+.mx-book .mx-logo-display{max-width:920px;min-height:clamp(210px,39vw,390px);padding:clamp(12px,3vw,35px);background:linear-gradient(154deg,#f7f8fa 0%,#cfdbe5 100%);clip-path:polygon(0 0,100% 0,100% 94%,96% 100%,0 100%);border-left:4px solid #0066ff;box-shadow:0 27px 50px #0005}
+.mx-book .mx-logo-display::before{background:none;filter:none}
+.mx-book .mx-logo-display img{width:100%;max-width:820px;max-height:340px;height:auto;object-fit:contain;transform:none!important;filter:drop-shadow(0 3px 4px #223d5914)}
+.mx-book .mx-logo-display[data-mode=dark]{background:#071c36;border:1px solid #48789f;box-shadow:0 23px 42px #0006}
+.mx-book .mx-logo-controls button{font-size:10px;border-radius:4px;background:#ffffff1b;color:#e8f1fa;border:1px solid #8aa3bb;min-height:43px}
+.mx-book .mx-logo-controls button[aria-pressed=true]{background:#0066ff;color:#fff;border-color:#58aaff}
+.mx-book .mx-concept-row{border-color:#87a3b65e;max-width:830px;gap:26px;grid-template-columns:minmax(90px,.27fr) 1fr}
+.mx-book .mx-concept-row p{color:#bdcddd;font-size:13px}
+.mx-book .mx-concept-row strong{color:#fff}
+.mx-book .mx-concept-row img{background:#e8eef4;mix-blend-mode:normal;padding:9px;width:100%;object-fit:contain;max-width:195px;clip-path:polygon(0 0,100% 0,100% 85%,87% 100%,0 100%)}
+/* Material samples in a steel cutting table. */
+.mx-book .mx-colors{background:
+ repeating-linear-gradient(107deg,#ffffff1b 0 1px,transparent 1px 16px),
+ linear-gradient(135deg,#8b9ba9,#e2e8eb 24%,#c4cfd8 70%,#aab9c4);
+ color:#0a2742;}
+.mx-book .mx-colors h2{color:#071c38}
+.mx-book .mx-colors h2 em{color:#005ad2}
+.mx-book .mx-colors-intro{color:#35546c}
+.mx-book .mx-colors .mx-eyebrow{color:#004f9d}
+.mx-book .mx-swatch strong{color:#0a2742}
+.mx-book .mx-swatch code{color:#124776}
+.mx-book .mx-type{border-color:#7c9aaf}
+.mx-book .mx-type-title{background:linear-gradient(#0a3669,#243b56);background-clip:text;-webkit-background-clip:text;color:transparent}
+.mx-book .mx-type-caption{color:#34536b}
+/* Applications on anthracite with an industrial staging treatment. */
+.mx-book .mx-application{
+ background:
+ repeating-linear-gradient(126deg,transparent 0 48px,#ffffff06 49px,transparent 50px 85px),
+ radial-gradient(ellipse at 23% 55%,#163d67 0%,transparent 66%),
+ #0d1724;
+}
+.mx-book .mx-application::before{background:linear-gradient(140deg,transparent 10%,#fff1 24%,transparent 25%);opacity:.5}
+.mx-book .mx-application-head h2 em,.mx-book .mx-uniform-layout h3 em{color:#84c6ff}
+.mx-book .mx-flip-stage::before{background:#0066ff4a}
+.mx-book .mx-card-flipper{filter:none}
+.mx-book .mx-card-flipper .mx-card-side img{filter:drop-shadow(0 25px 15px #0008)}
+.mx-book .mx-card-toggle{border-radius:4px;background:#0066ff;border-color:#137efc}
+.mx-book .mx-uniform-layout img{filter:drop-shadow(0 8px 20px #0007)}
+/* Additional 3D workshop. */
+.mx-showroom{padding:clamp(62px,9vw,110px) 0;background:#edf1f4;color:#0d2338;position:relative;overflow:hidden}
+.mx-showroom::before{content:"";position:absolute;inset:0;pointer-events:none;background:
+ repeating-linear-gradient(90deg,transparent 0 67px,#173a5c16 68px,transparent 69px 135px),
+ repeating-linear-gradient(0deg,transparent 0 67px,#173a5c13 68px,transparent 69px 135px);opacity:.6}
+.mx-showroom .mx-inner{z-index:1}
+.mx-showroom .mx-eyebrow{color:#0058ad}
+.mx-showroom-heading{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:end;margin:0 0 27px}
+.mx-showroom h2{font-family:var(--mx-sans);color:#0e2a49;font-size:clamp(42px,9vw,84px);text-transform:uppercase;line-height:.97;margin:14px 0 0}
+.mx-showroom h2 em{font-size:.75em;color:#005bd0;text-transform:none}
+.mx-showroom-heading p{max-width:30ch;color:#4a6175;font-size:13px;line-height:1.7}
+.mx-showroom-grid{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:0;background:#122238;box-shadow:20px 28px 36px #19334b24}
+.mx-viewport{position:relative;min-width:0;min-height:clamp(390px,53vw,650px);overflow:hidden;background:
+ radial-gradient(ellipse 48% 53% at 52% 41%,#3f6688 0%,transparent 80%),
+ repeating-linear-gradient(90deg,transparent 0 60px,#fff1 61px,transparent 62px 121px),
+ linear-gradient(135deg,#102b46,#071522);}
+.mx-viewport canvas{position:absolute;inset:0;display:block;width:100%;height:100%;touch-action:pan-y;cursor:grab}
+.mx-viewport canvas:active{cursor:grabbing}
+.mx-viewport::after{content:"";position:absolute;pointer-events:none;inset:0;background:linear-gradient(90deg,#001a3124,transparent 24%,transparent 78%,#001a3150),linear-gradient(0deg,#0317255a,transparent 18%);}
+.mx-viewport-note{position:absolute;left:21px;top:19px;z-index:3;font-size:10px;font-weight:800;color:#cbeeff;letter-spacing:.17em}
+.mx-viewport-orbit{position:absolute;z-index:3;pointer-events:none;right:20px;top:20px;display:grid;place-items:center;width:56px;height:56px;border:1px solid #7ec7e86b;border-radius:50%;color:#e8f8ff;font:500 12px var(--mx-sans)}
+.mx-viewport-orbit::before{content:"";position:absolute;inset:7px;border-radius:50%;border:1px dashed #a5dcff70;animation:mx-industrial-orbit 19s linear infinite}
+.mx-viewport-fallback{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:40px 25px;color:#d0dfed}
+.mx-viewport-fallback img{max-width:100%;width:min(76%,420px);max-height:360px;height:auto;object-fit:contain;filter:drop-shadow(0 22px 15px #0008)}
+.mx-viewport-fallback p{margin:12px auto;max-width:36ch;font-size:12px;line-height:1.7}
+.mx-garment-toolbar{display:flex;flex-direction:column;justify-content:space-between;padding:27px 21px;background:linear-gradient(156deg,#152b43,#0b182b);border-left:1px solid #6794ba55;color:#eaf6ff}
+.mx-garment-toolbar .mx-identity{color:#91b0c8;font-size:10px;letter-spacing:.15em}
+.mx-garment-toolbar h3{font-size:clamp(23px,3vw,33px);line-height:1.1;font-weight:600;margin:9px 0 9px;color:white}
+.mx-garment-toolbar p{color:#a9c3d9;font-size:12px;line-height:1.7;margin:0 0 18px}
+.mx-garment-buttons{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.mx-garment-buttons button,.mx-auto-btn,.mx-reset-btn{font:700 11px var(--mx-sans);min-height:44px;border:1px solid #5882a6;background:#142f4a;color:#e9f8ff;padding:12px 9px;cursor:pointer;border-radius:2px}
+.mx-garment-buttons button[aria-pressed=true]{background:#0066ff;color:#fff;border-color:#3693ff}
+.mx-auto-btn,.mx-reset-btn{width:100%;margin-top:9px;text-align:left;padding-left:13px}
+.mx-garment-slider{margin:22px 0;display:grid;gap:11px}
+.mx-garment-slider label{font:700 10px var(--mx-sans);letter-spacing:.1em;color:#bbd4e9;display:flex;justify-content:space-between;align-items:center}
+.mx-garment-slider input{accent-color:#3aaaff;width:100%;cursor:pointer}
+.mx-garment-footnote{font-size:10px!important;color:#aec3d3!important;margin:20px 0 0!important}
+.mx-studio-bottom{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;border-top:1px solid #9fb0c1;padding-top:15px;margin-top:24px;color:#45657f;font-size:10px}
+.mx-book .mx-end{background:linear-gradient(135deg,#091c30,#0b2a4d)}
+/* Light interaction: metals tilt and the canvas breathes, never noisy water ripples. */
+@keyframes mx-industrial-sweep{from{transform:translateX(-2%) scale(1)}to{transform:translateX(3%) scale(1.03)}}
+@keyframes mx-industrial-float{from{transform:translateY(5px) rotateY(-8deg) rotateZ(1deg)}to{transform:translateY(-8px) rotateY(1deg) rotateZ(-.7deg)}}
+@keyframes mx-industrial-orbit{to{transform:rotate(360deg)}}
+@media(max-width:760px){
+ .mx-showroom-grid{grid-template-columns:1fr}
+ .mx-viewport{min-height:clamp(400px,123vw,570px)}
+ .mx-garment-toolbar{border-left:0;border-top:1px solid #51749555;padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:10px 22px}
+ .mx-garment-toolbar .mx-controls-title{grid-column:1/3}
+ .mx-garment-toolbar .mx-garment-slider{margin:2px 0;align-self:center}
+ .mx-garment-toolbar .mx-controls-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;grid-column:1/3}
+ .mx-auto-btn,.mx-reset-btn{margin:0}
+ .mx-garment-toolbar .mx-garment-buttons{grid-column:1/3}
+ .mx-garment-footnote{grid-column:1/3;margin:4px 0 0!important}
+ .mx-showroom-heading{grid-template-columns:1fr;gap:10px}
+ .mx-showroom-heading p{max-width:55ch}
+ .mx-book .mx-hero{padding-top:80px;min-height:auto}
+ .mx-book .mx-hero-grid{gap:16px}
+ .mx-book .mx-hero::after{opacity:.5}
+ .mx-book .mx-photo-grid{grid-template-rows:210px 185px}
+ .mx-book .mx-art,.mx-book .mx-assembly{padding-block:60px}
+ .mx-book .mx-concept-row{grid-template-columns:110px minmax(0,1fr);gap:12px}
+ .mx-book .mx-logo-display{min-height:180px;padding:15px 8px;max-width:100%}
+ .mx-book .mx-logo-display img{width:100%;max-width:100%;height:auto;max-height:240px;object-fit:contain}
+ .mx-book .mx-logo-controls button{font-size:9px;padding:10px}
+}
+@media(max-width:390px){
+ .mx-showroom{padding:52px 0}
+ .mx-viewport{min-height:390px}
+ .mx-book .mx-concept-row{grid-template-columns:1fr}
+ .mx-book .mx-concept-row img{max-width:180px}
+ .mx-book .mx-hero h1{font-size:clamp(44px,11vw,62px)}
+ .mx-garment-toolbar{column-gap:12px}
+}
+@media(prefers-reduced-motion:reduce){.mx-book .mx-hero::before,.mx-book .mx-book-object,.mx-viewport-orbit::before{animation:none!important}}
