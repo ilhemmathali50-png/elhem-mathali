@@ -51,9 +51,8 @@ window.renderForceCleanNative=function renderForceCleanNative(detail){
   </div>
  </div></section>
  <section class="fc-section fc-type" id="fc-type" data-fc-chapter="type"><div class="fc-inner">
-  <header class="fc-section-header fc-reveal"><span class="fc-eyebrow">04 / TYPE & GRAPHIC LANGUAGE</span><h2>Une identité<br><em>qui respire.</em></h2><p>Une typographie claire et des formes qui évoquent l’eau en mouvement.</p></header>
+  <header class="fc-section-header fc-reveal"><span class="fc-eyebrow">04 / TYPOGRAPHIE</span><h2>Une identité<br><em>qui respire.</em></h2><p>Deux typographies complémentaires pour une identité claire et lisible.</p></header>
   <div class="fc-type-pair fc-reveal"><div class="fc-type-item montserrat"><span class="fc-letter">Aa</span><h3>Montserrat</h3><p>Pour les titres, affirmés et lisibles.</p></div><div class="fc-type-item poppins"><span class="fc-letter">Aa</span><h3>Poppins</h3><p>Pour les informations essentielles.</p></div></div>
-  <div class="fc-elements fc-reveal"><span class="fc-element-wave" aria-hidden="true"></span><span>Ondulations &amp; courbes</span><span class="fc-element-bubble" aria-hidden="true"></span><span>Bulles &amp; brillance</span><span aria-hidden="true">✳</span><span>Fraîcheur naturelle</span></div>
  </div></section>
  ${products.map(product).join('')}
  <section class="fc-product fc-product-deep" id="fc-ocean" data-fc-chapter="products"><div class="fc-inner">
