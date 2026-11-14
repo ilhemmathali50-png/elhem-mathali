@@ -92,3 +92,16 @@
 .mx-logo-display img{image-rendering:auto}
 @media(max-width:700px){.mx-concept-row{grid-template-columns:112px minmax(0,1fr);gap:17px}}
 @media(max-width:365px){.mx-concept-row{grid-template-columns:94px minmax(0,1fr);gap:13px}}
+
+/* mx-logo-clarity-fix-v25: preserve vector sharpness on iOS Safari and constrain the page to its viewport. */
+.detail-view:has(.mx-book),.mx-book,.mx-assembly,.mx-assembly .mx-inner{min-width:0;max-width:100%}
+.mx-assembly .mx-inner,.mx-assembly-head,.mx-concept-row{overflow-wrap:anywhere}
+.mx-book .mx-logo-display{display:flex;align-items:center;justify-content:center;min-width:0;width:100%;max-width:100%;overflow:hidden}
+.mx-book .mx-logo-display img{display:block;flex:0 1 auto;width:100%;min-width:0;max-width:850px;height:auto;max-height:none;object-fit:contain;image-rendering:auto}
+@media(max-width:700px),(hover:none){
+ .mx-book .mx-logo-display{min-height:0;perspective:none;transform:none}
+ .mx-book .mx-logo-display img{width:100%;max-width:100%;height:auto;max-height:none;transform:none!important;filter:none;will-change:auto}
+ .mx-book .mx-assembly-head p{max-width:100%;font-size:13px;line-height:1.7}
+ .mx-book .mx-concept-row{min-width:0}
+ .mx-book .mx-concept-row img{display:block;max-width:100%;height:auto}
+}
