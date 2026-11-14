@@ -345,62 +345,10 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 @media(prefers-reduced-motion:reduce){.client-review-capture{transition:none}}
 
 
-/* ForceClean / interactive water art book. Scoped to this project only. */
-.fc-book{--fc-ink:#e9faff;position:relative;isolation:isolate;overflow:hidden;max-width:820px;margin:0 auto 28px;padding:clamp(17px,3.8vw,36px);border:1px solid #4bb4ed80;border-radius:25px;color:var(--fc-ink);background:linear-gradient(155deg,#041b36 0%,#062f6b 35%,#064b9b 68%,#023159 100%);box-shadow:0 22px 55px #052c5a42}
-.fc-book:before,.fc-book:after{content:"";position:absolute;inset:-22%;pointer-events:none;z-index:-1}
-.fc-book:before{opacity:.63;background:radial-gradient(ellipse 48% 22% at 15% 14%,#05afe58c,transparent 90%),radial-gradient(ellipse 33% 32% at 83% 28%,#6cddff56,transparent 90%),radial-gradient(ellipse 56% 27% at 35% 73%,#0d94da5e,transparent 90%),radial-gradient(ellipse 45% 24% at 92% 96%,#26e2ff48,transparent 95%);filter:blur(16px);animation:fc-ambient 18s ease-in-out infinite alternate}
-.fc-book:after{opacity:.34;background:repeating-radial-gradient(ellipse at 24% 28%,transparent 0 39px,#a5f2ff65 42px,#00a9e900 48px),repeating-radial-gradient(ellipse at 83% 64%,transparent 0 60px,#a1ecff57 63px,#065baa00 70px);background-size:660px 690px,840px 810px;filter:blur(3px);mix-blend-mode:screen;animation:fc-caustics 24s linear infinite}
-.fc-water-orbit{position:absolute;z-index:-1;border:1px solid #b9f9ff7d;border-radius:50%;pointer-events:none;box-shadow:0 0 26px #40daff4b,0 0 5px #b7f7ff8c inset;animation:fc-orbit 11s ease-out infinite}
-.fc-water-orbit.one{width:200px;height:200px;top:12%;left:-95px}
-.fc-water-orbit.two{width:320px;height:320px;right:-200px;top:37%;animation-delay:-6s}
-.fc-water-orbit.three{width:270px;height:270px;bottom:9%;left:-150px;animation-delay:-3s}
-.fc-head{position:relative;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;padding:1px 0 24px;border-bottom:1px solid #bbe9ff55}
-.fc-edition{font:700 10px/1.5 var(--sans);letter-spacing:.14em;color:#adf0ff}
-.fc-water-badge{display:flex;align-items:center;gap:8px;font-size:10px;color:#dcfaff}
-.fc-water-badge:before{content:"";width:7px;height:7px;border-radius:50%;background:#72e3ff;box-shadow:0 0 14px #72e3ff}
-.fc-title{margin:28px 0 7px;font:700 clamp(38px,9vw,69px)/.99 'Montserrat',var(--sans);letter-spacing:-.055em;color:#fff}
-.fc-subtitle{margin:0 0 14px;font:italic 400 clamp(22px,5vw,30px)/1.2 var(--serif);color:#a8ecff}
-.fc-lead{max-width:52ch;margin:0 0 18px;color:#c4e5f1;font-size:12px;line-height:1.8}
-.fc-colors{display:flex;gap:7px;margin:0 0 21px}
-.fc-colors span{width:23px;height:6px;border-radius:30px;border:1px solid #ffffff47}
-.fc-sheet-frame{position:relative;margin:0 auto;padding:clamp(5px,1.3vw,10px);width:min(100%,670px);border-radius:13px;background:linear-gradient(130deg,#d4f7ff,#a7e0fa 30%,#fff 50%,#82bee6 90%);box-shadow:0 14px 33px #001c38a8,0 0 0 1px #b2e8ff61}
-.fc-sheet-frame:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;box-shadow:inset 0 1px #fff,inset 0 -2px #569ad0}
-.fc-image-button{display:block;width:100%;padding:0;overflow:hidden;border:0;border-radius:6px;background:#eefaff;cursor:zoom-in;touch-action:pan-y}
-.fc-image-button img{display:block;width:100%;aspect-ratio:4 / 5;object-fit:contain}
-.fc-sheet-top{width:min(100%,670px);display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:0 auto 12px}
-.fc-page-label{color:#d9f9ff;font-size:10px;font-weight:800;letter-spacing:.12em}
-.fc-page-title{color:#fff;font:400 clamp(17px,4vw,25px)/1.2 var(--serif);text-align:right}
-.fc-sheet-hint{margin:13px auto 0;max-width:670px;color:#b8e7f4;text-align:center;font-size:10px;letter-spacing:.02em}
-.fc-track{width:min(100%,670px);height:3px;margin:19px auto 12px;background:#f1fbff35;border-radius:99px;overflow:hidden}
-.fc-track span{display:block;width:10%;height:100%;background:linear-gradient(90deg,#56b63a,#53e3ff);border-radius:inherit;transition:width .35s ease}
-.fc-controls{display:flex;justify-content:space-between;align-items:center;gap:10px;max-width:670px;margin:0 auto}
-.fc-controls button{flex:0 1 145px;min-height:43px;padding:10px 14px;border:1px solid #b2e9ff8c;border-radius:999px;background:#e8faff12;color:#f2fdff;font:700 11px var(--sans)}
-.fc-controls button:hover:not(:disabled){background:#b7efff32}
-.fc-controls button:disabled{opacity:.28;cursor:default}
-.fc-controls output{font:700 12px var(--sans);font-variant-numeric:tabular-nums;letter-spacing:.15em;color:#d5f9ff}
-.fc-chapters-label{display:block;margin:27px 0 9px;color:#b7edff;text-transform:uppercase;font-size:9px;font-weight:800;letter-spacing:.15em}
-.fc-chapters{display:flex;gap:7px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:#7dd3ef80 transparent;padding:0 0 9px}
-.fc-chapters button{scroll-snap-align:start;flex:0 0 auto;max-width:155px;border:1px solid #9fdfff61;border-radius:11px;padding:11px 12px;background:#ffffff12;color:#dceffc;text-align:left;font:600 10px/1.5 var(--sans)}
-.fc-chapters button[aria-current="page"]{background:#e9faff;color:#063964;border-color:#fff}
-.fc-dialog{position:fixed;inset:0;margin:0;width:100vw;height:100dvh;max-width:none;max-height:none;border:0;padding:max(10px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));color:#f8fcff;background:#031c35}
-.fc-dialog::backdrop{background:#031c35f4}
-.fc-dialog[open]{display:grid;grid-template-rows:auto minmax(0,1fr);gap:10px}
-.fc-dialog-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.fc-dialog-top h3{font:400 clamp(18px,5vw,29px)/1.1 var(--serif);margin:0}
-.fc-dialog-actions{display:flex;gap:8px}
-.fc-dialog-actions button{min-height:42px;border:1px solid #acd8ed;border-radius:99px;padding:8px 13px;background:#143e61;color:#fff}
-.fc-dialog-actions .fc-dialog-close{min-width:42px;font-size:20px}
-.fc-dialog-stage{min-width:0;min-height:0;overflow:auto;display:grid;place-items:center}
-.fc-dialog-stage img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;box-shadow:0 8px 27px #000a}
-.fc-dialog.fc-zoomed .fc-dialog-stage{display:block}
-.fc-dialog.fc-zoomed .fc-dialog-stage img{width:155%;max-width:none;max-height:none;margin:0 auto}
-@keyframes fc-ambient{from{transform:translate(-3%,0) rotate(-3deg) scale(1)}to{transform:translate(5%,-3%) rotate(4deg) scale(1.09)}}
-@keyframes fc-caustics{from{background-position:0 0,0 0}to{background-position:110px 150px,-120px 180px}}
-@keyframes fc-orbit{0%{opacity:0;transform:scale(.72)}30%{opacity:.7}100%{opacity:0;transform:scale(1.34)}}
-@media(max-width:410px){.fc-book{padding:14px;border-radius:19px}.fc-title{font-size:38px}.fc-controls button{padding:10px;font-size:10px}.fc-water-badge{font-size:9px}}
-@media(prefers-reduced-motion:reduce){.fc-book:before,.fc-book:after,.fc-water-orbit{animation:none}.fc-water-orbit{opacity:.25}.fc-track span{transition:none}}
-
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="./forceclean-native.css?v=18">
+<script src="./forceclean-native.js?v=18" defer></script>
 <script defer>
 (()=>{
 'use strict';
@@ -880,85 +828,11 @@ function openProject(i){
  switchView('detail');
 }
 
-/* ForceClean / 10 original PDF pages with an interactive water background. */
+/* ForceClean native chapter. Full-bleed animated water and source artwork. */
 function renderForceCleanBook(){
- const detail=$('#detailContent');
- const pages=[
-  'Charte graphique','Le projet','Du croquis au logo','Le logo et ses usages',
-  'Palette couleurs','Typographies & univers graphique','Liquide vaisselle · 1,25 L',
-  'Savon liquide · 5 L','Air Fresh · Fraîcheur florale','Océan et textile'
- ];
- const number=i=>String(i+1).padStart(2,'0');
- const asset=i=>'./assets/projects/forceclean/page-'+number(i)+'.webp';
- detail.innerHTML='<article id="fcBook" class="fc-book" aria-label="ForceClean, charte graphique interactive">'
-  +'<span class="fc-water-orbit one" aria-hidden="true"></span><span class="fc-water-orbit two" aria-hidden="true"></span><span class="fc-water-orbit three" aria-hidden="true"></span>'
-  +'<div class="fc-head"><span class="fc-edition">THE CREATIVE EDITIONS / 03</span><span class="fc-water-badge">WATER INSPIRED IDENTITY</span></div>'
-  +'<h2 class="fc-title">ForceClean<span aria-hidden="true" style="color:#79dfff">.</span></h2>'
-  +'<p class="fc-subtitle">La fraîcheur prend forme.</p>'
-  +'<p class="fc-lead">Identité visuelle &amp; packaging. L’eau, les reflets et les courbes donnent du mouvement à une gamme de produits d’entretien. Les pages ci-dessous respectent la charte graphique originale.</p>'
-  +'<div class="fc-colors" aria-label="Palette ForceClean"><span style="background:#064B9B"></span><span style="background:#05AFE5"></span><span style="background:#062F6B"></span><span style="background:#56B63A"></span><span style="background:#FFFFFF"></span></div>'
-  +'<div class="fc-sheet-top"><span class="fc-page-label">ART BOOK / PAGE</span><span class="fc-page-title" id="fcPageTitle"></span></div>'
-  +'<div class="fc-sheet-frame" id="fcDisplay"><button class="fc-image-button" type="button" id="fcImageButton" aria-label="Agrandir la page de ForceClean"><img id="fcPageImage" alt="Couverture du livre ForceClean" width="648" height="810" decoding="async"></button></div>'
-  +'<p class="fc-sheet-hint">Touchez la page pour zoomer · Glissez pour feuilleter</p>'
-  +'<div class="fc-track" aria-hidden="true"><span id="fcProgress"></span></div>'
-  +'<div class="fc-controls"><button type="button" id="fcPrev">← Précédente</button><output id="fcCounter" aria-live="polite">01 / 10</output><button type="button" id="fcNext">Suivante →</button></div>'
-  +'<span class="fc-chapters-label">Explorer le livre</span><nav class="fc-chapters" id="fcChapters" aria-label="Pages du livre ForceClean"></nav>'
-  +'<dialog class="fc-dialog" id="fcPreview" aria-label="Agrandir une page de ForceClean"><div class="fc-dialog-top"><h3 id="fcZoomTitle"></h3><div class="fc-dialog-actions"><button type="button" id="fcZoomButton" aria-pressed="false">Zoom +</button><button type="button" class="fc-dialog-close" id="fcClose" aria-label="Fermer">×</button></div></div><div class="fc-dialog-stage"><img id="fcLargeImage" alt=""></div></dialog>'
-  +'</article>';
- const book=$('#fcBook',detail);
- const img=$('#fcPageImage',book),title=$('#fcPageTitle',book),counter=$('#fcCounter',book);
- const prev=$('#fcPrev',book),next=$('#fcNext',book),bar=$('#fcProgress',book);
- const nav=$('#fcChapters',book),frame=$('#fcDisplay',book),dialog=$('#fcPreview',book);
- const zoomImg=$('#fcLargeImage',dialog),zoomButton=$('#fcZoomButton',dialog),zoomTitle=$('#fcZoomTitle',dialog);
- let active=0,opener=null,swipe=null,oldOverflow='';
- const chapterButtons=pages.map((name,i)=>{
-  const button=document.createElement('button');
-  button.type='button';
-  button.textContent=number(i)+' · '+name;
-  button.addEventListener('click',()=>go(i,true));
-  nav.append(button);
-  return button;
- });
- function go(i,scroll=false){
-  active=Math.max(0,Math.min(pages.length-1,i));
-  const src=asset(active);
-  img.src=src;
-  img.alt='ForceClean, page '+number(active)+' sur 10 : '+pages[active];
-  title.textContent=pages[active];
-  counter.textContent=number(active)+' / 10';
-  bar.style.width=((active+1)*10)+'%';
-  prev.disabled=active===0;next.disabled=active===pages.length-1;
-  chapterButtons.forEach((button,j)=>{if(j===active)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current')});
-  if(scroll)frame.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
-  if(active+1<pages.length){const preload=new Image();preload.src=asset(active+1)}
- }
- prev.addEventListener('click',()=>go(active-1,true));
- next.addEventListener('click',()=>go(active+1,true));
- frame.addEventListener('pointerdown',event=>{swipe={x:event.clientX,y:event.clientY,id:event.pointerId}});
- frame.addEventListener('pointerup',event=>{
-  if(!swipe||event.pointerId!==swipe.id)return;
-  const dx=event.clientX-swipe.x,dy=event.clientY-swipe.y;swipe=null;
-  if(Math.abs(dx)>65&&Math.abs(dx)>1.45*Math.abs(dy)){
-   frame.dataset.swiped='true';
-   go(active+(dx<0?1:-1));
-   setTimeout(()=>delete frame.dataset.swiped,100);
-  }
- });
- frame.addEventListener('pointercancel',()=>{swipe=null});
- $('#fcImageButton',book).addEventListener('click',event=>{
-  if(frame.dataset.swiped==='true'){event.preventDefault();return}
-  opener=event.currentTarget;
-  zoomImg.src=asset(active);zoomImg.alt=img.alt;zoomTitle.textContent=pages[active];
-  dialog.classList.remove('fc-zoomed');zoomButton.textContent='Zoom +';zoomButton.setAttribute('aria-pressed','false');
-  oldOverflow=document.body.style.overflow;dialog.showModal();document.body.style.overflow='hidden';
- });
- zoomButton.addEventListener('click',()=>{
-  const zoomed=dialog.classList.toggle('fc-zoomed');
-  zoomButton.setAttribute('aria-pressed',String(zoomed));zoomButton.textContent=zoomed?'Zoom −':'Zoom +';
- });
- $('#fcClose',dialog).addEventListener('click',()=>dialog.close());
- dialog.addEventListener('close',()=>{document.body.style.overflow=oldOverflow;opener?.focus({preventScroll:true})});
- go(0);
+ const detail=document.querySelector('#detailContent');
+ if(typeof window.renderForceCleanNative==='function') window.renderForceCleanNative(detail);
+ else detail.textContent='ForceClean : le chapitre interactif est momentanément indisponible.';
 }
 
 function renderLogos(){const works=[{name:'Élya Natura',mark:'é.',color:'#294936',paper:'#E5EBE2'},{name:'MÉTALLUX',mark:'M',color:'#122E45',paper:'#E4EDF3'},{name:'ForceClean',mark:'FC',color:'#0D6197',paper:'#E4F2FA'},{name:'TrackSolid Pro',mark:'T',color:'#0077AD',paper:'#E7F6FE'},{name:'Logo explorations',mark:'✳',color:'#A42E48',paper:'#F7E3EB'},{name:'Letterform studies',mark:'em.',color:'#553169',paper:'#EEE3F6'}];
