@@ -25,6 +25,11 @@ jobs:
         uses: actions/checkout@v4
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+      - name: Generate transparent logo PNGs
+        run: |
+          python -m pip install --quiet pillow numpy opencv-python-headless
+          python scripts/generate_transparent_logos.py
+          test "$(find assets/logo-showroom/transparent -name '*.png' | wc -l)" -eq 27
       - name: Upload static portfolio
         uses: actions/upload-pages-artifact@v4
         with:
