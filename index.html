@@ -174,6 +174,16 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 .herb-sketch-zoom .herb-art { height:auto; object-fit:contain; }
 .herb-dialog[data-artwork][open] { grid-template-rows:auto minmax(0,1fr); }
 .herb-dialog[data-artwork] .herb-views { display:none; }
+
+.herb-sketch-zoom,.herb-sketch-preview { position:relative; }
+.herb-sketch-inset { position:absolute; inset:32.2% auto auto 6.7%; width:48%; height:48%; display:grid; grid-template-rows:72% 28%; overflow:hidden; border-radius:2%; background:#f8f3ea; color:#17271c; pointer-events:none; container-type:inline-size; }
+.herb-sketch-before,.herb-sketch-leaf { display:block; background-image:url('./assets/projects/herbtresor/sketch.jpg'); background-repeat:no-repeat; }
+.herb-sketch-before { background-size:208.333% auto; background-position:12.9% 49.2%; }
+.herb-sketch-symbol { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1%; background:#faf6ee; font:700 6cqw/1.2 var(--sans); }
+.herb-sketch-leaf { width:26%; aspect-ratio:90/72; background-size:777.778% auto; background-position:26% 75.9%; mix-blend-mode:multiply; }
+.herb-sketch-preview { grid-row:2; grid-column:1; align-self:center; justify-self:center; width:min(100%,calc((100dvh - 100px) * .8),700px); }
+.herb-sketch-preview .herb-art { width:100%; height:auto; }
+.herb-dialog[data-artwork] > .herb-full-image { display:none; }
 </style>
 <script defer>
 (()=>{
@@ -256,7 +266,7 @@ function renderHerbBook(){
  detail.innerHTML=`<article class="herb-book" aria-label="HerbTrésor, livre de marque">
 <section class="herb-page herb-cover herb-plate"><h1 class="herb-visually-hidden">HerbTrésor — Charte graphique</h1><img class="herb-art" src="./assets/projects/herbtresor/cover_story.webp" alt="Couverture du Brand Book HerbTrésor" loading="lazy" decoding="async"></section>
 <section class="herb-page herb-plate"><h2 class="herb-visually-hidden">L’histoire de HerbTrésor</h2><img class="herb-art" src="./assets/projects/herbtresor/brand_story.webp" alt="Brand Story HerbTrésor : histoire, essence, mission et vision" loading="lazy" decoding="async"></section>
-<section class="herb-page herb-plate herb-sketch-page"><h2 class="herb-visually-hidden">Tout commence par une feuille</h2><button type="button" class="herb-sketch-zoom" aria-label="Agrandir la planche du croquis"><img class="herb-art" src="./assets/projects/herbtresor/sketch.jpg" alt="Croquis de la feuille et symbole HerbTrésor" width="700" height="875" loading="lazy" decoding="async"></button></section>
+<section class="herb-page herb-plate herb-sketch-page"><h2 class="herb-visually-hidden">Tout commence par une feuille</h2><button type="button" class="herb-sketch-zoom" aria-label="Agrandir la planche du croquis"><img class="herb-art" src="./assets/projects/herbtresor/sketch.jpg" alt="Croquis de la feuille et symbole HerbTrésor" width="700" height="875" loading="lazy" decoding="async"><span class="herb-sketch-inset" aria-hidden="true"><span class="herb-sketch-before"></span><span class="herb-sketch-symbol"><span class="herb-sketch-leaf"></span><span>Icône seule</span></span></span></button></section>
 <section class="herb-page"><header><span>02</span><h2>Le logo</h2></header><p>Une feuille prolonge le tracé calligraphique et signe l’univers végétal de la marque.</p><div class="herb-logos"><img class="herb-art" src="./assets/projects/herbtresor/logo.jpg" alt="Logotype original sur fond clair" loading="lazy" decoding="async"><img class="herb-art" src="./assets/projects/herbtresor/logodark.jpg" alt="Logotype original sur fond foncé" loading="lazy" decoding="async"></div></section>
 <section class="herb-page "><header><span>03</span><h2>Couleurs &amp; typographies</h2></header><div class="herb-spread"><figure><img class="herb-art" src="./assets/projects/herbtresor/palette.webp" alt="Palette de la charte HerbTrésor" loading="lazy" decoding="async"><figcaption>Palette chromatique</figcaption></figure><figure><img class="herb-art" src="./assets/projects/herbtresor/type.jpg" alt="Hiérarchie typographique de la charte HerbTrésor" loading="lazy" decoding="async"><figcaption>Typographies</figcaption></figure></div></section>
 <section class="herb-page "><header><span>04</span><h2>Système d’étiquettes</h2></header><div class="herb-labels"><button type="button" class="herb-label" data-herb-product="Ricin"><img loading="lazy" decoding="async" src="./assets/projects/herbtresor/label_ricin.webp" alt=""><strong>Ricin</strong><span>Voir le mockup ↗</span></button>
@@ -278,11 +288,12 @@ function renderHerbBook(){
 <button type="button" class="herb-label" data-herb-product="Orange" data-herb-view="before"><img class="herb-art" src="./assets/projects/herbtresor/before_orange.webp" alt="Avant et après · Orange" loading="lazy" decoding="async"><strong>Orange</strong><span>Voir l’avant / après ↗</span></button>
 <button type="button" class="herb-label" data-herb-product="Nigelle" data-herb-view="before"><img class="herb-art" src="./assets/projects/herbtresor/before_nigelle.webp" alt="Avant et après · Nigelle" loading="lazy" decoding="async"><strong>Nigelle</strong><span>Voir l’avant / après ↗</span></button>
 <button type="button" class="herb-label" data-herb-product="Abricot" data-herb-view="before"><img class="herb-art" src="./assets/projects/herbtresor/before_abricot.webp" alt="Avant et après · Abricot" loading="lazy" decoding="async"><strong>Abricot</strong><span>Voir l’avant / après ↗</span></button></div></section>
-<dialog class="herb-dialog" aria-labelledby="herb-view-title"><div class="herb-dialog-bar"><h2 id="herb-view-title"></h2><button type="button" class="herb-close" aria-label="Fermer" autofocus>×</button></div><img class="herb-full-image" alt=""><div class="herb-views" aria-label="Vues du produit"><button type="button" class="herb-toggle" data-herb-mode="label">Étiquette</button><button type="button" class="herb-toggle" data-herb-mode="mock">Mockup</button><button type="button" class="herb-toggle" data-herb-mode="before">Avant / Après</button></div></dialog>
+<dialog class="herb-dialog" aria-labelledby="herb-view-title"><div class="herb-dialog-bar"><h2 id="herb-view-title"></h2><button type="button" class="herb-close" aria-label="Fermer" autofocus>×</button></div><img class="herb-full-image" alt=""><div class="herb-sketch-preview" hidden><img class="herb-art" src="./assets/projects/herbtresor/sketch.jpg" alt="Croquis de la feuille et symbole HerbTrésor" width="700" height="875" loading="lazy" decoding="async"><span class="herb-sketch-inset" aria-hidden="true"><span class="herb-sketch-before"></span><span class="herb-sketch-symbol"><span class="herb-sketch-leaf"></span><span>Icône seule</span></span></span></div><div class="herb-views" aria-label="Vues du produit"><button type="button" class="herb-toggle" data-herb-mode="label">Étiquette</button><button type="button" class="herb-toggle" data-herb-mode="mock">Mockup</button><button type="button" class="herb-toggle" data-herb-mode="before">Avant / Après</button></div></dialog>
 </article>`;
  releaseHerbSheets=stackHerbSheets($('.herb-book',detail));
  const dialog=$('.herb-dialog',detail);
  const visual=$('.herb-full-image',dialog);
+ const sketchPreview=$('.herb-sketch-preview',dialog);
  const views=$$('[data-herb-mode]',dialog);
  const products=[{"name":"Ricin","label":"label_ricin.webp","mock":"mock_ricin.webp","before":"before_ricin.webp"},{"name":"Argan","label":"label_argan.webp","mock":"mock_argan.jpg"},{"name":"Lavande","label":"label_lavande.jpg","mock":"mock_lavande.jpg","before":"before_lavande.webp"},{"name":"Orange","label":"label_orange.jpg","mock":"mock_orange.jpg","before":"before_orange.webp"},{"name":"Nigelle","label":"label_nigelle.webp","mock":null,"before":"before_nigelle.webp"},{"name":"Gadoum","label":"label_gadoum.webp"},{"name":"Amla","label":"label_amla.webp"},{"name":"Amande amère","label":"label_amande.webp"},{"name":"Fenugrec","label":"label_fenugrec.webp"},{"name":"Lin","label":"label_lin.webp"},{"name":"Cresson alénois","label":"label_cresson.webp"},{"name":"Akpi","label":"label_akpi.webp"},{"name":"Citron","label":"label_citron.jpg"},{"name":"Girofle","label":"label_girofle.jpg","mock":"mock_girofle.jpg"},{"name":"Abricot","label":null,"mock":null,"before":"before_abricot.webp"}];
  const viewLabels={label:'Étiquette originale',mock:'Mockup HerbTrésor',before:'Avant et après'};
@@ -307,8 +318,7 @@ function renderHerbBook(){
   opener=event.currentTarget;
   dialog.setAttribute('data-artwork','');
   $('#herb-view-title',dialog).textContent='Du croquis au symbole';
-  visual.src='./assets/projects/herbtresor/sketch.jpg';
-  visual.alt='Planche complète du croquis de la feuille HerbTrésor';
+  sketchPreview.hidden=false;
   openHerbPreview();
  });
  function openHerbPreview(){
@@ -321,6 +331,7 @@ function renderHerbBook(){
  dialog.addEventListener('close',()=>{
   document.body.style.overflow=previousOverflow;
   dialog.removeAttribute('data-artwork');
+  sketchPreview.hidden=true;
   opener.focus({preventScroll:true});
  });
 }
