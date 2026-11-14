@@ -196,19 +196,16 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 .fm-book{max-width:540px}
 .fm-leaf > .fm-plate,.fm-leaf > .fm-plate img { width:100%;height:100%;object-fit:contain;border-radius:inherit }
 .fm-product-page,.fm-range{overflow:auto;overscroll-behavior-y:contain}
-.fm-cover{display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden;background:#252f1e;color:#fff2d5;border-color:#bda174}
+.fm-cover{display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden;background:#A94F32;color:#fff2d5;border-color:#bda174}
 .fm-cover-heading{padding:9% 8% 7%;border-bottom:1px solid #bda174}
 .fm-cover-heading p{margin:0;font-size:clamp(.58rem,3.4cqi,.92rem);letter-spacing:.16em;text-transform:uppercase}
 .fm-cover-heading h1{font:400 clamp(2.1rem,13.5cqi,4.8rem)/.95 var(--serif);margin:.26em 0 .2em}
 .fm-cover-heading .fm-cover-subtitle{font:italic clamp(1.15rem,6.2cqi,2.2rem)/1.1 var(--serif);letter-spacing:0;text-transform:none;color:#edc599}
-.fm-cover-frame{position:relative;display:grid;place-items:center;min-height:0;background:#1c261a;isolation:isolate}
-.fm-cover-frame::before{content:"";position:absolute;inset:0;background:url('./assets/projects/fait-maison/cover.webp') center/cover;opacity:.26;z-index:-1}
+.fm-cover-frame{position:relative;display:grid;place-items:center;min-height:0}
 .fm-cover-frame > img{width:100%;height:100%;object-fit:contain}
 .fm-cover-caption{display:flex;justify-content:center;align-items:center;gap:10px;padding:6% 3%;border-top:1px solid #bda174;text-align:center;font-size:clamp(.55rem,2.9cqi,.82rem);letter-spacing:.13em;text-transform:uppercase}
 .fm-cover-caption span{width:22px;height:1px;background:#edc599}
 .fm-plate img{border-radius:inherit}
-.fm-cover-pop{position:absolute;left:43%;bottom:13%;width:23%;pointer-events:none;filter:drop-shadow(12px 12px 11px #160d0960);animation:fm-cover-pop 2.5s ease 1 both}
-@keyframes fm-cover-pop{0%,90%,100%{opacity:0;transform:translateY(18px) scale(.65)}24%,68%{opacity:1;transform:translateY(-32px) scale(1.23)}}
 .fm-plate,.fm-flat{width:100%;padding:0;border:0;border-radius:inherit;display:block;background:none;color:inherit;cursor:zoom-in}
 .fm-plate span{display:block;padding:8px;font-size:.85rem}
 .fm-heading h2{font:400 clamp(2rem,8vw,4rem)/1.05 var(--serif);margin:.16em 0}
@@ -251,7 +248,7 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 .fm-stage.is-zoom{display:block}
 .fm-stage.is-zoom img{width:170%;max-width:none;height:auto}
 .fm-zoom{display:flex;justify-content:center}
-@media(prefers-reduced-motion:reduce){.fm-leaf.is-turning,.fm-flat{animation:none}.fm-cover-pop{display:none}}
+@media(prefers-reduced-motion:reduce){.fm-leaf.is-turning,.fm-flat{animation:none}}
 
 .fm-face.is-label { background-size:2400% 100%; }
 .fm-transform[data-shape="bottle"] .fm-face.is-label { background-size:600% 100%; background-position:var(--fm-sample) center; }
@@ -424,7 +421,7 @@ function renderFaitMaisonBook(){
 <div class="fm-leaves">
 <section class="fm-leaf fm-cover">
  <header class="fm-cover-heading"><p>The Creative Editions · 02</p><h1>Fait Maison</h1><p class="fm-cover-subtitle">Le goût du geste</p></header>
- <div class="fm-cover-frame"><img src="./assets/projects/fait-maison/cover.webp" alt="La gamme Fait Maison, entre bocaux et eaux florales" fetchpriority="high" decoding="async"><div class="fm-cover-pop" aria-hidden="true"><img src="./assets/projects/fait-maison/geranium.webp" alt="" decoding="async"></div></div>
+ <div class="fm-cover-frame"><img src="./assets/projects/fait-maison/cover.webp" alt="La gamme Fait Maison, entre bocaux et eaux florales" fetchpriority="high" decoding="async"></div>
  <footer class="fm-cover-caption">Identité visuelle <span aria-hidden="true"></span> Packaging</footer>
 </section>
 <section class="fm-leaf " hidden><h2 class="herb-visually-hidden">À propos</h2><button class="fm-plate" type="button" data-fm-image="book-story" data-fm-title="À propos" aria-label="Agrandir : À propos"><img src="./assets/projects/fait-maison/book-story.webp" alt="À propos" loading="lazy" decoding="async"></button></section>
