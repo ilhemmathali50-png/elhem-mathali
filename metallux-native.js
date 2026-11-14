@@ -61,9 +61,9 @@ window.renderMetalluxNative=function(detail){
  const flipCard=()=>{const on=flip.dataset.flipped!=='true';flip.dataset.flipped=String(on);flip.setAttribute('aria-pressed',String(on));flip.setAttribute('aria-label',on?'Retourner la carte de visite pour voir le recto':'Retourner la carte de visite pour voir le verso');flipButton.innerHTML=on?'Revoir le recto <span aria-hidden="true">↻</span>':'Découvrir le verso <span aria-hidden="true">↻</span>'};
  flip.addEventListener('click',flipCard);flipButton.addEventListener('click',flipCard);
  const display=root.querySelector('#mxLogoDisplay'),logoImage=root.querySelector('#mxLogoImage');
- const variants={main:{img:'logo-original',mode:'light',alt:'Logo final MÉTALLUX fourni, version couleur complète'},dark:{img:'logo-panel',mode:'dark',alt:'Logo MÉTALLUX couleur sur fond bleu marine'},symbol:{img:'logo-icon-hd',mode:'light',alt:'Symbole MÉTALLUX original, qualité haute résolution, argent et bleu électrique'},mono:{img:'logo-monochrome-hd',mode:'light',alt:'Logo MÉTALLUX monochrome haute résolution, bleu marine'}};
+ const variants={main:{img:'logo-original',mode:'light',alt:'Logo final MÉTALLUX fourni, version couleur complète'},dark:{img:'logo-panel',mode:'dark',alt:'Logo MÉTALLUX couleur sur fond bleu marine'},symbol:{img:'logo-icon-hd',mode:'light',alt:'Symbole MÉTALLUX original, qualité haute résolution, argent et bleu électrique'},mono:{src:base+'logo-monochrome-vector.svg',mode:'light',alt:'Logo MÉTALLUX monochrome vectoriel, bleu marine, texte net et lisible'}};
  root.querySelectorAll('[data-mx-variant]').forEach(button=>button.addEventListener('click',()=>{
-  const next=variants[button.dataset.mxVariant];display.dataset.mode=next.mode;logoImage.src=A(next.img);logoImage.alt=next.alt;
+  const next=variants[button.dataset.mxVariant];display.dataset.mode=next.mode;logoImage.src=next.src||A(next.img);logoImage.alt=next.alt;
   root.querySelectorAll('[data-mx-variant]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
  }));
  if(!reduced()){
