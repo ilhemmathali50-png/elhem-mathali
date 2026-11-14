@@ -283,6 +283,10 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 .fm-transform[data-label="caviar"]:has(.fm-caviar-photo:not([hidden])){background:none}
 .fm-model.fm-caviar-photo{aspect-ratio:4 / 5;max-width:275px;filter:drop-shadow(0 8px 10px #52391c26)}
 .fm-caviar-photo > img{clip-path:polygon(50% 9.2%,63% 9.3%,75% 10.1%,82% 11.5%,85% 13%,86.3% 14.9%,86.3% 20.8%,85.7% 22%,83.4% 22.9%,83.7% 23.8%,82.1% 25.4%,82.2% 27.5%,85.1% 29.9%,86.6% 32.1%,86.9% 34.1%,86.4% 36%,86.5% 74.5%,87% 77.5%,86.5% 80.6%,85.1% 83.9%,82.4% 86.6%,77.8% 88.8%,68% 90.3%,58% 91%,48% 91.3%,36% 90.9%,24% 89.4%,17.5% 87.5%,14.1% 84.6%,12.9% 81.1%,12.8% 76.7%,13.6% 74.3%,13.1% 36.1%,12.6% 34.1%,13.1% 31.8%,14.3% 30%,17.5% 27.4%,17.8% 25.4%,16.9% 24.7%,16.3% 23.8%,16.8% 23.1%,14.7% 22.2%,13.6% 21%,13.5% 15%,14.7% 13.2%,17.5% 11.7%,24% 10.3%,37% 9.5%)}
+
+.fm-transform[data-label="poulet"]:has(.fm-poulet-photo:not([hidden])){background:none}
+.fm-model.fm-poulet-photo{aspect-ratio:4 / 5;max-width:275px;filter:drop-shadow(0 8px 10px #52391c26)}
+.fm-poulet-photo > img{clip-path:polygon(50% 8.3%,63% 8.4%,75% 9.3%,81% 10.6%,84.7% 12%,86.1% 14%,86.1% 22.8%,85.6% 23.6%,83.4% 24.6%,84.15% 26%,83.9% 27%,82.7% 28%,82.95% 29.2%,85.65% 30.7%,87.05% 32.4%,87.65% 34.25%,87.7% 79.5%,87.15% 83.2%,86% 85.8%,83% 88.4%,79% 90.2%,73% 91.5%,62% 92.4%,50% 92.7%,37% 92.45%,27% 91.65%,21% 90.6%,17% 88.6%,14.2% 86%,12.85% 83%,12.05% 79.65%,12.05% 34.4%,12.6% 32.35%,13.65% 30.9%,16.5% 29.45%,16.9% 28%,15.45% 27%,15.2% 26%,16.1% 24.5%,14.1% 23.75%,13.45% 22.6%,13.45% 14.1%,14.5% 12.4%,17.55% 11%,24.5% 9.55%,37% 8.6%)}
 </style>
 <script defer>
 (()=>{
@@ -467,7 +471,7 @@ function renderFaitMaisonBook(){
  <button type="button" class="fm-point" aria-label="Expliquer un choix graphique" aria-expanded="false">+</button>
 </div>
 <p class="fm-design-note" hidden>Le rouge épicé distingue la recette. Le français et l’arabe se lisent au centre de l’étiquette.</p>
-<div class="fm-actions"><button type="button" data-fm-wrap aria-pressed="false">Voir le produit</button><button type="button" data-fm-image="duo" data-fm-title="Caviar d’artichaut et Épice de poulet">Voir le mockup</button></div>
+<div class="fm-actions"><button type="button" data-fm-wrap aria-pressed="false">Voir le produit</button><button type="button" data-fm-image="mock-poulet" data-fm-title="Épice de poulet">Voir le mockup</button></div>
 <div class="fm-rotate" hidden><label>Tourner le produit <input type="range" min="-180" max="180" value="0" aria-label="Angle de rotation de Épice de poulet"></label></div>
 </section>
 <section class="fm-leaf fm-product-page" hidden>
@@ -595,7 +599,7 @@ function renderFaitMaisonBook(){
  $$('.fm-product-page',book).forEach(setupFaitMaisonProduct);
 }
 const faitMaisonJarPhotos={
- poulet:{file:'rotation-jar.webp',height:1320,radius:270,top:630},
+ poulet:{file:'rotation-poulet.webp',height:1100,radius:321,top:428,style:'fm-poulet-photo'},
  beurre:{file:'rotation-peanut.webp',height:1179,radius:287,top:505,style:'fm-peanut-photo'},
  caviar:{file:'rotation-caviar.webp',height:1100,radius:317,top:428,style:'fm-caviar-photo'}
 };
