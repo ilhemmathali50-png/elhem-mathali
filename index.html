@@ -322,6 +322,28 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 @media(min-width:650px){.client-review-grid{grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:42px;align-items:center}.client-review blockquote{margin-top:0}.client-review-detail{margin-top:28px}}
 @media(prefers-reduced-motion:reduce){.client-review-detail summary span:last-child{transition:none}}
 
+
+/* Original review screenshot, anonymous evidence and accessible lightbox */
+.client-review-evidence{margin-top:25px;display:flex;align-items:center;gap:15px;padding:13px;background:#ffffff9c;border:1px solid #ebdae1;border-radius:17px}
+.client-review-capture{appearance:none;display:block;position:relative;flex:none;width:118px;aspect-ratio:400/615;border:0;padding:0;border-radius:11px;overflow:hidden;background:#191919;cursor:zoom-in;box-shadow:0 8px 20px #34262e1f;transform:rotate(-2deg);transition:transform .25s ease,box-shadow .25s ease}
+.client-review-capture:hover,.client-review-capture:focus-visible{transform:rotate(0deg) scale(1.035);box-shadow:0 12px 26px #34262e35}
+.client-review-capture img{display:block;width:100%;height:100%;object-fit:contain}
+.client-review-capture:after{content:"↗";position:absolute;bottom:6px;right:6px;background:#fffef1e8;color:#392e33;border-radius:50%;width:27px;height:27px;display:grid;place-items:center;font-size:16px}
+.client-review-evidence-copy{min-width:0;flex:1}
+.client-review-evidence-copy strong{display:block;font:400 clamp(19px,4.5vw,25px)/1.1 var(--serif);color:#463640;margin-bottom:7px}
+.client-review-evidence-copy p{font-size:11px;color:#73656d;line-height:1.65;margin:0 0 10px}
+.client-review-evidence-copy small{display:inline-block;color:var(--cherry);font-size:10px;letter-spacing:.05em;font-weight:800}
+.client-review-dialog{border:0;border-radius:18px;padding:0;width:min(94vw,580px);max-width:580px;max-height:94dvh;background:#1c1b1b;color:white;box-shadow:0 26px 80px #0008}
+.client-review-dialog::backdrop{background:#170d15d9;backdrop-filter:blur(8px)}
+.client-review-dialog-inner{display:grid;grid-template-rows:auto minmax(0,1fr);height:min(93dvh,980px);gap:6px}
+.client-review-dialog-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;gap:15px}
+.client-review-dialog-head strong{font:500 12px var(--sans)}
+.client-review-dialog-head small{display:block;font-size:10px;color:#ccc;margin-top:3px}
+.client-review-close{display:grid;place-items:center;width:42px;height:42px;flex:none;min-height:42px;border:1px solid #777;border-radius:50%;background:#302d30;color:white;font-size:26px;cursor:pointer}
+.client-review-dialog img{display:block;width:100%;height:100%;min-height:0;object-fit:contain}
+@media(max-width:390px){.client-review-evidence{gap:10px;padding:10px}.client-review-capture{width:101px}}
+@media(prefers-reduced-motion:reduce){.client-review-capture{transition:none}}
+
 </style>
 <script defer>
 (()=>{
@@ -802,6 +824,15 @@ function openProject(i){
 }
 function renderLogos(){const works=[{name:'Élya Natura',mark:'é.',color:'#294936',paper:'#E5EBE2'},{name:'MÉTALLUX',mark:'M',color:'#122E45',paper:'#E4EDF3'},{name:'ForceClean',mark:'FC',color:'#0D6197',paper:'#E4F2FA'},{name:'TrackSolid Pro',mark:'T',color:'#0077AD',paper:'#E7F6FE'},{name:'Logo explorations',mark:'✳',color:'#A42E48',paper:'#F7E3EB'},{name:'Letterform studies',mark:'em.',color:'#553169',paper:'#EEE3F6'}];
  $('#logoGrid').innerHTML=works.map((x,i)=>`<div class="logo-card" style="background:${x.paper};color:${x.color}"><small>LOGO ATELIER / 0${i+1}</small><span class="logo-symbol" aria-hidden="true">${x.mark}</span><strong>${x.name}</strong></div>`).join('');}
+
+function setupClientCapture(){
+ const trigger=$('#openClientCapture'),dialog=$('#clientCaptureDialog'),close=$('#closeClientCapture');
+ if(!trigger||!dialog||!close)return;
+ trigger.addEventListener('click',()=>dialog.showModal());
+ close.addEventListener('click',()=>dialog.close());
+ dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
+ dialog.addEventListener('close',()=>trigger.focus({preventScroll:true}));
+}
 function initForm(){const form=$('#briefForm');form.addEventListener('submit',e=>{e.preventDefault();const f=new FormData(form);const t=`BRIEF CRÉATIF — ELHEM MATHELI\nNom : ${f.get('name')}\nMarque : ${f.get('brand')||'À préciser'}\nService : ${f.get('service')}\nProjet : ${f.get('goal')}`;$('#briefText').textContent=t;$('#briefOutput').hidden=false;$('#briefOutput').scrollIntoView({behavior:'smooth',block:'start'})});$('#copyBrief').addEventListener('click',async()=>{const text=$('#briefText').textContent;try{await navigator.clipboard.writeText(text);$('#copyBrief').textContent='Copié ✓'}catch(e){$('#copyBrief').textContent='Sélectionner et copier le texte'}})}
 
 let toastSeen=false,trailPending=false;
@@ -811,7 +842,7 @@ function hideContactToast(){const toast=$('#contactToast');if(toast)toast.classL
 function showContactToast(){if(toastSeen)return;toastSeen=true;const toast=$('#contactToast');if(toast)requestAnimationFrame(()=>toast.classList.add('visible'))}
 function setupContactToast(){const toast=document.createElement('aside');toast.id='contactToast';toast.className='contact-toast';toast.setAttribute('role','status');toast.setAttribute('aria-live','polite');toast.innerHTML='<button class="toast-close" type="button" aria-label="Fermer">×</button><small>A LITTLE NOTE FROM ELHEM</small><strong>Une idée en tête ? <em>On en parle ?</em></strong><p>Si mes services t’intéressent, n’hésite pas à me contacter. Je serais ravie de découvrir ton projet.</p><button type="button" class="toast-cta">Parlons de ton projet ↗</button>';document.body.appendChild(toast);toast.querySelector('.toast-close').addEventListener('click',hideContactToast);toast.querySelector('.toast-cta').addEventListener('click',()=>{hideContactToast();const input=$('.contact-view input[name="name"]');if(input){input.scrollIntoView({behavior:'smooth',block:'center'});input.focus({preventScroll:true})}})}
 
-function init(){renderProjects();renderLogos();initForm();setupScrollTrail();setupContactToast();
+function init(){renderProjects();renderLogos();initForm();setupScrollTrail();setupContactToast();setupClientCapture();
  $('#playWelcome').addEventListener('click',enterIntro);
  $('#skipWelcome').addEventListener('click',()=>enterApp('editions'));$('#skipIntro').addEventListener('click',()=>enterApp());$('#introFilm').addEventListener('ended',()=>enterApp());
  $('#logoHome').addEventListener('click',()=>switchView('editions'));$('#topContact').addEventListener('click',()=>switchView('contact'));$('#backToBook').addEventListener('click',()=>switchView('editions'));$('#nextCase').addEventListener('click',()=>openProject(currentProject+1));$('#aboutContact').addEventListener('click',()=>switchView('contact'));$('#filmToBook').addEventListener('click',()=>switchView('editions'));
@@ -857,6 +888,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
    <div class="client-review-content">
     <blockquote>« Un logo professionnel et un étiquetage soigné, le tout réalisé avec beaucoup de créativité, de sérieux et de professionnalisme. »</blockquote>
     <div class="client-review-byline"><span class="client-review-avatar" aria-hidden="true">C</span><span><strong>Avis d’une cliente</strong><small>Identité visuelle &amp; étiquetage</small></span></div>
+    <div class="client-review-evidence">
+     <button type="button" class="client-review-capture" id="openClientCapture" aria-label="Agrandir la capture d’écran du témoignage WhatsApp">
+      <img src="./assets/reviews/avis-cliente-whatsapp.webp" alt="Capture recadrée du message WhatsApp de la cliente, sans nom ni numéro" width="400" height="615" loading="lazy" decoding="async">
+     </button>
+     <div class="client-review-evidence-copy"><strong>Le message original.</strong><p>Une capture réelle du témoignage reçu, avec les informations personnelles retirées.</p><small>Toucher pour agrandir ↗</small></div>
+    </div>
    </div>
   </div>
   <details class="client-review-detail">
@@ -869,6 +906,13 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
    </div>
   </details>
  </section>
+
+ <dialog class="client-review-dialog" id="clientCaptureDialog" aria-label="Capture du témoignage client">
+  <div class="client-review-dialog-inner">
+   <div class="client-review-dialog-head"><span><strong>Le témoignage original</strong><small>Capture recadrée · Informations privées masquées</small></span><button type="button" class="client-review-close" id="closeClientCapture" aria-label="Fermer la capture">×</button></div>
+   <img src="./assets/reviews/avis-cliente-whatsapp.webp" alt="Capture WhatsApp du message complet de satisfaction client" width="400" height="615">
+  </div>
+ </dialog>
  <div class="sommaire-foot"><span>THE CREATIVE EDITIONS</span><i>Every brand has its own story.</i></div>
 </section>
 <section class="app-view detail-view" data-view="detail" hidden><button type="button" id="backToBook" class="return-link">← Back to the Art Book</button><div id="detailContent"></div><button type="button" class="outline-button detail-next" id="nextCase">Next edition <span>→</span></button></section>
