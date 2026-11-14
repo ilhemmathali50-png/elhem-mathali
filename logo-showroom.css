@@ -63,3 +63,11 @@
 @media(max-width:630px){.lg-showroom{padding:24px 14px}.lg-intro{gap:8px;padding-bottom:20px}.lg-intro h1{font-size:clamp(38px,9vw,57px);margin:12px 0}.lg-intro-number{min-width:66px;padding-left:9px}.lg-intro-number strong{font-size:47px}.lg-intro-number span{font-size:8px;line-height:1.4}.lg-intro p{font-size:11px}.lg-kicker{font-size:9px;letter-spacing:.1em}.lg-toolbar{display:block;padding:14px 0 18px}.lg-filters{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:6px;padding:2px 0 8px}.lg-filters::-webkit-scrollbar{display:none}.lg-filters button{white-space:nowrap;min-height:35px;padding:7px 12px;font-size:10px;flex:none}.lg-results{display:block;text-align:right;font-size:10px}.lg-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.lg-logo{border-radius:11px}.lg-logo-stage{aspect-ratio:.99}.lg-logo-stage img{padding:9px}.lg-logo-meta{padding:10px 9px 11px;align-items:start;min-height:62px}.lg-logo-meta strong{font-size:11px}.lg-logo-meta small{font-size:9px}.lg-logo-label{font-size:8px;padding:5px 6px}.lg-zoom-icon{width:30px;height:30px;top:8px;right:8px}.lg-zoom-icon svg{width:16px;height:16px}.lg-dialog{height:100dvh;max-height:100dvh;border-radius:0}.lg-dialog-layout{padding:16px 12px calc(22px + env(safe-area-inset-bottom))}.lg-detail-image--board{padding:3px}.lg-detail-image--logo{min-height:310px}.lg-end{font-size:9px}}
 @media(max-width:345px){.lg-logo-meta{display:block}.lg-logo-label{display:inline-block;margin-top:6px}.lg-intro-number{display:none}}
 @media(prefers-reduced-motion:reduce){.lg-logo{animation:none}.lg-logo,.lg-logo-stage img,.lg-filters button,.lg-zoom-icon,.lg-zoom-icon svg{transition:none}}
+
+/* Logo showroom: pure white paper throughout the gallery and logo previews */
+.logos-view:has(.lg-showroom), .lg-showroom{background:#ffffff!important}
+.lg-logo,.lg-logo-stage,.lg-logo-meta{background:#ffffff}
+.lg-logo{border-color:#e7e2e3;box-shadow:0 3px 15px #211a2410}
+.lg-logo:hover{box-shadow:0 13px 29px #211a2419}
+.lg-dialog,.lg-dialog-layout,.lg-detail-image,.lg-detail-image--logo{background:#ffffff}
+.lg-logo-stage img{background:#ffffff}
