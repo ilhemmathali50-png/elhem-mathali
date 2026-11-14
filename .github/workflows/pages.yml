@@ -30,6 +30,23 @@ jobs:
           python -m pip install --quiet pillow numpy opencv-python-headless
           python scripts/generate_transparent_logos.py
           test "$(find assets/logo-showroom/transparent -name '*.png' | wc -l)" -eq 27
+      - name: Unpack original Divers artwork
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import base64, io, zipfile
+          folder = Path('assets/divers')
+          packet = folder / 'gallery.pack.b64'
+          content = base64.b64decode(packet.read_text())
+          with zipfile.ZipFile(io.BytesIO(content)) as archive:
+              names = archive.namelist()
+              assert len(names) == 17, f'Expected 17 images; got {len(names)}'
+              assert all(n.startswith('poster-') and n.endswith('.webp') and '/' not in n and '..' not in n for n in names)
+              for name in names:
+                  (folder / name).write_bytes(archive.read(name))
+          packet.unlink()
+          print('Published 17 original user-supplied portfolio visuals')
+          PY
       - name: Upload static portfolio
         uses: actions/upload-pages-artifact@v4
         with:

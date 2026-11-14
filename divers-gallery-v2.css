@@ -1,0 +1,37 @@
+/* Portfolio Divers v2 · user-supplied artwork, never altered or cropped. */
+.divers-view{max-width:1130px;margin:0 auto}
+.divers-filters{position:relative;align-items:center;flex-wrap:wrap;gap:8px;padding-bottom:7px}
+.divers-filters button{transition:background .2s,color .2s,border-color .2s}
+.divers-filters button:hover{border-color:#a42e48}
+.divers-count{font-size:11px;color:#887782;text-align:right;margin:3px 0 17px}
+.divers-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;align-items:start}
+.divers-card{background:#fff;border:1px solid #e9dfe4;border-radius:15px;overflow:hidden;box-shadow:0 4px 22px #381b2a0a;min-width:0}
+.divers-card[hidden]{display:none!important}
+.divers-poster-card{transition:transform .2s ease,box-shadow .2s ease}
+.divers-poster-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px #381b2a1b}
+.divers-poster-open{border:0;display:block;width:100%;padding:0;margin:0;background:white;text-align:left;color:inherit;font-family:inherit;cursor:zoom-in}
+.divers-poster-open:focus-visible{outline:3px solid #a42e48;outline-offset:-4px}
+.divers-poster-media{display:grid;place-items:center;width:100%;aspect-ratio:1;background:#fff;overflow:hidden}
+.divers-poster-media img{display:block;width:100%;height:100%;object-fit:contain}
+.divers-poster-caption{display:grid;gap:7px;padding:13px 13px 16px;border-top:1px solid #f0e8eb}
+.divers-poster-caption small{font-size:9px;font-weight:800;letter-spacing:.1em;color:#a42e48}
+.divers-poster-caption strong{font-size:13px;line-height:1.35;color:#392c34}
+.divers-poster-caption>span{font-size:10px;line-height:1.45;color:#947a86;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.divers-media--video video{width:100%;height:auto;max-height:360px;aspect-ratio:1/1;object-fit:contain}
+.divers-lightbox{border:0;padding:0;overflow:hidden;background:#fff;border-radius:16px;width:min(850px,calc(100vw - 20px));max-width:none;max-height:min(95dvh,1100px);height:auto;box-shadow:0 30px 110px #14091077;color:#322630}
+.divers-lightbox::backdrop{background:#1c1421dd;backdrop-filter:blur(7px)}
+.divers-lightbox[open]{display:block}
+.divers-lightbox-inner{display:grid;grid-template-rows:auto minmax(0,1fr) auto;height:min(94dvh,1050px);max-height:94dvh}
+.divers-lightbox-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 15px 8px 19px;border-bottom:1px solid #eee5e9}
+.divers-lightbox-brand{font-size:10px;letter-spacing:.12em;font-weight:800;color:#a42e48}
+.divers-lightbox-close{width:40px;height:40px;background:#faf0f5;border:0;border-radius:50%;color:#78304a;font-size:27px;cursor:pointer;line-height:1}
+.divers-lightbox-stage{min-height:0;display:grid;place-items:center;padding:11px;background:#faf8f8;overflow:hidden}
+.divers-lightbox-stage img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.divers-lightbox-foot{display:grid;grid-template-columns:46px minmax(0,1fr) 46px;align-items:center;gap:8px;padding:11px 14px;background:#fff;border-top:1px solid #eee5e9}
+.divers-lightbox-foot>div{text-align:center;display:grid;gap:3px}
+.divers-lightbox-title{font:500 clamp(15px,2.8vw,21px)/1.2 var(--serif)}
+.divers-lightbox-counter{font-size:10px;color:#a18c96}
+.divers-lightbox-prev,.divers-lightbox-next{height:42px;width:42px;border:1px solid #e2cad3;border-radius:50%;background:#fff;color:#963d59;font-size:23px;cursor:pointer}
+@media(max-width:850px){.divers-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.divers-poster-caption{padding:10px 9px 12px}.divers-poster-caption strong{font-size:11px}.divers-poster-caption small{font-size:8px}.divers-poster-caption>span{font-size:9px}}
+@media(max-width:380px){.divers-grid{gap:7px}.divers-poster-caption{padding:9px 8px 11px}}
+@media(prefers-reduced-motion:reduce){.divers-poster-card,.divers-filters button{transition:none}}
