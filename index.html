@@ -264,6 +264,17 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 .fm-photo-model::before { content:none; }
 .fm-photo-model > img, .fm-photo-label { position:absolute; inset:0; width:100%; height:100%; display:block; }
 .fm-photo-model > img, .fm-photo-label { pointer-events:none; }
+
+/* Hide the print folio on the rules artwork in both web views. */
+.fm-plate[data-fm-image="book-rules"],.fm-rules-art{position:relative;aspect-ratio:9 / 16}
+.fm-plate[data-fm-image="book-rules"]::after,.fm-rules-art::after{
+ content:"";position:absolute;left:90.65%;top:2.22%;width:4.05%;height:1.54%;pointer-events:none;
+ background:linear-gradient(100deg,#f9ebd2,#fce6cb 74%,#f9e5c9);
+}
+.fm-rules-art{width:min(100%,calc((100dvh - 154px) * .5625));margin:auto}
+.fm-rules-art img{display:block;width:100%;height:auto}
+.fm-stage.is-zoom .fm-rules-art{width:170%;margin:0}
+.fm-stage.is-zoom .fm-rules-art img{width:100%}
 </style>
 <script defer>
 (()=>{
@@ -498,7 +509,7 @@ function renderFaitMaisonBook(){
 <section class="fm-leaf fm-range" hidden><div class="fm-heading"><h2>La gamme</h2></div><img src="./assets/projects/fait-maison/cover.webp" alt="Saveurs du terroir et eaux florales Fait Maison" loading="lazy" decoding="async"><div class="fm-gallery"><button class="fm-plate" type="button" data-fm-image="bsissa" data-fm-title="Bsissa d’orge aux herbes"><img src="./assets/projects/fait-maison/bsissa.webp" alt="Bsissa d’orge aux herbes" loading="lazy" decoding="async"><span>Bsissa d’orge aux herbes</span></button><button class="fm-plate" type="button" data-fm-image="beurre-scene" data-fm-title="Beurre de cacahuète"><img src="./assets/projects/fait-maison/beurre-scene.webp" alt="Beurre de cacahuète" loading="lazy" decoding="async"><span>Beurre de cacahuète</span></button></div></section>
 </div>
 <nav class="fm-navigation" aria-label="Pages de Fait Maison"><button type="button" data-fm-step="-1" aria-label="Page précédente" disabled>←</button><output aria-live="polite" aria-label="Page actuelle">01 / 13</output><button type="button" data-fm-step="1" aria-label="Page suivante">→</button></nav>
-<dialog class="herb-dialog fm-dialog" aria-labelledby="fm-preview-title"><div class="herb-dialog-bar"><h2 id="fm-preview-title"></h2><button class="herb-close" type="button" aria-label="Fermer" autofocus>×</button></div><div class="fm-stage"><img alt=""></div><div class="fm-zoom"><button type="button" aria-pressed="false">Zoom +</button></div></dialog>
+<dialog class="herb-dialog fm-dialog" aria-labelledby="fm-preview-title"><div class="herb-dialog-bar"><h2 id="fm-preview-title"></h2><button class="herb-close" type="button" aria-label="Fermer" autofocus>×</button></div><div class="fm-stage"><img alt=""><div class="fm-rules-art" hidden><img alt=""></div></div><div class="fm-zoom"><button type="button" aria-pressed="false">Zoom +</button></div></dialog>
 </article>`;
  const book=$('.fm-book',detail);
  const leaves=$('.fm-leaves',book);
@@ -547,7 +558,12 @@ function renderFaitMaisonBook(){
  leaves.addEventListener('pointercancel',()=>{swipeStart=null});
  $$('[data-fm-image]',book).forEach(button=>button.addEventListener('click',()=>{
   opener=button;
-  const visual=$('img',stage);
+  const isRules=button.dataset.fmImage==='book-rules';
+  const rules=$('.fm-rules-art',stage);
+  const standard=$('img',stage);
+  rules.hidden=!isRules;
+  standard.hidden=isRules;
+  const visual=isRules?$('img',rules):standard;
   visual.src='./assets/projects/fait-maison/'+button.dataset.fmImage+'.webp';
   visual.alt=button.dataset.fmTitle;
   $('#fm-preview-title',dialog).textContent=button.dataset.fmTitle;
