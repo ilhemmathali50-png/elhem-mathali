@@ -14,7 +14,7 @@ dest.mkdir(parents=True,exist_ok=True)
 created=[]
 
 for p in sorted(src.glob("*.webp")):
-    if "board" in p.name:
+    if "board" in p.name or p.stem in ("breakfast-news-logo","ny-knicks-logo"):
         continue
     im=Image.open(p).convert("RGBA")
     a=np.asarray(im).copy()
