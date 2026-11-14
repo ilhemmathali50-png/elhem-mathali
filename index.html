@@ -345,11 +345,24 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 @media(prefers-reduced-motion:reduce){.client-review-capture{transition:none}}
 
 
+
+/* Main navigation stays inside the upper site header instead of falling into the page footer. */
+.app-shell{padding-bottom:calc(20px + env(safe-area-inset-bottom))}
+.app-shell .portfolio-top-frame{position:sticky;top:0;z-index:60;isolation:isolate;background:#fffaf7;box-shadow:0 5px 15px #4c27431a}
+.app-shell .portfolio-top-frame .app-header{position:relative;top:auto;z-index:1;height:64px;min-height:calc(64px + env(safe-area-inset-top));padding:calc(7px + env(safe-area-inset-top)) 18px 7px}
+.app-shell .portfolio-top-frame .bottom-nav{position:relative;top:auto;right:auto;bottom:auto;left:auto;inset:auto;width:100%;max-width:none;margin:0;z-index:1;transform:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:5px 8px 7px;border:0;border-top:1px solid #ead9e1;border-bottom:1px solid #ead9e1;border-radius:0;background:#fffaf7;box-shadow:none;backdrop-filter:none}
+.app-shell .portfolio-top-frame .bottom-nav button{min-width:0;min-height:44px;padding:7px 3px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:5px;border-radius:11px;white-space:nowrap;font-size:clamp(9px,2.25vw,11px);letter-spacing:-.015em;line-height:1.2}
+.app-shell .portfolio-top-frame .bottom-nav button svg{width:17px;height:17px;flex:0 0 17px}
+.app-shell .portfolio-top-frame .bottom-nav button[aria-current="page"]{background:#f4e0eb;color:var(--cherry)}
+body.video-active .portfolio-top-frame{display:none!important}
+@media(min-width:730px){.app-shell .portfolio-top-frame .app-header{padding-inline:40px}.app-shell .portfolio-top-frame .bottom-nav{padding-inline:28px}.app-shell .portfolio-top-frame .bottom-nav button{font-size:11px;min-height:43px}}
+@media(max-width:359px){.app-shell .portfolio-top-frame .bottom-nav{gap:1px;padding-inline:4px}.app-shell .portfolio-top-frame .bottom-nav button{font-size:9px;gap:3px}.app-shell .portfolio-top-frame .bottom-nav button svg{width:16px;height:16px;flex-basis:16px}}
+
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="./forceclean-native.css?v=19">
+<link rel="stylesheet" href="./forceclean-native.css?v=30">
 <link rel="stylesheet" href="./metallux-native.css?v=25">
-<link rel="stylesheet" href="./metallux-industrial.css?v=28">
+<link rel="stylesheet" href="./metallux-industrial.css?v=30">
 <script src="./forceclean-native.js?v=19" defer></script>
 <script src="./metallux-native.js?v=29" defer></script>
 <script src="./metallux-studio.js?v=29" defer></script>
@@ -896,7 +909,10 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 </section>
 <!-- 04. Actual app and bottom navigation -->
 <div id="app" class="app-shell" hidden>
+<div class="portfolio-top-frame" aria-label="En-tête et navigation">
 <header class="app-header"><button type="button" class="em-link" id="logoHome" aria-label="Ouvrir les éditions">em.</button><span class="top-identity">THE CREATIVE EDITIONS</span><button type="button" class="header-contact" id="topContact" aria-label="Start a project"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="currentColor"><path d="M5 2.5v17l4.4-4.1 2.9 6.1 2.6-1.2-2.9-6.1h6.3z"/></svg></button></header>
+<nav class="bottom-nav" aria-label="Navigation principale"><button type="button" data-nav="editions" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10H3z"/><path d="M9 20v-7h6v7"/></svg>Sommaire</button><button type="button" data-nav="logos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 22 12 12 22 2 12z"/><path d="M12 6v12M6 12h12"/></svg>Logos</button><button type="button" data-nav="video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z"/></svg>Vidéo</button><button type="button" data-nav="about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 21v-2.2a7.5 7.5 0 0 1 15 0V21z"/></svg>À propos</button></nav>
+</div>
 <main id="main">
 <section class="app-view editions-view" data-view="editions">
  <div class="sommaire-head">
@@ -947,7 +963,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <section class="app-view about-view" data-view="about" hidden><div class="section-intro"><div class="eyebrow">THE DESIGNER</div><h2>Hello, I’m<br><em>Elhem.</em></h2></div><div class="about-photo"><img data-asset="about" alt="Elhem Matheli, designer" loading="lazy"></div><div class="about-copy"><span class="eyebrow">BRAND · PACKAGING · CONTENT</span><p>Je donne forme aux idées à travers des identités visuelles, des packagings et du contenu créatif. Mon travail réunit intention, clarté et détails.</p></div><div class="services-grid"><div><span>✳</span><strong>Brand Identity</strong></div><div><span>◇</span><strong>Packaging</strong></div><div><span>▦</span><strong>Creative Content</strong></div></div><div class="journal"><div class="eyebrow">THE CREATIVE JOURNAL</div><h3>Notes from<br><em>the studio.</em></h3><details><summary>Un logo n’est pas une identité. <span>+</span></summary><p>Une identité comprend les couleurs, la typographie, les compositions et les usages qui rendent la marque cohérente.</p></details><details><summary>Le packaging parle avant le produit. <span>+</span></summary><p>La hiérarchie, la matière et les informations d’une étiquette guident le regard et facilitent la compréhension.</p></details><details><summary>Chaque marque a son propre univers. <span>+</span></summary><p>Une marque botanique et une entreprise industrielle ne se racontent pas avec les mêmes codes.</p></details></div><button type="button" class="primary-button" id="aboutContact">Start your brand story <span>↗</span></button></section>
 <section class="app-view contact-view" data-view="contact" hidden><div class="section-intro"><div class="eyebrow">LET’S WORK TOGETHER</div><h2>Start your<br><em>brand story.</em></h2><p>Un petit brief pour mieux comprendre votre projet, sans formulaire compliqué.</p></div><form id="briefForm" class="brief-form"><label>Votre nom<input name="name" placeholder="Votre nom" required autocomplete="name"></label><label>Nom de la marque<input name="brand" placeholder="Votre marque (optionnel)"></label><label>Quel type de projet ?<select name="service"><option>Brand Identity</option><option>Packaging Design</option><option>Creative Content</option><option>Autre projet</option></select></label><label>Parlez-moi de votre idée<textarea name="goal" placeholder="Racontez votre projet en quelques mots" required rows="4"></textarea></label><button class="primary-button" type="submit">Préparer mon brief <span>↗</span></button></form><div id="briefOutput" hidden class="brief-output" aria-live="polite"><h3>Votre brief est prêt.</h3><pre id="briefText"></pre><button id="copyBrief" class="outline-button" type="button">Copier le brief</button></div></section>
 </main>
-<nav class="bottom-nav" aria-label="Navigation principale"><button type="button" data-nav="editions" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10H3z"/><path d="M9 20v-7h6v7"/></svg>Sommaire</button><button type="button" data-nav="logos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 22 12 12 22 2 12z"/><path d="M12 6v12M6 12h12"/></svg>Logos</button><button type="button" data-nav="video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z"/></svg>Vidéo</button><button type="button" data-nav="about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 21v-2.2a7.5 7.5 0 0 1 15 0V21z"/></svg>À propos</button></nav>
 </div>
 <script>
 /* Keep real portrait and video in separate files, instead of embedding them in the HTML. */

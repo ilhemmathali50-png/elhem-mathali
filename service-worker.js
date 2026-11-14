@@ -1,5 +1,5 @@
-const CACHE='em-editions-v29-metallux-copy-cleanup';
-const CORE=['./index.html?v=29','./manifest.webmanifest','./app-icon.svg','./assets/projects/sommaire-covers.webp','./forceclean-native.css?v=19','./forceclean-native.js?v=19','./metallux-native.css?v=25','./metallux-native.js?v=29','./metallux-industrial.css?v=28','./metallux-studio.js?v=29','./metallux-garment3d.js?v=29','./assets/projects/metallux/native/logo-black-transparent.webp'];
+const CACHE='em-editions-v30-top-navigation';
+const CORE=['./index.html?v=30','./manifest.webmanifest','./app-icon.svg','./assets/projects/sommaire-covers.webp','./forceclean-native.css?v=30','./forceclean-native.js?v=19','./metallux-native.css?v=25','./metallux-native.js?v=29','./metallux-industrial.css?v=30','./metallux-studio.js?v=29','./metallux-garment3d.js?v=29','./assets/projects/metallux/native/logo-black-transparent.webp'];
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
 });
@@ -10,7 +10,7 @@ self.addEventListener('fetch',event=>{
  const req=event.request;
  if(req.method!=='GET'||new URL(req.url).origin!==self.location.origin)return;
  if(req.mode==='navigate'){
-  event.respondWith(fetch(new Request(req,{cache:'reload'})).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put('./index.html?v=29',copy));}return res;}).catch(()=>caches.match('./index.html?v=29')));
+  event.respondWith(fetch(new Request(req,{cache:'reload'})).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put('./index.html?v=30',copy));}return res;}).catch(()=>caches.match('./index.html?v=30')));
   return;
  }
  event.respondWith(fetch(req).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put(req,copy));}return res;}).catch(()=>caches.match(req)));
