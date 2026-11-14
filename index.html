@@ -187,13 +187,26 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 
 
 .fm-book{--fm-ink:#293b28;color:var(--fm-ink);margin:0 auto;max-width:750px}
-.fm-leaves{position:relative;perspective:1300px;touch-action:pan-y}
-.fm-leaf{position:relative;min-width:0;background:linear-gradient(90deg,#b5915a28,transparent 18px),#fbf3e3;border:1px solid #cdb698;border-radius:4px 12px 12px 4px;box-shadow:0 3px #e5d5be,0 6px #cdb89d,0 16px 26px #53392224;transform-origin:left center}
+.fm-leaves{position:relative;aspect-ratio:9 / 16;perspective:1300px;touch-action:pan-y;container-type:inline-size}
+.fm-leaf{position:absolute;inset:0;min-width:0;background:linear-gradient(90deg,#b5915a28,transparent 18px),#fbf3e3;border:1px solid #cdb698;border-radius:4px 12px 12px 4px;box-shadow:0 3px #e5d5be,0 6px #cdb89d,0 16px 26px #53392224;transform-origin:left center}
 .fm-leaf.is-turning{animation:fm-page-turn .42s ease both}
 @keyframes fm-page-turn{from{transform:rotateY(var(--fm-turn));filter:brightness(.83);opacity:.65}to{transform:rotateY(0);opacity:1}}
 .fm-leaf img{display:block;width:100%;height:auto}
-.fm-cover{background:#25321e}
-.fm-cover>img,.fm-plate img{border-radius:inherit}
+/* Every sheet uses the same portrait frame. */
+.fm-book{max-width:540px}
+.fm-leaf > .fm-plate,.fm-leaf > .fm-plate img { width:100%;height:100%;object-fit:contain;border-radius:inherit }
+.fm-product-page,.fm-range{overflow:auto;overscroll-behavior-y:contain}
+.fm-cover{display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden;background:#252f1e;color:#fff2d5;border-color:#bda174}
+.fm-cover-heading{padding:9% 8% 7%;border-bottom:1px solid #bda174}
+.fm-cover-heading p{margin:0;font-size:clamp(.58rem,3.4cqi,.92rem);letter-spacing:.16em;text-transform:uppercase}
+.fm-cover-heading h1{font:400 clamp(2.1rem,13.5cqi,4.8rem)/.95 var(--serif);margin:.26em 0 .2em}
+.fm-cover-heading .fm-cover-subtitle{font:italic clamp(1.15rem,6.2cqi,2.2rem)/1.1 var(--serif);letter-spacing:0;text-transform:none;color:#edc599}
+.fm-cover-frame{position:relative;display:grid;place-items:center;min-height:0;background:#1c261a;isolation:isolate}
+.fm-cover-frame::before{content:"";position:absolute;inset:0;background:url('./assets/projects/fait-maison/cover.webp') center/cover;opacity:.26;z-index:-1}
+.fm-cover-frame > img{width:100%;height:100%;object-fit:contain}
+.fm-cover-caption{display:flex;justify-content:center;align-items:center;gap:10px;padding:6% 3%;border-top:1px solid #bda174;text-align:center;font-size:clamp(.55rem,2.9cqi,.82rem);letter-spacing:.13em;text-transform:uppercase}
+.fm-cover-caption span{width:22px;height:1px;background:#edc599}
+.fm-plate img{border-radius:inherit}
 .fm-cover-pop{position:absolute;left:43%;bottom:13%;width:23%;pointer-events:none;filter:drop-shadow(12px 12px 11px #160d0960);animation:fm-cover-pop 2.5s ease 1 both}
 @keyframes fm-cover-pop{0%,90%,100%{opacity:0;transform:translateY(18px) scale(.65)}24%,68%{opacity:1;transform:translateY(-32px) scale(1.23)}}
 .fm-plate,.fm-flat{width:100%;padding:0;border:0;border-radius:inherit;display:block;background:none;color:inherit;cursor:zoom-in}
@@ -214,7 +227,7 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 .fm-rotate{margin:12px 0 0;text-align:center}
 .fm-rotate label{display:grid;gap:3px;font-size:.84rem}
 .fm-rotate input{width:min(100%,340px);margin:auto;accent-color:#294936}
-.fm-navigation{position:sticky;bottom:calc(86px + env(safe-area-inset-bottom));z-index:3;margin:14px auto 0;padding:6px;width:max-content;max-width:100%;border-radius:999px;background:#fbf3e3;box-shadow:0 3px 12px #30201636}
+.fm-navigation{position:relative;margin:14px auto 0;padding:6px;width:max-content;max-width:100%;border-radius:999px;background:#fbf3e3;box-shadow:0 3px 12px #30201636}
 .fm-navigation button:disabled{opacity:.42;cursor:default}
 .fm-navigation output{min-width:68px;text-align:center;font-size:.8rem;font-variant-numeric:tabular-nums}
 .fm-gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:13px}
@@ -409,7 +422,11 @@ function renderFaitMaisonBook(){
  const detail=$('#detailContent');
  detail.innerHTML=`<article class="fm-book" aria-label="Fait Maison, livre interactif">
 <div class="fm-leaves">
-<section class="fm-leaf fm-cover"><h1 class="herb-visually-hidden">Fait Maison — Le goût du geste</h1><img src="./assets/projects/fait-maison/book-cover.webp" alt="Couverture Fait Maison · Le goût du geste" fetchpriority="high" decoding="async"><div class="fm-cover-pop" aria-hidden="true"><img src="./assets/projects/fait-maison/geranium.webp" alt=""  decoding="async"></div></section>
+<section class="fm-leaf fm-cover">
+ <header class="fm-cover-heading"><p>The Creative Editions · 02</p><h1>Fait Maison</h1><p class="fm-cover-subtitle">Le goût du geste</p></header>
+ <div class="fm-cover-frame"><img src="./assets/projects/fait-maison/cover.webp" alt="La gamme Fait Maison, entre bocaux et eaux florales" fetchpriority="high" decoding="async"><div class="fm-cover-pop" aria-hidden="true"><img src="./assets/projects/fait-maison/geranium.webp" alt="" decoding="async"></div></div>
+ <footer class="fm-cover-caption">Identité visuelle <span aria-hidden="true"></span> Packaging</footer>
+</section>
 <section class="fm-leaf " hidden><h2 class="herb-visually-hidden">À propos</h2><button class="fm-plate" type="button" data-fm-image="book-story" data-fm-title="À propos" aria-label="Agrandir : À propos"><img src="./assets/projects/fait-maison/book-story.webp" alt="À propos" loading="lazy" decoding="async"></button></section>
 <section class="fm-leaf " hidden><h2 class="herb-visually-hidden">Les versions du logo</h2><button class="fm-plate" type="button" data-fm-image="book-logos" data-fm-title="Les versions du logo" aria-label="Agrandir : Les versions du logo"><img src="./assets/projects/fait-maison/book-logos.webp" alt="Les versions du logo" loading="lazy" decoding="async"></button></section>
 <section class="fm-leaf " hidden><h2 class="herb-visually-hidden">Palette de couleurs</h2><button class="fm-plate" type="button" data-fm-image="book-palette" data-fm-title="Palette de couleurs" aria-label="Agrandir : Palette de couleurs"><img src="./assets/projects/fait-maison/book-palette.webp" alt="Palette de couleurs" loading="lazy" decoding="async"></button></section>
