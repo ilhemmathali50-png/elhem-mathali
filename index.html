@@ -279,6 +279,10 @@ body.video-active .app-header,body.video-active .bottom-nav{display:none!importa
 .fm-transform[data-label="beurre"]:has(.fm-photo-model:not([hidden])){background:none}
 .fm-model.fm-peanut-photo{aspect-ratio:1792 / 2400;max-width:275px;filter:drop-shadow(0 8px 10px #52391c26)}
 .fm-peanut-photo > img{clip-path:polygon(50% 6.2%,61% 6.35%,69% 6.85%,75% 7.65%,78% 8.9%,78.4% 10.7%,78.4% 15.7%,77.9% 16.9%,75.7% 17.7%,76.25% 18.85%,76.4% 19.6%,75.25% 20.55%,74.7% 22.6%,75.3% 25.1%,77.45% 29.5%,80.6% 34.3%,82.8% 38%,83.4% 40%,83.6% 76.7%,83.45% 81.3%,82.1% 84.4%,79.7% 87%,76% 89.7%,70% 91.5%,61% 92.85%,50% 93.5%,39% 92.85%,30% 91.8%,24.4% 90.2%,20.2% 88%,18.2% 85.6%,16.8% 82.3%,16.25% 79.1%,16.25% 41%,17.2% 38.1%,19.4% 34.7%,22.2% 30.6%,23.8% 27.1%,24.6% 23.6%,24.5% 21.05%,23.2% 20.2%,22.75% 19.25%,23.6% 18.25%,24.1% 17.75%,22% 17.1%,21.1% 16.15%,20.85% 11.4%,21.15% 10%,22.7% 8.65%,26.05% 7.55%,32% 6.85%,40% 6.4%)}
+
+.fm-transform[data-label="caviar"]:has(.fm-caviar-photo:not([hidden])){background:none}
+.fm-model.fm-caviar-photo{aspect-ratio:4 / 5;max-width:275px;filter:drop-shadow(0 8px 10px #52391c26)}
+.fm-caviar-photo > img{clip-path:polygon(50% 9.2%,63% 9.3%,75% 10.1%,82% 11.5%,85% 13%,86.3% 14.9%,86.3% 20.8%,85.7% 22%,83.4% 22.9%,83.7% 23.8%,82.1% 25.4%,82.2% 27.5%,85.1% 29.9%,86.6% 32.1%,86.9% 34.1%,86.4% 36%,86.5% 74.5%,87% 77.5%,86.5% 80.6%,85.1% 83.9%,82.4% 86.6%,77.8% 88.8%,68% 90.3%,58% 91%,48% 91.3%,36% 90.9%,24% 89.4%,17.5% 87.5%,14.1% 84.6%,12.9% 81.1%,12.8% 76.7%,13.6% 74.3%,13.1% 36.1%,12.6% 34.1%,13.1% 31.8%,14.3% 30%,17.5% 27.4%,17.8% 25.4%,16.9% 24.7%,16.3% 23.8%,16.8% 23.1%,14.7% 22.2%,13.6% 21%,13.5% 15%,14.7% 13.2%,17.5% 11.7%,24% 10.3%,37% 9.5%)}
 </style>
 <script defer>
 (()=>{
@@ -590,18 +594,23 @@ function renderFaitMaisonBook(){
  });
  $$('.fm-product-page',book).forEach(setupFaitMaisonProduct);
 }
-function setupFaitMaisonPhotoJar(model, artwork, peanut){
+const faitMaisonJarPhotos={
+ poulet:{file:'rotation-jar.webp',height:1320,radius:270,top:630},
+ beurre:{file:'rotation-peanut.webp',height:1179,radius:287,top:505,style:'fm-peanut-photo'},
+ caviar:{file:'rotation-caviar.webp',height:1100,radius:317,top:428,style:'fm-caviar-photo'}
+};
+function setupFaitMaisonPhotoJar(model, artwork, config){
  model.classList.add('fm-photo-model');
- if(peanut)model.classList.add('fm-peanut-photo');
+ if(config.style)model.classList.add(config.style);
  const photo=document.createElement('img');
- photo.src='./assets/projects/fait-maison/'+(peanut?'rotation-peanut.webp':'rotation-jar.webp');
+ photo.src='./assets/projects/fait-maison/'+config.file;
  photo.alt='';
  photo.draggable=false;
  photo.decoding='async';
  model.prepend(photo);
  const layer=document.createElement('canvas');
  layer.width=880;
- layer.height=peanut?1179:1320;
+ layer.height=config.height;
  layer.className='fm-photo-label';
  layer.setAttribute('aria-hidden','true');
  model.append(layer);
@@ -612,11 +621,11 @@ function setupFaitMaisonPhotoJar(model, artwork, peanut){
   context.clearRect(0,0,layer.width,layer.height);
   if(!artwork.naturalWidth || amount<=0)return;
   const center=440;
-  const radius=peanut?287:270;
+  const radius=config.radius;
   const shift=angle/360;
   const sourceWidth=artwork.naturalWidth;
   const sourceHeight=artwork.naturalHeight;
-  const top=peanut?505:630;
+  const top=config.top;
   const height=sourceHeight/sourceWidth*(2*Math.PI*radius);
   for(let x=center-radius;x<center+radius;x++){
    const curve=(x-center)/radius;
@@ -666,8 +675,7 @@ function setupFaitMaisonProduct(page){
  const note=$('.fm-design-note',page);
  const bottle=canvas.dataset.shape==='bottle';
  let angle=0, drag, paintPhoto;
- const peanut=canvas.dataset.label==='beurre';
- const usesPhoto=peanut||canvas.dataset.label==='poulet';
+ const photoConfig=faitMaisonJarPhotos[canvas.dataset.label];
  function face(kind,deg,radius,width){
   const el=document.createElement('span');
   el.className='fm-face is-'+kind;
@@ -707,8 +715,8 @@ function setupFaitMaisonProduct(page){
  }
  wrap.addEventListener('click',()=>{
   const reveal=model.hidden;
-  if(reveal&&usesPhoto)paintPhoto??=setupFaitMaisonPhotoJar(model,artwork,peanut);
-  if(reveal&&!usesPhoto&&!spin.childElementCount)buildModel();
+  if(reveal&&photoConfig)paintPhoto??=setupFaitMaisonPhotoJar(model,artwork,photoConfig);
+  if(reveal&&!photoConfig&&!spin.childElementCount)buildModel();
   rotate(0);
   model.hidden=!reveal;
   if(reveal)paintPhoto?.(0,true);
