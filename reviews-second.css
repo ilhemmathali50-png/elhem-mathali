@@ -1,27 +1,100 @@
-/* Creative Editions · second authentic client testimonial */
-.client-review-head>span:first-child{letter-spacing:.14em}
-.client-review-extra{border-top:1px solid #e4ccd6;margin-top:28px;padding-top:28px;display:grid;grid-template-columns:minmax(0,.32fr) minmax(0,.68fr);gap:23px;align-items:start}
-.client-review-extra-label{font:800 10px/1.6 var(--sans);letter-spacing:.17em;color:#9e3c5a;text-transform:uppercase;margin-bottom:15px}
-.client-review-extra-side h4{font:400 clamp(26px,4vw,38px)/1.13 var(--serif);letter-spacing:-.04em;color:#40313c;margin:0 0 12px}
-.client-review-extra-side p{font:400 12px/1.75 var(--sans);color:#7a6975;margin:0}
-.client-review-new-message{position:relative;border:1px solid #e0ccd7;background:linear-gradient(140deg,#fff9fa,#f6eaf1);padding:25px 26px;border-radius:20px;box-shadow:0 11px 30px #5831480a}
-.client-review-new-message blockquote{font:400 clamp(18px,2.9vw,26px)/1.54 var(--serif);letter-spacing:-.016em;color:#43333d;margin:0 0 20px}
-.client-review-new-message footer{border-top:1px solid #e9d8df;padding-top:14px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:5px}
-.client-review-new-message footer strong{font:800 11px/1.4 var(--sans);color:#613c4f}
-.client-review-new-message footer span{font:400 10px/1.5 var(--sans);color:#856e7e}
-@media(max-width:690px){.client-review-extra{grid-template-columns:1fr;gap:15px}.client-review-new-message{padding:21px 18px}.client-review-new-message blockquote{font-size:clamp(19px,5vw,24px)}}
-@media(max-width:440px){.client-review-extra{margin-top:24px;padding-top:24px}.client-review-new-message blockquote{line-height:1.48}}
-
-/* The second capture uses a landscape WhatsApp screenshot, unlike the first portrait proof. */
-.client-review-evidence--second{margin-top:22px;align-items:center;background:#fffefedc}
-.client-review-evidence--second .client-review-capture{width:min(185px,43%);aspect-ratio:440/285;flex:none;transform:rotate(-1deg);border-radius:12px}
-.client-review-evidence--second .client-review-capture img{width:100%;height:100%;object-fit:cover}
-.client-review-evidence--second .client-review-evidence-copy strong{font-size:clamp(18px,3vw,24px)}
+/* The Creative Editions · clear, minimal testimonials
+   Two real client quotes, each linked to its original screenshot */
+.client-review.client-review--simple{
+  margin:clamp(28px,5vw,48px) 0 30px;
+  padding:clamp(20px,4vw,34px);
+  background:linear-gradient(125deg,#fffaf7,#f9edf3);
+  border:1px solid #ead8df;
+  border-radius:23px;
+  overflow:hidden;
+  box-shadow:0 12px 35px #4c2b420d;
+}
+.client-review--simple::before{display:none!important}
+.review-simple-head{margin-bottom:23px}
+.review-simple-kicker{
+  display:block;color:#9c3a59;
+  font:800 10px/1.5 var(--sans);letter-spacing:.17em;
+  margin-bottom:9px;
+}
+.client-review--simple .review-simple-head h3{
+  margin:0;
+  max-width:660px;
+  font:400 clamp(29px,4.6vw,43px)/1.15 var(--serif);
+  letter-spacing:-.047em;color:#382a36;
+  overflow-wrap:break-word;
+}
+.client-review--simple .review-simple-head h3 em{
+  color:#a42e48;font-style:italic;font-weight:400;
+}
+.review-simple-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;align-items:stretch;
+}
+.review-simple-card{
+  min-width:0;
+  display:flex;flex-direction:column;align-items:stretch;
+  padding:20px;
+  border:1px solid #e8d9df;
+  border-radius:16px;
+  background:#fffefcf2;
+}
+.client-review--simple .review-simple-quote{
+  margin:0;
+  font:400 clamp(18px,2.5vw,24px)/1.36 var(--serif);
+  color:#44323f;
+  letter-spacing:-.014em;
+  overflow-wrap:break-word;
+  word-break:normal;
+  text-wrap:pretty;
+}
+.review-simple-kind{
+  font:700 10px/1.5 var(--sans);
+  color:#9a5970;
+  margin:13px 0 19px;
+}
+.review-simple-proof{
+  appearance:none;
+  width:100%;
+  margin-top:auto;
+  display:flex;align-items:center;gap:12px;
+  text-align:left;
+  padding:9px 10px;
+  border:1px solid #e9d5de;
+  border-radius:12px;
+  background:#fbf4f7;
+  color:#913955;
+  cursor:pointer;
+  transition:background .2s ease,border-color .2s ease;
+}
+.review-simple-proof:hover{background:#f6e4ec;border-color:#d6a9bc}
+.review-simple-proof:focus-visible{outline:2px solid #a42e48;outline-offset:3px}
+.review-simple-thumbnail{
+  width:67px;height:61px;flex:0 0 67px;
+  display:grid;place-items:center;
+  border-radius:8px;overflow:hidden;
+  background:#29282a;
+}
+.review-simple-thumbnail img{
+  display:block;width:100%;height:100%;
+  object-fit:contain;
+}
+.review-simple-proof-label{
+  min-width:0;font:800 11px/1.45 var(--sans);
+}
 .client-review-dialog--second{width:min(94vw,760px);max-width:760px}
 .client-review-dialog--second .client-review-dialog-inner{height:min(75dvh,730px)}
 .client-review-dialog--second img{width:100%;max-height:100%;object-fit:contain}
-@media(max-width:480px){
- .client-review-evidence--second{flex-direction:column;align-items:stretch;gap:12px}
- .client-review-evidence--second .client-review-capture{width:min(100%,300px);aspect-ratio:440/285;margin:0 auto}
- .client-review-evidence--second .client-review-evidence-copy{text-align:center}
+@media(max-width:680px){
+  .review-simple-grid{grid-template-columns:1fr;gap:11px}
+  .review-simple-card{padding:18px}
+  .review-simple-head{margin-bottom:18px}
+  .client-review--simple .review-simple-quote{font-size:clamp(19px,5.2vw,24px)}
+  .review-simple-kind{margin-bottom:16px}
 }
+@media(max-width:370px){
+  .client-review.client-review--simple{padding:17px}
+  .review-simple-card{padding:15px}
+  .client-review--simple .review-simple-head h3{font-size:28px}
+  .review-simple-thumbnail{width:55px;flex-basis:55px;height:56px}
+}
+@media(prefers-reduced-motion:reduce){.review-simple-proof{transition:none}}
