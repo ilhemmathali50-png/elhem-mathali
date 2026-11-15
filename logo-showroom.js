@@ -13,7 +13,6 @@ const asset=p=>{
  }
  return './'+p;
 };
-const arrowSVG='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false" aria-hidden="true"><path d="M6 18 18 6M8 6h10v10"/></svg>';
 window.mountLogoShowroom=function(view){
  if(!view||view.dataset.logoGalleryMounted==='true')return;
  view.dataset.logoGalleryMounted='true';
