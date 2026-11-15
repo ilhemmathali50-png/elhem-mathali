@@ -1,0 +1,46 @@
+/* Minimal interface / no decorative UI icons. Brand marks and visual project work stay untouched. */
+.app-shell .portfolio-top-frame .bottom-nav button{
+  flex-direction:row;gap:0;min-height:46px;padding:9px 4px;
+  font-size:clamp(10px,2.65vw,12px);font-weight:750;line-height:1.25;
+}
+.app-shell .portfolio-top-frame .bottom-nav button svg,
+.creative-nav-icon,.sommaire-arrow,.about-service-icon,.about-art-symbol,
+.about-link-arrow,.client-review-mark,.lg-zoom-icon,
+.client-review-capture::after{display:none!important}
+.client-review-capture::after{content:none!important}
+.app-shell .header-contact{
+  width:auto;min-width:69px;height:37px;padding:8px 12px;
+  border-radius:999px;font:700 11px/1.2 var(--sans);
+}
+.sommaire-item{grid-template-columns:112px minmax(0,1fr)!important;gap:14px!important;padding-right:13px!important}
+.about-service{min-height:125px;gap:8px}
+.about-service h4{margin-top:3px}
+.about-services{align-items:stretch}
+.intro-exit,.herb-close,.fm-dialog .herb-close,
+.client-review-close,.divers-lightbox-close,.lg-close,
+.fc-modal-close,.mx-modal-head button{
+  width:auto!important;min-width:64px;height:auto!important;min-height:37px;
+  padding:8px 12px!important;border-radius:999px!important;
+  font:700 11px/1.2 var(--sans)!important;letter-spacing:0;
+}
+.toast-close{width:auto!important;min-width:61px;height:auto!important;min-height:30px;padding:7px 9px!important;border-radius:999px!important;font:700 10px/1.2 var(--sans)!important}
+.contact-toast{padding-right:86px}
+.fm-navigation button{font-size:11px!important;font-weight:700;padding:8px 12px!important;white-space:nowrap}
+.divers-lightbox-foot{grid-template-columns:minmax(77px,auto) minmax(0,1fr) minmax(77px,auto);gap:6px}
+.divers-lightbox-prev,.divers-lightbox-next{
+  width:auto!important;min-width:77px;max-width:100%;height:38px!important;
+  padding:7px 6px;border-radius:999px!important;font:700 10px/1.2 var(--sans)!important;
+}
+.divers-lightbox-close{color:#78304a}
+.client-review-dialog-head{gap:8px}
+@media(max-width:730px){
+ .app-shell .portfolio-top-frame .bottom-nav button{flex-direction:row!important;min-height:44px;font-size:clamp(9px,2.6vw,11px);white-space:nowrap}
+ .app-shell .portfolio-top-frame .bottom-nav{gap:3px}
+ .app-shell .header-contact{min-width:65px;height:36px;padding:7px 9px}
+}
+@media(max-width:400px){
+ .sommaire-item{grid-template-columns:88px minmax(0,1fr)!important;gap:11px!important}
+ .divers-lightbox-foot{grid-template-columns:70px minmax(0,1fr) 70px;padding:10px 7px;gap:4px}
+ .divers-lightbox-prev,.divers-lightbox-next{min-width:68px!important;font-size:9px!important}
+ .contact-toast{padding-right:76px}
+}
