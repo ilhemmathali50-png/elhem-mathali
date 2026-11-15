@@ -45,8 +45,28 @@ function initDivers(){
   return item;
  });
  grid.append(...imageCards);
+ // The user's vertical video is a separate native player, not part of the image lightbox.
+ const videoCard=grid.querySelector('.divers-video-card');
+ const video=videoCard?.querySelector('video');
+ const playButton=videoCard?.querySelector('.divers-video-play');
+ if(video && playButton){
+   playButton.addEventListener('click',()=>{
+     playButton.hidden=true;
+     video.controls=true;
+     video.preload='metadata';
+     const maybePlay=video.play();
+     if(maybePlay?.catch)maybePlay.catch(()=>{video.controls=true;});
+   });
+   video.addEventListener('error',()=>{
+     if(video.dataset.fallbackTried==='true')return;
+     video.dataset.fallbackTried='true';
+     video.src='./assets/divers/formation-acupuncture.mp4';
+     video.load();
+     if(playButton.hidden){const maybePlay=video.play();if(maybePlay?.catch)maybePlay.catch(()=>{});}
+   });
+ }
  const count=page.querySelector('.divers-count');
- if(count)count.textContent=POSTERS.length+' créations à découvrir';
+ if(count)count.textContent=(POSTERS.length+(videoCard?1:0))+' créations à découvrir';
  const dialog=document.createElement('dialog');
  dialog.className='divers-lightbox';dialog.setAttribute('aria-label','Agrandissement des créations');
  dialog.innerHTML=`<div class="divers-lightbox-inner">
