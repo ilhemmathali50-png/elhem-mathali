@@ -1,5 +1,5 @@
-const CACHE='em-editions-v46-second-client-review';
-const CORE=['./index.html?v=46','./manifest.webmanifest','./app-icon.svg','./assets/projects/sommaire-covers.webp','./forceclean-native.css?v=30','./forceclean-native.js?v=21','./metallux-native.css?v=25','./metallux-native.js?v=31','./metallux-industrial.css?v=30','./metallux-studio.js?v=31','./metallux-garment3d.js?v=29','./logo-showroom.css?v=34','./logo-showroom.js?v=37','./creative-editorial.css?v=3','./divers-gallery-v2.css?v=2','./iconless-ui.css?v=1','./project-diagnostic.css?v=2','./reviews-second.css?v=1','./project-diagnostic.js?v=2','./creative-editorial.js?v=6','./assets/projects/metallux/native/logo-black-transparent.webp'];
+const CACHE='em-editions-v47-second-review-screenshot';
+const CORE=['./index.html?v=47','./manifest.webmanifest','./app-icon.svg','./assets/projects/sommaire-covers.webp','./forceclean-native.css?v=30','./forceclean-native.js?v=21','./metallux-native.css?v=25','./metallux-native.js?v=31','./metallux-industrial.css?v=30','./metallux-studio.js?v=31','./metallux-garment3d.js?v=29','./logo-showroom.css?v=34','./logo-showroom.js?v=37','./creative-editorial.css?v=3','./divers-gallery-v2.css?v=2','./iconless-ui.css?v=1','./project-diagnostic.css?v=2','./reviews-second.css?v=2','./assets/reviews/avis-cliente-02.svg','./project-diagnostic.js?v=2','./creative-editorial.js?v=6','./assets/projects/metallux/native/logo-black-transparent.webp'];
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
 });
@@ -10,7 +10,7 @@ self.addEventListener('fetch',event=>{
  const req=event.request;
  if(req.method!=='GET'||new URL(req.url).origin!==self.location.origin)return;
  if(req.mode==='navigate'){
-  event.respondWith(fetch(new Request(req,{cache:'reload'})).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put('./index.html?v=46',copy));}return res;}).catch(()=>caches.match('./index.html?v=46')));
+  event.respondWith(fetch(new Request(req,{cache:'reload'})).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put('./index.html?v=47',copy));}return res;}).catch(()=>caches.match('./index.html?v=47')));
   return;
  }
  event.respondWith(fetch(req).then(res=>{if(res.ok){const copy=res.clone();caches.open(CACHE).then(c=>c.put(req,copy));}return res;}).catch(()=>caches.match(req)));
