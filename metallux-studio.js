@@ -89,7 +89,7 @@
   const setOriginals=(on)=>{
    originalView.hidden=!on;
    originalsButton.setAttribute('aria-pressed',String(on));
-   originalsButton.textContent=on?'Revenir à la rotation 3D ↻':'Voir les mockups originaux ↗';
+   originalsButton.textContent=on?'Revenir à la rotation 3D':'Voir les mockups originaux';
   };
   originalsButton.addEventListener('click',()=>setOriginals(originalView.hidden));
   section.querySelectorAll('[data-mx-garment],#mxGarmentAngle,#mxGarmentAuto,#mxGarmentReset').forEach(control=>{
