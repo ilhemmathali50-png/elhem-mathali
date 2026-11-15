@@ -24,7 +24,7 @@ window.mountLogoShowroom=function(view){
  <div id="lgGrid" class="lg-grid" aria-label="Collection complète de logos"></div>
  <div class="lg-end"><span>END OF THE COLLECTION</span><span>ELHEM MATHELI · BRAND IDENTITY DESIGN</span></div>
  <dialog class="lg-dialog" id="lgDialog" aria-label="Présentation du logo">
-  <div class="lg-dialog-layout"><div class="lg-dialog-head"><div><span class="lg-dialog-eyebrow" id="lgDialogCat"></span><h2 id="lgDialogTitle"></h2></div><button class="lg-close" id="lgClose" type="button" aria-label="Fermer la présentation">×</button></div>
+  <div class="lg-dialog-layout"><div class="lg-dialog-head"><div><span class="lg-dialog-eyebrow" id="lgDialogCat"></span><h2 id="lgDialogTitle"></h2></div><button class="lg-close" id="lgClose" type="button" aria-label="Fermer la présentation">Fermer</button></div>
    <nav class="lg-detail-tabs" id="lgDetailTabs" aria-label="Choix du visuel"></nav>
    <div class="lg-detail-body" id="lgDetailBody"></div>
    <p class="lg-detail-foot">Visuels originaux · Présentation de portfolio</p>
@@ -36,7 +36,7 @@ window.mountLogoShowroom=function(view){
  function tile(it,index){
   const caption=it.board?'Voir la charte graphique':'Agrandir le logo';
   return `<button type="button" class="lg-logo" data-lg-item="${safe(it.slug)}" style="--lg-accent:${it.accent};--lg-soft:${it.soft};--lg-order:${Math.min(index,9)}" aria-label="${safe(it.name)} · ${caption}">
-   <span class="lg-logo-stage"><img src="${asset(it.src||it.board)}" alt="Logo ${safe(it.name)}" loading="${index<6?'eager':'lazy'}" decoding="async"><span class="lg-zoom-icon" aria-hidden="true">${arrowSVG}</span></span>
+   <span class="lg-logo-stage"><img src="${asset(it.src||it.board)}" alt="Logo ${safe(it.name)}" loading="${index<6?'eager':'lazy'}" decoding="async"></span>
    <span class="lg-logo-meta"><span><strong>${safe(it.name)}</strong><small>${safe(it.category)}</small></span>${it.board?'<span class="lg-logo-label">CHARTE</span>':''}</span>
   </button>`;
  }
