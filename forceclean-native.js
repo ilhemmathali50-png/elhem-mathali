@@ -15,7 +15,7 @@ function product(p){
  <div class="fc-inner">
  <div class="fc-product-head fc-reveal"><div><span class="fc-eyebrow">04 / PACKAGING · ${idx}</span><h2 id="fc-title-${p.id}">${p.title}</h2><p class="fc-product-info">${p.description}</p></div><span class="fc-product-volume">${p.volume}</span></div>
  <div class="fc-product-stage fc-reveal"><img class="fc-product-photo" src="${asset(p.photo)}" alt="Mockup original · ${p.title}" loading="lazy" decoding="async"><img class="fc-product-label" src="${asset(p.label)}" alt="Étiquette originale à plat · ${p.title}" loading="lazy" decoding="async"></div>
- <div class="fc-product-actions fc-reveal"><button type="button" data-fc-zoom="${asset(p.label)}" data-fc-title="${p.title} · Étiquette">Étiquette originale ↗</button><button type="button" data-fc-zoom="${asset(p.photo)}" data-fc-title="${p.title} · Mockup">Voir le mockup ↗</button></div>
+ <div class="fc-product-actions fc-reveal"><button type="button" data-fc-zoom="${asset(p.label)}" data-fc-title="${p.title} · Étiquette">Étiquette originale</button><button type="button" data-fc-zoom="${asset(p.photo)}" data-fc-title="${p.title} · Mockup">Voir le mockup</button></div>
  </div></section>`;
 }
 window.renderForceCleanNative=function renderForceCleanNative(detail){
@@ -58,7 +58,7 @@ window.renderForceCleanNative=function renderForceCleanNative(detail){
  <section class="fc-product fc-product-deep" id="fc-ocean" data-fc-chapter="products"><div class="fc-inner">
   <div class="fc-product-head fc-reveal"><div><span class="fc-eyebrow">04 / PACKAGING · 04</span><h2>Océan<br><em>&amp; textile.</em></h2><p class="fc-product-info">Deux déclinaisons de 500 ml, une même direction artistique pour l’Air Fresh Essence Océan et le Parfum de linge.</p></div><span class="fc-product-volume">500 ml</span></div>
   <div class="fc-product-duo fc-reveal"><img src="${asset('ocean-label')}" alt="Étiquette originale Air Fresh Essence Océan 500 ml" loading="lazy" decoding="async"><img src="${asset('textile-label')}" alt="Étiquette originale Parfum de linge Fraîcheur textile 500 ml" loading="lazy" decoding="async"></div>
-  <div class="fc-product-actions fc-reveal"><button type="button" data-fc-zoom="${asset('ocean-label')}" data-fc-title="Air Fresh · Essence Océan">Essence Océan ↗</button><button type="button" data-fc-zoom="${asset('textile-label')}" data-fc-title="Parfum de linge · Fraîcheur textile">Parfum de linge ↗</button></div>
+  <div class="fc-product-actions fc-reveal"><button type="button" data-fc-zoom="${asset('ocean-label')}" data-fc-title="Air Fresh · Essence Océan">Essence Océan</button><button type="button" data-fc-zoom="${asset('textile-label')}" data-fc-title="Parfum de linge · Fraîcheur textile">Parfum de linge</button></div>
  </div></section>
  <footer class="fc-outro"><div class="fc-inner"><strong>La propreté, mise en scène.</strong><p>ForceClean · Brand identity &amp; packaging design · Elhem Matheli</p></div></footer>
  <dialog class="fc-modal" id="fcNativePreview" aria-label="Agrandir un design ForceClean"><div class="fc-modal-head"><h3 id="fcNativePreviewTitle"></h3><button type="button" id="fcNativeClose" class="fc-modal-close" aria-label="Fermer">Fermer</button></div><div class="fc-modal-scene"><img id="fcNativePreviewImage" alt=""></div><button type="button" class="fc-modal-zoom" id="fcNativeZoom" aria-pressed="false">Agrandir +</button></dialog>
