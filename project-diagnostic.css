@@ -3,7 +3,7 @@
 .contact-view{max-width:920px;margin:0 auto;padding-bottom:80px}
 .contact-view .section-intro{margin-bottom:24px}
 .contact-view .section-intro p{max-width:570px}
-.project-diagnostic{--pd-ink:#372b35;--pd-muted:#75646f;--pd-line:#e7d4df;--pd-cherry:#98344f}
+.project-diagnostic{--pd-ink:#372b35;--pd-muted:#75646f;--pd-line:#e7d4df;--pd-cherry:#98344f;scroll-margin-top:155px}
 .pd-progress{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;border-top:1px solid var(--pd-line);border-bottom:1px solid var(--pd-line);margin-bottom:23px}
 .pd-progress-label{font:800 10px var(--sans);letter-spacing:.16em;color:#98405d}
 .pd-progress-count{font:400 25px/1 var(--serif);color:var(--pd-ink)}
