@@ -895,7 +895,7 @@ function init(){renderProjects();renderLogos();initForm();setupScrollTrail();set
  $('#playWelcome').addEventListener('click',enterIntro);
  $('#skipWelcome').addEventListener('click',()=>enterApp('editions'));$('#skipIntro').addEventListener('click',()=>enterApp());$('#introFilm').addEventListener('ended',()=>enterApp());
  $('#logoHome').addEventListener('click',()=>switchView('editions'));$('#topContact').addEventListener('click',()=>switchView('contact'));$('#backToBook').addEventListener('click',()=>switchView('editions'));$('#nextCase').addEventListener('click',()=>openProject(currentProject+1));$('#aboutContact').addEventListener('click',()=>switchView('contact'));$('#filmToBook').addEventListener('click',()=>switchView('editions'));
- $('[data-nav]').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.nav)));
+ $$('[data-nav]').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.nav)));
  showOnly('welcome');
  if('serviceWorker' in navigator&&location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
 }
@@ -1018,6 +1018,11 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  </section>
  <section class="about-chapter" aria-labelledby="aboutWhy"><div class="about-chapter-heading"><span class="about-chapter-number">04.</span><h3 id="aboutWhy">Pourquoi travailler avec moi ?</h3></div><p>Parce qu’un bon design doit aussi répondre à un vrai besoin de marque.</p>
    <div class="about-value-list"><div class="about-value"><strong>Une approche réfléchie</strong><p>Je commence par écouter, comprendre le produit, le public et l’objectif.</p></div><div class="about-value"><strong>Le souci du détail</strong><p>De la lisibilité d’une étiquette à la cohérence d’un feed, chaque élément compte.</p></div><div class="about-value"><strong>Une création sur mesure</strong><p>Je cherche une direction qui correspond à chaque projet, sans appliquer une formule identique à tous.</p></div></div>
+   <div class="about-path" aria-label="Mes astuces de design">
+     <div class="about-path-item"><small>ASTUCE / IDENTITÉ</small><strong>Un logo n’est pas toute une marque.</strong><p>Le choix des couleurs, des typographies et des règles d’utilisation fait la différence.</p></div>
+     <div class="about-path-item"><small>ASTUCE / PACKAGING</small><strong>La lisibilité passe en premier.</strong><p>Le nom et les informations essentielles doivent se comprendre en un coup d’œil.</p></div>
+     <div class="about-path-item"><small>ASTUCE / SOCIAL</small><strong>Cohérence ne veut pas dire répétition.</strong><p>Chaque publication peut être différente tout en restant reconnaissable.</p></div>
+   </div>
  </section>
  <section class="about-chapter" aria-labelledby="aboutContactTitle"><div class="about-chapter-heading"><span class="about-chapter-number">05.</span><h3 id="aboutContactTitle">Restons en contact</h3></div><p>Un projet, une question ou l’envie de collaborer ? Retrouvez-moi sur ces canaux.</p>
    <div class="about-connect">
