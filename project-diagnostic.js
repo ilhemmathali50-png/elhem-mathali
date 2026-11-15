@@ -17,33 +17,33 @@ const choiceLabel=root.querySelector('#creativeChoiceLabel');
 const topics={
   brand:{
     choice:'Créer une identité de marque',
-    title:'Donnons une personnalité à votre marque.',
-    reply:'Un univers fort commence par une idée claire. Ensemble, nous pouvons créer un logo, une palette et un langage visuel qui racontent votre histoire.'
+    title:'Donnons une personnalité à votre marque',
+    reply:'Un univers fort commence par une idée claire. Ensemble, nous pouvons créer un logo, une palette et un langage visuel qui racontent votre histoire'
   },
   refresh:{
     choice:'Faire évoluer mon identité',
-    title:'Votre marque a déjà une histoire. Faisons-la évoluer.',
-    reply:'Pas besoin de tout recommencer. Je peux vous aider à moderniser son image et à retrouver une cohérence entre vos supports.'
+    title:'Votre marque a déjà une histoire. Faisons-la évoluer',
+    reply:'Pas besoin de tout recommencer. Je peux vous aider à moderniser son image et à retrouver une cohérence entre vos supports'
   },
   packaging:{
     choice:'Créer un packaging ou des étiquettes',
-    title:'Votre produit mérite le premier regard.',
-    reply:'Une étiquette bien pensée valorise le produit et transmet le bon message. Parlons du format, de son univers et de ce que vous voulez faire ressentir.'
+    title:'Votre produit mérite le premier regard',
+    reply:'Une étiquette bien pensée valorise le produit et transmet le bon message. Parlons du format, de son univers et de ce que vous voulez faire ressentir'
   },
   social:{
     choice:'Créer du contenu pour les réseaux',
-    title:'Faisons reconnaître votre marque au premier coup d’œil.',
-    reply:'Posts, carrousels, campagnes ou reels : nous pouvons créer un univers éditorial cohérent qui se distingue sans se répéter.'
+    title:'Faisons reconnaître votre marque au premier coup d’œil',
+    reply:'Posts, carrousels, campagnes ou reels : nous pouvons créer un univers éditorial cohérent qui se distingue sans se répéter'
   },
   digital:{
     choice:'Concevoir une expérience digitale',
-    title:'Transformons votre idée en expérience claire.',
-    reply:'Site, page de présentation ou interface : je peux vous aider à structurer un parcours agréable et cohérent avec votre identité.'
+    title:'Transformons votre idée en expérience claire',
+    reply:'Site, page de présentation ou interface : je peux vous aider à structurer un parcours agréable et cohérent avec votre identité'
   },
   explore:{
     choice:'Discuter de mon idée',
-    title:'Vous n’avez pas besoin d’avoir toutes les réponses.',
-    reply:'Une idée encore floue ? Racontez-moi ce que vous imaginez. Nous identifierons ensemble la direction créative la plus pertinente.'
+    title:'Vous n’avez pas besoin d’avoir toutes les réponses',
+    reply:'Une idée encore floue ? Racontez-moi ce que vous imaginez. Nous identifierons ensemble la direction créative la plus pertinente'
   }
 };
 let active=null;
