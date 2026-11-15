@@ -367,8 +367,10 @@ body.video-active .portfolio-top-frame{display:none!important}
 <link rel="stylesheet" href="./creative-editorial.css?v=3">
 <link rel="stylesheet" href="./divers-gallery-v2.css?v=2">
 <link rel="stylesheet" href="./iconless-ui.css?v=1">
+<link rel="stylesheet" href="./project-diagnostic.css?v=1">
 <script src="./logo-showroom.js?v=37" defer></script>
 <script src="./creative-editorial.js?v=6" defer></script>
+<script src="./project-diagnostic.js?v=1" defer></script>
 <script src="./forceclean-native.js?v=21" defer></script>
 <script src="./metallux-native.js?v=31" defer></script>
 <script src="./metallux-studio.js?v=31" defer></script>
@@ -883,7 +885,6 @@ function setupClientCapture(){
  dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
  dialog.addEventListener('close',()=>trigger.focus({preventScroll:true}));
 }
-function initForm(){const form=$('#briefForm');form.addEventListener('submit',e=>{e.preventDefault();const f=new FormData(form);const t=`BRIEF CRÉATIF — ELHEM MATHELI\nNom : ${f.get('name')}\nMarque : ${f.get('brand')||'À préciser'}\nService : ${f.get('service')}\nProjet : ${f.get('goal')}`;$('#briefText').textContent=t;$('#briefOutput').hidden=false;$('#briefOutput').scrollIntoView({behavior:'smooth',block:'start'})});$('#copyBrief').addEventListener('click',async()=>{const text=$('#briefText').textContent;try{await navigator.clipboard.writeText(text);$('#copyBrief').textContent='Copié'}catch(e){$('#copyBrief').textContent='Sélectionner et copier le texte'}})}
 
 let toastSeen=false,trailPending=false;
 function refreshScrollTrail(){const app=$('#app');if(!app||app.hidden)return;const d=document.documentElement;const max=Math.max(d.scrollHeight-innerHeight,1);const p=Math.max(0,Math.min(1,scrollY/max));d.style.setProperty('--trail-p',p.toFixed(3));d.style.setProperty('--trail-y',(27+60*p)+'%');d.style.setProperty('--trail-x',(50+24*Math.sin(p*Math.PI*2))+'%');}
@@ -892,7 +893,7 @@ function hideContactToast(){const toast=$('#contactToast');if(toast)toast.classL
 function showContactToast(){if(toastSeen)return;toastSeen=true;const toast=$('#contactToast');if(toast)requestAnimationFrame(()=>toast.classList.add('visible'))}
 function setupContactToast(){const toast=document.createElement('aside');toast.id='contactToast';toast.className='contact-toast';toast.setAttribute('role','status');toast.setAttribute('aria-live','polite');toast.innerHTML='<button class="toast-close" type="button" aria-label="Fermer">Fermer</button><small>A LITTLE NOTE FROM ELHEM</small><strong>Une idée en tête ? <em>On en parle ?</em></strong><p>Si mes services t’intéressent, n’hésite pas à me contacter. Je serais ravie de découvrir ton projet.</p><button type="button" class="toast-cta">Parlons de ton projet</button>';document.body.appendChild(toast);toast.querySelector('.toast-close').addEventListener('click',hideContactToast);toast.querySelector('.toast-cta').addEventListener('click',()=>{hideContactToast();const input=$('.contact-view input[name="name"]');if(input){input.scrollIntoView({behavior:'smooth',block:'center'});input.focus({preventScroll:true})}})}
 
-function init(){renderProjects();renderLogos();initForm();setupScrollTrail();setupContactToast();setupClientCapture();
+function init(){renderProjects();renderLogos();setupScrollTrail();setupContactToast();setupClientCapture();
  $('#playWelcome').addEventListener('click',enterIntro);
  $('#skipWelcome').addEventListener('click',()=>enterApp('editions'));$('#skipIntro').addEventListener('click',()=>enterApp());$('#introFilm').addEventListener('ended',()=>enterApp());
  $('#logoHome').addEventListener('click',()=>switchView('editions'));$('#topContact').addEventListener('click',()=>switchView('contact'));$('#backToBook').addEventListener('click',()=>switchView('editions'));$('#nextCase').addEventListener('click',()=>openProject(currentProject+1));$('#aboutContact').addEventListener('click',()=>switchView('contact'));$('#filmToBook').addEventListener('click',()=>switchView('editions'));
@@ -1035,7 +1036,71 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  </section>
  <footer class="about-thanks"><span class="creative-eyebrow">A LITTLE NOTE FROM ELHEM</span><h3>Merci pour votre<br><em>confiance.</em></h3><p>Merci d’avoir découvert mon univers. J’espère avoir le plaisir de faire partie de votre prochain projet et de créer, ensemble, quelque chose qui vous ressemble.</p><button type="button" class="primary-button" id="aboutContact">Start your brand story </button></footer>
 </section>
-<section class="app-view contact-view" data-view="contact" hidden><div class="section-intro"><div class="eyebrow">LET’S WORK TOGETHER</div><h2>Start your<br><em>brand story.</em></h2><p>Un petit brief pour mieux comprendre votre projet, sans formulaire compliqué.</p></div><form id="briefForm" class="brief-form"><label>Votre nom<input name="name" placeholder="Votre nom" required autocomplete="name"></label><label>Nom de la marque<input name="brand" placeholder="Votre marque (optionnel)"></label><label>Quel type de projet ?<select name="service"><option>Brand Identity</option><option>Packaging Design</option><option>Creative Content</option><option>Autre projet</option></select></label><label>Parlez-moi de votre idée<textarea name="goal" placeholder="Racontez votre projet en quelques mots" required rows="4"></textarea></label><button class="primary-button" type="submit">Préparer mon brief</button></form><div id="briefOutput" hidden class="brief-output" aria-live="polite"><h3>Votre brief est prêt.</h3><pre id="briefText"></pre><button id="copyBrief" class="outline-button" type="button">Copier le brief</button></div></section>
+<section class="app-view contact-view" data-view="contact" hidden aria-labelledby="contactTitle">
+  <div class="section-intro">
+    <div class="eyebrow">LET’S WORK TOGETHER / THE PROJECT MATCH</div>
+    <h2 id="contactTitle">Start your<br><em>brand story.</em></h2>
+    <p>Vous avez une idée, mais vous ne savez pas exactement de quel design vous avez besoin ? Quelques choix suffisent pour trouver une première direction et me contacter directement.</p>
+  </div>
+  <div id="projectDiagnostic" class="project-diagnostic" data-pd-current="1">
+    <div class="pd-progress"><span class="pd-progress-label">YOUR CREATIVE PROJECT</span><span class="pd-progress-count"><strong id="pdStepValue">01</strong><span> / 03</span></span></div>
+    <div class="pd-track" aria-hidden="true"><span class="pd-track-fill" id="pdTrackFill"></span></div>
+    <section class="pd-step" data-pd-panel="1" aria-labelledby="pdFirstTitle">
+      <span class="pd-step-number">ÉTAPE 01 / LE POINT DE DÉPART</span>
+      <h3 id="pdFirstTitle">Parlons de <em>votre idée.</em></h3>
+      <p class="pd-lead">Quelle situation ressemble le plus à votre projet ? Pas besoin de connaître les termes techniques du design.</p>
+      <div class="pd-choices" aria-label="Votre type de projet">
+        <button class="pd-choice" type="button" data-pd-kind="launch"><small>01 / BRAND</small><strong>Je lance une marque</strong><span>Une nouvelle idée, un nouveau nom, une histoire à construire.</span></button>
+        <button class="pd-choice" type="button" data-pd-kind="evolve"><small>02 / REFRESH</small><strong>Je veux faire évoluer ma marque</strong><span>Je veux une image plus claire et plus cohérente.</span></button>
+        <button class="pd-choice" type="button" data-pd-kind="product"><small>03 / PACKAGING</small><strong>Je prépare un produit</strong><span>Étiquette, emballage ou présentation d’une gamme.</span></button>
+        <button class="pd-choice" type="button" data-pd-kind="content"><small>04 / CONTENT</small><strong>Je veux communiquer autrement</strong><span>Publications, campagnes, reels et contenu créatif.</span></button>
+        <button class="pd-choice" type="button" data-pd-kind="digital"><small>05 / DIGITAL</small><strong>J’ai un projet digital</strong><span>Site, interface ou expérience sur mobile.</span></button>
+      </div>
+    </section>
+    <section class="pd-step" data-pd-panel="2" aria-labelledby="pdSecondTitle" hidden>
+      <span class="pd-step-number">ÉTAPE 02 / VOTRE PRIORITÉ</span>
+      <h3 id="pdSecondTitle">Quel résultat <em>recherchez-vous ?</em></h3>
+      <p class="pd-lead">Pour votre projet : <strong id="pdKindSelected"></strong>. Choisissez votre priorité et je vous proposerai un premier axe de travail.</p>
+      <div class="pd-choices pd-goals" id="pdGoalChoices" aria-label="Choisir votre priorité"></div>
+      <div class="pd-actions"><button class="pd-back" type="button" data-pd-back="1">Changer de projet</button></div>
+    </section>
+    <section class="pd-step" data-pd-panel="3" aria-labelledby="pdLastTitle" hidden>
+      <span class="pd-step-number">ÉTAPE 03 / ON ÉCHANGE</span>
+      <h3 id="pdLastTitle">Une direction <em>pour commencer.</em></h3>
+      <p class="pd-lead">Voici une première piste fondée sur vos choix, pas un diagnostic définitif. On affinera ensemble le périmètre et les livrables.</p>
+      <div class="pd-result" aria-live="polite">
+        <div class="pd-result-top"><small>VOTRE PISTE CRÉATIVE</small><span>Suggestion personnalisée</span></div>
+        <div class="pd-result-body">
+          <h4 id="pdServiceName"></h4>
+          <p id="pdServiceCopy"></p>
+          <div class="pd-result-what" id="pdDeliverables" aria-label="Livrables possibles"></div>
+        </div>
+      </div>
+      <div class="pd-contact-heading"><h4>Donnez-moi quelques détails.</h4><p>Ce message servira uniquement à préparer notre échange sur WhatsApp.</p></div>
+      <form id="pdDetailsForm" class="pd-mini-form">
+        <div class="pd-form-row">
+          <label>Votre prénom ou nom
+            <input name="name" type="text" placeholder="Votre nom" autocomplete="name" maxlength="90" required>
+          </label>
+          <label>Votre marque (facultatif)
+            <input name="brand" type="text" placeholder="Nom de la marque" maxlength="90">
+          </label>
+        </div>
+        <label>Racontez-moi votre idée en quelques mots
+          <textarea name="goal" placeholder="Ex. Je prépare une gamme de soins et j’ai besoin d’étiquettes cohérentes..." rows="3" maxlength="650" required></textarea>
+        </label>
+      </form>
+      <div class="pd-final-actions">
+        <a id="pdWhatsApp" class="pd-send" href="https://wa.me/21622271913" target="_blank" rel="noopener noreferrer">Discuter de mon projet sur WhatsApp</a>
+        <button id="pdCopy" class="pd-copy" type="button">Copier mon résumé</button>
+      </div>
+      <p class="pd-disclaimer">Le message s’ouvrira dans WhatsApp pour que vous puissiez le relire et l’envoyer vous-même. Aucune demande n’est envoyée automatiquement.</p>
+      <p id="pdCopyStatus" class="pd-note" role="status" aria-live="polite"></p>
+      <div class="pd-actions"><button class="pd-back" type="button" data-pd-back="2">Modifier ma priorité</button></div>
+    </section>
+    <div class="pd-alternative">Vous préférez un échange direct ? <a href="https://wa.me/21622271913" target="_blank" rel="noopener noreferrer">WhatsApp</a> ou <a href="mailto:contactmathali@gmail.com">e-mail</a>.</div>
+  </div>
+</section>
 </main>
 </div>
 <script>
