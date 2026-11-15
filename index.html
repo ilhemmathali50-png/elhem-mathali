@@ -400,12 +400,13 @@ body.video-active .portfolio-top-frame{display:none!important}
 <link rel="stylesheet" href="./logo-showroom.css?v=34">
 <link rel="stylesheet" href="./creative-editorial.css?v=3">
 <link rel="stylesheet" href="./divers-gallery-v2.css?v=2">
+<link rel="stylesheet" href="./divers-video.css?v=1">
 <link rel="stylesheet" href="./iconless-ui.css?v=1">
 <link rel="stylesheet" href="./project-diagnostic.css?v=2">
 <link rel="stylesheet" href="./reviews-second.css?v=3">
 <link rel="stylesheet" href="./about-toolkit.css?v=2">
 <script src="./logo-showroom.js?v=37" defer></script>
-<script src="./creative-editorial.js?v=6" defer></script>
+<script src="./creative-editorial.js?v=7" defer></script>
 <script src="./project-diagnostic.js?v=3" defer></script>
 <script src="./forceclean-native.js?v=22" defer></script>
 <script src="./metallux-native.js?v=31" defer></script>
@@ -1024,14 +1025,28 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <section class="app-view logos-view" data-view="logos" hidden><div class="section-intro"><div class="eyebrow">THE LOGO ATELIER</div><h2>Little marks.<br><em>Big ideas</em></h2><p>Une vitrine de recherches et d’identités graphiques, sans inventer de réalisations</p></div><div class="logo-grid" id="logoGrid"></div><div class="editorial-note">La construction d’un logo commence toujours par une idée claire, pas par un effet</div></section>
 <section class="app-view divers-view" data-view="divers" hidden aria-labelledby="diversTitle">
   <header class="divers-hero"><span class="creative-eyebrow">THE CREATIVE EDITIONS / CONTENT STUDIO</span><h2 id="diversTitle">Divers<br><em>En mouvement</em></h2><p>Des campagnes créatives et des contenus pensés pour capter le regard. Découvrez mes visuels pour TrackSolid Pro et Élya Natura</p></header>
-  <p class="divers-count" aria-live="polite">17 créations à découvrir</p>
+  <p class="divers-count" aria-live="polite">18 créations à découvrir</p>
   <div class="divers-grid" id="diversGrid">
+    <article class="divers-card divers-video-card" data-divers-type="videos">
+      <div class="divers-video-stage">
+        <video id="diversFormationVideo" playsinline webkit-playsinline preload="none" aria-label="Montage vidéo pour une formation en acupuncture">
+          <source src="./assets/divers/formation-acupuncture-web.mp4" type="video/mp4">
+          Votre navigateur ne peut pas lire cette vidéo.
+        </video>
+        <button type="button" class="divers-video-play" id="diversFormationPlay" aria-label="Lire le montage vidéo de formation en acupuncture">
+          <span class="divers-video-kicker">VIDEO EDITION / 01</span>
+          <strong>Formation acupuncture</strong>
+          <span class="divers-video-action">Voir la vidéo</span>
+        </button>
+      </div>
+      <div class="divers-poster-caption"><small>MONTAGE VIDÉO · FORMAT VERTICAL</small><strong>Formation en acupuncture</strong><span>Concept visuel et montage</span></div>
+    </article>
     
     <article class="divers-card" data-divers-type="posts"><div class="divers-media"><img src="./assets/projects/fait-maison/mock-geranium.webp" alt="Visuel produit et packaging Eau de géranium de Fait Maison" loading="lazy"></div><div class="divers-card-copy"><small>02 / VISUEL · PRODUIT</small><h3>Fait Maison</h3><p>Mise en scène d’un produit, choix de la composition et narration visuelle</p></div></article>
     <article class="divers-card" data-divers-type="posts"><div class="divers-media"><img src="./assets/projects/herbtresor/brand_story.webp" alt="Planche de direction artistique pour HerbTrésor" loading="lazy"></div><div class="divers-card-copy"><small>03 / CRÉATION · BRANDING</small><h3>HerbTrésor</h3><p>Direction graphique et langage visuel d’une marque inspirée par la nature</p></div></article>
     <article class="divers-card" data-divers-type="posts"><div class="divers-media"><img src="./assets/projects/forceclean/native/air-mockup.webp" alt="Visuel de packaging de produit ForceClean" loading="lazy"></div><div class="divers-card-copy"><small>04 / VISUEL · PACKAGING</small><h3>ForceClean</h3><p>Présentation d’un produit d’entretien et de son univers visuel</p></div></article>
   </div>
-  <footer class="divers-footer"><p>17 créations graphiques à découvrir. Chaque image conserve son design original ; touchez un visuel pour le découvrir en grand</p><button id="filmToBook" type="button" class="outline-button">Retour au sommaire </button></footer>
+  <footer class="divers-footer"><p>17 visuels et 1 montage vidéo à découvrir. Touchez un visuel pour l’agrandir ou lancez la vidéo pour la regarder</p><button id="filmToBook" type="button" class="outline-button">Retour au sommaire </button></footer>
 </section>
 <section class="app-view about-view" data-view="about" hidden aria-labelledby="aboutTitle">
  <header class="about-hero">
