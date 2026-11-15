@@ -1,0 +1,13 @@
+/* The Creative Editions · designer toolkit in À propos */
+.about-toolkit-intro{max-width:640px;margin-bottom:19px}
+.about-toolkit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.about-tool{min-width:0;min-height:189px;display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:22px 20px;border-radius:18px;border:1px solid #e4d4df;background:linear-gradient(145deg,#fffdfc,#f8eaf0);transition:transform .25s ease,box-shadow .25s ease}
+.about-tool:nth-child(2){background:linear-gradient(135deg,#fdf9fe,#efe8f5)}
+.about-tool:nth-child(3){background:linear-gradient(125deg,#f7fbfd,#e9eff7)}
+.about-tool:hover{transform:translateY(-2px);box-shadow:0 14px 27px #682e4512}
+.about-tool small{font:800 10px/1.4 var(--sans);letter-spacing:.16em;color:#9d4566}
+.about-tool h4{margin:5px 0 0;font:400 clamp(23px,3vw,29px)/1.1 var(--serif);letter-spacing:-.04em;color:#3e2e3b}
+.about-tool p{margin:0;font:400 12px/1.7 var(--sans);color:#6e5e6b}
+.about-tool .about-tool-use{font:700 10px/1.5 var(--sans);color:#8e415e;margin-top:auto;padding-top:10px;border-top:1px solid #e7d4de;width:100%}
+@media(max-width:730px){.about-toolkit{grid-template-columns:1fr;gap:11px}.about-tool{min-height:unset;gap:9px;padding:19px 18px}.about-tool h4{font-size:26px}}
+@media(prefers-reduced-motion:reduce){.about-tool{transition:none}}
