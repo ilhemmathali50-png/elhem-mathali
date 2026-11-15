@@ -367,10 +367,10 @@ body.video-active .portfolio-top-frame{display:none!important}
 <link rel="stylesheet" href="./creative-editorial.css?v=3">
 <link rel="stylesheet" href="./divers-gallery-v2.css?v=2">
 <link rel="stylesheet" href="./iconless-ui.css?v=1">
-<link rel="stylesheet" href="./project-diagnostic.css?v=1">
+<link rel="stylesheet" href="./project-diagnostic.css?v=2">
 <script src="./logo-showroom.js?v=37" defer></script>
 <script src="./creative-editorial.js?v=6" defer></script>
-<script src="./project-diagnostic.js?v=1" defer></script>
+<script src="./project-diagnostic.js?v=2" defer></script>
 <script src="./forceclean-native.js?v=21" defer></script>
 <script src="./metallux-native.js?v=31" defer></script>
 <script src="./metallux-studio.js?v=31" defer></script>
@@ -397,7 +397,7 @@ function enterIntro(){
  film.play().catch(()=>film.focus());
 }
 function enterApp(view='editions'){const film=$('#introFilm');if(film){film.pause();}showOnly('app');switchView(view)}
-function switchView(view){if(view==='project')view='detail';const prev=activeView;activeView=view;document.body.classList.toggle('video-active',view==='video');$$('[data-view]').forEach(el=>el.hidden=el.dataset.view!==view);$$('[data-nav]').forEach(el=>{if(el.dataset.nav===view||view==='detail'&&el.dataset.nav==='editions')el.setAttribute('aria-current','page');else el.removeAttribute('aria-current')});const film=$('#portfolioFilm');if(film){if(view==='video'){const p=film.play();if(p&&typeof p.catch==='function')p.catch(()=>{film.controls=true})}else film.pause()}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:reduce?'instant':'smooth'});if(view==='contact'&&prev!=='contact')showContactToast();else if(view!=='contact')hideContactToast();refreshScrollTrail();}
+function switchView(view){if(view==='project')view='detail';const prev=activeView;activeView=view;document.body.classList.toggle('video-active',view==='video');$$('[data-view]').forEach(el=>el.hidden=el.dataset.view!==view);$$('[data-nav]').forEach(el=>{if(el.dataset.nav===view||view==='detail'&&el.dataset.nav==='editions')el.setAttribute('aria-current','page');else el.removeAttribute('aria-current')});const film=$('#portfolioFilm');if(film){if(view==='video'){const p=film.play();if(p&&typeof p.catch==='function')p.catch(()=>{film.controls=true})}else film.pause()}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:reduce?'instant':'smooth'});hideContactToast();refreshScrollTrail();}
 function renderProjects(){
  const area=$('#projectStrip');
  if(!area)return;
@@ -1037,69 +1037,49 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  <footer class="about-thanks"><span class="creative-eyebrow">A LITTLE NOTE FROM ELHEM</span><h3>Merci pour votre<br><em>confiance.</em></h3><p>Merci d’avoir découvert mon univers. J’espère avoir le plaisir de faire partie de votre prochain projet et de créer, ensemble, quelque chose qui vous ressemble.</p><button type="button" class="primary-button" id="aboutContact">Start your brand story </button></footer>
 </section>
 <section class="app-view contact-view" data-view="contact" hidden aria-labelledby="contactTitle">
-  <div class="section-intro">
-    <div class="eyebrow">LET’S WORK TOGETHER / THE PROJECT MATCH</div>
-    <h2 id="contactTitle">Start your<br><em>brand story.</em></h2>
-    <p>Vous avez une idée, mais vous ne savez pas exactement de quel design vous avez besoin ? Quelques choix suffisent pour trouver une première direction et me contacter directement.</p>
-  </div>
-  <div id="projectDiagnostic" class="project-diagnostic" data-pd-current="1">
-    <div class="pd-progress"><span class="pd-progress-label">YOUR CREATIVE PROJECT</span><span class="pd-progress-count"><strong id="pdStepValue">01</strong><span> / 03</span></span></div>
-    <div class="pd-track" aria-hidden="true"><span class="pd-track-fill" id="pdTrackFill"></span></div>
-    <section class="pd-step" data-pd-panel="1" aria-labelledby="pdFirstTitle">
-      <span class="pd-step-number">ÉTAPE 01 / LE POINT DE DÉPART</span>
-      <h3 id="pdFirstTitle">Parlons de <em>votre idée.</em></h3>
-      <p class="pd-lead">Quelle situation ressemble le plus à votre projet ? Pas besoin de connaître les termes techniques du design.</p>
-      <div class="pd-choices" aria-label="Votre type de projet">
-        <button class="pd-choice" type="button" data-pd-kind="launch"><small>01 / BRAND</small><strong>Je lance une marque</strong><span>Une nouvelle idée, un nouveau nom, une histoire à construire.</span></button>
-        <button class="pd-choice" type="button" data-pd-kind="evolve"><small>02 / REFRESH</small><strong>Je veux faire évoluer ma marque</strong><span>Je veux une image plus claire et plus cohérente.</span></button>
-        <button class="pd-choice" type="button" data-pd-kind="product"><small>03 / PACKAGING</small><strong>Je prépare un produit</strong><span>Étiquette, emballage ou présentation d’une gamme.</span></button>
-        <button class="pd-choice" type="button" data-pd-kind="content"><small>04 / CONTENT</small><strong>Je veux communiquer autrement</strong><span>Publications, campagnes, reels et contenu créatif.</span></button>
-        <button class="pd-choice" type="button" data-pd-kind="digital"><small>05 / DIGITAL</small><strong>J’ai un projet digital</strong><span>Site, interface ou expérience sur mobile.</span></button>
-      </div>
-    </section>
-    <section class="pd-step" data-pd-panel="2" aria-labelledby="pdSecondTitle" hidden>
-      <span class="pd-step-number">ÉTAPE 02 / VOTRE PRIORITÉ</span>
-      <h3 id="pdSecondTitle">Quel résultat <em>recherchez-vous ?</em></h3>
-      <p class="pd-lead">Pour votre projet : <strong id="pdKindSelected"></strong>. Choisissez votre priorité et je vous proposerai un premier axe de travail.</p>
-      <div class="pd-choices pd-goals" id="pdGoalChoices" aria-label="Choisir votre priorité"></div>
-      <div class="pd-actions"><button class="pd-back" type="button" data-pd-back="1">Changer de projet</button></div>
-    </section>
-    <section class="pd-step" data-pd-panel="3" aria-labelledby="pdLastTitle" hidden>
-      <span class="pd-step-number">ÉTAPE 03 / ON ÉCHANGE</span>
-      <h3 id="pdLastTitle">Une direction <em>pour commencer.</em></h3>
-      <p class="pd-lead">Voici une première piste fondée sur vos choix, pas un diagnostic définitif. On affinera ensemble le périmètre et les livrables.</p>
-      <div class="pd-result" aria-live="polite">
-        <div class="pd-result-top"><small>VOTRE PISTE CRÉATIVE</small><span>Suggestion personnalisée</span></div>
-        <div class="pd-result-body">
-          <h4 id="pdServiceName"></h4>
-          <p id="pdServiceCopy"></p>
-          <div class="pd-result-what" id="pdDeliverables" aria-label="Livrables possibles"></div>
-        </div>
-      </div>
-      <div class="pd-contact-heading"><h4>Donnez-moi quelques détails.</h4><p>Ce message servira uniquement à préparer notre échange sur WhatsApp.</p></div>
-      <form id="pdDetailsForm" class="pd-mini-form">
-        <div class="pd-form-row">
-          <label>Votre prénom ou nom
-            <input name="name" type="text" placeholder="Votre nom" autocomplete="name" maxlength="90" required>
-          </label>
-          <label>Votre marque (facultatif)
-            <input name="brand" type="text" placeholder="Nom de la marque" maxlength="90">
-          </label>
-        </div>
-        <label>Racontez-moi votre idée en quelques mots
-          <textarea name="goal" placeholder="Ex. Je prépare une gamme de soins et j’ai besoin d’étiquettes cohérentes..." rows="3" maxlength="650" required></textarea>
-        </label>
-      </form>
-      <div class="pd-final-actions">
-        <a id="pdWhatsApp" class="pd-send" href="https://wa.me/21622271913" target="_blank" rel="noopener noreferrer">Discuter de mon projet sur WhatsApp</a>
-        <button id="pdCopy" class="pd-copy" type="button">Copier mon résumé</button>
-      </div>
-      <p class="pd-disclaimer">Le message s’ouvrira dans WhatsApp pour que vous puissiez le relire et l’envoyer vous-même. Aucune demande n’est envoyée automatiquement.</p>
-      <p id="pdCopyStatus" class="pd-note" role="status" aria-live="polite"></p>
-      <div class="pd-actions"><button class="pd-back" type="button" data-pd-back="2">Modifier ma priorité</button></div>
-    </section>
-    <div class="pd-alternative">Vous préférez un échange direct ? <a href="https://wa.me/21622271913" target="_blank" rel="noopener noreferrer">WhatsApp</a> ou <a href="mailto:contactmathali@gmail.com">e-mail</a>.</div>
-  </div>
+ <div class="section-intro">
+   <div class="eyebrow">THE CREATIVE EDITIONS / LET’S CREATE</div>
+   <h2 id="contactTitle">Start your<br><em>brand story.</em></h2>
+   <p>Du premier concept au détail qui fait la différence : chaque belle idée mérite une identité qui lui ressemble.</p>
+ </div>
+ <div id="creativeWelcome">
+   <div class="cw-welcome">
+     <span class="cw-mark" aria-hidden="true">em.</span>
+     <div>
+       <small>UN PETIT MOT DE ELHEM</small>
+       <h3>Bienvenue dans <em>mon atelier créatif.</em></h3>
+       <p>Je suis Elhem, designer en branding et packaging. Vous avez une idée, un produit ou une marque à faire grandir ? Racontez-moi ce qui vous inspire, et voyons comment lui donner une vraie personnalité.</p>
+     </div>
+   </div>
+   <div class="cw-select">
+     <span class="cw-select-label">NOTRE PREMIÈRE CONVERSATION</span>
+     <h4>Comment puis-je <em>vous aider ?</em></h4>
+     <div class="cw-choices" role="group" aria-label="Choisissez le sujet de votre projet">
+       <button class="cw-choice" type="button" data-creative-need="brand" aria-pressed="false"><span>01 / BRANDING</span><strong>Créer mon identité de marque</strong></button>
+       <button class="cw-choice" type="button" data-creative-need="packaging" aria-pressed="false"><span>02 / PACKAGING</span><strong>Créer mon packaging ou mes étiquettes</strong></button>
+       <button class="cw-choice" type="button" data-creative-need="refresh" aria-pressed="false"><span>03 / REBRANDING</span><strong>Faire évoluer ma marque</strong></button>
+       <button class="cw-choice" type="button" data-creative-need="social" aria-pressed="false"><span>04 / CONTENT</span><strong>Créer du contenu pour les réseaux</strong></button>
+       <button class="cw-choice" type="button" data-creative-need="digital" aria-pressed="false"><span>05 / DIGITAL</span><strong>Concevoir une expérience digitale</strong></button>
+       <button class="cw-choice" type="button" data-creative-need="explore" aria-pressed="false"><span>06 / DÉCOUVERTE</span><strong>J’ai une idée, parlons-en !</strong></button>
+     </div>
+   </div>
+   <section class="cw-response" id="creativeResponse" aria-labelledby="creativeResponseTitle" hidden>
+     <div class="cw-response-head"><small id="creativeResponseKicker">UNE PREMIÈRE IDÉE POUR VOTRE PROJET</small><span>ELHEM MATHELI</span></div>
+     <div class="cw-response-content" aria-live="polite">
+       <p id="creativeChoiceLabel" class="cw-choice-summary"></p>
+       <h4 id="creativeResponseTitle"></h4>
+       <p id="creativeResponseText"></p>
+       <label class="cw-note-label" for="creativeNote">Un petit détail à me partager ? (facultatif)</label>
+       <textarea class="cw-note" id="creativeNote" rows="3" maxlength="700" placeholder="Par exemple : ma marque s’appelle…, je prépare une gamme de…, j’ai une idée pour…"></textarea>
+       <div class="cw-actions">
+         <a class="cw-contact" id="creativeWhatsApp" href="https://wa.me/21622271913" target="_blank" rel="noopener noreferrer">Échanger sur WhatsApp</a>
+         <a class="cw-contact cw-contact--email" id="creativeEmail" href="mailto:contactmathali@gmail.com">Écrire un e-mail</a>
+       </div>
+       <p class="cw-consent">Votre message sera préparé avec le sujet choisi. Vous pourrez le relire et décider de l’envoyer vous-même.</p>
+     </div>
+   </section>
+   <p class="cw-direct">Un simple bonjour ? <a href="https://wa.me/21622271913" target="_blank" rel="noopener noreferrer">Contact direct</a></p>
+ </div>
 </section>
 </main>
 </div>
