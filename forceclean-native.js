@@ -23,7 +23,7 @@ window.renderForceCleanNative=function renderForceCleanNative(detail){
  detail.innerHTML=`<article class="fc-native" id="fcNative" aria-label="ForceClean · Art Book interactif">
  <section class="fc-hero" id="fc-intro" aria-labelledby="fc-hero-title">${water()}
   <div class="fc-inner fc-hero-content">
-   <div class="fc-hero-copy"><span class="fc-eyebrow">THE CREATIVE EDITIONS / CHAPTER 03</span><h2 id="fc-hero-title">La fraîcheur<br><em>en mouvement.</em></h2><p class="fc-hero-description">ForceClean. Une identité visuelle qui puise sa force dans l’eau, la brillance et la fraîcheur. Logo, direction artistique et packaging.</p><a class="fc-hero-cta" href="#fc-story">Découvrir le projet <span aria-hidden="true">↓</span></a></div>
+   <div class="fc-hero-copy"><span class="fc-eyebrow">THE CREATIVE EDITIONS / CHAPTER 03</span><h2 id="fc-hero-title">La fraîcheur<br><em>en mouvement.</em></h2><p class="fc-hero-description">ForceClean. Une identité visuelle qui puise sa force dans l’eau, la brillance et la fraîcheur. Logo, direction artistique et packaging.</p><a class="fc-hero-cta" href="#fc-story">Découvrir le projet </a></div>
    <div class="fc-hero-brand"><img src="${asset('logo-clean')}" alt="Logo original ForceClean, produits d’entretien" fetchpriority="high" decoding="async"></div>
   </div>
  </section>
@@ -61,7 +61,7 @@ window.renderForceCleanNative=function renderForceCleanNative(detail){
   <div class="fc-product-actions fc-reveal"><button type="button" data-fc-zoom="${asset('ocean-label')}" data-fc-title="Air Fresh · Essence Océan">Essence Océan ↗</button><button type="button" data-fc-zoom="${asset('textile-label')}" data-fc-title="Parfum de linge · Fraîcheur textile">Parfum de linge ↗</button></div>
  </div></section>
  <footer class="fc-outro"><div class="fc-inner"><strong>La propreté, mise en scène.</strong><p>ForceClean · Brand identity &amp; packaging design · Elhem Matheli</p></div></footer>
- <dialog class="fc-modal" id="fcNativePreview" aria-label="Agrandir un design ForceClean"><div class="fc-modal-head"><h3 id="fcNativePreviewTitle"></h3><button type="button" id="fcNativeClose" class="fc-modal-close" aria-label="Fermer">×</button></div><div class="fc-modal-scene"><img id="fcNativePreviewImage" alt=""></div><button type="button" class="fc-modal-zoom" id="fcNativeZoom" aria-pressed="false">Agrandir +</button></dialog>
+ <dialog class="fc-modal" id="fcNativePreview" aria-label="Agrandir un design ForceClean"><div class="fc-modal-head"><h3 id="fcNativePreviewTitle"></h3><button type="button" id="fcNativeClose" class="fc-modal-close" aria-label="Fermer">Fermer</button></div><div class="fc-modal-scene"><img id="fcNativePreviewImage" alt=""></div><button type="button" class="fc-modal-zoom" id="fcNativeZoom" aria-pressed="false">Agrandir +</button></dialog>
  </article>`;
  const root=detail.querySelector('#fcNative');
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
