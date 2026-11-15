@@ -11,3 +11,12 @@
 .about-tool .about-tool-use{font:700 10px/1.5 var(--sans);color:#8e415e;margin-top:auto;padding-top:10px;border-top:1px solid #e7d4de;width:100%}
 @media(max-width:730px){.about-toolkit{grid-template-columns:1fr;gap:11px}.about-tool{min-height:unset;gap:9px;padding:19px 18px}.about-tool h4{font-size:26px}}
 @media(prefers-reduced-motion:reduce){.about-tool{transition:none}}
+
+/* Persuasive heading for client-value chapter */
+.about-chapter>.about-benefit-hook{
+  font:400 clamp(20px,4.5vw,30px)/1.2 var(--serif);
+  letter-spacing:-.03em;
+  color:#a42e48;
+  max-width:710px;
+  margin:3px 0 13px;
+}
