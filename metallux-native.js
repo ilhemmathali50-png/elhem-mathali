@@ -11,7 +11,7 @@ window.renderMetalluxNative=function(detail){
  <section class="mx-section mx-hero" id="mx-intro" data-mx-chapter="intro">
   <div class="mx-inner mx-hero-grid">
    <div class="mx-hero-copy mx-reveal"><span class="mx-eyebrow">THE CREATIVE EDITIONS · ÉDITION 04</span><h1>Le métal<br><em>devient identité</em></h1><p class="mx-hero-intro">MÉTALLUX, une signature visuelle où la précision de l’assemblage rencontre l’éclat du bleu électrique</p><div class="mx-hero-rule">ART DIRECTION · BRAND IDENTITY · APPLICATIONS</div></div>
-   <div class="mx-hero-image" aria-label="Couverture originale de l'Art Book MÉTALLUX"><div class="mx-hero-aura" aria-hidden="true"></div><div class="mx-book-object"><img src="${A('cover-book')}" alt="Couverture originale de l’Art Book MÉTALLUX, livre bleu marine métallisé" fetchpriority="high" decoding="async"></div></div>
+   <div class="mx-hero-image" aria-label="Nouvelle couverture MÉTALLUX, métal brossé et bleu électrique"><div class="mx-hero-aura" aria-hidden="true"></div><div class="mx-book-object"><img src="./assets/projects/metallux/native/couverture-metallux-2026.jpg" alt="Couverture MÉTALLUX, logo métallisé argent et bleu sur fond industriel lumineux" fetchpriority="high" decoding="async" width="1792" height="2400"></div></div>
   </div>
  </section>
  <nav class="mx-chapter-nav" aria-label="Sommaire de MÉTALLUX">${menu.map(([id,title],i)=>`<a href="#mx-${id}" data-mx-link="${id}"${i===0?' aria-current="location"':''}><span>${String(i+1).padStart(2,'0')}</span>${title}</a>`).join('')}</nav>
