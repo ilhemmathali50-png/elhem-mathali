@@ -49,16 +49,16 @@ window.renderMetalluxNative=function(detail){
   <div class="mx-flip-stage mx-reveal"><button class="mx-card-flipper" id="mxCardFlipper" type="button" data-flipped="false" aria-label="Retourner la carte de visite pour voir le verso" aria-pressed="false">
    <span class="mx-card-side front"><img src="${A('card-front')}" alt="Carte de visite MÉTALLUX, recto original" loading="lazy"></span><span class="mx-card-side back"><img src="${A('card-back')}" alt="Carte de visite MÉTALLUX, verso original" loading="lazy"></span>
   </button></div>
-  <button class="mx-card-toggle mx-reveal" id="mxCardToggle" type="button">Découvrir le verso <span aria-hidden="true">↻</span></button>
+  <button class="mx-card-toggle mx-reveal" id="mxCardToggle" type="button">Découvrir le verso </button>
   <div class="mx-app-divider" aria-hidden="true"></div>
   <div class="mx-uniform-layout mx-reveal"><div><span class="mx-eyebrow">05 / APPLICATION TEXTILE</span><h3>Une identité<br><em>jusque dans le détail</em></h3><p>Le symbole et la signature MÉTALLUX prennent place sur les supports textiles présentés dans l’Art Book original</p></div><img src="${A('uniforms')}" alt="Mockups originaux : polo et sweat MÉTALLUX bleu marine" loading="lazy"></div>
  </div></section>
  <footer class="mx-end"><span class="mx-eyebrow">THE CREATIVE EDITIONS · MÉTALLUX</span><strong>Du métal à l’identité</strong><p>BRAND IDENTITY · ART DIRECTION · APPLICATIONS</p></footer>
- <dialog id="mxModal" class="mx-modal" aria-label="Agrandir un visuel MÉTALLUX"><div class="mx-modal-head"><h3 id="mxModalTitle"></h3><button id="mxClose" type="button" aria-label="Fermer">×</button></div><div class="mx-modal-body"><img id="mxModalImage" alt=""></div></dialog>
+ <dialog id="mxModal" class="mx-modal" aria-label="Agrandir un visuel MÉTALLUX"><div class="mx-modal-head"><h3 id="mxModalTitle"></h3><button id="mxClose" type="button" aria-label="Fermer">Fermer</button></div><div class="mx-modal-body"><img id="mxModalImage" alt=""></div></dialog>
  </article>`;
  const root=detail.querySelector('#mxBook');
  const flip=root.querySelector('#mxCardFlipper'),flipButton=root.querySelector('#mxCardToggle');
- const flipCard=()=>{const on=flip.dataset.flipped!=='true';flip.dataset.flipped=String(on);flip.setAttribute('aria-pressed',String(on));flip.setAttribute('aria-label',on?'Retourner la carte de visite pour voir le recto':'Retourner la carte de visite pour voir le verso');flipButton.innerHTML=on?'Revoir le recto <span aria-hidden="true">↻</span>':'Découvrir le verso <span aria-hidden="true">↻</span>'};
+ const flipCard=()=>{const on=flip.dataset.flipped!=='true';flip.dataset.flipped=String(on);flip.setAttribute('aria-pressed',String(on));flip.setAttribute('aria-label',on?'Retourner la carte de visite pour voir le recto':'Retourner la carte de visite pour voir le verso');flipButton.innerHTML=on?'Revoir le recto ':'Découvrir le verso '};
  flip.addEventListener('click',flipCard);flipButton.addEventListener('click',flipCard);
  const display=root.querySelector('#mxLogoDisplay'),logoImage=root.querySelector('#mxLogoImage');
  const variants={main:{img:'logo-original',mode:'light',alt:'Logo final MÉTALLUX fourni, version couleur complète'},dark:{img:'logo-panel',mode:'dark',alt:'Logo MÉTALLUX couleur sur fond bleu marine'},symbol:{img:'logo-icon-hd',mode:'light',alt:'Symbole MÉTALLUX original, qualité haute résolution, argent et bleu électrique'},mono:{src:base+'logo-monochrome-vector.svg',mode:'light',alt:'Logo MÉTALLUX monochrome vectoriel, bleu marine, texte net et lisible'}};
