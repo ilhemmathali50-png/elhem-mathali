@@ -20,3 +20,18 @@
   max-width:710px;
   margin:3px 0 13px;
 }
+
+/* CV: single, accessible call to action beneath the parcours introduction */
+.about-cv-link{
+ display:inline-flex;align-items:center;justify-content:center;
+ min-height:48px;margin-top:14px;padding:13px 24px;
+ border:1px solid #963452;border-radius:999px;
+ background:linear-gradient(110deg,#922f4b 0%,#ad547c 58%,#a37cc6 130%);
+ box-shadow:0 8px 22px #9e466023;
+ color:#fff;text-decoration:none;
+ font:800 12px/1.35 var(--sans);
+ transition:transform .22s ease,box-shadow .22s ease;
+}
+.about-cv-link:hover{transform:translateY(-2px);box-shadow:0 12px 27px #9e466038}
+.about-cv-link:focus-visible{outline:3px solid #a42e48;outline-offset:4px}
+@media(prefers-reduced-motion:reduce){.about-cv-link{transition:none}}
