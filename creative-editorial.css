@@ -75,3 +75,38 @@
 }
 @media(max-width:440px){.about-connect{grid-template-columns:1fr}.about-service{padding:14px 12px;min-height:165px}.about-services{gap:8px}.about-hero .about-photo{margin-right:10px}.divers-hero h2,.about-hero h2{font-size:clamp(49px,12vw,64px)}}
 @media(prefers-reduced-motion:reduce){.portfolio-top-frame .bottom-nav button,.about-connect a{transition:none}}
+
+
+/* ABOUT / CREATIVE SCROLL STORY · November 2026 */
+.about-view{overflow:clip}
+.about-visual{position:relative;min-width:0;isolation:isolate}
+.about-visual .about-photo{position:relative;z-index:1;overflow:hidden;background:#e7d6d3}
+.about-visual .about-photo img{transform:scale(1.015);transition:transform 1.3s cubic-bezier(.18,.7,.2,1)}
+.about-visual.is-visible .about-photo img{transform:scale(1)}
+.about-visual::before{content:"";position:absolute;inset:-20px -12px 20px 18px;background:radial-gradient(circle at 75% 20%,#c9b3f489,transparent 56%),radial-gradient(circle at 16% 80%,#f0adbe7c,transparent 58%);filter:blur(10px);z-index:0;pointer-events:none}
+.about-bezier{position:absolute;z-index:3;width:148px;height:112px;bottom:-26px;left:-28px;overflow:visible;filter:drop-shadow(0 6px 12px #5f284b24);pointer-events:none}
+.about-bezier .bezier-curve{fill:none;stroke:#a42e48;stroke-width:2.1;stroke-linecap:round}
+.about-bezier .bezier-handle{fill:none;stroke:#665cc1;stroke-width:1.25;stroke-dasharray:4 5}
+.about-bezier .bezier-anchor{fill:#faf7f2;stroke:#a42e48;stroke-width:1.6}
+.about-visual.is-visible .bezier-curve{stroke-dasharray:260;stroke-dashoffset:260;animation:aboutDraw 1.6s .3s cubic-bezier(.2,.75,.15,1) forwards}
+.about-art-note{position:absolute;z-index:4;top:18px;right:-14px;transform:rotate(4deg);border:1px solid #d9bfc8;background:#faf7f2e8;backdrop-filter:blur(7px);padding:10px 12px;border-radius:2px;color:#83344f;font-size:9px;font-weight:800;letter-spacing:.16em;box-shadow:0 7px 21px #49273418}
+.about-art-symbol{position:absolute;z-index:4;right:-15px;bottom:19%;font:400 57px/.9 var(--serif);color:#a42e48;animation:aboutFloat 6s ease-in-out infinite;pointer-events:none}
+.about-view.about-motion-ready .about-reveal{opacity:0;transform:translate3d(0,28px,0);transition:opacity .65s ease,transform .75s cubic-bezier(.2,.7,.2,1);transition-delay:var(--about-delay,0ms)}
+.about-view.about-motion-ready .about-reveal.is-visible{opacity:1;transform:translateZ(0)}
+.about-chapter{position:relative}
+.about-chapter-heading h3{background:linear-gradient(95deg,#382b35,#9c405d,#6f608e);background-size:180% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+.about-services{perspective:1100px}
+.about-service{position:relative;isolation:isolate;overflow:hidden;transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease}
+.about-service::before{content:"";position:absolute;z-index:0;inset:0;background:linear-gradient(130deg,var(--about-glow-a,#f5d3df) 0%,#fffdfb 48%,var(--about-glow-b,#e6dffc) 100%);background-size:220% 220%;opacity:.7;animation:aboutGradient 10s ease-in-out infinite alternate}
+.about-service > *{position:relative;z-index:1}
+.about-service:nth-child(3n+1){--about-glow-a:#f2c9d6;--about-glow-b:#d9e2ff}
+.about-service:nth-child(3n+2){--about-glow-a:#d6e6ef;--about-glow-b:#e6d7ed}
+.about-service:nth-child(3n){--about-glow-a:#e5d9fa;--about-glow-b:#f6decf}
+.about-service:nth-child(2n)::before{animation-delay:-4s}
+.about-service:hover,.about-service:focus-within{transform:translateY(-5px);border-color:#d9afc0;box-shadow:0 15px 28px #5d30431b}
+.about-service-icon{background:#ffffffba;border:1px solid #ffffff95}
+@keyframes aboutDraw{to{stroke-dashoffset:0}}
+@keyframes aboutFloat{0%,100%{translate:0 0}50%{translate:0 -13px}}
+@keyframes aboutGradient{0%{background-position:0% 0%}100%{background-position:100% 100%}}
+@media(max-width:730px){.about-visual{margin:0 8px 14px 8px}.about-bezier{left:-20px;bottom:-21px;width:116px}.about-art-note{right:-7px;top:13px;font-size:8px}.about-art-symbol{right:-10px;font-size:42px}}
+@media(prefers-reduced-motion:reduce){.about-view.about-motion-ready .about-reveal{opacity:1;transform:none;transition:none}.about-visual.is-visible .bezier-curve{animation:none;stroke-dasharray:none;stroke-dashoffset:0}.about-service::before,.about-art-symbol{animation:none}.about-visual .about-photo img{transition:none}}
