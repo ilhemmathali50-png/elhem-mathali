@@ -30,7 +30,7 @@ function initDivers(){
  const grid=page.querySelector('#diversGrid');
  const toolbar=page.querySelector('.divers-filters');
  if(!grid||!toolbar)return;
- // Replace only the 3 temporary project previews, not the actual introduction film.
+ // Replace only temporary portfolio preview cards, preserving supplied artwork.
  grid.querySelectorAll('.divers-card[data-divers-type="posts"]').forEach(el=>el.remove());
  const posterById=new Map(POSTERS.map(p=>[String(p[0]),p]));
  const imageCards=POSTERS.map(([id,title,brand],index)=>{
@@ -49,22 +49,18 @@ function initDivers(){
  toolbar.innerHTML=`<button type="button" data-divers-filter="all" aria-pressed="true">Tout</button>
    <button type="button" data-divers-filter="posts" aria-pressed="false">Posts & visuels</button>
    <button type="button" data-divers-filter="tracksolid" aria-pressed="false">TrackSolid Pro</button>
-   <button type="button" data-divers-filter="elya" aria-pressed="false">Élya Natura</button>
-   <button type="button" data-divers-filter="videos" aria-pressed="false">Vidéos</button>`;
+   <button type="button" data-divers-filter="elya" aria-pressed="false">Élya Natura</button>`;
  const count=document.createElement('p');count.className='divers-count';count.setAttribute('aria-live','polite');
  toolbar.after(count);
- const film=page.querySelector('#portfolioFilm');
  const filters=Array.from(toolbar.querySelectorAll('[data-divers-filter]'));
  const cards=Array.from(grid.querySelectorAll('.divers-card'));
  function filter(type){
   filters.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.diversFilter===type)));
   let visible=0;
   cards.forEach(card=>{
-   const shown=type==='all'||(type==='posts'&&card.dataset.diversType==='posts')||
-    (type==='videos'&&card.dataset.diversType==='videos')||card.dataset.diversProject===type;
+   const shown=type==='all'||(type==='posts'&&card.dataset.diversType==='posts')||card.dataset.diversProject===type;
    card.hidden=!shown;if(shown)visible++;
   });
-  if(type!=='videos' && type!=='all' && film) film.pause();
   count.textContent=visible+' création'+(visible>1?'s':'')+' à découvrir';
  }
  toolbar.addEventListener('click',e=>{
