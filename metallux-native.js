@@ -45,7 +45,7 @@ window.renderMetalluxNative=function(detail){
  </div></section>
  <section class="mx-section mx-application" id="mx-apps" data-mx-chapter="apps"><div class="mx-inner">
   <div class="mx-application-head mx-reveal"><div><span class="mx-eyebrow">04 / APPLICATIONS</span><h2>La marque<br><em>en usage</em></h2></div><p>Du concept à des supports réels, avec des compositions d’origine préservées</p></div>
-  <div class="mx-card-caption mx-reveal"><span>CARTE DE VISITE · 3D FLIP</span><span>Appuie pour retourner ↻</span></div>
+  <div class="mx-card-caption mx-reveal"><span>CARTE DE VISITE · 3D FLIP</span><span>Appuie pour retourner</span></div>
   <div class="mx-flip-stage mx-reveal"><button class="mx-card-flipper" id="mxCardFlipper" type="button" data-flipped="false" aria-label="Retourner la carte de visite pour voir le verso" aria-pressed="false">
    <span class="mx-card-side front"><img src="${A('card-front')}" alt="Carte de visite MÉTALLUX, recto original" loading="lazy"></span><span class="mx-card-side back"><img src="${A('card-back')}" alt="Carte de visite MÉTALLUX, verso original" loading="lazy"></span>
   </button></div>
