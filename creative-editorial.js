@@ -28,8 +28,7 @@ function initDivers(){
  if(!page || page.dataset.diversV2==='true')return;
  page.dataset.diversV2='true';
  const grid=page.querySelector('#diversGrid');
- const toolbar=page.querySelector('.divers-filters');
- if(!grid||!toolbar)return;
+ if(!grid)return;
  // Replace only temporary portfolio preview cards, preserving supplied artwork.
  grid.querySelectorAll('.divers-card[data-divers-type="posts"]').forEach(el=>el.remove());
  const posterById=new Map(POSTERS.map(p=>[String(p[0]),p]));
@@ -46,27 +45,8 @@ function initDivers(){
   return item;
  });
  grid.append(...imageCards);
- toolbar.innerHTML=`<button type="button" data-divers-filter="all" aria-pressed="true">Tout</button>
-   <button type="button" data-divers-filter="posts" aria-pressed="false">Posts & visuels</button>
-   <button type="button" data-divers-filter="tracksolid" aria-pressed="false">TrackSolid Pro</button>
-   <button type="button" data-divers-filter="elya" aria-pressed="false">Élya Natura</button>`;
- const count=document.createElement('p');count.className='divers-count';count.setAttribute('aria-live','polite');
- toolbar.after(count);
- const filters=Array.from(toolbar.querySelectorAll('[data-divers-filter]'));
- const cards=Array.from(grid.querySelectorAll('.divers-card'));
- function filter(type){
-  filters.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.diversFilter===type)));
-  let visible=0;
-  cards.forEach(card=>{
-   const shown=type==='all'||(type==='posts'&&card.dataset.diversType==='posts')||card.dataset.diversProject===type;
-   card.hidden=!shown;if(shown)visible++;
-  });
-  count.textContent=visible+' création'+(visible>1?'s':'')+' à découvrir';
- }
- toolbar.addEventListener('click',e=>{
-  const b=e.target.closest('[data-divers-filter]');if(b)filter(b.dataset.diversFilter);
- });
- filter('all');
+ const count=page.querySelector('.divers-count');
+ if(count)count.textContent=POSTERS.length+' créations à découvrir';
  const dialog=document.createElement('dialog');
  dialog.className='divers-lightbox';dialog.setAttribute('aria-label','Agrandissement des créations');
  dialog.innerHTML=`<div class="divers-lightbox-inner">
