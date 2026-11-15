@@ -84,7 +84,7 @@
   originalsButton.className='mx-original-toggle';
   originalsButton.setAttribute('aria-controls','mxOriginalOverlay');
   originalsButton.setAttribute('aria-pressed','false');
-  originalsButton.textContent='Voir les mockups originaux ↗';
+  originalsButton.textContent='Voir les mockups originaux';
   section.querySelector('.mx-controls-actions').append(originalsButton);
   const setOriginals=(on)=>{
    originalView.hidden=!on;
