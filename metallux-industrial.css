@@ -196,3 +196,29 @@
 /* Keep chapter navigation visible below the two-row portfolio header. */
 .mx-book .mx-chapter-nav{top:calc(120px + env(safe-area-inset-top))}
 .mx-book .mx-section{scroll-margin-top:calc(180px + env(safe-area-inset-top))}
+
+/* Selected 2026 MÉTALLUX cover: preserve all edges and typography of the new artwork */
+.mx-book .mx-hero-image .mx-book-object img{
+ display:block;
+ width:100%;
+ height:auto;
+ max-height:min(75svh,730px);
+ object-fit:contain;
+ clip-path:none;
+ -webkit-mask-image:none;
+ mask-image:none;
+ border-radius:8px;
+ box-shadow:0 20px 40px #001c3866;
+}
+.mx-book .mx-hero-image .mx-book-object{max-width:465px}
+.sommaire-cover-3,
+.sommaire-detail-cover.sommaire-cover-3{
+ background-image:url('./assets/projects/metallux/native/couverture-metallux-2026.jpg');
+ background-position:center;
+ background-repeat:no-repeat;
+ background-size:cover;
+}
+@media(max-width:700px){
+ .mx-book .mx-hero-image .mx-book-object{max-width:405px}
+ .mx-book .mx-hero-image .mx-book-object img{max-height:none}
+}
