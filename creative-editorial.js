@@ -41,7 +41,7 @@ function initDivers(){
   item.dataset.diversProject=category;
   item.innerHTML=`<button class="divers-poster-open" type="button" data-poster-id="${id}" aria-label="Agrandir le visuel ${esc(title)}, ${esc(brand)}">
     <span class="divers-poster-media"><img src="./assets/divers/poster-${id}.webp" alt="${esc(title)} · ${esc(brand)}" loading="${index<3?'eager':'lazy'}" decoding="async"></span>
-    <span class="divers-poster-caption"><small>${esc(brand.toUpperCase())} · POST ${String(index+1).padStart(2,'0')}</small><strong>${esc(title)}</strong><span>Voir le visuel en grand <span aria-hidden="true">↗</span></span></span>
+    <span class="divers-poster-caption"><small>${esc(brand.toUpperCase())} · POST ${String(index+1).padStart(2,'0')}</small><strong>${esc(title)}</strong><span>Voir le visuel en grand </span></span>
    </button>`;
   return item;
  });
@@ -70,9 +70,9 @@ function initDivers(){
  const dialog=document.createElement('dialog');
  dialog.className='divers-lightbox';dialog.setAttribute('aria-label','Agrandissement des créations');
  dialog.innerHTML=`<div class="divers-lightbox-inner">
- <div class="divers-lightbox-head"><span class="divers-lightbox-brand"></span><button class="divers-lightbox-close" type="button" aria-label="Fermer le visuel">×</button></div>
+ <div class="divers-lightbox-head"><span class="divers-lightbox-brand"></span><button class="divers-lightbox-close" type="button" aria-label="Fermer le visuel">Fermer</button></div>
  <div class="divers-lightbox-stage"><img alt=""></div>
- <div class="divers-lightbox-foot"><button type="button" class="divers-lightbox-prev" aria-label="Voir la création précédente">←</button><div><strong class="divers-lightbox-title"></strong><small class="divers-lightbox-counter"></small></div><button type="button" class="divers-lightbox-next" aria-label="Voir la création suivante">→</button></div>
+ <div class="divers-lightbox-foot"><button type="button" class="divers-lightbox-prev" aria-label="Voir la création précédente">Précédent</button><div><strong class="divers-lightbox-title"></strong><small class="divers-lightbox-counter"></small></div><button type="button" class="divers-lightbox-next" aria-label="Voir la création suivante">Suivant</button></div>
  </div>`;
  page.append(dialog);
  const img=dialog.querySelector('.divers-lightbox-stage img');
