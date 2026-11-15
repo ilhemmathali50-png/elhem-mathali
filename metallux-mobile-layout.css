@@ -1,0 +1,116 @@
+/* MÉTALLUX / mobile cover-first editorial layout
+   Preserves the approved cover and every other project page. */
+@media (max-width:700px){
+  .detail-view:has(.mx-book)>.return-link{
+    top:12px;
+    left:16px;
+    padding:9px 16px;
+    min-height:39px;
+    background:#102c49;
+    color:#fff;
+    border:1px solid #7699bc;
+    box-shadow:0 5px 15px #18324a26;
+  }
+  .mx-book .mx-hero{
+    min-height:0!important;
+    padding:70px 0 35px!important;
+    background:
+      repeating-linear-gradient(90deg, transparent 0 91px, #214e7810 92px 93px),
+      linear-gradient(158deg,#f6f8fb 0%,#edf2f6 54%,#dce7f1 100%);
+  }
+  .mx-book .mx-hero::before{opacity:.2!important;animation:none!important}
+  .mx-book .mx-hero::after{opacity:0!important}
+  .mx-book .mx-hero .mx-inner{width:calc(100% - 38px)}
+  .mx-book .mx-hero-grid{
+    display:flex!important;
+    flex-direction:column;
+    align-items:center;
+    gap:19px!important;
+    width:100%;
+  }
+  .mx-book .mx-hero-image{
+    order:1;
+    width:min(72vw,308px)!important;
+    max-width:100%;
+    margin:0 auto!important;
+    perspective:none;
+  }
+  .mx-book .mx-hero-image .mx-book-object{
+    width:100%;
+    max-width:100%!important;
+    margin:0 auto;
+    filter:none!important;
+    animation:none!important;
+    transform:none!important;
+  }
+  .mx-book .mx-hero-image .mx-book-object img{
+    display:block;
+    width:100%;
+    height:auto;
+    max-height:none!important;
+    object-fit:contain;
+    clip-path:none;
+    mask-image:none;
+    -webkit-mask-image:none;
+    border-radius:11px;
+    box-shadow:0 14px 26px #102e4b49;
+  }
+  .mx-book .mx-hero-aura{opacity:.22;filter:blur(20px)}
+  .mx-book .mx-hero-copy{
+    order:2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    max-width:370px;
+    width:100%;
+    text-align:center;
+    gap:7px;
+    padding:0 4px;
+  }
+  .mx-book .mx-hero-copy .mx-eyebrow{
+    margin:0!important;
+    font-size:9px;
+    letter-spacing:.14em;
+    line-height:1.4;
+    color:#2e6f9e;
+  }
+  .mx-book .mx-hero h1{
+    margin:0!important;
+    font-size:clamp(31px,7.7vw,43px)!important;
+    line-height:1.08!important;
+    letter-spacing:-.04em!important;
+    text-align:center;
+    text-wrap:balance;
+    color:#0b2949;
+  }
+  .mx-book .mx-hero h1 em{
+    display:block;
+    font-size:.88em!important;
+    line-height:1.12;
+    letter-spacing:-.035em;
+    color:#0066e8;
+  }
+  .mx-book .mx-hero-intro{
+    max-width:35ch;
+    margin:5px auto 0!important;
+    font-size:12px!important;
+    line-height:1.65!important;
+    text-align:center;
+    color:#37536e;
+  }
+  .mx-book .mx-hero-rule,
+  .mx-book .mx-industrial-stamp{display:none!important}
+  .mx-book .mx-chapter-nav{
+    top:calc(118px + env(safe-area-inset-top));
+  }
+  .mx-book .mx-section{scroll-margin-top:calc(178px + env(safe-area-inset-top))}
+}
+@media (max-width:390px){
+  .mx-book .mx-hero{padding-top:66px!important}
+  .mx-book .mx-hero-image{width:min(70vw,280px)!important}
+  .mx-book .mx-hero-grid{gap:16px!important}
+  .mx-book .mx-hero h1{font-size:clamp(29px,8vw,38px)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .mx-book .mx-hero-image .mx-book-object{animation:none!important;transform:none!important}
+}
