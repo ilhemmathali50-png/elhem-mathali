@@ -402,7 +402,7 @@ function renderProjects(){
  area.innerHTML=projects.map((p,i)=>`<button class="sommaire-item" type="button" data-project="${i}" aria-label="Découvrir ${p.name}" style="--project-color:${p.theme};--project-paper:${p.paper}">
  <span class="sommaire-cover sommaire-cover-${p.sprite}" aria-hidden="true"></span>
  <span class="sommaire-meta"><small>ÉDITION ${String(i+1).padStart(2,'0')}</small><strong>${p.name}</strong><span>${p.type}</span></span>
- <span class="sommaire-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="currentColor"><path d="M5 2.5v17l4.4-4.1 2.9 6.1 2.6-1.2-2.9-6.1h6.3z"/></svg></span>
+ 
  </button>`).join('');
  $$('[data-project]',area).forEach(b=>b.addEventListener('click',()=>openProject(Number(b.dataset.project))));
 }
@@ -475,7 +475,7 @@ function renderHerbBook(){
 <button type="button" class="herb-label" data-herb-product="Orange" data-herb-view="before"><img class="herb-art" src="./assets/projects/herbtresor/before_orange.webp" alt="Avant et après · Orange" loading="lazy" decoding="async"><strong>Orange</strong><span>Voir l’avant / après ↗</span></button>
 <button type="button" class="herb-label" data-herb-product="Nigelle" data-herb-view="before"><img class="herb-art" src="./assets/projects/herbtresor/before_nigelle.webp" alt="Avant et après · Nigelle" loading="lazy" decoding="async"><strong>Nigelle</strong><span>Voir l’avant / après ↗</span></button>
 <button type="button" class="herb-label" data-herb-product="Abricot" data-herb-view="before"><img class="herb-art" src="./assets/projects/herbtresor/before_abricot.webp" alt="Avant et après · Abricot" loading="lazy" decoding="async"><strong>Abricot</strong><span>Voir l’avant / après ↗</span></button></div></section>
-<dialog class="herb-dialog" aria-labelledby="herb-view-title"><div class="herb-dialog-bar"><h2 id="herb-view-title"></h2><button type="button" class="herb-close" aria-label="Fermer" autofocus>×</button></div><img class="herb-full-image" alt=""><div class="herb-sketch-preview" hidden><img class="herb-art" src="./assets/projects/herbtresor/sketch.jpg" alt="Croquis de la feuille et symbole HerbTrésor" width="700" height="875" loading="lazy" decoding="async"><span class="herb-sketch-inset" aria-hidden="true"><span class="herb-sketch-before"></span><span class="herb-sketch-symbol"><span class="herb-sketch-leaf"></span><span>Icône seule</span></span></span></div><div class="herb-views" aria-label="Vues du produit"><button type="button" class="herb-toggle" data-herb-mode="label">Étiquette</button><button type="button" class="herb-toggle" data-herb-mode="mock">Mockup</button><button type="button" class="herb-toggle" data-herb-mode="before">Avant / Après</button></div></dialog>
+<dialog class="herb-dialog" aria-labelledby="herb-view-title"><div class="herb-dialog-bar"><h2 id="herb-view-title"></h2><button type="button" class="herb-close" aria-label="Fermer" autofocus>Fermer</button></div><img class="herb-full-image" alt=""><div class="herb-sketch-preview" hidden><img class="herb-art" src="./assets/projects/herbtresor/sketch.jpg" alt="Croquis de la feuille et symbole HerbTrésor" width="700" height="875" loading="lazy" decoding="async"><span class="herb-sketch-inset" aria-hidden="true"><span class="herb-sketch-before"></span><span class="herb-sketch-symbol"><span class="herb-sketch-leaf"></span><span>Icône seule</span></span></span></div><div class="herb-views" aria-label="Vues du produit"><button type="button" class="herb-toggle" data-herb-mode="label">Étiquette</button><button type="button" class="herb-toggle" data-herb-mode="mock">Mockup</button><button type="button" class="herb-toggle" data-herb-mode="before">Avant / Après</button></div></dialog>
 </article>`;
  releaseHerbSheets=stackHerbSheets($('.herb-book',detail));
  const dialog=$('.herb-dialog',detail);
@@ -604,8 +604,8 @@ function renderFaitMaisonBook(){
 </section>
 <section class="fm-leaf fm-range" hidden><div class="fm-heading"><h2>La gamme</h2></div><img src="./assets/projects/fait-maison/cover.webp" alt="Saveurs du terroir et eaux florales Fait Maison" loading="lazy" decoding="async"><div class="fm-gallery"><button class="fm-plate" type="button" data-fm-image="bsissa" data-fm-title="Bsissa d’orge aux herbes"><img src="./assets/projects/fait-maison/bsissa.webp" alt="Bsissa d’orge aux herbes" loading="lazy" decoding="async"><span>Bsissa d’orge aux herbes</span></button><button class="fm-plate" type="button" data-fm-image="beurre-scene" data-fm-title="Beurre de cacahuète"><img src="./assets/projects/fait-maison/beurre-scene.webp" alt="Beurre de cacahuète" loading="lazy" decoding="async"><span>Beurre de cacahuète</span></button></div></section>
 </div>
-<nav class="fm-navigation" aria-label="Pages de Fait Maison"><button type="button" data-fm-step="-1" aria-label="Page précédente" disabled>←</button><output aria-live="polite" aria-label="Page actuelle">01 / 13</output><button type="button" data-fm-step="1" aria-label="Page suivante">→</button></nav>
-<dialog class="herb-dialog fm-dialog" aria-labelledby="fm-preview-title"><div class="herb-dialog-bar"><h2 id="fm-preview-title"></h2><button class="herb-close" type="button" aria-label="Fermer" autofocus>×</button></div><div class="fm-stage"><img alt=""><div class="fm-rules-art" hidden><img alt=""></div></div><div class="fm-zoom"><button type="button" aria-pressed="false">Zoom +</button></div></dialog>
+<nav class="fm-navigation" aria-label="Pages de Fait Maison"><button type="button" data-fm-step="-1" aria-label="Page précédente" disabled>Précédente</button><output aria-live="polite" aria-label="Page actuelle">01 / 13</output><button type="button" data-fm-step="1" aria-label="Page suivante">Suivante</button></nav>
+<dialog class="herb-dialog fm-dialog" aria-labelledby="fm-preview-title"><div class="herb-dialog-bar"><h2 id="fm-preview-title"></h2><button class="herb-close" type="button" aria-label="Fermer" autofocus>Fermer</button></div><div class="fm-stage"><img alt=""><div class="fm-rules-art" hidden><img alt=""></div></div><div class="fm-zoom"><button type="button" aria-pressed="false">Zoom +</button></div></dialog>
 </article>`;
  const book=$('.fm-book',detail);
  const leaves=$('.fm-leaves',book);
@@ -889,7 +889,7 @@ function refreshScrollTrail(){const app=$('#app');if(!app||app.hidden)return;con
 function setupScrollTrail(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const app=$('#app');if(!app)return;const a=document.createElement('div');a.className='scroll-trail';a.setAttribute('aria-hidden','true');app.prepend(a);addEventListener('scroll',()=>{if(trailPending)return;trailPending=true;requestAnimationFrame(()=>{trailPending=false;refreshScrollTrail()})},{passive:true});addEventListener('resize',refreshScrollTrail,{passive:true});}
 function hideContactToast(){const toast=$('#contactToast');if(toast)toast.classList.remove('visible')}
 function showContactToast(){if(toastSeen)return;toastSeen=true;const toast=$('#contactToast');if(toast)requestAnimationFrame(()=>toast.classList.add('visible'))}
-function setupContactToast(){const toast=document.createElement('aside');toast.id='contactToast';toast.className='contact-toast';toast.setAttribute('role','status');toast.setAttribute('aria-live','polite');toast.innerHTML='<button class="toast-close" type="button" aria-label="Fermer">×</button><small>A LITTLE NOTE FROM ELHEM</small><strong>Une idée en tête ? <em>On en parle ?</em></strong><p>Si mes services t’intéressent, n’hésite pas à me contacter. Je serais ravie de découvrir ton projet.</p><button type="button" class="toast-cta">Parlons de ton projet ↗</button>';document.body.appendChild(toast);toast.querySelector('.toast-close').addEventListener('click',hideContactToast);toast.querySelector('.toast-cta').addEventListener('click',()=>{hideContactToast();const input=$('.contact-view input[name="name"]');if(input){input.scrollIntoView({behavior:'smooth',block:'center'});input.focus({preventScroll:true})}})}
+function setupContactToast(){const toast=document.createElement('aside');toast.id='contactToast';toast.className='contact-toast';toast.setAttribute('role','status');toast.setAttribute('aria-live','polite');toast.innerHTML='<button class="toast-close" type="button" aria-label="Fermer">Fermer</button><small>A LITTLE NOTE FROM ELHEM</small><strong>Une idée en tête ? <em>On en parle ?</em></strong><p>Si mes services t’intéressent, n’hésite pas à me contacter. Je serais ravie de découvrir ton projet.</p><button type="button" class="toast-cta">Parlons de ton projet</button>';document.body.appendChild(toast);toast.querySelector('.toast-close').addEventListener('click',hideContactToast);toast.querySelector('.toast-cta').addEventListener('click',()=>{hideContactToast();const input=$('.contact-view input[name="name"]');if(input){input.scrollIntoView({behavior:'smooth',block:'center'});input.focus({preventScroll:true})}})}
 
 function init(){renderProjects();renderLogos();initForm();setupScrollTrail();setupContactToast();setupClientCapture();
  $('#playWelcome').addEventListener('click',enterIntro);
@@ -915,17 +915,17 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <!-- Full-screen intro film, without overlaid phrases or text -->
 <section id="intro" class="onboard intro-screen intro-fullscreen" aria-label="Vidéo de présentation" hidden>
   <video id="introFilm" controls playsinline webkit-playsinline preload="auto" data-poster="cover" aria-label="Présentation vidéo d'Elhem Matheli"><source data-asset="video" type="video/mp4">Votre navigateur ne peut pas lire cette vidéo.</video>
-  <button id="skipIntro" class="intro-exit" type="button" aria-label="Passer la vidéo et voir les projets">×</button>
+  <button id="skipIntro" class="intro-exit" type="button" aria-label="Passer la vidéo et voir les projets">Passer</button>
 </section>
 <!-- 04. Actual app and bottom navigation -->
 <div id="app" class="app-shell" hidden>
 <div class="portfolio-top-frame" aria-label="En-tête et navigation">
-<header class="app-header"><button type="button" class="em-link" id="logoHome" aria-label="Ouvrir les éditions">em.</button><span class="top-identity">THE CREATIVE EDITIONS</span><button type="button" class="header-contact" id="topContact" aria-label="Start a project"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="currentColor"><path d="M5 2.5v17l4.4-4.1 2.9 6.1 2.6-1.2-2.9-6.1h6.3z"/></svg></button></header>
+<header class="app-header"><button type="button" class="em-link" id="logoHome" aria-label="Ouvrir les éditions">em.</button><span class="top-identity">THE CREATIVE EDITIONS</span><button type="button" class="header-contact" id="topContact" aria-label="Démarrer un projet">Contact</button></header>
 <nav class="bottom-nav" aria-label="Navigation principale">
-<button type="button" data-nav="editions" aria-current="page" title="Sommaire"><svg class="creative-nav-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="3.5" width="15" height="17" rx="1.4"/><path d="M8 7.5h8M8 11h5.5M8 14.5h8"/><path d="M2.5 7v10M21.5 7v10"/><circle cx="4.5" cy="3.5" r="1"/><circle cx="19.5" cy="20.5" r="1"/></svg>Sommaire</button>
-<button type="button" data-nav="logos" title="Logos"><svg class="creative-nav-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 10-10 10L2 12z"/><path d="M7.2 16.7 17 6.9M7 8c3.4 0 6.6 1.5 10 4M10.2 6.7 7 8l1.4 3.2"/><circle cx="7" cy="8" r="1.5" fill="currentColor" stroke="none"/><circle cx="17" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>Logos</button>
-<button type="button" data-nav="divers" title="Divers"><svg class="creative-nav-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="14" height="14" rx="1.5"/><path d="M7 2v4M13 2v4M17 9h4v12H8v-3"/><path d="m8.7 8.3 4.5 2.7-4.5 2.7z"/></svg>Divers</button>
-<button type="button" data-nav="about" title="À propos"><svg class="creative-nav-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20v-1.8c0-2.8 2.3-5 5.1-5h3.8c2.8 0 5.1 2.2 5.1 5V20z"/><circle cx="12" cy="7.7" r="3.65"/><circle cx="3.5" cy="20.5" r="1.3"/><circle cx="20.5" cy="20.5" r="1.3"/><path d="M4.8 20.5h14.4"/></svg>À propos</button>
+<button type="button" data-nav="editions" aria-current="page" title="Sommaire">Sommaire</button>
+<button type="button" data-nav="logos" title="Logos">Logos</button>
+<button type="button" data-nav="divers" title="Divers">Divers</button>
+<button type="button" data-nav="about" title="À propos">À propos</button>
 </nav>
 </div>
 <main id="main">
@@ -941,10 +941,10 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  <section id="clientReview" class="client-review" aria-labelledby="clientReviewTitle">
   <div class="client-review-head"><span>CLIENT VOICE · 01</span><span class="client-review-source">Témoignage reçu par message</span></div>
   <div class="client-review-grid">
-   <div class="client-review-intro"><span class="client-review-mark" aria-hidden="true">“</span><h3 id="clientReviewTitle">Kind words.<br><em>Real impact.</em></h3><p>Un regard extérieur sur la créativité, le soin et l’écoute derrière chaque projet.</p></div>
+   <div class="client-review-intro"><h3 id="clientReviewTitle">Kind words.<br><em>Real impact.</em></h3><p>Un regard extérieur sur la créativité, le soin et l’écoute derrière chaque projet.</p></div>
    <div class="client-review-content">
     <blockquote>« Un logo professionnel et un étiquetage soigné, le tout réalisé avec beaucoup de créativité, de sérieux et de professionnalisme. »</blockquote>
-    <div class="client-review-byline"><span class="client-review-avatar" aria-hidden="true">C</span><span><strong>Avis d’une cliente</strong><small>Identité visuelle &amp; étiquetage</small></span></div>
+    <div class="client-review-byline"><span><strong>Avis d’une cliente</strong><small>Identité visuelle &amp; étiquetage</small></span></div>
     <div class="client-review-evidence">
      <button type="button" class="client-review-capture" id="openClientCapture" aria-label="Agrandir la capture d’écran du témoignage WhatsApp">
       <img src="./assets/reviews/avis-cliente-whatsapp.webp" alt="Capture recadrée du message WhatsApp de la cliente, sans nom ni numéro" width="400" height="615" loading="lazy" decoding="async">
@@ -954,7 +954,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
    </div>
   </div>
   <details class="client-review-detail">
-   <summary><span>Lire le témoignage complet</span><span aria-hidden="true">+</span></summary>
+   <summary><span>Lire le témoignage complet</span></summary>
    <div class="client-review-full">
     <p>Je tiens à remercier chaleureusement le designer pour son excellent travail !</p>
     <p>Un logo professionnel et un étiquetage soigné, le tout réalisé avec beaucoup de créativité, de sérieux et de professionnalisme.</p>
@@ -966,13 +966,13 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
  <dialog class="client-review-dialog" id="clientCaptureDialog" aria-label="Capture du témoignage client">
   <div class="client-review-dialog-inner">
-   <div class="client-review-dialog-head"><span><strong>Le témoignage original</strong><small>Capture recadrée · Informations privées masquées</small></span><button type="button" class="client-review-close" id="closeClientCapture" aria-label="Fermer la capture">×</button></div>
+   <div class="client-review-dialog-head"><span><strong>Le témoignage original</strong><small>Capture recadrée · Informations privées masquées</small></span><button type="button" class="client-review-close" id="closeClientCapture" aria-label="Fermer la capture">Fermer</button></div>
    <img src="./assets/reviews/avis-cliente-whatsapp.webp" alt="Capture WhatsApp du message complet de satisfaction client" width="400" height="615">
   </div>
  </dialog>
  <div class="sommaire-foot"><span>THE CREATIVE EDITIONS</span><i>Every brand has its own story.</i></div>
 </section>
-<section class="app-view detail-view" data-view="detail" hidden><button type="button" id="backToBook" class="return-link">← Back to the Art Book</button><div id="detailContent"></div><button type="button" class="outline-button detail-next" id="nextCase">Next edition <span>→</span></button></section>
+<section class="app-view detail-view" data-view="detail" hidden><button type="button" id="backToBook" class="return-link">Retour au livre</button><div id="detailContent"></div><button type="button" class="outline-button detail-next" id="nextCase">Next edition <span>→</span></button></section>
 <section class="app-view logos-view" data-view="logos" hidden><div class="section-intro"><div class="eyebrow">THE LOGO ATELIER</div><h2>Little marks.<br><em>Big ideas.</em></h2><p>Une vitrine de recherches et d’identités graphiques, sans inventer de réalisations.</p></div><div class="logo-grid" id="logoGrid"></div><div class="editorial-note">La construction d’un logo commence toujours par une idée claire, pas par un effet.</div></section>
 <section class="app-view divers-view" data-view="divers" hidden aria-labelledby="diversTitle">
   <header class="divers-hero"><span class="creative-eyebrow">THE CREATIVE EDITIONS / CONTENT STUDIO</span><h2 id="diversTitle">Divers<span class="period">.</span><br><em>En mouvement.</em></h2><p>Des campagnes créatives et des contenus pensés pour capter le regard. Découvrez mes visuels pour TrackSolid Pro et Élya Natura.</p></header>
@@ -983,7 +983,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     <article class="divers-card" data-divers-type="posts"><div class="divers-media"><img src="./assets/projects/herbtresor/brand_story.webp" alt="Planche de direction artistique pour HerbTrésor" loading="lazy"></div><div class="divers-card-copy"><small>03 / CRÉATION · BRANDING</small><h3>HerbTrésor</h3><p>Direction graphique et langage visuel d’une marque inspirée par la nature.</p></div></article>
     <article class="divers-card" data-divers-type="posts"><div class="divers-media"><img src="./assets/projects/forceclean/native/air-mockup.webp" alt="Visuel de packaging de produit ForceClean" loading="lazy"></div><div class="divers-card-copy"><small>04 / VISUEL · PACKAGING</small><h3>ForceClean</h3><p>Présentation d’un produit d’entretien et de son univers visuel.</p></div></article>
   </div>
-  <footer class="divers-footer"><p>17 créations graphiques à découvrir. Chaque image conserve son design original ; touchez un visuel pour le découvrir en grand.</p><button id="filmToBook" type="button" class="outline-button">Retour au sommaire <span aria-hidden="true">→</span></button></footer>
+  <footer class="divers-footer"><p>17 créations graphiques à découvrir. Chaque image conserve son design original ; touchez un visuel pour le découvrir en grand.</p><button id="filmToBook" type="button" class="outline-button">Retour au sommaire </button></footer>
 </section>
 <section class="app-view about-view" data-view="about" hidden aria-labelledby="aboutTitle">
  <header class="about-hero">
@@ -999,7 +999,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
        <circle cx="97" cy="88" r="4" fill="#665cc1"/>
      </svg>
      <span class="about-art-note" aria-hidden="true">IDEA → VECTOR → IDENTITY</span>
-     <span class="about-art-symbol" aria-hidden="true">✳</span>
+     
    </div>
  </header>
  <section class="about-chapter" aria-labelledby="aboutWho"><div class="about-chapter-heading"><span class="about-chapter-number">01.</span><h3 id="aboutWho">Qui je suis</h3></div><p>Je suis Elhem Matheli, designer en branding et packaging, et créatrice de contenu. J’accompagne les marques dans la conception d’une identité claire, du premier concept jusqu’à ses applications visuelles : logo, étiquette, packaging, contenu et supports digitaux.</p><p>J’aime penser au-delà du simple « joli » : chaque couleur, forme et détail doit raconter quelque chose et servir l’idée derrière le projet.</p></section>
@@ -1008,12 +1008,12 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  </section>
  <section class="about-chapter" aria-labelledby="aboutOffer"><div class="about-chapter-heading"><span class="about-chapter-number">03.</span><h3 id="aboutOffer">Comment je peux vous aider</h3></div><p>Une identité forte ne s’arrête pas au logo. Voici les prestations sur lesquelles je peux vous accompagner.</p>
    <div class="about-services">
-     <article class="about-service"><span class="about-service-icon" aria-hidden="true">✧</span><h4>Identité visuelle</h4><p>Logo, palette, typographies et univers de marque.</p></article>
-     <article class="about-service"><span class="about-service-icon" aria-hidden="true">◇</span><h4>Packaging &amp; étiquettes</h4><p>Conception d’étiquettes, packaging et mockups produits.</p></article>
-     <article class="about-service"><span class="about-service-icon" aria-hidden="true">✳</span><h4>Direction artistique</h4><p>Moodboard, concept créatif et cohérence visuelle.</p></article>
-     <article class="about-service"><span class="about-service-icon" aria-hidden="true">▦</span><h4>Social Media Design</h4><p>Posts, carrousels et visuels de campagnes.</p></article>
-     <article class="about-service"><span class="about-service-icon" aria-hidden="true">▷</span><h4>Création de contenu</h4><p>Idées, reels et montage de vidéos courtes.</p></article>
-     <article class="about-service"><span class="about-service-icon" aria-hidden="true">⌘</span><h4>Design digital</h4><p>Expériences visuelles pour sites et interfaces.</p></article>
+     <article class="about-service"><h4>Identité visuelle</h4><p>Logo, palette, typographies et univers de marque.</p></article>
+     <article class="about-service"><h4>Packaging &amp; étiquettes</h4><p>Conception d’étiquettes, packaging et mockups produits.</p></article>
+     <article class="about-service"><h4>Direction artistique</h4><p>Moodboard, concept créatif et cohérence visuelle.</p></article>
+     <article class="about-service"><h4>Social Media Design</h4><p>Posts, carrousels et visuels de campagnes.</p></article>
+     <article class="about-service"><h4>Création de contenu</h4><p>Idées, reels et montage de vidéos courtes.</p></article>
+     <article class="about-service"><h4>Design digital</h4><p>Expériences visuelles pour sites et interfaces.</p></article>
    </div>
  </section>
  <section class="about-chapter" aria-labelledby="aboutWhy"><div class="about-chapter-heading"><span class="about-chapter-number">04.</span><h3 id="aboutWhy">Pourquoi travailler avec moi ?</h3></div><p>Parce qu’un bon design doit aussi répondre à un vrai besoin de marque.</p>
@@ -1026,15 +1026,15 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  </section>
  <section class="about-chapter" aria-labelledby="aboutContactTitle"><div class="about-chapter-heading"><span class="about-chapter-number">05.</span><h3 id="aboutContactTitle">Restons en contact</h3></div><p>Un projet, une question ou l’envie de collaborer ? Retrouvez-moi sur ces canaux.</p>
    <div class="about-connect">
-     <a href="https://www.instagram.com/elhememetheli/" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir Instagram d’Elhem Matheli dans un nouvel onglet"><span><strong>Instagram</strong><small>@elhememetheli</small></span><span class="about-link-arrow" aria-hidden="true">↗</span></a>
-     <a href="https://wa.me/21622271913" target="_blank" rel="noopener noreferrer" aria-label="Contacter Elhem Matheli sur WhatsApp"><span><strong>WhatsApp</strong><small>+216 22 271 913</small></span><span class="about-link-arrow" aria-hidden="true">↗</span></a>
-     <a href="mailto:contactmathali@gmail.com" aria-label="Envoyer un email à Elhem Matheli"><span><strong>E-mail</strong><small>contactmathali@gmail.com</small></span><span class="about-link-arrow" aria-hidden="true">↗</span></a>
-     <span class="about-pending" aria-label="Facebook, lien non encore renseigné"><span><strong>Facebook</strong><small>Lien officiel à ajouter</small></span><span class="about-link-arrow" aria-hidden="true">·</span></span>
+     <a href="https://www.instagram.com/elhememetheli/" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir Instagram d’Elhem Matheli dans un nouvel onglet"><span><strong>Instagram</strong><small>@elhememetheli</small></span></a>
+     <a href="https://wa.me/21622271913" target="_blank" rel="noopener noreferrer" aria-label="Contacter Elhem Matheli sur WhatsApp"><span><strong>WhatsApp</strong><small>+216 22 271 913</small></span></a>
+     <a href="mailto:contactmathali@gmail.com" aria-label="Envoyer un email à Elhem Matheli"><span><strong>E-mail</strong><small>contactmathali@gmail.com</small></span></a>
+     <span class="about-pending" aria-label="Facebook, lien non encore renseigné"><span><strong>Facebook</strong><small>Lien officiel à ajouter</small></span></span>
    </div>
  </section>
- <footer class="about-thanks"><span class="creative-eyebrow">A LITTLE NOTE FROM ELHEM</span><h3>Merci pour votre<br><em>confiance.</em></h3><p>Merci d’avoir découvert mon univers. J’espère avoir le plaisir de faire partie de votre prochain projet et de créer, ensemble, quelque chose qui vous ressemble.</p><button type="button" class="primary-button" id="aboutContact">Start your brand story <span aria-hidden="true">↗</span></button></footer>
+ <footer class="about-thanks"><span class="creative-eyebrow">A LITTLE NOTE FROM ELHEM</span><h3>Merci pour votre<br><em>confiance.</em></h3><p>Merci d’avoir découvert mon univers. J’espère avoir le plaisir de faire partie de votre prochain projet et de créer, ensemble, quelque chose qui vous ressemble.</p><button type="button" class="primary-button" id="aboutContact">Start your brand story </button></footer>
 </section>
-<section class="app-view contact-view" data-view="contact" hidden><div class="section-intro"><div class="eyebrow">LET’S WORK TOGETHER</div><h2>Start your<br><em>brand story.</em></h2><p>Un petit brief pour mieux comprendre votre projet, sans formulaire compliqué.</p></div><form id="briefForm" class="brief-form"><label>Votre nom<input name="name" placeholder="Votre nom" required autocomplete="name"></label><label>Nom de la marque<input name="brand" placeholder="Votre marque (optionnel)"></label><label>Quel type de projet ?<select name="service"><option>Brand Identity</option><option>Packaging Design</option><option>Creative Content</option><option>Autre projet</option></select></label><label>Parlez-moi de votre idée<textarea name="goal" placeholder="Racontez votre projet en quelques mots" required rows="4"></textarea></label><button class="primary-button" type="submit">Préparer mon brief <span>↗</span></button></form><div id="briefOutput" hidden class="brief-output" aria-live="polite"><h3>Votre brief est prêt.</h3><pre id="briefText"></pre><button id="copyBrief" class="outline-button" type="button">Copier le brief</button></div></section>
+<section class="app-view contact-view" data-view="contact" hidden><div class="section-intro"><div class="eyebrow">LET’S WORK TOGETHER</div><h2>Start your<br><em>brand story.</em></h2><p>Un petit brief pour mieux comprendre votre projet, sans formulaire compliqué.</p></div><form id="briefForm" class="brief-form"><label>Votre nom<input name="name" placeholder="Votre nom" required autocomplete="name"></label><label>Nom de la marque<input name="brand" placeholder="Votre marque (optionnel)"></label><label>Quel type de projet ?<select name="service"><option>Brand Identity</option><option>Packaging Design</option><option>Creative Content</option><option>Autre projet</option></select></label><label>Parlez-moi de votre idée<textarea name="goal" placeholder="Racontez votre projet en quelques mots" required rows="4"></textarea></label><button class="primary-button" type="submit">Préparer mon brief</button></form><div id="briefOutput" hidden class="brief-output" aria-live="polite"><h3>Votre brief est prêt.</h3><pre id="briefText"></pre><button id="copyBrief" class="outline-button" type="button">Copier le brief</button></div></section>
 </main>
 </div>
 <script>
