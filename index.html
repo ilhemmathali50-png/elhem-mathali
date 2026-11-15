@@ -368,7 +368,7 @@ body.video-active .portfolio-top-frame{display:none!important}
 <link rel="stylesheet" href="./divers-gallery-v2.css?v=2">
 <link rel="stylesheet" href="./iconless-ui.css?v=1">
 <link rel="stylesheet" href="./project-diagnostic.css?v=2">
-<link rel="stylesheet" href="./reviews-second.css?v=2">
+<link rel="stylesheet" href="./reviews-second.css?v=3">
 <script src="./logo-showroom.js?v=37" defer></script>
 <script src="./creative-editorial.js?v=6" defer></script>
 <script src="./project-diagnostic.js?v=3" defer></script>
@@ -946,52 +946,30 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  </div>
  <div id="projectStrip" class="sommaire-list" aria-label="Sommaire des projets"></div>
 
- <section id="clientReview" class="client-review" aria-labelledby="clientReviewTitle">
-  <div class="client-review-head"><span>CLIENT VOICES · 02</span><span class="client-review-source">Témoignages reçus par message</span></div>
-  <div class="client-review-grid">
-   <div class="client-review-intro"><h3 id="clientReviewTitle">Kind words.<br><em>Real impact</em></h3><p>Un regard extérieur sur la créativité, le soin et l’écoute derrière chaque projet</p></div>
-   <div class="client-review-content">
-    <blockquote>« Un logo professionnel et un étiquetage soigné, le tout réalisé avec beaucoup de créativité, de sérieux et de professionnalisme. »</blockquote>
-    <div class="client-review-byline"><span><strong>Avis d’une cliente</strong><small>Identité visuelle &amp; étiquetage</small></span></div>
-    <div class="client-review-evidence">
-     <button type="button" class="client-review-capture" id="openClientCapture" aria-label="Agrandir la capture d’écran du témoignage WhatsApp">
-      <img src="./assets/reviews/avis-cliente-whatsapp.webp" alt="Capture recadrée du message WhatsApp de la cliente, sans nom ni numéro" width="400" height="615" loading="lazy" decoding="async">
-     </button>
-     <div class="client-review-evidence-copy"><strong>Le message original</strong><p>Une capture réelle du témoignage reçu, avec les informations personnelles retirées</p><small>Toucher pour agrandir</small></div>
-    </div>
-   </div>
-  </div>
-  <details class="client-review-detail">
-   <summary><span>Lire le témoignage complet</span></summary>
-   <div class="client-review-full">
-    <p>Je tiens à remercier chaleureusement le designer pour son excellent travail !</p>
-    <p>Un logo professionnel et un étiquetage soigné, le tout réalisé avec beaucoup de créativité, de sérieux et de professionnalisme.</p>
-    <p>Je suis très satisfaite du résultat et de la qualité du travail fourni. Merci pour votre écoute, votre disponibilité et votre engagement.</p>
-    <p>Je recommande vivement vos services à toutes les personnes qui recherchent un travail de qualité !</p>
-   </div>
-  </details>
- <article class="client-review-extra" aria-labelledby="clientReviewTwoTitle">
-  <header class="client-review-extra-side">
-   <div class="client-review-extra-label">CLIENT VOICE / 02</div>
-   <h4 id="clientReviewTwoTitle">L’écoute fait la différence</h4>
-   <p>Un second retour client sur l’accompagnement, l’attention portée au projet et le professionnalisme</p>
+ <section id="clientReview" class="client-review client-review--simple" aria-labelledby="clientReviewTitle">
+  <header class="review-simple-head">
+    <span class="review-simple-kicker">AVIS CLIENTS</span>
+    <h3 id="clientReviewTitle">Vous en parlez <em>mieux que moi</em></h3>
   </header>
-  <div class="client-review-new-message">
-   <blockquote>« Elhem est une personne à l'écoute et très professionnelle , elle prend son temps de comprendre le client au niveau de la création d'une brand et d'un logo pour le design . Je la recommande vraiment sans recule . 😊 »</blockquote>
-   <footer><strong>Avis d’une cliente</strong><span>Brand identity &amp; logo design · Message reçu</span></footer>
-   <div class="client-review-evidence client-review-evidence--second">
-    <button type="button" class="client-review-capture" id="openClientCaptureTwo" aria-label="Agrandir la capture authentique du deuxième témoignage WhatsApp">
-     <img src="./assets/reviews/avis-cliente-02.svg" width="440" height="285" loading="lazy" decoding="async" alt="Capture originale recadrée du message WhatsApp : Elhem est une personne à l'écoute et très professionnelle">
-    </button>
-    <div class="client-review-evidence-copy">
-     <strong>Le message original</strong>
-     <p>Le retour de la cliente, conservé dans sa capture d’origine</p>
-     <small>Toucher pour agrandir</small>
-    </div>
-   </div>
+  <div class="review-simple-grid">
+    <article class="review-simple-card">
+      <blockquote class="review-simple-quote">« Un logo professionnel et un étiquetage soigné »</blockquote>
+      <p class="review-simple-kind">Identité visuelle &amp; packaging</p>
+      <button type="button" class="review-simple-proof" id="openClientCapture" aria-label="Voir la capture originale du premier avis client">
+        <span class="review-simple-thumbnail"><img src="./assets/reviews/avis-cliente-whatsapp.webp" alt="Aperçu de la capture WhatsApp du premier avis" width="400" height="615" loading="lazy" decoding="async"></span>
+        <span class="review-simple-proof-label">Voir le message original</span>
+      </button>
+    </article>
+    <article class="review-simple-card">
+      <blockquote class="review-simple-quote">« Elhem est une personne à l'écoute et très professionnelle »</blockquote>
+      <p class="review-simple-kind">Brand identity &amp; logo</p>
+      <button type="button" class="review-simple-proof" id="openClientCaptureTwo" aria-label="Voir la capture originale du deuxième avis client">
+        <span class="review-simple-thumbnail"><img src="./assets/reviews/avis-cliente-02.svg" alt="Aperçu de la capture WhatsApp du deuxième avis" width="440" height="285" loading="lazy" decoding="async"></span>
+        <span class="review-simple-proof-label">Voir le message original</span>
+      </button>
+    </article>
   </div>
- </article>
- </section>
+</section>
 
  <dialog class="client-review-dialog" id="clientCaptureDialog" aria-label="Capture du témoignage client">
   <div class="client-review-dialog-inner">
