@@ -401,6 +401,25 @@ body.video-active .portfolio-top-frame{display:none!important}
 @media(prefers-reduced-motion:reduce){#welcome #playWelcome{animation:none;transition:none}#welcome #playWelcome::after{transition:none}}
 @media(max-width:380px){#welcome #playWelcome{padding:14px 17px;min-height:54px;font-size:12px}#welcome #playWelcome::after{font-size:22px}}
 
+
+/* Floral thank-you surprise at the end of À propos */
+.bouquet-surprise{border:0;padding:0;background:transparent;color:#34292f;width:min(92vw,420px);max-width:420px;max-height:min(90dvh,680px);overflow:visible;box-shadow:none}
+.bouquet-surprise::backdrop{background:#241826a8;backdrop-filter:blur(7px)}
+.bouquet-surprise-card{position:relative;overflow:hidden;border:1px solid #ead9d9;border-radius:28px;padding:34px 23px 30px;background:radial-gradient(circle at 50% 10%,#fffefd 0%,#fff8f6 68%,#f9e7e9 100%);box-shadow:0 24px 70px #1d12263c;text-align:center;animation:bouquetCardReveal .6s cubic-bezier(.2,.84,.24,1) both}
+.bouquet-surprise-close{position:absolute;top:14px;right:14px;display:grid;place-items:center;width:38px;height:38px;border:1px solid #dfc7c9;border-radius:50%;background:#ffffffd9;color:#704453;font-size:24px;line-height:1;z-index:2}
+.bouquet-surprise-kicker{display:block;color:#b15f79;font-size:10px;font-weight:800;letter-spacing:.22em;margin:2px 34px 8px}
+.bouquet-surprise-flower{width:min(75%,265px);height:auto;aspect-ratio:1;object-fit:contain;margin:0 auto 6px;mix-blend-mode:multiply;filter:drop-shadow(0 12px 14px #704a4a1a);animation:bouquetFlowerBloom 1.15s .15s cubic-bezier(.18,1.24,.2,1) both}
+.bouquet-surprise-title{font:700 clamp(21px,5vw,27px)/1.65 var(--sans);margin:4px 0 9px;letter-spacing:0}
+.bouquet-surprise-note{font:400 14px/1.85 var(--sans);color:#796871;margin:0 auto;max-width:310px}
+.bouquet-surprise-signature{display:block;font:italic 20px var(--serif);color:#ac5870;margin-top:17px}
+.bouquet-surprise-sparkle{position:absolute;color:#d89eae;font-size:20px;pointer-events:none;animation:bouquetSparkle 3s ease-in-out infinite}
+.bouquet-surprise-sparkle.one{left:13%;top:28%}
+.bouquet-surprise-sparkle.two{right:12%;top:42%;animation-delay:1s}
+@keyframes bouquetCardReveal{from{opacity:0;transform:translateY(28px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes bouquetFlowerBloom{from{opacity:0;transform:translateY(24px) scale(.65) rotate(-7deg)}to{opacity:1;transform:translateY(0) scale(1) rotate(0)}}
+@keyframes bouquetSparkle{0%,100%{opacity:.35;transform:scale(.7)}50%{opacity:1;transform:scale(1.22)}}
+@media(max-height:660px){.bouquet-surprise-card{padding:23px 20px}.bouquet-surprise-flower{width:min(58%,190px)}}
+@media(prefers-reduced-motion:reduce){.bouquet-surprise-card,.bouquet-surprise-flower,.bouquet-surprise-sparkle{animation:none!important}}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="./forceclean-native.css?v=30">
@@ -977,7 +996,32 @@ function hideContactToast(){const toast=$('#contactToast');if(toast)toast.classL
 function showContactToast(){if(toastSeen)return;toastSeen=true;const toast=$('#contactToast');if(toast)requestAnimationFrame(()=>toast.classList.add('visible'))}
 function setupContactToast(){const toast=document.createElement('aside');toast.id='contactToast';toast.className='contact-toast';toast.setAttribute('role','status');toast.setAttribute('aria-live','polite');toast.innerHTML='<button class="toast-close" type="button" aria-label="Fermer">Fermer</button><small>A LITTLE NOTE FROM ELHEM</small><strong>Une idée en tête ? <em>On en parle ?</em></strong><p>Si mes services t’intéressent, n’hésite pas à me contacter. Je serais ravie de découvrir ton projet</p><button type="button" class="toast-cta">Parlons de ton projet</button>';document.body.appendChild(toast);toast.querySelector('.toast-close').addEventListener('click',hideContactToast);toast.querySelector('.toast-cta').addEventListener('click',()=>{hideContactToast();const input=$('.contact-view input[name="name"]');if(input){input.scrollIntoView({behavior:'smooth',block:'center'});input.focus({preventScroll:true})}})}
 
-function init(){renderProjects();renderLogos();setupScrollTrail();setupContactToast();setupClientCapture();
+
+function setupBouquetSurprise(){
+ const dialog=$('#bouquetSurprise'),footer=$('.about-thanks'),about=$('.about-view');
+ if(!dialog||!footer||!about||!('IntersectionObserver' in window))return;
+ let shown=false;
+ try{shown=sessionStorage.getItem('elhem-bouquet-surprise-v1')==='seen'}catch(e){}
+ const close=$('#closeBouquetSurprise');
+ close?.addEventListener('click',()=>dialog.close());
+ dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
+ if(shown)return;
+ let pending=false;
+ const observer=new IntersectionObserver(entries=>{
+  if(pending||!entries.some(entry=>entry.isIntersecting)||about.hidden||$('#app').hidden)return;
+  pending=true;
+  observer.disconnect();
+  setTimeout(()=>{
+   if(about.hidden||$('#app').hidden||dialog.open)return;
+   shown=true;
+   try{sessionStorage.setItem('elhem-bouquet-surprise-v1','seen')}catch(e){}
+   dialog.showModal();
+  },500);
+ },{threshold:0.3});
+ observer.observe(footer);
+}
+
+function init(){renderProjects();renderLogos();setupScrollTrail();setupContactToast();setupBouquetSurprise();setupClientCapture();
  $('#playWelcome').addEventListener('click',enterIntro);
  $('#skipWelcome').addEventListener('click',()=>enterApp('editions'));$('#skipIntro').addEventListener('click',()=>enterApp());$('#introFilm').addEventListener('ended',()=>enterApp());
  $('#logoHome').addEventListener('click',()=>switchView('editions'));$('#topContact').addEventListener('click',()=>switchView('contact'));$('#backToBook').addEventListener('click',()=>switchView('editions'));$('#nextCase').addEventListener('click',()=>openProject(currentProject+1));$('#aboutContact').addEventListener('click',()=>switchView('contact'));$('#serviceContact').addEventListener('click',()=>switchView('contact'));$('#filmToBook').addEventListener('click',()=>switchView('editions'));
@@ -1254,6 +1298,20 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 </section>
 </main>
 </div>
+
+<dialog class="bouquet-surprise" id="bouquetSurprise" aria-labelledby="bouquetSurpriseTitle" aria-describedby="bouquetSurpriseNote" lang="ar" dir="rtl">
+ <div class="bouquet-surprise-card">
+  <button type="button" class="bouquet-surprise-close" id="closeBouquetSurprise" aria-label="سكر الرسالة">×</button>
+  <span class="bouquet-surprise-kicker" dir="ltr">A LITTLE GIFT FOR YOU</span>
+  <span aria-hidden="true" class="bouquet-surprise-sparkle one">✦</span>
+  <span aria-hidden="true" class="bouquet-surprise-sparkle two">✧</span>
+  <img class="bouquet-surprise-flower" src="./assets/portfolio/bouquet-surprise.svg" alt="بوكيه ورد طبيعي بالوردي والأحمر والأبيض" width="220" height="220" loading="lazy" decoding="async">
+  <h2 class="bouquet-surprise-title" id="bouquetSurpriseTitle">مدام وصلت لهنا…<br>أنا فرحانة برشا بوجودك ♡</h2>
+  <p class="bouquet-surprise-note" id="bouquetSurpriseNote">هالبوكيه هدية صغيرة منّي ليك.<br>شكراً خاطر خذيت من وقتك واكتشفت عالمي.</p>
+  <span class="bouquet-surprise-signature" dir="ltr">With love, Elhem ♡</span>
+ </div>
+</dialog>
+
 <script>
 /* Keep real portrait and video in separate files, instead of embedding them in the HTML. */
 const MEDIA_ASSETS={
