@@ -100,48 +100,87 @@
 @media(prefers-reduced-motion:reduce){.review-simple-proof{transition:none}}
 
 
-/* Fait Maison / third review. Minimal native-video design, consistent with real client proofs. */
+
+/* Fait Maison | quiet editorial audio testimonial, no decorative Play button */
 .review-simple-card--video{
-  grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);
-  align-items:center;gap:clamp(17px,4vw,38px);padding:clamp(18px,4vw,30px);
-  background:linear-gradient(135deg,#fffefd 25%,#fbeff3 100%);
+  --review-berry:#9b3653;--review-ink:#3d2833;--review-soft:#775b66;
+  grid-column:1/-1;
+  position:relative;isolation:isolate;overflow:hidden;
+  display:grid;grid-template-columns:minmax(0,1.18fr) minmax(165px,.82fr);
+  align-items:center;gap:clamp(18px,4vw,56px);
+  padding:clamp(24px,4vw,42px);
+  border-radius:21px;border:1px solid #e6cdd6;
+  background:radial-gradient(circle at 84% 12%,#f8e3ed 0,transparent 46%),linear-gradient(130deg,#fffefa,#fdf4f6 72%,#f1e2ed);
+  box-shadow:0 16px 42px #74344c14;
+}
+.review-simple-card--video::before{
+  content:"";position:absolute;z-index:-1;right:-90px;top:-140px;
+  width:290px;height:290px;border:1px solid #9b36531f;border-radius:50%;
+  box-shadow:0 0 0 42px #ffffff4d,0 0 0 78px #9b365308;
+  pointer-events:none;
+}
+.review-simple-card--video::after{
+  content:"";position:absolute;inset:auto 0 0;height:3px;
+  background:linear-gradient(90deg,#9b3653 0%,#de9db4 32%,transparent 90%);
+  pointer-events:none;
 }
 .review-video-copy{min-width:0;display:flex;flex-direction:column;align-items:flex-start}
+.review-video-topline{
+  display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:22px;
+}
 .review-video-kicker{
-  color:#9c3a59;font:800 10px/1.5 var(--sans);letter-spacing:.15em;margin-bottom:14px;
+  color:var(--review-berry);font:800 10px/1.5 var(--sans);letter-spacing:.14em;
+}
+.review-video-index{
+  padding:5px 9px;border-radius:999px;border:1px solid #e6cdd7;
+  color:#986176;background:#fff8fb;
+  font:750 10px/1.4 var(--sans);font-variant-numeric:tabular-nums;
 }
 .client-review--simple .review-video-copy h4{
-  margin:0 0 14px;color:#382a36;
-  font:400 clamp(25px,4.1vw,39px)/1.12 var(--serif);letter-spacing:-.04em;text-wrap:balance;
+  margin:0 0 19px;color:var(--review-ink);
+  font:400 clamp(32px,4.5vw,48px)/1.04 var(--serif);
+  letter-spacing:-.065em;text-wrap:balance;
 }
-.review-video-copy h4 em{color:#a42e48;font-weight:400}
+.client-review--simple .review-video-copy h4 em{font-weight:400;color:var(--review-berry)}
 .client-review--simple .review-video-project{
-  color:#855164;font:800 11px/1.6 var(--sans);margin:0 0 12px;
+  color:#8b3655;font:800 11px/1.6 var(--sans);margin:0 0 12px;
 }
 .client-review--simple .review-video-detail{
-  color:#72636c;font:400 12px/1.75 var(--sans);margin:0 0 12px;max-width:43ch;
+  color:var(--review-soft);font:400 12px/1.75 var(--sans);margin:0 0 24px;max-width:33ch;
 }
+.review-video-waveprint{display:flex;flex-direction:column;gap:10px;max-width:100%;padding:14px 0 0;border-top:1px solid #dfcad4}
+.review-video-wave{height:40px;display:flex;align-items:center;gap:3px}
+.review-video-wave i{display:block;width:3px;height:var(--h);flex:none;background:linear-gradient(180deg,#dba3b6,#98324e);border-radius:12px;opacity:.86}
+.review-video-wave i:nth-child(3n){opacity:.58}
+.review-video-audio-note{font:750 9px/1.55 var(--sans);letter-spacing:.12em;color:#92697c}
 .review-video-poster{
   appearance:none;position:relative;display:block;overflow:hidden;width:100%;
-  max-width:240px;justify-self:center;aspect-ratio:360/584;border:0;border-radius:13px;
-  padding:0;background:#161821;cursor:pointer;box-shadow:0 15px 28px #21151f28;
+  max-width:230px;justify-self:center;aspect-ratio:360/584;
+  border:5px solid #fffefa;border-radius:18px;padding:0;
+  background:#181a1f;cursor:pointer;
+  box-shadow:0 18px 40px #3f182b36,0 0 0 1px #d7bec9;
+  transform:rotate(2deg);transition:transform .35s ease,box-shadow .35s ease;
 }
-.review-video-poster img{display:block;width:100%;height:100%;object-fit:cover}
+.review-video-poster:hover,.review-video-poster:focus-visible{
+  transform:rotate(0deg) translateY(-3px);
+  box-shadow:0 22px 44px #3f182b43,0 0 0 1px #b97990;
+}
+.review-video-poster img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
 .review-video-poster::after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(0deg,#000b,transparent 34%,#00000000 72%);
-}
-.review-video-poster-play{
-  position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);
-  width:60px;height:60px;border-radius:100%;
-  display:grid;place-items:center;background:#fffef5ed;color:#9c2f4b;
-  font-size:21px;box-shadow:0 4px 20px #0004;
+  content:"";position:absolute;inset:35% 0 0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 32%,#0e1314d9 100%);
 }
 .review-video-poster-label{
-  position:absolute;z-index:2;left:14px;bottom:15px;color:white;
-  font:800 10px/1.5 var(--sans);letter-spacing:.12em;
+  position:absolute;z-index:2;left:11px;right:11px;bottom:12px;color:white;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding-top:11px;border-top:1px solid #ffffffa1;
+  font:800 9px/1.45 var(--sans);letter-spacing:.105em;text-align:left;
 }
-.review-video-poster:focus-visible{outline:3px solid #a42e48;outline-offset:4px}
+.review-video-arrow{
+  display:grid;place-items:center;flex:none;
+  font:400 21px/1 var(--sans);color:#fff;
+}
+.review-video-poster:focus-visible{outline:3px solid #9b3653;outline-offset:5px}
 .review-video-dialog{width:min(94vw,540px);max-width:540px;overflow:hidden}
 .review-video-dialog .client-review-dialog-inner{height:min(90dvh,850px);min-height:0;grid-template-rows:auto minmax(0,1fr)}
 .review-video-dialog .client-review-dialog-head{background:#17191e}
@@ -151,9 +190,28 @@
   object-fit:contain;background:#10151a;
 }
 @media(max-width:680px){
- .review-simple-card--video{grid-template-columns:1fr;gap:17px}
- .review-video-poster{max-width:220px}
- .review-video-copy h4{font-size:31px}
- .client-review--simple .review-video-detail{margin-bottom:17px}
+ .review-simple-card--video{
+  grid-template-columns:minmax(0,1fr) minmax(105px,39%);gap:14px;
+  padding:19px 15px 21px;border-radius:17px;align-items:center;
+ }
+ .review-video-topline{margin-bottom:14px;gap:7px}
+ .review-video-kicker{font-size:8px;letter-spacing:.09em}
+ .review-video-index{font-size:9px;padding:3px 7px}
+ .client-review--simple .review-video-copy h4{font-size:clamp(23px,6.8vw,31px);line-height:1.06;margin:0 0 15px}
+ .client-review--simple .review-video-project{font-size:10px;line-height:1.5;margin-bottom:8px}
+ .client-review--simple .review-video-detail{font-size:11px;line-height:1.55;margin-bottom:15px}
+ .review-video-wave{gap:2.5px;height:32px}
+ .review-video-wave i{width:2.5px;max-height:31px}
+ .review-video-waveprint{padding-top:11px;gap:7px}
+ .review-video-audio-note{font-size:8px;letter-spacing:.04em}
+ .review-video-poster{max-width:175px;border-width:3px;border-radius:12px;transform:rotate(1.2deg)}
+ .review-video-poster-label{left:6px;right:6px;bottom:7px;letter-spacing:.035em;font-size:7.5px}
+ .review-video-arrow{font-size:17px}
 }
-
+@media(max-width:360px){
+ .review-simple-card--video{grid-template-columns:minmax(0,1fr) 102px;gap:10px;padding:16px 11px}
+ .review-video-wave i:nth-child(n+14){display:none}
+ .review-video-poster-label{font-size:7px}
+ .client-review--simple .review-video-copy h4{font-size:23px}
+}
+@media(prefers-reduced-motion:reduce){.review-video-poster{transition:none;transform:none}}
