@@ -48,3 +48,16 @@
  .mx-realistic-stage img{animation:none;transition:none}
  .mx-realistic-choices button,.mx-realistic-original{transition:none}
 }
+/* Textile selector: Pull / Polo / Collection. No simulated 360 controls for still photos. */
+.mx-realistic-choices{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.mx-realistic-choices [data-mx-realistic="collection"]{grid-column:1/-1}
+.mx-realistic-stage img{animation:none;filter:drop-shadow(0 10px 14px #1234521a)}
+@media(min-width:880px){
+ .mx-realistic-choices{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .mx-realistic-choices [data-mx-realistic="collection"]{grid-column:auto}
+}
+@media(max-width:760px){
+ .mx-realistic-stage{min-height:0;padding:18px 17px 10px}
+ .mx-realistic-stage img{width:min(100%,440px);height:auto;max-height:480px;object-fit:contain}
+ .mx-realistic-choices button{min-height:49px}
+}
