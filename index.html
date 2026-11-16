@@ -416,7 +416,7 @@ body.video-active .portfolio-top-frame{display:none!important}
 <link rel="stylesheet" href="./reviews-second.css?v=3">
 <link rel="stylesheet" href="./about-toolkit.css?v=3">
 <link rel="stylesheet" href="./about-welcome-tn.css?v=1">
-<link rel="stylesheet" href="./portfolio-refinement.css?v=1">
+<link rel="stylesheet" href="./portfolio-refinement.css?v=2">
 <script src="./logo-showroom.js?v=37" defer></script>
 <script src="./creative-editorial.js?v=8" defer></script>
 <script src="./project-diagnostic.js?v=3" defer></script>
@@ -454,10 +454,10 @@ function renderProjects(){
  const area=$('#projectStrip');
  if(!area)return;
  const header=$('#editionCount');if(header)header.textContent=String(projects.length).padStart(2,'0')+' PROJETS';
- area.innerHTML=projects.map((p,i)=>`<button class="sommaire-item" type="button" data-project="${i}" aria-label="Découvrir ${p.name}" style="--project-color:${p.theme};--project-paper:${p.paper}">
+ area.innerHTML=projects.map((p,i)=>`<button class="sommaire-item" type="button" data-project="${i}" aria-label="Ouvrir la charte graphique de ${p.name}" style="--project-color:${p.theme};--project-paper:${p.paper}">
  <span class="sommaire-cover sommaire-cover-${p.sprite}" aria-hidden="true"></span>
- <span class="sommaire-meta"><small>ÉDITION ${String(i+1).padStart(2,'0')}</small><strong>${p.name}</strong><span>${p.type}</span></span>
- 
+ <span class="sommaire-meta"><small>ÉDITION ${String(i+1).padStart(2,'0')}</small><strong>${p.name}</strong><span>${p.type}</span><span class="sommaire-open-label">Voir la charte</span></span>
+ <span class="sommaire-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
  </button>`).join('');
  $$('[data-project]',area).forEach(b=>b.addEventListener('click',()=>openProject(Number(b.dataset.project))));
 }
