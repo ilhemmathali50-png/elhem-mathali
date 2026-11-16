@@ -79,12 +79,7 @@
           <button type="button" data-mx-realistic="collection" aria-pressed="false">03 / Collection</button>
         </div>
         <p class="mx-realistic-honesty">Mockups de présentation · La reproduction du logo sur les vêtements est illustrative. Les fichiers officiels figurent dans la section Identité</p>
-        <button type="button" class="mx-realistic-original" id="mxOriginalToggle" aria-expanded="false" aria-controls="mxOriginalPanel">Voir le mockup d’origine</button>
       </div>
-    </div>
-    <div class="mx-original-panel" id="mxOriginalPanel" hidden>
-      <span>RÉFÉRENCE / DOCUMENT ORIGINAL</span>
-      <img src="./assets/projects/metallux/native/uniforms.webp" alt="Mockups originaux MÉTALLUX : polo et pull côte à côte" loading="lazy" decoding="async">
     </div>
     <div class="mx-studio-bottom"><span>THE CREATIVE EDITIONS / MÉTALLUX</span><span>MOCKUPS TEXTILES / VISUELS RÉALISTES</span></div>
    </div>`;
@@ -127,13 +122,6 @@
     if(preview.complete)clear();
     else preview.addEventListener('load',clear,{once:true});
   }));
-  const originalButton=section.querySelector('#mxOriginalToggle'),originalPanel=section.querySelector('#mxOriginalPanel');
-  originalButton.addEventListener('click',()=>{
-    const expanded=originalButton.getAttribute('aria-expanded')==='true';
-    originalButton.setAttribute('aria-expanded',String(!expanded));
-    originalPanel.hidden=expanded;
-    originalButton.textContent=expanded?'Voir le mockup d’origine':'Masquer le mockup d’origine';
-  });
   section.querySelectorAll('.mx-reveal').forEach(item=>item.classList.add('is-visible'));
   const nav=root.querySelector('.mx-chapter-nav');
   if(nav){
