@@ -7,7 +7,16 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Elhem Editions">
-<meta name="description" content="Elhem Matheli, Brand Identity & Packaging Designer. Discover The Creative Editions, an interactive mobile portfolio">
+<meta name="description" content="Portfolio d’Elhem Matheli : identités de marque, packaging, étiquettes, direction artistique et contenus créatifs. Découvrez quatre projets et les étapes de création">
+<link rel="canonical" href="https://ilhemmathali50-png.github.io/elhem-mathali/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="The Creative Editions">
+<meta property="og:title" content="Elhem Matheli · Brand Identity & Packaging Designer">
+<meta property="og:description" content="Quatre projets de design, du concept aux applications : branding, packaging et création visuelle">
+<meta property="og:url" content="https://ilhemmathali50-png.github.io/elhem-mathali/">
+<meta property="og:image" content="https://ilhemmathali50-png.github.io/elhem-mathali/assets/profile/cover.webp">
+<meta name="twitter:card" content="summary_large_image">
 <title>Elhem Matheli | The Creative Editions</title>
 <link rel="icon" href="app-icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -407,11 +416,13 @@ body.video-active .portfolio-top-frame{display:none!important}
 <link rel="stylesheet" href="./reviews-second.css?v=3">
 <link rel="stylesheet" href="./about-toolkit.css?v=3">
 <link rel="stylesheet" href="./about-welcome-tn.css?v=1">
+<link rel="stylesheet" href="./portfolio-refinement.css?v=1">
 <script src="./logo-showroom.js?v=37" defer></script>
 <script src="./creative-editorial.js?v=7" defer></script>
 <script src="./project-diagnostic.js?v=3" defer></script>
 <script src="./forceclean-native.js?v=22" defer></script>
 <script src="./metallux-native.js?v=33" defer></script>
+<script src="./portfolio-case-studies.js?v=1" defer></script>
 <script src="./metallux-studio.js?v=31" defer></script>
 <script type="module" src="./metallux-garment3d.js?v=29"></script>
 <script defer>
@@ -436,7 +447,9 @@ function enterIntro(){
  film.play().catch(()=>film.focus());
 }
 function enterApp(view='editions'){const film=$('#introFilm');if(film){film.pause();}showOnly('app');switchView(view)}
-function switchView(view){if(view==='project')view='detail';const prev=activeView;activeView=view;document.body.classList.toggle('video-active',view==='video');$$('[data-view]').forEach(el=>el.hidden=el.dataset.view!==view);$$('[data-nav]').forEach(el=>{if(el.dataset.nav===view||view==='detail'&&el.dataset.nav==='editions')el.setAttribute('aria-current','page');else el.removeAttribute('aria-current')});const film=$('#portfolioFilm');if(film){if(view==='video'){const p=film.play();if(p&&typeof p.catch==='function')p.catch(()=>{film.controls=true})}else film.pause()}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:reduce?'instant':'smooth'});hideContactToast();refreshScrollTrail();}
+function switchView(view){if(view==='project')view='detail';const prev=activeView;activeView=view;
+ if(view!=='detail' && new URL(location.href).searchParams.has('projet')){const url=new URL(location.href);url.searchParams.delete('projet');history.replaceState({},'',url);}
+document.body.classList.toggle('video-active',view==='video');$$('[data-view]').forEach(el=>el.hidden=el.dataset.view!==view);$$('[data-nav]').forEach(el=>{if(el.dataset.nav===view||view==='detail'&&el.dataset.nav==='editions')el.setAttribute('aria-current','page');else el.removeAttribute('aria-current')});const film=$('#portfolioFilm');if(film){if(view==='video'){const p=film.play();if(p&&typeof p.catch==='function')p.catch(()=>{film.controls=true})}else film.pause()}const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;window.scrollTo({top:0,behavior:reduce?'instant':'smooth'});hideContactToast();refreshScrollTrail();}
 function renderProjects(){
  const area=$('#projectStrip');
  if(!area)return;
@@ -886,10 +899,13 @@ function openProject(i){
  releaseHerbSheets=undefined;
  currentProject=(i+projects.length)%projects.length;
  const p=projects[currentProject];
- if(p.id==='herbtresor'){renderHerbBook();switchView('detail');return;}
- if(p.id==='fait-maison'){renderFaitMaisonBook();switchView('detail');return;}
- if(p.id==='forceclean'){renderForceCleanBook();switchView('detail');return;}
- if(p.id==='metallux'){renderMetalluxBook();switchView('detail');return;}
+ const url=new URL(location.href);
+ url.searchParams.set('projet',p.id);
+ history.replaceState({projet:p.id},'',url);
+ if(p.id==='herbtresor'){renderHerbBook();window.renderPortfolioCaseStudy?.(p.id,$('#detailContent'));switchView('detail');return;}
+ if(p.id==='fait-maison'){renderFaitMaisonBook();window.renderPortfolioCaseStudy?.(p.id,$('#detailContent'));switchView('detail');return;}
+ if(p.id==='forceclean'){renderForceCleanBook();window.renderPortfolioCaseStudy?.(p.id,$('#detailContent'));switchView('detail');return;}
+ if(p.id==='metallux'){renderMetalluxBook();window.renderPortfolioCaseStudy?.(p.id,$('#detailContent'));switchView('detail');return;}
  $('#detailContent').innerHTML=`<div class="sommaire-detail" style="--project-color:${p.theme};--project-paper:${p.paper}"><div class="sommaire-detail-cover sommaire-cover-${p.sprite}" aria-hidden="true"></div><span>ÉDITION ${String(currentProject+1).padStart(2,'0')}</span><h2>${p.name}</h2><p>Page du projet à compléter après validation du Sommaire</p><div class="sommaire-detail-next">Cover · Mini charte graphique · Logo · Couleurs · Typographies · Project Goal · Design Decision · Mockups</div></div>`;
  switchView('detail');
 }
@@ -940,9 +956,12 @@ function setupContactToast(){const toast=document.createElement('aside');toast.i
 function init(){renderProjects();renderLogos();setupScrollTrail();setupContactToast();setupClientCapture();
  $('#playWelcome').addEventListener('click',enterIntro);
  $('#skipWelcome').addEventListener('click',()=>enterApp('editions'));$('#skipIntro').addEventListener('click',()=>enterApp());$('#introFilm').addEventListener('ended',()=>enterApp());
- $('#logoHome').addEventListener('click',()=>switchView('editions'));$('#topContact').addEventListener('click',()=>switchView('contact'));$('#backToBook').addEventListener('click',()=>switchView('editions'));$('#nextCase').addEventListener('click',()=>openProject(currentProject+1));$('#aboutContact').addEventListener('click',()=>switchView('contact'));$('#filmToBook').addEventListener('click',()=>switchView('editions'));
+ $('#logoHome').addEventListener('click',()=>switchView('editions'));$('#topContact').addEventListener('click',()=>switchView('contact'));$('#backToBook').addEventListener('click',()=>switchView('editions'));$('#nextCase').addEventListener('click',()=>openProject(currentProject+1));$('#aboutContact').addEventListener('click',()=>switchView('contact'));$('#serviceContact').addEventListener('click',()=>switchView('contact'));$('#filmToBook').addEventListener('click',()=>switchView('editions'));
  $$('[data-nav]').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.nav)));
- showOnly('welcome');
+ const deepProject=new URL(location.href).searchParams.get('projet');
+ const deepIndex=projects.findIndex(p=>p.id===deepProject);
+ if(deepIndex>=0){showOnly('app');openProject(deepIndex);}
+ else showOnly('welcome');
  if('serviceWorker' in navigator&&location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
@@ -1027,7 +1046,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <section class="app-view logos-view" data-view="logos" hidden><div class="section-intro"><div class="eyebrow">THE LOGO ATELIER</div><h2>Little marks.<br><em>Big ideas</em></h2><p>Une vitrine de recherches et d’identités graphiques, sans inventer de réalisations</p></div><div class="logo-grid" id="logoGrid"></div><div class="editorial-note">La construction d’un logo commence toujours par une idée claire, pas par un effet</div></section>
 <section class="app-view divers-view" data-view="divers" hidden aria-labelledby="diversTitle">
   <header class="divers-hero"><span class="creative-eyebrow">THE CREATIVE EDITIONS / CONTENT STUDIO</span><h2 id="diversTitle">Divers<br><em>En mouvement</em></h2><p>Des campagnes créatives et des contenus pensés pour capter le regard. Découvrez mes visuels pour TrackSolid Pro et Élya Natura</p></header>
-  <p class="divers-count" aria-live="polite">18 créations à découvrir</p>
+  <p class="divers-count" aria-live="polite">Une sélection de créations à découvrir</p>
   <div class="divers-grid" id="diversGrid">
     <article class="divers-card divers-video-card" data-divers-type="videos">
       <div class="divers-video-stage">
@@ -1048,6 +1067,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     <article class="divers-card" data-divers-type="posts"><div class="divers-media"><img src="./assets/projects/herbtresor/brand_story.webp" alt="Planche de direction artistique pour HerbTrésor" loading="lazy"></div><div class="divers-card-copy"><small>03 / CRÉATION · BRANDING</small><h3>HerbTrésor</h3><p>Direction graphique et langage visuel d’une marque inspirée par la nature</p></div></article>
     <article class="divers-card" data-divers-type="posts"><div class="divers-media"><img src="./assets/projects/forceclean/native/air-mockup.webp" alt="Visuel de packaging de produit ForceClean" loading="lazy"></div><div class="divers-card-copy"><small>04 / VISUEL · PACKAGING</small><h3>ForceClean</h3><p>Présentation d’un produit d’entretien et de son univers visuel</p></div></article>
   </div>
+  <div class="divers-more-wrap"><button id="diversMore" class="divers-more" type="button" aria-expanded="false" hidden>Voir toutes les créations</button></div>
   <footer class="divers-footer"><p>17 visuels et 1 montage vidéo à découvrir. Touchez un visuel pour l’agrandir ou lancez la vidéo pour la regarder</p><button id="filmToBook" type="button" class="outline-button">Retour au sommaire </button></footer>
 </section>
 <section class="app-view about-view" data-view="about" hidden aria-labelledby="aboutTitle">
@@ -1070,7 +1090,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  <section class="about-chapter" aria-labelledby="aboutWho"><div class="about-chapter-heading"><span class="about-chapter-number">01</span><h3 id="aboutWho">Qui je suis</h3></div><p>Je suis Elhem Matheli, designer en branding et packaging, et créatrice de contenu. J’accompagne les marques dans la conception d’une identité claire, du premier concept jusqu’à ses applications visuelles : logo, étiquette, packaging, contenu et supports digitaux</p><p>J’aime penser au-delà du simple « joli » : chaque couleur, forme et détail doit raconter quelque chose et servir l’idée derrière le projet</p></section>
  <section class="about-chapter" aria-labelledby="aboutJourney">
    <div class="about-chapter-heading"><span class="about-chapter-number">02</span><h3 id="aboutJourney">Mon parcours</h3></div>
-   <p>De l’ingénierie économique et financière au design, mon parcours associe l’analyse et la création. J’ai également suivi une formation vers les métiers du numérique, avant de développer mon expérience en branding, packaging et communication digitale</p>
+   <p>De mes études en économie et finance au design, mon parcours associe l’analyse et la création. J’ai également suivi une formation vers les métiers du numérique, avant de développer mon expérience en branding, packaging et communication digitale</p>
    <a class="about-cv-link" href="./assets/cv/CV_Elhem_Mathali_2026.pdf" target="_blank" rel="noopener noreferrer" type="application/pdf" aria-label="Consulter le CV d’Elhem Matheli en PDF dans un nouvel onglet">Consulter mon CV</a>
  </section>
  <section class="about-chapter" aria-labelledby="aboutOffer"><div class="about-chapter-heading"><span class="about-chapter-number">03</span><h3 id="aboutOffer">Comment je peux vous aider</h3></div><p>Une identité forte ne s’arrête pas au logo. Voici les prestations sur lesquelles je peux vous accompagner</p>
@@ -1081,6 +1101,17 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
      <article class="about-service"><h4>Social Media Design</h4><p>Posts, carrousels et visuels de campagnes</p></article>
      <article class="about-service"><h4>Création de contenu</h4><p>Idées, reels et montage de vidéos courtes</p></article>
      <article class="about-service"><h4>Design digital</h4><p>Expériences visuelles pour sites et interfaces</p></article>
+   </div>
+   <div class="portfolio-process" aria-labelledby="collaborationTitle">
+    <span>DU BRIEF AU RÉSULTAT</span>
+    <h4 id="collaborationTitle">Comment nous travaillons ensemble</h4>
+    <div class="portfolio-steps">
+      <div class="portfolio-step"><small>01 / ÉCHANGE</small><strong>Comprendre le projet</strong><p>Nous définissons la marque, le public, les objectifs et les supports nécessaires</p></div>
+      <div class="portfolio-step"><small>02 / CRÉATION</small><strong>Construire une direction</strong><p>Je prépare une proposition visuelle, puis nous affinons les éléments prévus ensemble</p></div>
+      <div class="portfolio-step"><small>03 / LIVRAISON</small><strong>Des fichiers adaptés</strong><p>Logos vectoriels, palette, charte, étiquettes, mockups ou contenus selon la prestation choisie</p></div>
+    </div>
+    <p class="portfolio-terms">Les livrables, formats, révisions, délais et tarifs sont précisés dans un devis avant le début de la collaboration</p>
+    <button type="button" class="portfolio-cta" id="serviceContact">Parlons de votre projet</button>
    </div>
  </section>
  <section class="about-chapter" aria-labelledby="aboutWhy"><div class="about-chapter-heading"><span class="about-chapter-number">04</span><h3 id="aboutWhy">Ce que votre marque gagne avec moi</h3></div>
@@ -1180,7 +1211,7 @@ const MEDIA_ASSETS={
 };
 document.querySelectorAll("[data-asset]").forEach(el=>{const src=MEDIA_ASSETS[el.dataset.asset];if(src)el.src=src});
 document.querySelectorAll("[data-poster]").forEach(el=>{const poster=MEDIA_ASSETS[el.dataset.poster];if(poster)el.poster=poster});
-document.querySelectorAll("video").forEach(el=>el.load());
+/* Videos are intentionally loaded on user interaction to preserve mobile bandwidth. */
 </script>
 </body>
 </html>
