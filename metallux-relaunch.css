@@ -1,0 +1,84 @@
+/* MÉTALLUX / 2026-11-16: editorial cover + genuine 360° garment stage.
+   Overrides are limited to the MÉTALLUX art-book. Original brand assets are unchanged. */
+.mx-book.mx-steel-edition .mx-hero{
+ background:radial-gradient(ellipse at 76% 43%,#173f67 0%,transparent 55%),linear-gradient(135deg,#06111f 0%,#0b233c 53%,#061a32 100%)!important;
+ color:#eff7ff;padding:clamp(85px,10vw,122px) 0 clamp(55px,7vw,100px);
+ min-height:min(785px,94svh);
+}
+.mx-book.mx-steel-edition .mx-hero::before{
+ opacity:.38!important;mix-blend-mode:screen!important;
+ background:repeating-linear-gradient(90deg,transparent 0 69px,#b4ddfc1c 70px,transparent 71px 140px),linear-gradient(124deg,transparent 39%,#fff2 39.2%,transparent 39.8%,transparent 67%,#7dc4ff1c 67.3%,transparent 68%)!important;
+ animation:none!important;
+}
+.mx-book.mx-steel-edition .mx-hero::after{background:linear-gradient(180deg,transparent 72%,#020913a8 100%)!important;opacity:1!important}
+.mx-book.mx-steel-edition .mx-hero h1{
+ font-family:var(--mx-sans);color:#fff!important;font-size:clamp(48px,8.2vw,99px)!important;
+ line-height:.99!important;font-weight:750;letter-spacing:-.075em!important;text-transform:none;
+}
+.mx-book.mx-steel-edition .mx-hero h1 em{color:#7bc5ff!important;font-size:.85em!important;font-weight:400;letter-spacing:-.06em!important}
+.mx-book.mx-steel-edition .mx-hero .mx-eyebrow{color:#9ecdec!important}
+.mx-book.mx-steel-edition .mx-hero-intro{color:#c4d4e6!important;max-width:37ch;font-size:clamp(12px,1.3vw,15px)}
+.mx-book.mx-steel-edition .mx-hero-rule{color:#8aacc7}
+.mx-book.mx-steel-edition .mx-hero-rule::before{background:#5cabfb}
+.mx-book.mx-steel-edition .mx-hero-grid{grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:clamp(26px,5vw,82px)}
+.mx-book.mx-steel-edition .mx-cover-compose{
+ width:min(100%,465px);aspect-ratio:4/5.2;margin-inline:auto;position:relative;isolation:isolate;overflow:hidden;
+ background:linear-gradient(147deg,#19324b 0%,#071a2d 64%,#0c3056 100%);
+ border:1px solid #8db5d173;box-shadow:24px 32px 55px #0009, inset 0 0 0 6px #06172a66;
+ transform:perspective(1000px) rotateY(-5deg) rotateX(2deg);transition:transform .55s ease;
+}
+.mx-book.mx-steel-edition .mx-cover-compose::before{
+ content:"";position:absolute;inset:0;z-index:-1;opacity:.29;filter:grayscale(1) contrast(1.25);
+ background:url('./assets/projects/metallux/native/industrial-gate.webp') center/cover no-repeat;
+}
+.mx-book.mx-steel-edition .mx-cover-compose::after{
+ content:"";position:absolute;inset:0;z-index:-1;
+ background:linear-gradient(180deg,#061629a6,transparent 26%,#06172b99 85%,#06172bd9);
+}
+.mx-book.mx-steel-edition .mx-cover-compose:hover{transform:perspective(1000px) rotateY(0) rotateX(0)}
+.mx-cover-edition{position:absolute;top:7%;left:9%;right:9%;display:flex;justify-content:space-between;gap:10px;color:#d7eaff;font:700 clamp(8px,.9vw,11px)/1.5 var(--mx-sans);letter-spacing:.14em}
+.mx-cover-edition span:last-child{color:#7cc9ff}
+.mx-cover-hero-mark{position:absolute;top:30%;left:7%;right:7%;min-height:32%;display:grid;place-items:center;border-top:1px solid #b5d8ee50;border-bottom:1px solid #b5d8ee50;background:linear-gradient(130deg,#061831e8,#122d4ad9);box-shadow:0 20px 35px #0005}
+.mx-cover-hero-mark img{display:block;width:88%;max-height:180px;height:auto;object-fit:contain}
+.mx-cover-vertical{position:absolute;top:17%;right:5%;writing-mode:vertical-rl;letter-spacing:.29em;font:600 9px var(--mx-sans);color:#b4defd8f}
+.mx-cover-foot{position:absolute;left:9%;right:9%;bottom:7%;display:flex;justify-content:space-between;gap:10px;align-items:end;border-top:1px solid #afcfe488;padding-top:14px;color:#d8e8f7;font:600 clamp(8px,1vw,11px)/1.6 var(--mx-sans);letter-spacing:.1em}
+.mx-cover-foot strong{font-size:clamp(10px,1.2vw,14px);letter-spacing:.16em;color:#fff}
+.mx-interactive-3d{margin-bottom:22px;border-radius:18px;overflow:hidden;box-shadow:0 23px 45px #122e4940}
+.mx-interactive-3d .mx-viewport{min-height:clamp(380px,48vw,580px)}
+.mx-interactive-3d .mx-garment-toolbar{min-width:0}
+.mx-interactive-3d .mx-garment-slider label{justify-content:space-between}
+.mx-interactive-3d .mx-controls-actions{display:grid;gap:8px}
+.mx-interactive-3d .mx-garment-toolbar button{border-radius:8px}
+.mx-interactive-3d .mx-garment-toolbar button:focus-visible{outline:3px solid #80d5ff;outline-offset:2px}
+.mx-realistic-showroom .mx-reference-label{font:750 10px/1.7 var(--mx-sans);letter-spacing:.15em;color:#3b6282;margin:8px 0 13px}
+.mx-interactive-3d .mx-viewport-fallback img{max-height:380px}
+@media(max-width:760px){
+ .mx-book.mx-steel-edition .mx-hero{min-height:auto!important;padding:75px 0 47px!important}
+ .mx-book.mx-steel-edition .mx-hero-grid{display:flex!important;flex-direction:column!important;gap:24px!important;align-items:center}
+ .mx-book.mx-steel-edition .mx-hero-image{order:1;width:min(80vw,370px)!important}
+ .mx-book.mx-steel-edition .mx-cover-compose{width:100%;transform:none;aspect-ratio:4/4.9}
+ .mx-book.mx-steel-edition .mx-cover-compose:hover{transform:none}
+ .mx-book.mx-steel-edition .mx-hero-copy{order:2;max-width:430px;width:100%;text-align:center;align-items:center}
+ .mx-book.mx-steel-edition .mx-hero h1{font-size:clamp(37px,9.5vw,59px)!important;line-height:1.03!important;white-space:normal!important;text-wrap:balance!important}
+ .mx-book.mx-steel-edition .mx-hero h1 br{display:block!important}
+ .mx-book.mx-steel-edition .mx-hero h1 em{display:inline!important;font-size:.85em!important}
+ .mx-book.mx-steel-edition .mx-hero-intro{max-width:37ch;margin:14px auto 0!important;text-align:center}
+ .mx-book.mx-steel-edition .mx-cover-hero-mark img{max-height:160px}
+ .mx-interactive-3d{border-radius:14px}
+ .mx-interactive-3d .mx-viewport{min-height:clamp(325px,100vw,480px)}
+ .mx-interactive-3d .mx-garment-toolbar{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 16px}
+ .mx-interactive-3d .mx-garment-toolbar .mx-controls-title{grid-column:1/-1}
+ .mx-interactive-3d .mx-garment-toolbar .mx-garment-buttons{grid-column:1/-1}
+ .mx-interactive-3d .mx-garment-toolbar .mx-garment-slider{grid-column:1/-1;margin:8px 0}
+ .mx-interactive-3d .mx-garment-toolbar .mx-controls-actions{grid-column:1/-1}
+ .mx-interactive-3d .mx-garment-toolbar .mx-garment-footnote{grid-column:1/-1}
+}
+@media(max-width:390px){
+ .mx-book.mx-steel-edition .mx-hero h1{font-size:clamp(33px,9vw,41px)!important}
+ .mx-book.mx-steel-edition .mx-hero-image{width:min(78vw,305px)!important}
+ .mx-cover-edition{font-size:8px;letter-spacing:.08em}
+ .mx-interactive-3d .mx-garment-toolbar{grid-template-columns:minmax(0,1fr)}
+}
+@media(prefers-reduced-motion:reduce){
+ .mx-book.mx-steel-edition .mx-cover-compose{transition:none;transform:none}
+}
