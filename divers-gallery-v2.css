@@ -67,3 +67,17 @@
   .divers-poster-card--new .divers-poster-media{aspect-ratio:4/5}
   .divers-poster-card--new .divers-poster-caption{padding:11px 9px 13px}
 }
+
+
+/* Three Tunisian hoodie artwork pieces: show every original line without cropping. */
+.divers-poster-card--hoodie{background:#fffaf5;border-color:#eadbd6;box-shadow:0 9px 30px #4b293215}
+.divers-poster-card--hoodie .divers-poster-media,
+.divers-poster-card--new .divers-poster-open[data-poster-id="7154"] .divers-poster-media,
+.divers-poster-card--new .divers-poster-open[data-poster-id="7155"] .divers-poster-media,
+.divers-poster-card--new .divers-poster-open[data-poster-id="7156"] .divers-poster-media{
+ aspect-ratio:1 / 1;overflow:hidden;background:#fdf8f0;padding:0;
+}
+.divers-poster-card--hoodie .divers-poster-media img{width:100%;height:100%;object-fit:contain;object-position:center}
+.divers-poster-card--hoodie .divers-poster-caption{background:#fff9f3;border-top-color:#f1e0d7}
+.divers-poster-card--hoodie .divers-poster-caption small{color:#9e3a47}
+.divers-poster-card--hoodie .divers-poster-caption strong{font-size:clamp(12px,1.6vw,15px);line-height:1.45}
