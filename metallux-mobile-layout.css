@@ -114,3 +114,70 @@
 @media(prefers-reduced-motion:reduce){
   .mx-book .mx-hero-image .mx-book-object{animation:none!important;transform:none!important}
 }
+
+
+/* MÉTALLUX / mobile typography refinement: no broken oversized titles.
+   Local to the METALLUX chapter; other case studies remain unchanged. */
+@media (max-width:700px){
+  .mx-book .mx-hero h1,
+  .mx-book .mx-art-head h2,
+  .mx-book .mx-assembly-head h2,
+  .mx-book .mx-colors h2,
+  .mx-book .mx-application-head h2{
+    font-size:clamp(16px,5.1vw,26px)!important;
+    line-height:1.2!important;
+    letter-spacing:-.035em!important;
+    white-space:nowrap!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+    text-wrap:nowrap!important;
+    max-width:100%;
+  }
+  .mx-book .mx-uniform-layout h3{
+    font-size:clamp(15px,4.3vw,21px)!important;
+    line-height:1.25!important;
+    letter-spacing:-.028em!important;
+    white-space:nowrap!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+  }
+  .mx-book .mx-hero h1 br,
+  .mx-book .mx-art-head h2 br,
+  .mx-book .mx-assembly-head h2 br,
+  .mx-book .mx-colors h2 br,
+  .mx-book .mx-application-head h2 br,
+  .mx-book .mx-uniform-layout h3 br{
+    display:none!important;
+  }
+  .mx-book .mx-hero h1 em,
+  .mx-book .mx-art-head h2 em,
+  .mx-book .mx-assembly-head h2 em,
+  .mx-book .mx-colors h2 em,
+  .mx-book .mx-application-head h2 em,
+  .mx-book .mx-uniform-layout h3 em{
+    display:inline!important;
+    font-size:1em!important;
+    line-height:inherit!important;
+    letter-spacing:-.035em!important;
+  }
+  .mx-book .mx-application-head h2,
+  .mx-book .mx-uniform-layout h3{color:#f6f9ff!important}
+  .mx-book .mx-application-head h2 em,
+  .mx-book .mx-uniform-layout h3 em{color:#87c7ff!important}
+  .mx-book .mx-art-head h2{color:#102a45!important}
+  .mx-book .mx-colors h2{color:#071c38!important}
+  .mx-book .mx-assembly-head h2{color:#fff!important}
+  .mx-book .mx-art-head>div,
+  .mx-book .mx-application-head>div,
+  .mx-book .mx-uniform-layout>div{min-width:0}
+}
+@media (max-width:350px){
+  .mx-book .mx-hero h1,
+  .mx-book .mx-art-head h2,
+  .mx-book .mx-assembly-head h2,
+  .mx-book .mx-colors h2,
+  .mx-book .mx-application-head h2{
+    font-size:clamp(15px,4.8vw,18px)!important;
+  }
+  .mx-book .mx-uniform-layout h3{font-size:14px!important}
+}
