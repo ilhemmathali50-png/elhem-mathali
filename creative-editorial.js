@@ -4,8 +4,11 @@
 (()=>{
 'use strict';
 /* Keep the rest of the work available, but lead with six selected pieces. */
-const FEATURED=new Set([7150,7151,7152,7153,7149,7148,7144,7140,7137,7133]);
+const FEATURED=new Set([7154,7155,7156,7150,7151,7152,7153,7149,7148,7144,7140,7137,7133]);
 const POSTERS=[
+ [7154,'وسّع بالك · Motif pour hoodie 01','Design textile'],
+ [7155,'يا حسرة على اللي فات · Motif pour hoodie 02','Design textile'],
+ [7156,'الدنيا دوّارة · Motif pour hoodie 03','Design textile'],
  [7150,'موش كيف كيف · Motif tunisien','Créations tunisiennes'],
  [7151,'على كيفي · Expression tunisienne','Créations tunisiennes'],
  [7152,'تونسي ونفتخر · Typographie et patrimoine','Créations tunisiennes'],
@@ -41,7 +44,7 @@ function initDivers(){
  const imageCards=POSTERS.map(([id,title,brand],index)=>{
   const category=brand==='Élya Natura'?'elya':brand==='TrackSolid Pro'?'tracksolid':brand==='Design textile'?'textile':'tunisie';
   const item=document.createElement('article');
-  item.className='divers-card divers-poster-card'+(id>=7150?' divers-poster-card--new':'');
+  item.className='divers-card divers-poster-card'+(id>=7150?' divers-poster-card--new':'')+(id>=7154?' divers-poster-card--hoodie':'');
   item.dataset.diversType='posts';
   item.dataset.diversProject=category;
   item.hidden=!FEATURED.has(id);
@@ -74,6 +77,8 @@ function initDivers(){
  }
  const count=page.querySelector('.divers-count');
  const more=page.querySelector('#diversMore');
+ const footerInfo=page.querySelector('.divers-footer p');
+ if(footerInfo)footerInfo.textContent=POSTERS.length+' illustrations et 1 montage vidéo à découvrir. Touchez un dessin pour le voir en grand, sans recadrage.';
  const rest=POSTERS.length-FEATURED.size;
  if(count)count.textContent='Une sélection de '+FEATURED.size+' visuels'+(videoCard?' et 1 vidéo':'');
  if(more && rest>0){
