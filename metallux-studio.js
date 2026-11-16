@@ -63,21 +63,22 @@
    <div class="mx-inner">
     <div class="mx-showroom-heading mx-reveal">
      <div><span class="mx-eyebrow">06 / APPLICATIONS TEXTILES</span><h2 id="mxAtelierHeading">La marque <em>en situation</em></h2></div>
-     <p>Des mockups 3D réalistes, isolés sur fond transparent pour mettre les volumes et les finitions en valeur</p>
+     <p>Des mockups textiles réalistes pour présenter la marque sur un pull, un polo et une collection coordonnée</p>
     </div>
     <div class="mx-realistic-layout mx-reveal">
       <div class="mx-realistic-stage">
-        <img id="mxRealisticImage" src="./assets/projects/metallux/native/polo-realistic-transparent.png" alt="Polo MÉTALLUX bleu marine, mockup 3D réaliste isolé sur fond transparent" loading="lazy" decoding="async" width="1189" height="1323">
+        <img id="mxRealisticImage" src="./assets/projects/metallux/native/pull-realistic-photo.webp" alt="Pull MÉTALLUX réaliste bleu marine, col rond et manches longues, détails bleu électrique et marquage argenté" loading="lazy" decoding="async" width="400" height="500">
       </div>
       <div class="mx-realistic-info">
         <span class="mx-eyebrow">TEXTILE / MÉTALLUX</span>
-        <h3 id="mxRealisticTitle">Le polo signature</h3>
-        <p id="mxRealisticDescription">Coupe structurée, tissu bleu marine et finitions bleu électrique, présentés sous forme de rendu 3D</p>
+        <h3 id="mxRealisticTitle">Le pull signature</h3>
+        <p id="mxRealisticDescription">Sweat à col rond bleu marine, manches longues et finitions bleu électrique. Présentation textile réaliste.</p>
         <div class="mx-realistic-choices" role="group" aria-label="Choisir un visuel textile">
-          <button type="button" data-mx-realistic="polo" aria-pressed="true">01 / Polo</button>
-          <button type="button" data-mx-realistic="collection" aria-pressed="false">02 / Collection</button>
+          <button type="button" data-mx-realistic="pull" aria-pressed="true">01 / Pull</button>
+          <button type="button" data-mx-realistic="polo" aria-pressed="false">02 / Polo</button>
+          <button type="button" data-mx-realistic="collection" aria-pressed="false">03 / Collection</button>
         </div>
-        <p class="mx-realistic-honesty">Rendus visuels 3D · Le logo sur les mockups est une simulation graphique, les versions officielles se trouvent dans la section Identité</p>
+        <p class="mx-realistic-honesty">Mockups de présentation · La reproduction du logo sur les vêtements est illustrative. Les fichiers officiels figurent dans la section Identité</p>
         <button type="button" class="mx-realistic-original" id="mxOriginalToggle" aria-expanded="false" aria-controls="mxOriginalPanel">Voir le mockup d’origine</button>
       </div>
     </div>
@@ -85,46 +86,28 @@
       <span>RÉFÉRENCE / DOCUMENT ORIGINAL</span>
       <img src="./assets/projects/metallux/native/uniforms.webp" alt="Mockups originaux MÉTALLUX : polo et pull côte à côte" loading="lazy" decoding="async">
     </div>
-    <div class="mx-studio-bottom"><span>THE CREATIVE EDITIONS / MÉTALLUX</span><span>RENDUS 3D / FOND TRANSPARENT</span></div>
+    <div class="mx-studio-bottom"><span>THE CREATIVE EDITIONS / MÉTALLUX</span><span>MOCKUPS TEXTILES / RENDEMENTS RÉALISTES</span></div>
    </div>`;
   app.insertAdjacentElement('afterend',section);
-  // Actual geometry-based 360-degree viewer. Photorealistic stills remain below as design references.
-  const viewer=document.createElement('div');
-  viewer.className='mx-showroom-grid mx-interactive-3d mx-reveal';
-  viewer.innerHTML=`
-    <div class="mx-viewport" id="mxGLViewer" aria-label="Visionneuse interactive 3D des vêtements MÉTALLUX">
-      <span class="mx-viewport-note">ROTATION LIBRE · 360°</span><span class="mx-viewport-orbit" aria-hidden="true">360°</span>
-      <div class="mx-viewport-fallback" id="mxGLFallback"><div>
-        <img src="./assets/projects/metallux/native/uniforms-realistic-transparent.png" alt="Collection textile MÉTALLUX, aperçu lorsque la 3D n’est pas disponible" loading="lazy">
-        <p>Le modèle 3D se charge. Les visuels originaux restent disponibles plus bas.</p>
-      </div></div>
-    </div>
-    <aside class="mx-garment-toolbar" aria-label="Contrôles de la rotation textile 3D">
-      <div class="mx-controls-title"><span class="mx-identity">MÉTALLUX / ATELIER 360°</span><h3 id="mxGarmentTitle">Polo signature</h3>
-        <p>Un modèle 3D volumétrique à tourner librement pour explorer la coupe. Les rendus réalistes se trouvent juste en dessous.</p></div>
-      <div class="mx-garment-buttons" role="group" aria-label="Sélection du vêtement">
-        <button type="button" data-mx-garment="polo" aria-pressed="true">01 / Polo</button>
-        <button type="button" data-mx-garment="sweat" aria-pressed="false">02 / Pull</button>
-      </div>
-      <div class="mx-garment-slider"><label for="mxGarmentAngle">ANGLE DE VUE <strong id="mxGarmentDegrees">0°</strong></label><input type="range" id="mxGarmentAngle" min="0" max="359" value="0" step="1" aria-label="Faire tourner le vêtement sur 360 degrés"></div>
-      <div class="mx-controls-actions"><button type="button" id="mxGarmentAuto" class="mx-auto-btn" aria-pressed="true">Ⅱ Pause rotation</button><button type="button" id="mxGarmentReset" class="mx-reset-btn">↺ Vue de face</button></div>
-      <p class="mx-garment-footnote">Glissez avec le doigt sur le vêtement pour le faire tourner. Modèle 3D d’interprétation, non une reproduction exacte du patron ou du logo imprimé.</p>
-    </aside>`;
-  section.querySelector('.mx-realistic-layout').before(viewer);
-  viewer.insertAdjacentHTML('afterend','<p class="mx-reference-label">APERÇUS RÉALISTES / POLO ET COLLECTION</p>');
-  window.dispatchEvent(new CustomEvent('metallux-studio-mounted',{detail:{section}}));
+  // One photorealistic textile showcase. Static images are not described as interactive 360° models.
   const designs={
+    pull:{
+      src:'./assets/projects/metallux/native/pull-realistic-photo.webp',
+      alt:'Pull MÉTALLUX réaliste bleu marine à manches longues avec passepoils bleu électrique et monogramme argenté',
+      title:'Le pull signature',
+      description:'Sweat à col rond bleu marine, manches longues et finitions bleu électrique. Présentation textile réaliste.'
+    },
     polo:{
       src:'./assets/projects/metallux/native/polo-realistic-transparent.png',
-      alt:'Polo MÉTALLUX bleu marine, mockup 3D réaliste transparent',
+      alt:'Polo MÉTALLUX bleu marine, mockup textile réaliste isolé',
       title:'Le polo signature',
-      description:'Coupe structurée, tissu bleu marine et finitions bleu électrique, présentés sous forme de rendu 3D'
+      description:'Polo bleu marine à col boutonné, détails bleu électrique et logo brodé en rendu réaliste.'
     },
     collection:{
       src:'./assets/projects/metallux/native/uniforms-realistic-transparent.png',
-      alt:'Polo et pull MÉTALLUX bleu marine, rendus 3D réalistes isolés sur fond transparent',
+      alt:'Collection MÉTALLUX avec polo et pull bleu marine en mockups réalistes',
       title:'La collection textile',
-      description:'Deux silhouettes coordonnées, avec des détails bleus et argentés sur des textiles bleu marine'
+      description:'Deux pièces coordonnées, bleu marine et détails bleu électrique, présentées ensemble.'
     }
   };
   const preview=section.querySelector('#mxRealisticImage');
