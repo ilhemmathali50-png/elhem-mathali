@@ -4,8 +4,12 @@
 (()=>{
 'use strict';
 /* Keep the rest of the work available, but lead with six selected pieces. */
-const FEATURED=new Set([7149,7148,7144,7140,7137,7133]);
+const FEATURED=new Set([7150,7151,7152,7153,7149,7148,7144,7140,7137,7133]);
 const POSTERS=[
+ [7150,'موش كيف كيف · Motif tunisien','Créations tunisiennes'],
+ [7151,'على كيفي · Expression tunisienne','Créations tunisiennes'],
+ [7152,'تونسي ونفتخر · Typographie et patrimoine','Créations tunisiennes'],
+ [7153,'Hoodie asymétrique · Collection 01','Design textile'],
  [7149,'L’installation, une question de confiance','TrackSolid Pro'],
  [7148,'Quand les GPS s’affrontent','TrackSolid Pro'],
  [7147,'Votre confort, notre priorité','TrackSolid Pro'],
@@ -35,14 +39,14 @@ function initDivers(){
  grid.querySelectorAll('.divers-card[data-divers-type="posts"]').forEach(el=>el.remove());
  const posterById=new Map(POSTERS.map(p=>[String(p[0]),p]));
  const imageCards=POSTERS.map(([id,title,brand],index)=>{
-  const category=brand==='Élya Natura'?'elya':'tracksolid';
+  const category=brand==='Élya Natura'?'elya':brand==='TrackSolid Pro'?'tracksolid':brand==='Design textile'?'textile':'tunisie';
   const item=document.createElement('article');
-  item.className='divers-card divers-poster-card';
+  item.className='divers-card divers-poster-card'+(id>=7150?' divers-poster-card--new':'');
   item.dataset.diversType='posts';
   item.dataset.diversProject=category;
   item.hidden=!FEATURED.has(id);
   item.innerHTML=`<button class="divers-poster-open" type="button" data-poster-id="${id}" aria-label="Agrandir le visuel ${esc(title)}, ${esc(brand)}">
-    <span class="divers-poster-media"><img src="./assets/divers/poster-${id}.webp" alt="${esc(title)} · ${esc(brand)}" loading="${index<3?'eager':'lazy'}" decoding="async"></span>
+    <span class="divers-poster-media"><img src="./assets/divers/poster-${id}.webp" alt="${esc(title)} · ${esc(brand)}" loading="${index<2?'eager':'lazy'}" decoding="async"></span>
     <span class="divers-poster-caption"><small>${esc(brand.toUpperCase())} · POST ${String(index+1).padStart(2,'0')}</small><strong>${esc(title)}</strong><span>Voir le visuel en grand </span></span>
    </button>`;
   return item;
