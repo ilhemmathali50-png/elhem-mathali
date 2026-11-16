@@ -3,6 +3,8 @@
 */
 (()=>{
 'use strict';
+/* Keep the rest of the work available, but lead with six selected pieces. */
+const FEATURED=new Set([7149,7148,7144,7140,7137,7133]);
 const POSTERS=[
  [7149,'L’installation, une question de confiance','TrackSolid Pro'],
  [7148,'Quand les GPS s’affrontent','TrackSolid Pro'],
@@ -38,6 +40,7 @@ function initDivers(){
   item.className='divers-card divers-poster-card';
   item.dataset.diversType='posts';
   item.dataset.diversProject=category;
+  item.hidden=!FEATURED.has(id);
   item.innerHTML=`<button class="divers-poster-open" type="button" data-poster-id="${id}" aria-label="Agrandir le visuel ${esc(title)}, ${esc(brand)}">
     <span class="divers-poster-media"><img src="./assets/divers/poster-${id}.webp" alt="${esc(title)} · ${esc(brand)}" loading="${index<3?'eager':'lazy'}" decoding="async"></span>
     <span class="divers-poster-caption"><small>${esc(brand.toUpperCase())} · POST ${String(index+1).padStart(2,'0')}</small><strong>${esc(title)}</strong><span>Voir le visuel en grand </span></span>
@@ -66,7 +69,23 @@ function initDivers(){
    });
  }
  const count=page.querySelector('.divers-count');
- if(count)count.textContent=(POSTERS.length+(videoCard?1:0))+' créations à découvrir';
+ const more=page.querySelector('#diversMore');
+ const rest=POSTERS.length-FEATURED.size;
+ if(count)count.textContent='Une sélection de '+FEATURED.size+' visuels'+(videoCard?' et 1 vidéo':'');
+ if(more && rest>0){
+   more.hidden=false;
+   more.textContent='Voir les '+rest+' autres visuels';
+   let expanded=false;
+   more.addEventListener('click',()=>{
+     expanded=!expanded;
+     grid.querySelectorAll('.divers-poster-card').forEach(card=>{
+       card.hidden=!expanded&&!FEATURED.has(Number(card.querySelector('[data-poster-id]')?.dataset.posterId));
+     });
+     more.setAttribute('aria-expanded',String(expanded));
+     more.textContent=expanded?'Réduire la galerie':'Voir les '+rest+' autres visuels';
+     if(count)count.textContent=expanded?(POSTERS.length+' visuels'+(videoCard?' et 1 vidéo':'')):'Une sélection de '+FEATURED.size+' visuels'+(videoCard?' et 1 vidéo':'');
+   });
+ }
  const dialog=document.createElement('dialog');
  dialog.className='divers-lightbox';dialog.setAttribute('aria-label','Agrandissement des créations');
  dialog.innerHTML=`<div class="divers-lightbox-inner">
