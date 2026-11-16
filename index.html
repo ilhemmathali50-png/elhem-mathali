@@ -415,7 +415,7 @@ body.video-active .portfolio-top-frame{display:none!important}
 <link rel="stylesheet" href="./divers-video.css?v=1">
 <link rel="stylesheet" href="./iconless-ui.css?v=1">
 <link rel="stylesheet" href="./project-diagnostic.css?v=2">
-<link rel="stylesheet" href="./reviews-second.css?v=3">
+<link rel="stylesheet" href="./reviews-second.css?v=4">
 <link rel="stylesheet" href="./about-toolkit.css?v=3">
 <link rel="stylesheet" href="./about-welcome-tn.css?v=1">
 <link rel="stylesheet" href="./portfolio-refinement.css?v=2">
@@ -947,6 +947,27 @@ function setupClientCapture(){
   dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
   dialog.addEventListener('close',()=>trigger.focus({preventScroll:true}));
  });
+ const videoDialog=$('#clientVideoDialog'),video=$('#clientReviewVideo'),closeVideo=$('#closeClientVideo');
+ if(videoDialog&&video&&closeVideo){
+   let opener=null;
+   ['#openClientVideo','#openClientVideoPoster'].forEach(selector=>{
+     const trigger=$(selector);
+     if(!trigger)return;
+     trigger.addEventListener('click',()=>{
+       opener=trigger;
+       videoDialog.showModal();
+       video.play().catch(()=>{});
+     });
+   });
+   closeVideo.addEventListener('click',()=>videoDialog.close());
+   videoDialog.addEventListener('click',event=>{if(event.target===videoDialog)videoDialog.close()});
+   videoDialog.addEventListener('close',()=>{
+     video.pause();
+     try{video.currentTime=0}catch(e){}
+     opener?.focus({preventScroll:true});
+   });
+   document.addEventListener('visibilitychange',()=>{if(document.hidden)video.pause()});
+ }
 }
 
 let toastSeen=false,trailPending=false;
@@ -1028,6 +1049,22 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
         <span class="review-simple-proof-label">Voir le message original</span>
       </button>
     </article>
+    <article class="review-simple-card review-simple-card--video" aria-labelledby="reviewVideoTitle">
+      <div class="review-video-copy">
+        <span class="review-video-kicker">03 / AVIS VOCAL</span>
+        <h4 id="reviewVideoTitle">Un retour client <em>à écouter.</em></h4>
+        <p class="review-video-project">Fait Maison · Identité visuelle &amp; packaging</p>
+        <p class="review-video-detail">Un message vocal original, présenté en vidéo avec les informations de contact masquées.</p>
+        <button class="review-video-action" type="button" id="openClientVideo" aria-label="Écouter l’avis vocal de Fait Maison">
+          <span class="review-video-action-icon" aria-hidden="true">▶</span> Écouter l’avis · 29 sec
+        </button>
+      </div>
+      <button class="review-video-poster" type="button" id="openClientVideoPoster" aria-label="Ouvrir la vidéo de l’avis client Fait Maison">
+        <img src="./assets/reviews/avis-client-fait-maison-poster.jpg" alt="Capture anonymisée d’un avis vocal WhatsApp accompagnant les produits Fait Maison" width="360" height="584" loading="lazy" decoding="async">
+        <span class="review-video-poster-play" aria-hidden="true">▶</span>
+        <span class="review-video-poster-label">VIDÉO / 00:29</span>
+      </button>
+    </article>
   </div>
 </section>
 
@@ -1042,6 +1079,20 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
    <div class="client-review-dialog-head"><span><strong>Le deuxième témoignage original</strong><small>Capture WhatsApp recadrée</small></span><button type="button" class="client-review-close" id="closeClientCaptureTwo" aria-label="Fermer la capture">Fermer</button></div>
    <img src="./assets/reviews/avis-cliente-02.svg" alt="Capture recadrée du véritable message WhatsApp de recommandation client" width="440" height="285">
   </div>
+ </dialog>
+ <dialog class="client-review-dialog review-video-dialog" id="clientVideoDialog" aria-label="Avis vocal vidéo pour Fait Maison">
+   <div class="client-review-dialog-inner">
+     <div class="client-review-dialog-head">
+       <span><strong>Fait Maison · Avis vocal</strong><small>Vidéo d’origine anonymisée · 29 secondes</small></span>
+       <button type="button" class="client-review-close" id="closeClientVideo" aria-label="Fermer la vidéo">Fermer</button>
+     </div>
+     <div class="review-video-dialog-stage">
+       <video id="clientReviewVideo" controls playsinline webkit-playsinline preload="none" poster="./assets/reviews/avis-client-fait-maison-poster.jpg" aria-label="Enregistrement vidéo d’un retour vocal client pour Fait Maison">
+         <source src="./assets/reviews/avis-client-fait-maison.mp4" type="video/mp4">
+         Votre navigateur ne prend pas en charge la lecture vidéo.
+       </video>
+     </div>
+   </div>
  </dialog>
  <div class="sommaire-foot"><span>THE CREATIVE EDITIONS</span><i>Every brand has its own story</i></div>
 </section>
