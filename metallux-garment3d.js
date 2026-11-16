@@ -138,7 +138,7 @@ function attachViewer(stage,T){
  const rib=new T.MeshStandardMaterial({color:'#0b2942',metalness:.04,roughness:.96,side:T.DoubleSide});
  const print=labelMaterial(T);
  let shape=garment(T,'polo',textile,rib,print);scene.add(shape);
- let yaw=0,autoOn=false,pointer=null,last=performance.now(),visible=true,frame=0;
+ let yaw=0,autoOn=!reduceMotion(),pointer=null,last=performance.now(),visible=true,frame=0;
  const setAngle=rad=>{yaw=((rad%TWO_PI)+TWO_PI)%TWO_PI;shape.rotation.y=yaw;const deg=Math.round(yaw*180/Math.PI)%360;degrees.textContent=deg+'°';slider.value=String(deg)};
  function changeGarment(nextType){
   scene.remove(shape);shape.traverse(o=>{if(o.isMesh&&o.geometry)o.geometry.dispose()});
@@ -152,6 +152,7 @@ function attachViewer(stage,T){
  slider.addEventListener('input',()=>{autoOn=false;updateAuto();setAngle(Number(slider.value)*Math.PI/180)});
  function updateAuto(){auto.setAttribute('aria-pressed',String(autoOn));auto.textContent=autoOn?'Ⅱ Pause rotation':'▶ Activer la rotation'}
  auto.addEventListener('click',()=>{autoOn=!autoOn;updateAuto()});
+ updateAuto();
  reset.addEventListener('click',()=>{autoOn=false;updateAuto();setAngle(0)});
  const cvs=renderer.domElement;
  cvs.addEventListener('pointerdown',e=>{pointer={id:e.pointerId,x:e.clientX,y:e.clientY,yaw};autoOn=false;updateAuto();cvs.setPointerCapture(e.pointerId)});
