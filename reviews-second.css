@@ -101,114 +101,119 @@
 
 
 
-/* Fait Maison | quiet editorial audio testimonial, no decorative Play button */
+/* Fait Maison / compact client audio review: one clear action, one original capture. */
 .review-simple-card--video{
-  --review-berry:#9b3653;--review-ink:#3d2833;--review-soft:#775b66;
   grid-column:1/-1;
-  position:relative;isolation:isolate;overflow:hidden;
-  display:grid;grid-template-columns:minmax(0,1.18fr) minmax(165px,.82fr);
-  align-items:center;gap:clamp(18px,4vw,56px);
-  padding:clamp(24px,4vw,42px);
-  border-radius:21px;border:1px solid #e6cdd6;
-  background:radial-gradient(circle at 84% 12%,#f8e3ed 0,transparent 46%),linear-gradient(130deg,#fffefa,#fdf4f6 72%,#f1e2ed);
-  box-shadow:0 16px 42px #74344c14;
+  min-width:0;
+  padding:0;
+  display:block;
+  border:1px solid #ead7df;
+  border-radius:17px;
+  background:#fffdfb;
+  box-shadow:0 8px 26px #643c4810;
+  overflow:hidden;
 }
-.review-simple-card--video::before{
-  content:"";position:absolute;z-index:-1;right:-90px;top:-140px;
-  width:290px;height:290px;border:1px solid #9b36531f;border-radius:50%;
-  box-shadow:0 0 0 42px #ffffff4d,0 0 0 78px #9b365308;
-  pointer-events:none;
+.review-video-entry{
+  appearance:none;
+  width:100%;
+  min-width:0;
+  border:0;
+  background:transparent;
+  display:grid;
+  grid-template-columns:110px minmax(0,1fr);
+  gap:20px;
+  align-items:center;
+  padding:15px;
+  text-align:left;
+  cursor:pointer;
+  color:#3d2833;
+  transition:background .2s ease;
 }
-.review-simple-card--video::after{
-  content:"";position:absolute;inset:auto 0 0;height:3px;
-  background:linear-gradient(90deg,#9b3653 0%,#de9db4 32%,transparent 90%);
-  pointer-events:none;
+.review-video-entry:hover{background:#fef5f8}
+.review-video-entry:focus-visible{outline:3px solid #a42e48;outline-offset:-5px}
+.review-video-thumb{
+  display:block;position:relative;
+  width:110px;aspect-ratio:360/584;
+  padding:4px;overflow:hidden;
+  border:1px solid #e9d4dd;border-radius:10px;
+  background:#fff;box-shadow:0 3px 12px #341c291c;
 }
-.review-video-copy{min-width:0;display:flex;flex-direction:column;align-items:flex-start}
-.review-video-topline{
-  display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:22px;
+.review-video-thumb img{
+  display:block;width:100%;height:100%;
+  border-radius:6px;object-fit:cover;object-position:center;
+  background:#182029;
+}
+.review-video-copy{
+  display:flex;flex-direction:column;
+  align-items:flex-start;min-width:0;
 }
 .review-video-kicker{
-  color:var(--review-berry);font:800 10px/1.5 var(--sans);letter-spacing:.14em;
+  color:#a42e48;letter-spacing:.095em;
+  font:800 10px/1.35 var(--sans);
+  margin-bottom:11px;
 }
-.review-video-index{
-  padding:5px 9px;border-radius:999px;border:1px solid #e6cdd7;
-  color:#986176;background:#fff8fb;
-  font:750 10px/1.4 var(--sans);font-variant-numeric:tabular-nums;
+.review-simple-card--video .review-video-heading{
+  display:block;font:600 clamp(24px,3.5vw,33px)/1.1 var(--serif);
+  letter-spacing:-.045em;color:#382a36;
+  margin:0 0 5px;
 }
-.client-review--simple .review-video-copy h4{
-  margin:0 0 19px;color:var(--review-ink);
-  font:400 clamp(32px,4.5vw,48px)/1.04 var(--serif);
-  letter-spacing:-.065em;text-wrap:balance;
+.review-video-role{
+  font:700 11px/1.5 var(--sans);color:#8a4d64;
 }
-.client-review--simple .review-video-copy h4 em{font-weight:400;color:var(--review-berry)}
-.client-review--simple .review-video-project{
-  color:#8b3655;font:800 11px/1.6 var(--sans);margin:0 0 12px;
+.review-video-snippet{
+  font:400 12px/1.5 var(--sans);
+  color:#695d66;margin-top:8px;
 }
-.client-review--simple .review-video-detail{
-  color:var(--review-soft);font:400 12px/1.75 var(--sans);margin:0 0 24px;max-width:33ch;
+.review-video-listen{
+  display:flex;align-items:center;flex-wrap:wrap;
+  gap:8px 14px;margin-top:15px;
+  padding-top:12px;border-top:1px solid #eadbe1;
+  width:100%;
+  font:800 11px/1.4 var(--sans);color:#9b3653;
 }
-.review-video-waveprint{display:flex;flex-direction:column;gap:10px;max-width:100%;padding:14px 0 0;border-top:1px solid #dfcad4}
-.review-video-wave{height:40px;display:flex;align-items:center;gap:3px}
-.review-video-wave i{display:block;width:3px;height:var(--h);flex:none;background:linear-gradient(180deg,#dba3b6,#98324e);border-radius:12px;opacity:.86}
-.review-video-wave i:nth-child(3n){opacity:.58}
-.review-video-audio-note{font:750 9px/1.55 var(--sans);letter-spacing:.12em;color:#92697c}
-.review-video-poster{
-  appearance:none;position:relative;display:flex;flex-direction:column;overflow:hidden;
-  width:min(100%,260px);max-width:260px;justify-self:center;
-  padding:8px 8px 0;border:1px solid #e0ccd3;border-radius:14px;
-  background:#fffdfb;color:#593747;cursor:pointer;
-  box-shadow:0 15px 35px #48223326,0 0 0 5px #fff9;
-  transform:rotate(1.5deg);
-  transition:transform .3s ease,box-shadow .3s ease;
+.review-video-duration{
+  display:inline-flex;
+  font:800 10px/1.4 var(--sans);color:#7c596a;
+  font-variant-numeric:tabular-nums;letter-spacing:.05em;
 }
-.review-video-poster:hover,.review-video-poster:focus-visible{
-  transform:rotate(0deg) translateY(-3px);
-  box-shadow:0 19px 39px #48223330,0 0 0 5px #fff9;
-}
-.review-video-poster img{
-  display:block;width:100%;height:auto;aspect-ratio:360/584;
-  object-fit:contain;object-position:center;background:#111821;border-radius:8px;
-}
-.review-video-poster-label{
-  position:static;display:flex;align-items:center;justify-content:space-between;gap:10px;
-  width:100%;min-height:40px;padding:9px 5px;
-  color:#86566a;font:800 9px/1.45 var(--sans);letter-spacing:.105em;text-align:left;
-}
-.review-video-duration{color:#9b3653;letter-spacing:.05em;font-variant-numeric:tabular-nums}
-.review-video-poster:focus-visible{outline:3px solid #9b3653;outline-offset:5px}
 .review-video-dialog{width:min(94vw,540px);max-width:540px;overflow:hidden}
-.review-video-dialog .client-review-dialog-inner{height:min(90dvh,850px);min-height:0;grid-template-rows:auto minmax(0,1fr)}
+.review-video-dialog .client-review-dialog-inner{
+  height:min(90dvh,850px);min-height:0;
+  grid-template-rows:auto minmax(0,1fr)
+}
 .review-video-dialog .client-review-dialog-head{background:#17191e}
-.review-video-dialog-stage{min-height:0;display:grid;place-items:center;background:#121419;overflow:hidden}
+.review-video-dialog-stage{
+  min-height:0;display:grid;place-items:center;
+  background:#121419;overflow:hidden
+}
 .review-video-dialog video{
-  display:block;width:100%;height:100%;max-height:calc(90dvh - 72px);
-  object-fit:contain;background:#10151a;
+  display:block;width:100%;height:100%;
+  max-height:calc(90dvh - 72px);
+  object-fit:contain;background:#10151a
 }
 @media(max-width:680px){
- .review-simple-card--video{
-  grid-template-columns:minmax(0,1fr) minmax(105px,39%);gap:14px;
-  padding:19px 15px 21px;border-radius:17px;align-items:center;
- }
- .review-video-topline{margin-bottom:14px;gap:7px}
- .review-video-kicker{font-size:8px;letter-spacing:.09em}
- .review-video-index{font-size:9px;padding:3px 7px}
- .client-review--simple .review-video-copy h4{font-size:clamp(23px,6.8vw,31px);line-height:1.06;margin:0 0 15px}
- .client-review--simple .review-video-project{font-size:10px;line-height:1.5;margin-bottom:8px}
- .client-review--simple .review-video-detail{font-size:11px;line-height:1.55;margin-bottom:15px}
- .review-video-wave{gap:2.5px;height:32px}
- .review-video-wave i{width:2.5px;max-height:31px}
- .review-video-waveprint{padding-top:11px;gap:7px}
- .review-video-audio-note{font-size:8px;letter-spacing:.04em}
- .review-simple-card--video{grid-template-columns:1fr;gap:20px;padding:23px 18px 26px}
- .review-video-poster{width:min(87%,275px);max-width:275px;transform:rotate(1deg)}
- .review-video-poster-label{font-size:9px;min-height:42px}
- .review-video-copy{width:100%}
+  .review-simple-card--video{border-radius:15px}
+  .review-video-entry{
+    grid-template-columns:86px minmax(0,1fr);
+    gap:14px;padding:12px;align-items:center
+  }
+  .review-video-thumb{width:86px;border-radius:8px}
+  .review-video-kicker{font-size:9px;margin-bottom:7px}
+  .review-simple-card--video .review-video-heading{
+    font-size:clamp(22px,5.8vw,27px);margin-bottom:4px
+  }
+  .review-video-role{font-size:10px}
+  .review-video-snippet{font-size:11px;line-height:1.45;margin-top:5px}
+  .review-video-listen{font-size:10px;gap:6px 10px;margin-top:9px;padding-top:8px}
 }
 @media(max-width:360px){
- .review-simple-card--video{grid-template-columns:1fr;gap:18px;padding:18px 14px}
- .review-video-wave i:nth-child(n+14){display:none}
- .review-video-poster-label{font-size:7px}
- .client-review--simple .review-video-copy h4{font-size:23px}
+  .review-video-entry{grid-template-columns:76px minmax(0,1fr);gap:10px;padding:9px}
+  .review-video-thumb{width:76px}
+  .review-video-kicker{font-size:8px;letter-spacing:.05em}
+  .review-simple-card--video .review-video-heading{font-size:22px}
+  .review-video-snippet{font-size:10px}
+  .review-video-listen{font-size:9.5px}
 }
-@media(prefers-reduced-motion:reduce){.review-video-poster{transition:none;transform:none}}
+@media(prefers-reduced-motion:reduce){
+  .review-video-entry{transition:none}
+}
