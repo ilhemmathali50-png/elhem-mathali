@@ -86,7 +86,7 @@
       <span>RÉFÉRENCE / DOCUMENT ORIGINAL</span>
       <img src="./assets/projects/metallux/native/uniforms.webp" alt="Mockups originaux MÉTALLUX : polo et pull côte à côte" loading="lazy" decoding="async">
     </div>
-    <div class="mx-studio-bottom"><span>THE CREATIVE EDITIONS / MÉTALLUX</span><span>MOCKUPS TEXTILES / RENDEMENTS RÉALISTES</span></div>
+    <div class="mx-studio-bottom"><span>THE CREATIVE EDITIONS / MÉTALLUX</span><span>MOCKUPS TEXTILES / VISUELS RÉALISTES</span></div>
    </div>`;
   app.insertAdjacentElement('afterend',section);
   // One photorealistic textile showcase. Static images are not described as interactive 360° models.
