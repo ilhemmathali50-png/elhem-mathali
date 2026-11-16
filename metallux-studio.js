@@ -41,76 +41,88 @@
   app.querySelector('.mx-app-divider')?.remove();
   const section=document.createElement('section');
   section.id='mx-atelier';
-  section.className='mx-showroom mx-section';
+  section.className='mx-showroom mx-realistic-showroom mx-section';
   section.dataset.mxChapter='atelier';
   section.setAttribute('aria-labelledby','mxAtelierHeading');
   section.innerHTML=`
    <div class="mx-inner">
     <div class="mx-showroom-heading mx-reveal">
-     <div><span class="mx-eyebrow">06 / LE SHOWROOM INTERACTIF</span><h2 id="mxAtelierHeading">MÉTALLUX<br><em>en volume</em></h2></div>
-     <p>Un aperçu des vêtements de marque à manipuler en trois dimensions. Tournez, explorez, changez de pièce</p>
+     <div><span class="mx-eyebrow">06 / APPLICATIONS TEXTILES</span><h2 id="mxAtelierHeading">La marque <em>en situation</em></h2></div>
+     <p>Des mockups 3D réalistes, isolés sur fond transparent pour mettre les volumes et les finitions en valeur</p>
     </div>
-    <div class="mx-showroom-grid mx-reveal">
-     <div class="mx-viewport" id="mxGLViewer" aria-label="Visualisation tridimensionnelle interactive d'un vêtement MÉTALLUX">
-      <span class="mx-viewport-note">DIGITAL MATERIAL LAB / 01</span>
-      <span class="mx-viewport-orbit" aria-hidden="true">360°</span>
-      <div class="mx-viewport-fallback" id="mxGLFallback"><div><img src="./assets/projects/metallux/native/uniforms.webp" alt="Polo et sweat MÉTALLUX, mockups originaux" loading="lazy" decoding="async"><p>Chargement de l’aperçu 3D interactif…</p></div></div>
-     </div>
-     <div class="mx-garment-toolbar">
-      <div class="mx-controls-title"><span class="mx-identity">ÉQUIPEMENT / PROTOTYPE NUMÉRIQUE</span><h3 id="mxGarmentTitle">Polo signature</h3><p>Bleu marine, monogramme discret, matière textile</p></div>
-      <div class="mx-garment-buttons" role="group" aria-label="Sélection du vêtement">
-       <button type="button" data-mx-garment="polo" aria-pressed="true">01 · Polo</button>
-       <button type="button" data-mx-garment="sweat" aria-pressed="false">02 · Pull</button>
+    <div class="mx-realistic-layout mx-reveal">
+      <div class="mx-realistic-stage">
+        <img id="mxRealisticImage" src="./assets/projects/metallux/native/polo-realistic-transparent.png" alt="Polo MÉTALLUX bleu marine, mockup 3D réaliste isolé sur fond transparent" loading="lazy" decoding="async" width="1189" height="1323">
       </div>
-      <div class="mx-garment-slider"><label for="mxGarmentAngle">ROTATION <output id="mxGarmentDegrees">0°</output></label><input id="mxGarmentAngle" type="range" min="0" max="360" step="1" value="0" aria-label="Tourner le vêtement en degrés"></div>
-      <div class="mx-controls-actions"><button type="button" id="mxGarmentAuto" class="mx-auto-btn" aria-pressed="false">▶ Activer la rotation</button><button type="button" id="mxGarmentReset" class="mx-reset-btn">↺ Vue de face</button></div>
-      <p class="mx-garment-footnote" id="mxGarmentNote">Modèle 3D conceptuel : ouvrez les mockups originaux pour comparer les designs réels</p>
-     </div>
+      <div class="mx-realistic-info">
+        <span class="mx-eyebrow">TEXTILE / MÉTALLUX</span>
+        <h3 id="mxRealisticTitle">Le polo signature</h3>
+        <p id="mxRealisticDescription">Coupe structurée, tissu bleu marine et finitions bleu électrique, présentés sous forme de rendu 3D</p>
+        <div class="mx-realistic-choices" role="group" aria-label="Choisir un visuel textile">
+          <button type="button" data-mx-realistic="polo" aria-pressed="true">01 / Polo</button>
+          <button type="button" data-mx-realistic="collection" aria-pressed="false">02 / Collection</button>
+        </div>
+        <p class="mx-realistic-honesty">Rendus visuels 3D · Le logo sur les mockups est une simulation graphique, les versions officielles se trouvent dans la section Identité</p>
+        <button type="button" class="mx-realistic-original" id="mxOriginalToggle" aria-expanded="false" aria-controls="mxOriginalPanel">Voir le mockup d’origine</button>
+      </div>
     </div>
-    <div class="mx-studio-bottom"><span>THE CREATIVE EDITIONS / MÉTALLUX</span><span>INTERACTION AU DOIGT · SOURIS · CURSEUR</span></div>
+    <div class="mx-original-panel" id="mxOriginalPanel" hidden>
+      <span>RÉFÉRENCE / DOCUMENT ORIGINAL</span>
+      <img src="./assets/projects/metallux/native/uniforms.webp" alt="Mockups originaux MÉTALLUX : polo et pull côte à côte" loading="lazy" decoding="async">
+    </div>
+    <div class="mx-studio-bottom"><span>THE CREATIVE EDITIONS / MÉTALLUX</span><span>RENDUS 3D / FOND TRANSPARENT</span></div>
    </div>`;
   app.insertAdjacentElement('afterend',section);
-  const viewport=section.querySelector('#mxGLViewer');
-  const originalView=document.createElement('div');
-  originalView.className='mx-original-overlay';
-  originalView.id='mxOriginalOverlay';
-  originalView.hidden=true;
-  originalView.setAttribute('aria-label','Mockups originaux des vêtements MÉTALLUX');
-  originalView.innerHTML='<img src="./assets/projects/metallux/native/uniforms.webp" alt="Mockups originaux : polo et pull MÉTALLUX côte à côte" loading="lazy" decoding="async"><span>MOCKUPS ORIGINAUX · MÉTALLUX</span>';
-  viewport.append(originalView);
-  const originalsButton=document.createElement('button');
-  originalsButton.type='button';
-  originalsButton.id='mxOriginalToggle';
-  originalsButton.className='mx-original-toggle';
-  originalsButton.setAttribute('aria-controls','mxOriginalOverlay');
-  originalsButton.setAttribute('aria-pressed','false');
-  originalsButton.textContent='Voir les mockups originaux';
-  section.querySelector('.mx-controls-actions').append(originalsButton);
-  const setOriginals=(on)=>{
-   originalView.hidden=!on;
-   originalsButton.setAttribute('aria-pressed',String(on));
-   originalsButton.textContent=on?'Revenir à la rotation 3D':'Voir les mockups originaux';
+  const designs={
+    polo:{
+      src:'./assets/projects/metallux/native/polo-realistic-transparent.png',
+      alt:'Polo MÉTALLUX bleu marine, mockup 3D réaliste transparent',
+      title:'Le polo signature',
+      description:'Coupe structurée, tissu bleu marine et finitions bleu électrique, présentés sous forme de rendu 3D'
+    },
+    collection:{
+      src:'./assets/projects/metallux/native/uniforms-realistic-transparent.png',
+      alt:'Polo et pull MÉTALLUX bleu marine, rendus 3D réalistes isolés sur fond transparent',
+      title:'La collection textile',
+      description:'Deux silhouettes coordonnées, avec des détails bleus et argentés sur des textiles bleu marine'
+    }
   };
-  originalsButton.addEventListener('click',()=>setOriginals(originalView.hidden));
-  section.querySelectorAll('[data-mx-garment],#mxGarmentAngle,#mxGarmentAuto,#mxGarmentReset').forEach(control=>{
-   control.addEventListener('pointerdown',()=>setOriginals(false),{passive:true});
-   control.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' ')setOriginals(false)});
+  const preview=section.querySelector('#mxRealisticImage');
+  const title=section.querySelector('#mxRealisticTitle');
+  const description=section.querySelector('#mxRealisticDescription');
+  section.querySelectorAll('[data-mx-realistic]').forEach(button=>button.addEventListener('click',()=>{
+    const key=button.dataset.mxRealistic;
+    const design=designs[key];
+    if(!design)return;
+    preview.classList.add('is-changing');
+    preview.src=design.src;
+    preview.alt=design.alt;
+    title.textContent=design.title;
+    description.textContent=design.description;
+    section.querySelectorAll('[data-mx-realistic]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+    const clear=()=>preview.classList.remove('is-changing');
+    if(preview.complete)clear();
+    else preview.addEventListener('load',clear,{once:true});
+  }));
+  const originalButton=section.querySelector('#mxOriginalToggle'),originalPanel=section.querySelector('#mxOriginalPanel');
+  originalButton.addEventListener('click',()=>{
+    const expanded=originalButton.getAttribute('aria-expanded')==='true';
+    originalButton.setAttribute('aria-expanded',String(!expanded));
+    originalPanel.hidden=expanded;
+    originalButton.textContent=expanded?'Voir le mockup d’origine':'Masquer le mockup d’origine';
   });
-  // Dynamically inserted content must not inherit an invisible reveal state.
   section.querySelectorAll('.mx-reveal').forEach(item=>item.classList.add('is-visible'));
   const nav=root.querySelector('.mx-chapter-nav');
   if(nav){
-   const a=document.createElement('a');
-   a.href='#mx-atelier';a.dataset.mxLink='atelier';
-   a.innerHTML='<span>06</span>Showroom 3D';
+   const a=document.createElement('a');a.href='#mx-atelier';a.dataset.mxLink='atelier';
+   a.innerHTML='<span>06</span>Textile';
    a.addEventListener('click',event=>{
-    event.preventDefault();
-    section.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
-    nav.querySelectorAll('[data-mx-link]').forEach(x=>x.removeAttribute('aria-current'));
-    a.setAttribute('aria-current','location');
+      event.preventDefault();
+      section.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+      nav.querySelectorAll('[data-mx-link]').forEach(x=>x.removeAttribute('aria-current'));
+      a.setAttribute('aria-current','location');
    });
    nav.append(a);
   }
-  window.dispatchEvent(new CustomEvent('metallux-studio-mounted',{detail:{section}}));
  };
 })();
