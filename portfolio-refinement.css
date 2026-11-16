@@ -88,3 +88,62 @@
 @media(prefers-reduced-motion:reduce){
  .divers-more,.case-study-actions a,.case-study-actions button{transition:none}
 }
+
+/* Sommaire project entry affordance: every complete card opens its charte */
+.sommaire-item{
+  position:relative;
+  cursor:pointer;
+  grid-template-columns:112px minmax(0,1fr) 40px;
+  gap:clamp(8px,2vw,15px);
+}
+.sommaire-item .sommaire-meta{gap:7px}
+.sommaire-item .sommaire-open-label{
+  display:inline-flex;
+  align-items:center;
+  width:auto;
+  color:#a03859;
+  border-bottom:1px solid #c894a7;
+  padding-bottom:2px;
+  font:800 10px/1.25 var(--sans);
+  letter-spacing:.01em;
+}
+.sommaire-item .sommaire-arrow{
+  width:34px;
+  height:34px;
+  border:1px solid #c997aa;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#fff8fb,#eddae6);
+  color:#9e3553;
+  justify-self:end;
+  margin-right:10px;
+  box-shadow:0 4px 10px #752c4912;
+  transition:background .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+.sommaire-item .sommaire-arrow svg{width:19px;height:19px;display:block}
+.sommaire-item:hover .sommaire-arrow,.sommaire-item:focus-visible .sommaire-arrow{
+  transform:translateX(3px);
+  background:linear-gradient(135deg,#a72e51,#986bba);
+  color:#fff;
+  box-shadow:0 6px 16px #8e2c5139;
+}
+.sommaire-item:active .sommaire-arrow{transform:translateX(5px)}
+@media(max-width:680px){
+  .sommaire-item{grid-template-columns:minmax(88px,25%) minmax(0,1fr) 34px;gap:clamp(7px,2.2vw,12px)}
+  .sommaire-item .sommaire-arrow{width:30px;height:30px;margin-right:7px}
+  .sommaire-item .sommaire-arrow svg{width:17px;height:17px}
+  .sommaire-item .sommaire-meta{gap:6px}
+  .sommaire-item .sommaire-meta strong{font-size:clamp(23px,6vw,37px)}
+  .sommaire-item .sommaire-open-label{font-size:10px}
+}
+@media(max-width:350px){
+  .sommaire-item{grid-template-columns:88px minmax(0,1fr) 27px;gap:7px}
+  .sommaire-item .sommaire-arrow{width:26px;height:26px;margin-right:4px}
+  .sommaire-item .sommaire-arrow svg{width:15px;height:15px}
+  .sommaire-item .sommaire-meta strong{font-size:clamp(21px,6vw,26px)}
+  .sommaire-item .sommaire-open-label{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+  .sommaire-item .sommaire-arrow{transition:none}
+}
