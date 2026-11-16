@@ -66,8 +66,7 @@ window.renderPortfolioCaseStudy=function(id,target){
  section.className='case-study-intro';
  section.setAttribute('aria-label','Présentation du projet '+p.title);
  section.style.setProperty('--case-accent',p.accent);
- const shareUrl=new URL('./',location.href);
- shareUrl.searchParams.set('projet',id);
+ const shareUrl=new URL('./projets/'+id+'.html',new URL('./',location.href));
  section.innerHTML='<div class="case-study-inner">'+
  '<div class="case-study-top"><span>ÉTUDE DE PROJET / THE CREATIVE EDITIONS</span><span>'+esc(p.type)+'</span></div>'+
  '<div class="case-study-introduction"><div><h2>'+esc(p.title)+'</h2><p>'+esc(p.intro)+'</p></div>'+
