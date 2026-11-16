@@ -10,6 +10,21 @@
   const root=detail.querySelector('#mxBook');
   if(!root)return;
   root.classList.add('mx-steel-edition');
+  // Curated editorial cover, using the supplied MÉTALLUX mark rather than a flattened mockup.
+  const hero=root.querySelector('.mx-hero-image');
+  if(hero){
+   hero.setAttribute('aria-label','Couverture éditoriale MÉTALLUX, identité métallisée et inspiration architecturale');
+   hero.innerHTML=`<div class="mx-cover-compose">
+      <div class="mx-cover-edition"><span>THE CREATIVE EDITIONS</span><span>VOL. 04 / 2026</span></div>
+      <div class="mx-cover-hero-mark"><img src="./assets/projects/metallux/native/logo-panel.webp" alt="Logo officiel MÉTALLUX, bleu électrique et argent" fetchpriority="high" decoding="async"></div>
+      <span class="mx-cover-vertical" aria-hidden="true">STRUCTURE / PRECISION / IDENTITY</span>
+      <div class="mx-cover-foot"><strong>MÉTALLUX</strong><span>BRAND IDENTITY<br>ART DIRECTION</span></div>
+     </div>`;
+  }
+  const coverTitle=root.querySelector('.mx-hero-copy h1');
+  if(coverTitle)coverTitle.innerHTML='La force<br><em>du détail.</em>';
+  const coverIntro=root.querySelector('.mx-hero-intro');
+  if(coverIntro)coverIntro.textContent='Une identité construite comme le métal : lignes précises, matières affirmées et lumière bleu électrique';
   const heroCopy=root.querySelector('.mx-hero-copy');
   if(heroCopy){
    const stamp=document.createElement('p');
@@ -73,6 +88,31 @@
     <div class="mx-studio-bottom"><span>THE CREATIVE EDITIONS / MÉTALLUX</span><span>RENDUS 3D / FOND TRANSPARENT</span></div>
    </div>`;
   app.insertAdjacentElement('afterend',section);
+  // Actual geometry-based 360-degree viewer. Photorealistic stills remain below as design references.
+  const viewer=document.createElement('div');
+  viewer.className='mx-showroom-grid mx-interactive-3d mx-reveal';
+  viewer.innerHTML=`
+    <div class="mx-viewport" id="mxGLViewer" aria-label="Visionneuse interactive 3D des vêtements MÉTALLUX">
+      <span class="mx-viewport-note">ROTATION LIBRE · 360°</span><span class="mx-viewport-orbit" aria-hidden="true">360°</span>
+      <div class="mx-viewport-fallback" id="mxGLFallback"><div>
+        <img src="./assets/projects/metallux/native/uniforms-realistic-transparent.png" alt="Collection textile MÉTALLUX, aperçu lorsque la 3D n’est pas disponible" loading="lazy">
+        <p>Le modèle 3D se charge. Les visuels originaux restent disponibles plus bas.</p>
+      </div></div>
+    </div>
+    <aside class="mx-garment-toolbar" aria-label="Contrôles de la rotation textile 3D">
+      <div class="mx-controls-title"><span class="mx-identity">MÉTALLUX / ATELIER 360°</span><h3 id="mxGarmentTitle">Polo signature</h3>
+        <p>Un modèle 3D volumétrique à tourner librement pour explorer la coupe. Les rendus réalistes se trouvent juste en dessous.</p></div>
+      <div class="mx-garment-buttons" role="group" aria-label="Sélection du vêtement">
+        <button type="button" data-mx-garment="polo" aria-pressed="true">01 / Polo</button>
+        <button type="button" data-mx-garment="sweat" aria-pressed="false">02 / Pull</button>
+      </div>
+      <div class="mx-garment-slider"><label for="mxGarmentAngle">ANGLE DE VUE <strong id="mxGarmentDegrees">0°</strong></label><input type="range" id="mxGarmentAngle" min="0" max="359" value="0" step="1" aria-label="Faire tourner le vêtement sur 360 degrés"></div>
+      <div class="mx-controls-actions"><button type="button" id="mxGarmentAuto" class="mx-auto-btn" aria-pressed="true">Ⅱ Pause rotation</button><button type="button" id="mxGarmentReset" class="mx-reset-btn">↺ Vue de face</button></div>
+      <p class="mx-garment-footnote">Glissez avec le doigt sur le vêtement pour le faire tourner. Modèle 3D d’interprétation, non une reproduction exacte du patron ou du logo imprimé.</p>
+    </aside>`;
+  section.querySelector('.mx-realistic-layout').before(viewer);
+  viewer.insertAdjacentHTML('afterend','<p class="mx-reference-label">APERÇUS RÉALISTES / POLO ET COLLECTION</p>');
+  window.dispatchEvent(new CustomEvent('metallux-studio-mounted',{detail:{section}}));
   const designs={
     polo:{
       src:'./assets/projects/metallux/native/polo-realistic-transparent.png',
