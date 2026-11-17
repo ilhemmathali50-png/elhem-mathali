@@ -71,3 +71,82 @@
 .lg-logo:hover{box-shadow:0 13px 29px #211a2419}
 .lg-dialog,.lg-dialog-layout,.lg-detail-image,.lg-detail-image--logo{background:#ffffff}
 .lg-logo-stage img{background:#ffffff}
+
+
+/* ÉLYA NATURA / TERRACOTTA EDITION.
+   Display the authentic original artwork (white wordmark on terracotta)
+   with no generic white canvas. All other logos keep the neutral gallery. */
+.lg-logo[data-lg-item="elya-natura"]{
+  border-color:#ddaa97;
+  box-shadow:0 6px 22px #8a4c371c;
+}
+.lg-logo[data-lg-item="elya-natura"] .lg-logo-stage{
+  background:#9b432b;
+  isolation:isolate;
+}
+.lg-logo[data-lg-item="elya-natura"] .lg-logo-stage::before{
+  background:linear-gradient(90deg,#e9b8a4,#b95539,#e9b8a4);
+  opacity:.9;
+  height:3px;
+  z-index:3;
+}
+.lg-logo[data-lg-item="elya-natura"] .lg-logo-stage img{
+  width:100%;height:100%;
+  padding:0;
+  object-fit:cover;
+  background:transparent;
+  filter:none;
+  position:relative;
+  z-index:1;
+}
+.lg-logo[data-lg-item="elya-natura"]:hover{
+  box-shadow:0 17px 35px #8a4c3738;
+  border-color:#bf795c;
+}
+.lg-logo[data-lg-item="elya-natura"] .lg-logo-meta{
+  background:#fffdfb;
+}
+.lg-dialog.lg-dialog--elya,
+.lg-dialog.lg-dialog--elya .lg-dialog-layout{
+  background:radial-gradient(ellipse at 25% 14%,#dfb09e 0%,#ce947f 46%,#c17b66 100%);
+  color:#2f2524;
+}
+.lg-dialog--elya .lg-dialog-eyebrow{color:#87324c}
+.lg-dialog--elya .lg-dialog-head h2{color:#302526}
+.lg-dialog--elya .lg-detail-image--logo.lg-detail-image--elya{
+  width:min(100%,720px);
+  margin:0 auto;
+  min-height:0;
+  padding:0;
+  gap:0;
+  background:#9b432b;
+  border:1px solid #efc8b8;
+  border-radius:14px;
+  box-shadow:0 18px 42px #642c2838;
+  overflow:hidden;
+}
+.lg-dialog--elya .lg-detail-image--elya img{
+  display:block;
+  width:100%;height:auto;
+  max-width:100%;
+  max-height:min(65dvh,700px);
+  object-fit:contain;
+  background:transparent;
+}
+.lg-dialog--elya .lg-detail-image--elya figcaption{
+  color:#fff4eb;
+  background:#9b432b;
+  padding:9px 12px 13px;
+  width:100%;
+}
+.lg-dialog--elya .lg-detail-foot{color:#493331}
+@media(max-width:630px){
+  .lg-logo[data-lg-item="elya-natura"] .lg-logo-stage img{padding:0}
+  .lg-dialog--elya .lg-detail-image--logo.lg-detail-image--elya{
+    min-height:0;
+    border-radius:11px;
+  }
+  .lg-dialog--elya .lg-detail-image--elya img{
+    max-height:min(60dvh,580px);
+  }
+}
