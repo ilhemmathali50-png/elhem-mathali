@@ -7,6 +7,9 @@ const safe=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;
 // The original WebPs stay intact for archive/charte views.
  // Logo-only tiles and detail views display generated alpha-transparent PNGs.
 const asset=p=>{
+ // Élya Natura's official WebP already contains the correct terracotta artwork and white lettering.
+ // The old transparent PNG URL is absent from the repository, so always use the real artwork.
+ if(p==='assets/logo-showroom/elya-natura.webp')return './'+p;
  if(p.startsWith('assets/logo-showroom/') && p.endsWith('.webp') && !p.endsWith('-board.webp')){
   const name=p.split('/').pop().replace(/\.webp$/,'.png');
   return './assets/logo-showroom/transparent/'+name;
@@ -54,7 +57,7 @@ window.mountLogoShowroom=function(view){
    +(hasAlt&&!hasBoard?'<span class="lg-tab-note">Versions du logotype</span>':'');
   const source=mode==='board'&&hasBoard?current.board:variant===0?(current.src||current.board):current.variants[variant-1];
   const label=mode==='board'&&hasBoard?'Charte graphique et mockups originaux':'Logotype original';
-  body.innerHTML=`<figure class="lg-detail-image ${mode==='board'&&hasBoard?'lg-detail-image--board':'lg-detail-image--logo'}" style="--lg-soft:${current.soft}"><img src="${asset(source)}" alt="${safe(label)} · ${safe(current.name)}" decoding="async"><figcaption>${safe(label)}</figcaption></figure>`;
+  body.innerHTML=`<figure class="lg-detail-image ${mode==='board'&&hasBoard?'lg-detail-image--board':'lg-detail-image--logo'}${current.slug==='elya-natura'?' lg-detail-image--elya':''}" style="--lg-soft:${current.soft}"><img src="${asset(source)}" alt="${safe(label)} · ${safe(current.name)}" decoding="async"><figcaption>${safe(label)}</figcaption></figure>`;
   if(mode==='logo'&&hasAlt){
    const nav=document.createElement('div');nav.className='lg-variants';nav.setAttribute('role','group');nav.setAttribute('aria-label','Versions du logo');
    [current.src,...current.variants].forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.dataset.lgVariant=String(i);b.setAttribute('aria-pressed',String(i===variant));b.textContent='Version '+String(i+1).padStart(2,'0');nav.append(b)});
@@ -63,6 +66,7 @@ window.mountLogoShowroom=function(view){
  }
  function open(it,trigger){
   current=it;opener=trigger;variant=0;mode=it.board?'board':'logo';
+  dialog.classList.toggle('lg-dialog--elya',it.slug==='elya-natura');
   present();dialog.showModal();$('#lgClose').focus({preventScroll:true});
  }
  $('#lgFilters').addEventListener('click',e=>{const b=e.target.closest('[data-lg-filter]');if(!b)return;filter=b.dataset.lgFilter;renderGallery()});
@@ -71,7 +75,7 @@ window.mountLogoShowroom=function(view){
  body.addEventListener('click',e=>{const b=e.target.closest('[data-lg-variant]');if(!b)return;variant=Number(b.dataset.lgVariant);present()});
  $('#lgClose').addEventListener('click',()=>dialog.close());
  dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
- dialog.addEventListener('close',()=>{opener?.focus({preventScroll:true});current=null;opener=null});
+ dialog.addEventListener('close',()=>{opener?.focus({preventScroll:true});current=null;opener=null;dialog.classList.remove('lg-dialog--elya')});
  renderGallery();
 };
 })();
