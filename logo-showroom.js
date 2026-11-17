@@ -7,9 +7,9 @@ const safe=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;
 // The original WebPs stay intact for archive/charte views.
  // Logo-only tiles and detail views display generated alpha-transparent PNGs.
 const asset=p=>{
- // Élya Natura's official WebP already contains the correct terracotta artwork and white lettering.
- // The old transparent PNG URL is absent from the repository, so always use the real artwork.
- if(p==='assets/logo-showroom/elya-natura.webp')return './'+p;
+ // The publishing workflow generates the transparent PNG from the authentic Élya Natura artwork.
+ // Using that alpha-only logo lets the warm terracotta background remain genuinely editable in CSS.
+ if(p==='assets/logo-showroom/elya-natura.webp')return './assets/logo-showroom/transparent/elya-natura.png?art=73';
  if(p.startsWith('assets/logo-showroom/') && p.endsWith('.webp') && !p.endsWith('-board.webp')){
   const name=p.split('/').pop().replace(/\.webp$/,'.png');
   return './assets/logo-showroom/transparent/'+name;
